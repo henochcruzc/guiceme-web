@@ -67,15 +67,15 @@ export class LoginMainComponent extends GeneralComponent implements OnInit, OnDe
           },
 
         },
-        // {
-        //   key: 'captcha',
-        //   className: 'col-md-12',
-        //   type: 'captcha',
-        //   props: {
-        //     label: '',
-        //     required: true
-        //   }
-        // },
+        {
+          key: 'captcha',
+          className: 'col-md-12',
+          type: 'captcha',
+          props: {
+            label: '',
+            required: true
+          }
+        },
 
         // {
         //   className: 'col-md-12 d-flex justify-content-end',
