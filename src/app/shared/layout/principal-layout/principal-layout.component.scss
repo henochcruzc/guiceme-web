@@ -145,3 +145,18 @@
 .matMenuBtn:hover .hover-icon {
   display: inline-block;
 }
+
+@media (max-width: 769.98px) { 
+  .user {
+    font-size: 11px!important;
+  }
+   .rol {
+    font-size: 8px!important;
+  }
+  .um {
+    font-size: 9px!important;
+  }
+  .sub-brand{
+    font-size: 12px!important;
+  }
+}
