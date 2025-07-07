@@ -107,7 +107,7 @@ export class ReimpresionEtiquetasComponent extends GeneralComponent {
         }, 
         {
           fieldGroupClassName: 'row',
-          className: "col-md-3",
+          className: "col-md-4 col-lg-3",
           fieldGroup:
             [{
               className: "col-lg-5 col-md-6",

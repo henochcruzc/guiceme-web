@@ -133,7 +133,7 @@ background-color: #8dd755;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  width: 11%;
+  min-width: 150px;
 }
 
 .textNegritas{
