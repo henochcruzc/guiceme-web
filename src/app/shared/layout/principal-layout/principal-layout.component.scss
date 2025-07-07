@@ -1,0 +1,147 @@
+.header-top {
+  position: sticky;
+  z-index: 990;
+  top: 0px;
+}
+
+.main-content {
+  min-height: calc(100% - 220px) !important;
+  background: #f8f8f8;
+}
+
+.line-h {
+  height: 3px;
+  flex-shrink: 0;
+  background: #BD9B3B;
+}
+
+.header-nav {
+  background-color: #235B4E;
+  display: flex;
+  height: 60px;
+  padding: 10px 30px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  color: #BC955C;
+}
+
+.separator {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sub-brand {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  color: #fff;
+}
+
+.info-user {
+
+  height: 40px;
+  gap: 20px;
+  color: #fff;
+
+  .img-user {
+    width: 40px;
+    height: 40.044px;
+    flex-shrink: 0;
+
+  }
+
+  .user {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .rol {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .um {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .estiloMenu{
+    width: 35px;
+    height: 35px;
+    padding-left: 9px;
+    margin-top: 3px;
+  }
+
+}
+
+/* Estilo personalizado para el menú */
+.mat-menu-panel {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilo personalizado para los elementos del menú */
+.mat-menu-item {
+  color: #333;
+}
+
+/* Estilo personalizado para el texto al hacer hover */
+.mat-menu-item:hover {
+  background-color: #ddd;
+  color: #000;
+}
+
+::ng-deep .mat-mdc-menu-item:not([disabled]):hover {
+  color: var(--turquesa-primario, #41ABCA) !important;
+  font-family: Montserrat !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: normal !important;
+  border-radius: 4px 4px 0px 0px !important;
+  border-left: 4px solid var(--V_New, #018699) !important;
+  background: #F3FEFF !important;
+}
+
+::ng-deep .mat-mdc-menu-item-text {
+  //color: var(--Text-Titulos, #626262) !important;
+  font-family: Montserrat !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: normal !important;
+}
+
+::ng-deep .mat-mdc-menu-item {
+  border-radius: 4px 4px 0px 0px;
+  border-left: 4px solid var(--turquesa-primario, #41ABCA) !important;
+  background: #FFF !important;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+  max-width: 345px !important;
+}
+
+
+.matMenuBtn:hover .initial-icon {
+  display: none;
+}
+
+.matMenuBtn:hover .hover-icon {
+  display: inline-block;
+}

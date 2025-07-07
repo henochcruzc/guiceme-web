@@ -1,0 +1,18 @@
+<div class="titulo-g title-flex">
+
+   <div *ngIf="btnBack" class="btn-regresar">
+      <span class="back" (click)="onRegresar()" title="accion1"></span>
+   </div>
+
+   <div  *ngIf="btnBack" ><span class="separator"><svg xmlns="http://www.w3.org/2000/svg" width="2" height="24" viewBox="0 0 2 24" fill="none">
+      <path d="M1 1.32422V22.677" stroke="#DDDDDD" stroke-width="2" stroke-linecap="round"/>
+      </svg></span></div>
+   
+   <h5>{{titulo}}</h5> 
+
+   <div  *ngIf="subTitulo" ><span class="separator"><svg xmlns="http://www.w3.org/2000/svg" width="2" height="24" viewBox="0 0 2 24" fill="none">
+      <path d="M1 1.32422V22.677" stroke="#DDDDDD" stroke-width="2" stroke-linecap="round"/>
+   </svg></span></div>
+
+   <div class="text-subTilulo" *ngIf="subTitulo">{{subTituloTxt}}</div>
+</div>

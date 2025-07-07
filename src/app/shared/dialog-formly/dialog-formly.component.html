@@ -1,0 +1,65 @@
+<div *ngIf="data.customTitle!=null" mat-dialog-title class="d-h bar-n ">
+    <span class="bar-h"></span>
+    <span class="titulo customAcciones" >
+       
+            <div>
+                {{ data.title }}
+            </div>
+            <div>
+            {{ data.customTitle }}<u>{{data.folio}} </u>  
+            </div>
+    
+    
+        <span  (click)="closeDialog()"><img src="assets/images/close.svg" alt="cancel"></span>
+    </span>
+</div>
+<div *ngIf="data.customTitle==undefined" mat-dialog-title class="d-h bar-n ">
+    <span class="bar-h"></span>
+    <span class="titulo d-flex w-100 ">
+        {{ data.title }}
+        <span class="btn-cerrar" (click)="closeDialog()"><img src="assets/images/close.svg" alt="cancel"></span>
+    </span>
+</div>
+<mat-dialog-content class="dialog-content my-dialog">
+    <form [formGroup]="form">
+        <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="customAcciones" *ngIf="!data.hideBtns && data.customTitle!=null">
+
+  <mat-checkbox class="justify-content-start" color="primary"  [checked]="atribuible"  (change)="checkAtribuible($event.checked)">  
+    ¿Es atribuible al proveedor?
+  </mat-checkbox> 
+  <div class="justify-content-end">
+      <span  >Esta acción no se puede deshacer&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>
+    <button [disabled]="form.invalid" type="button" class="btn btn-primary" (click)="confirmDialog()"
+        *ngIf="data.confirmTxtBtn">{{data.confirmTxtBtn}}</button> 
+      </span>
+    </div>
+
+
+</mat-dialog-actions>
+
+<mat-dialog-actions class="customAcciones my-dialog" *ngIf="!data.hideBtns && data.customFooter!=null">
+
+   
+    <div class="justify-content-end">
+        <span style="width: 420px;" > ¿Deseas imprimir la mezcla con folio <b>{{data.folio}}</b>?</span>
+     
+        <span style="margin-left: 260px !important;">
+      <button [disabled]="form.invalid" type="button" class="btn btn-primary" (click)="confirmDialog()"
+          *ngIf="data.confirmTxtBtn">{{data.confirmTxtBtn}}</button> 
+        </span>
+      </div>
+  
+  
+  </mat-dialog-actions>
+
+<mat-dialog-actions class="justify-content-end" *ngIf="!data.hideBtns && data.customTitle==undefined && data.customFooter==undefined">
+    <button type="button" class="btn btn-danger" (click)="closeDialog()"
+        *ngIf="data.cancelTxtBtn">{{data.cancelTxtBtn}}</button>
+    <button [disabled]="form.invalid" type="button" class="btn btn-primary" (click)="confirmDialog()"
+        *ngIf="data.confirmTxtBtn">{{data.confirmTxtBtn}}</button>
+</mat-dialog-actions> 

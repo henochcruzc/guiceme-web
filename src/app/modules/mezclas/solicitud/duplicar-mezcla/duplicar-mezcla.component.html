@@ -1,0 +1,171 @@
+<app-header-detalle-mezcla [headerData]="headerData"></app-header-detalle-mezcla>
+
+<div class="card-ceme">
+    <div class="card card-body">
+        <mat-panel-title class="panelDuplicar">
+            <div class="addMezcla"></div>
+            <div class="textNegritasHeader">Duplicar mezcla: </div>
+            <span ngClass="{{validaTipo()}}" class="textResultHeader">{{desTipoMezcla}}</span>
+            <div class="line-panel-header w-100"></div>
+        </mat-panel-title>
+
+        <form [formGroup]="form" class="mb-3">
+            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+            <!--<div>{{modelTipoMezcla | json}}  form valido : {{formTipoMezcla}} fiel : {{fieldsTipoMezcla}}</div> -->
+        </form>
+
+        <!--<div class="d-flex justify-content-end w-100 align-items-center mb-3 gap-3">
+            <button type="button" class="btn btn-danger" [disabled]="validaAcciones()" (click)="resetForm()">Limpiar</button>
+            <button type="button" class="btn btn-primary" [disabled]="validaAcciones()" (click)="pageChanged(1)">Buscar</button>
+        </div>-->
+        <div class="header-table d-flex align-items-center justify-content-between ">
+            <div class="titulo d-flex align-items-center">
+                <div class="ico-clipboard"></div>
+                <span class="text">Listado de mezclas</span>
+            </div>
+            <div class="">
+                <strong> S=</strong> Solicitada &nbsp;&nbsp; <strong> MA=</strong> Mezcla Aprobada
+                &nbsp;&nbsp;<strong> RMA=</strong> Responsable MA &nbsp;&nbsp;<strong> MAP=</strong> Mezcla Aplicada
+            </div>
+
+        </div>
+
+
+        <div class="table-responsive scroll-table">
+            <mat-table class="fullTable " [dataSource]="tableDS"  matSortDirection="asc"
+            matSort #sort="matSort" (matSortChange)="shortTable($event)">
+
+                <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+                <ng-container matColumnDef="folioSolicitud">
+                    <mat-header-cell *matHeaderCellDef> <span class="justify-content-center"><strong>Folio de solicitud</strong> </span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        {{ element.folioSolicitud }}
+
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="folioMezcla">
+                    <mat-header-cell *matHeaderCellDef><strong>Folio de mezcla</strong>  </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <a mat-button routerLink="." (click)="onVerDetalle(element)"> {{ element.folioMezcla }}</a>
+
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ultimaFecha">
+                    <mat-header-cell *matHeaderCellDef><strong>Ultima fecha</strong>  </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{ element.ultimaFecha }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="estatus">
+                    <mat-header-cell *matHeaderCellDef> <strong>Estatus</strong>  </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div class="bandera" ngClass="{{_coloresEstatus.findClassColorEstatus(element.estatus.id) }}">
+                            <div class="circle " ngClass="{{ _coloresEstatus.findClassColorEstatus(element.estatus.id) }}">
+                                <div></div>
+                            </div>
+
+                            <span>{{ element.estatus.descripcion }}</span>
+                        </div>
+                        <div class="icon " ngClass="{{ 'clock-'+ _coloresEstatus.findClassColorClock(element.estatus.id) }}"></div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="seguimiento">
+                    <mat-header-cell *matHeaderCellDef> <strong>Seguimiento de mezcla</strong>  </mat-header-cell>
+                    <mat-cell class=" no-padding" *matCellDef="let element">
+                        <div class="w-100 d-flex progress-cell">
+                            <div class="col-md-3 col-3 cell">
+                                <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu4Seguimiento(element.estatus.id,1) ">
+                                    <div></div>
+                                </div>
+                                <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu4HrR(element.estatus.id,1) "></div>
+                            </div>
+                            <div class="col-md-3 col-3  cell">
+                                <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu4HrL(element.estatus.id,2) "></div>
+                                <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu4Seguimiento(element.estatus.id,2) ">
+                                    <div></div>
+                                </div>
+                                <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu4HrR(element.estatus.id,2) "></div>
+                            </div>
+                            <div class="col-md-3 col-3 cell">
+                                <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu4HrL(element.estatus.id,3) "></div>
+                                <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu4Seguimiento(element.estatus.id,3) ">
+                                    <div></div>
+                                </div>
+                                <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu4HrR(element.estatus.id,3) "></div>
+                            </div>
+                            <div class="col-md-3 col-3 cell">
+                                <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu4HrL(element.estatus.id,4) "></div>
+                                <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu4Seguimiento(element.estatus.id,4) ">
+                                    <div></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+
+
+                <!--  Column folioSolicitud-->
+                <ng-container matColumnDef="item-folioSolicitud">
+                    <mat-header-cell class="mat-column-folioSolicitud color-gray" mat-header-cell *matHeaderCellDef>
+                    </mat-header-cell>
+                </ng-container>
+                <!--  Column folioMezcla-->
+                <ng-container matColumnDef="item-folioMezcla">
+                    <mat-header-cell class="mat-column-folioMezcla color-gray" mat-header-cell *matHeaderCellDef>
+                    </mat-header-cell>
+                </ng-container>
+                <!--  Column ultimaFecha-->
+                <ng-container matColumnDef="item-ultimaFecha">
+                    <mat-header-cell class="mat-column-ultimaFecha color-gray" mat-header-cell *matHeaderCellDef>
+                    </mat-header-cell>
+                </ng-container>
+                <!--  Column estatus-->
+                <ng-container matColumnDef="item-estatus">
+                    <mat-header-cell class="mat-column-estatus color-gray" mat-header-cell *matHeaderCellDef>
+                    </mat-header-cell>
+                </ng-container>
+                <!--  Column seguimiento-->
+                <ng-container matColumnDef="item-seguimiento">
+                    <mat-header-cell class="mat-column-seguimiento no-padding" mat-header-cell *matHeaderCellDef>
+                        <div class="progress-header">
+                            <div class="col-md-3  col-3 uno">S</div>
+                            <div class="col-md-3  col-3 dos">MA</div>
+                            <div class="col-md-3  col-3 uno">RMA</div>
+                            <div class="col-md-3  col-3 dos">MAP</div>
+                        </div>
+                    </mat-header-cell>
+                </ng-container>
+                <mat-header-row
+                    *matHeaderRowDef="['item-folioSolicitud', 'item-folioMezcla', 'item-ultimaFecha','item-estatus', 'item-seguimiento']"
+                    class="example-second-header-row">
+                </mat-header-row>
+            </mat-table>
+        </div>
+
+        <div class=" paginador d-flex justify-content-between w-100 align-items-center">
+            <div class="textResult">Resultados <span class="textNegritas">{{collectionSize}}</span></div>
+            <div class="d-flex flex-row align-items-center"><ngb-pagination class="me-5" [(page)]="paginaActual"
+                    [collectionSize]="collectionSize" (pageChange)="pageChanged($event)"
+                    [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true" [ellipses]="true"
+                    [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA">
+
+                    <ng-template ngbPaginationPrevious>&lt;</ng-template>
+                    <ng-template ngbPaginationNext>&gt;</ng-template>
+
+                </ngb-pagination>
+                <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

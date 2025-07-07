@@ -1,0 +1,214 @@
+.card.card-body.header {
+  padding: 0;
+}
+
+.header-data {
+  .data-no-icon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 75px;
+
+    background-image: url('../../../../../assets/images/decoracion.svg');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+
+    .seccion {
+      padding: 1rem;
+
+      .titulo {
+        font-family: Montserrat;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        align-items: center !important;
+    }
+
+      .texto {
+        font-size: 16px;
+        color: #222222;
+        font-weight: bolder;
+
+      }
+    }
+  }
+}
+
+.text-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.text-title-com {
+  font-size: 18px;
+  font-weight: 400;
+
+}
+
+.data-detalle {
+  .titulo {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .texto {
+    font-size: 14px;
+    font-weight: 500;
+
+  }
+}
+
+
+
+.text-title-l-m {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.agregados {
+  margin-top: -14px;
+  font-size: 14px;
+}
+
+.table-medicamento {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+
+  .mat-mdc-table {
+    border-bottom: solid 0px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  mat-header-row[role=row] {
+    display: none;
+  }
+
+  mat-row[role=row] {
+    border: solid 1px #EEE;
+    min-height: 40px !important;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 7px;
+
+    mat-cell[role=cell]:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+
+    mat-cell[role=cell]:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}
+
+.lightSelect {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
+
+  mat-cell[role=cell]:last-child {
+    border-right: solid 8px #41ABCA;
+  }
+}
+
+.lightSelectAsig {
+  mat-cell[role=cell]:last-child {
+    border-right: solid 8px #00D494;
+    ;
+  }
+}
+
+.mat-column-no {
+  flex: 0 0 105px !important;
+  width: 105px !important;
+}
+
+.mat-column-estatus {
+  flex: 0 0 155px !important;
+  width: 155px !important;
+  justify-content: flex-end;
+}
+
+.card-detalle-med {
+  box-shadow: 0px 12px 14px 0px #0000000F;
+  border-radius: 6PX;
+}
+
+hr.hr.blue {
+  border: 1px solid #8EBFCD
+}
+
+// ::ng-deep .btn-outline-basic:disabled,
+// .btn-outline-basic.disabled {
+//   color: rgb(131 200 220) !important;
+//   background-image: none;
+//   background-color: transparent;
+//   border: none;
+// }
+
+// .btn:disabled,
+// .btn.disabled,
+// fieldset:disabled .btn {
+//   color: var(--bs-btn-disabled-color);
+//   pointer-events: none !important;
+//   background-color: var(--bs-btn-disabled-bg) !important;
+//   border-color: transparent !important;
+//   opacity: 0.50 !important;
+// }
+
+.botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.btns {
+  margin-top: 42px;
+}
+
+.mat-column-preparar {
+  flex: 0 0 126px !important;
+  width: 126px !important;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.btn-formu {
+  max-height: 36px;
+}
+
+.mat-column-no{
+  flex: 0 0 50px !important;
+  width: 50px !important;
+}
+
+mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
+  padding-left: 5px;
+}
+
+.titulo1 {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  align-items: center;
+}
+
+.mat-column-eliminar{
+  flex: 0 0 120px !important;
+  width: 120px !important;
+}
+
+.mat-column-lote{
+  flex: 0 0 100px !important;
+  width: 100px !important;
+}
+
+.mat-column-piezas{
+  flex: 0 0 220px !important;
+  width: 220px !important;
+}

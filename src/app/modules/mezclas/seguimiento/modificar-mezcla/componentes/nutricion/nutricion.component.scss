@@ -1,0 +1,180 @@
+// 
+.custom-checkbox {
+  position: relative;
+}
+
+::ng-deep .custom-checkbox-radio {
+
+  .mat-checkbox-background,
+  .mat-checkbox-frame {
+    border-radius: 50% !important;
+    scale: 1.8 !important;
+  }
+}
+
+.number {
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  //background-color: #2196f3; /* Color de fondo del número */
+  //color: white; /* Color del texto del número */
+  width: 26px;
+  /* Ancho del contenedor del número */
+  height: 23px;
+  /* Altura del contenedor del número */
+  border-radius: 50%;
+  /* Para que el contenedor del número sea circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  /* Asegura que el número esté por encima del checkbox */
+  margin: 5px;
+  /* Ajusta el espacio entre el número y los bordes del checkbox */
+}
+
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  /* ajusta el espacio para el checkbox */
+}
+
+.custom-checkbox mat-checkbox {
+  //position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 0px;
+  margin-left: 5px;
+}
+
+.color-w {
+  color: #fff;
+}
+
+.color-b {
+  color: #000;
+}
+
+.txt-header3 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+  border-color: var(--mdc-checkbox-unselected-icon-color);
+  background-color: #fff !important;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+.mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background,
+.mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background {
+  border-color: var(--mdc-checkbox-selected-icon-color);
+  background-color: var(--mdc-checkbox-selected-icon-color);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+label.mdc-label {
+  padding-right: 20px !important;
+}
+
+.mdc-form-field>label {
+  padding-right: 20px !important;
+}
+
+.btnGuardar {
+  color: var(--turquesa-primario, #41ABCA);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.btnCancelar {
+  color: #FB6753;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.btnEliminar {
+  color: #FB6753;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.btnEditar {
+  color: var(--turquesa-primario, #41ABCA);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+::gn-dep .mdc-checkbox .mdc-checkbox__native-control[disabled]:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+  border-color: var(--mdc-checkbox-disabled-unselected-icon-color);
+  background-color: transparent !important;
+}
+
+.mat-column-rechazar{
+  flex: 0 0 124px !important;
+  width: 124px !important;
+}
+
+.mat-column-unidadMedida{
+  flex: 0 0 270px !important;
+  width: 270px !important;
+}
+
+
+.mat-column-dosis{
+  flex: 0 0 124px !important;
+  width: 124px !important;
+}
+
+.mat-column-medicamento{
+  flex-basis: max-content;
+  min-width: 300px !important;
+}
+
+
+::ng-deep .mat-mdc-tab-labels .mdc-tab.mat-mdc-tab.mdc-tab-indicator--active {
+  background-color: #40a8c6;
+  border-radius: 10px 10px 0px 0px;
+  background: var(--turquesa-primario, #41ABCA);
+}
+
+::ng-deep .mat-mdc-tab-header-pagination-controls-enabled .mat-mdc-tab-header-pagination {
+  display: flex;
+  border-right: 1.5px solid var(--Lineas, #D8D8D8) !important;
+  background: #E6F1F7 !important;
+}
+
+::ng-deep .mat-mdc-tab-header-pagination-chevron {
+  border-color: var(--turquesa-primario, #41ABCA) !important;
+}
+
+::ng-deep .btn-outline-basic:disabled, .btn-outline-basic.disabled {
+  color: rgba(0, 0, 0, 0.87) !important;
+  background-image: none;
+  background-color: transparent;
+  border: none;
+}
+

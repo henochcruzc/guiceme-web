@@ -1,0 +1,197 @@
+<div class="card-ceme">
+
+    <div class="card card-body">
+            <mat-panel-title class="align-header">
+                <div class="solicitud"></div>
+                <div class="text-teatle">Edición de ficha técnica</div>
+                <div class="line-panel-header " style="width: 75% !important;"></div>
+            </mat-panel-title>
+
+        <div class="d-flex">
+            <div class="col-lg-8">
+                <form [formGroup]="form1" class=" ">
+                    <formly-form [model]="model1" [fields]="fields1" [form]="form1"></formly-form>
+                </form>
+            </div>
+
+            <div class="ms-3 d-flex gap-3 col-lg-4 btns">
+                <button type="button" class="btn btn-danger ps-4 pe-4 btn-formu" [disabled]="form1.invalid"
+                    (click)="resetForm()">Limpiar</button>
+                <button type="button" class="btn btn-primary ps-4 pe-4 btn-formu" [disabled]="form1.invalid"
+                    (click)="this.buscaMedicamento()">Buscar</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card-ceme">
+    <div class="card card-body">
+        <div class="d-flex align-items-center">
+            <div class="addMezcla"></div>
+            <div class="text-title-l-m ">Resultados de búsqueda</div>
+            <div class="line-panel-header " style="width: 75% !important;"></div>
+
+
+
+        </div>
+        <app-no-medicamento *ngIf="tableDS?.data?.length < 0 || !tableDS" [class]="'no-med-ft'"></app-no-medicamento>
+        <div class="d-flex w-100 ">
+            <div class="col-lg-4">
+                <div class="table-responsive scroll-table table-medicamento">
+                    <mat-table class="fullTable " [dataSource]="tableDS">
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
+                            [ngClass]="{'lightSelect': modelSelected.idMedicamento==row.idMedicamento}"></mat-row>
+
+                        <ng-container matColumnDef="no">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div class="d-flex flex-row gap-2 align-items-center">
+                                    {{ element.num }}<div class='ico-medic'></div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="desCorta">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <b>{{ element.desCorta }} {{ element.numUniMinMedPz }} {{
+                                    element.refUnidadMinMedida }}</b>
+                            </mat-cell>
+                        </ng-container>
+
+                    </mat-table>
+                </div>
+            </div>
+
+
+            <div class="col-lg-8 ms-3 card-detalle-med card-body" *ngIf="isConsulta">
+                <div>
+                    <div class="d-flex align-items-center">
+                        <div ngClass="" class="ico-medic"></div>
+                        <div class="text-title-l-m ">{{modelSelected.desCorta}}</div>
+
+                    </div>
+                </div>
+                <hr class="hr" />
+                <div class="d-flex titulo1">
+                    <div class="addMezcla"></div>
+                    Ficha técnica
+                    <br>
+                </div>
+                <div>
+
+                    <div>
+                        <form [formGroup]="form">
+                            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+                        </form>
+                        <form [formGroup]="formAmbiente">
+                            
+                                <formly-form [model]="modelAmbiente" [fields]="fieldsAmbiente" [form]="formAmbiente"></formly-form>
+                         
+                        </form>  
+                        <form [formGroup]="formRedFria">
+                            <formly-form [model]="modelRedFria" [fields]="fieldsRedFria" [form]="formRedFria"></formly-form>
+                            
+                        </form> 
+                    </div>
+                    <br>
+
+                    <div class="d-flex titulo col-md-12">
+                        <div class="col-md-6"> <img src="../../../../assets/images/Drip.svg">Diluyentes</div>
+                        
+                        <button class="col-md-6 btn btn-outline-basic agregaDil" [disabled]="this.agregaDiluyenteDis()"  (click)="this.agregarDiluyente()" > <img src="assets/images/add.svg" alt="" style="cursor: pointer;" >Agregar Diluyente</button>
+                    </div>
+                    
+    
+                    <form [formGroup]="formDil">
+    
+                        <formly-form [model]="modelDil" [fields]="fieldsDil" [form]="formDil"></formly-form>
+                        <br>
+
+                        <div class="table-responsive scroll-table">
+                            <div class="d-flex titulo-tabla titulo1" style="width: 27%;">
+                                <div class="lista-med"></div>
+                                Lista de diluyentes
+                                <br>
+                            </div>
+                            <mat-table class="fullTable" [dataSource]="diluyentesDataSource" matSortActive="medicamento"
+                                matSortDirection="asc" matSort (matSortChange)="shortTableDil($event)">
+    
+                                <mat-header-row *matHeaderRowDef="diluyentesDisplayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: diluyentesDisplayedColumns;"> </mat-row>
+    
+                                <ng-container matColumnDef="Diluyente">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                        class="columna-300"><strong>Diluyente</strong>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.desCortaDiluyente}}
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="perDilacion">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Período de validez diluido ambiente (hrs.)</strong> </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.numValDilucionAmb?element.numValDilucionAmb:element.perValDilucionAmbiente}} </mat-cell>
+                                </ng-container>
+    
+                                <ng-container matColumnDef="redFria">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-300"><strong>Período de validez diluido red fría (hrs.)</strong> </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.numValDilucionRfria?element.numValDilucionRfria:element.perValDilucionFria}} </mat-cell>
+                                </ng-container>
+    
+                               
+    
+    
+                                <ng-container matColumnDef="eliminar">
+                                    <mat-header-cell *matHeaderCellDef><strong>Eliminar</strong> </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class=" alinearIcono">
+    
+                                        <button  class="btn">
+                                            <span><img src="../../../../../assets/images/rechazar.svg"
+                                                    class="image-secundario" alt="Rechazar" title="rechazar"
+                                                    (click)="eliminarDil(element)"></span></button>
+    
+    
+                                    </mat-cell>
+                                </ng-container>
+    
+    
+                                <br>
+    
+    
+                            </mat-table>
+                        </div>
+                    </form>
+
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+<div class="contenido-no-color">
+
+    <div class="botones w-100 d-flex justify-content: space-between;">
+        <div>
+            <span>
+            </span>
+        </div>
+        <div class="botones">
+            <div class="botones">
+
+                <button type="button" class="btn btn-primary" [disabled]="btnDisabled()"
+                    style="margin-right: 20px;" (click)="registrar()">
+                    Actualizar información</button>
+            </div>
+        </div>
+    </div>
+
+</div>

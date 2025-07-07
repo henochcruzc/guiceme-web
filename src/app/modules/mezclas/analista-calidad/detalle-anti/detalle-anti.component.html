@@ -1,0 +1,101 @@
+<app-header-detalle-mezcla [headerData]="headerData"></app-header-detalle-mezcla>
+
+<div class="card-ceme">
+    <div class="card card-body">
+        <div class="header-table">
+            <div class="lista-medicamento padding">
+
+                <div class="header-table d-flex align-items-center justify-content-between ">
+                    <div class="titulo" >
+                        <span class="text2">Mezcla: Antibiótico / No aprobada</span><br>
+                        <div class="titulo-tabla " style="display: flex; align-items: center; padding-left: 10px; color: var(--Txt_title, #404041);">
+                            <div class="ico-clipboard"></div>
+                            <span class="text">Listado de medicamentos</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive scroll-table">
+                    <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="medicamento"
+                        matSortDirection="asc" matSort #sort="matSort" (matSortChange)="shortTable($event)">
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+                        <ng-container matColumnDef="desCortaMedicamento">
+                            <mat-header-cell class="col-md-9" *matHeaderCellDef mat-sort-header> Medicamentos
+                            </mat-header-cell>
+                            <mat-cell class="col-md-9" *matCellDef="let element">
+                                {{ element.desCortaMedicamento }}
+
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="numDosisMedicamento">
+                            <mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header> Dosis
+                            </mat-header-cell>
+                            <mat-cell class="col-md-1" *matCellDef="let element">
+                                {{ element.numDosisMedicamento }}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="refUnidadMinMedida">
+                            <mat-header-cell class="col-md-2" *matHeaderCellDef mat-sort-header> Unidad de medida
+                            </mat-header-cell>
+                            <mat-cell class="col-md-2" *matCellDef="let element">{{ element.refUnidadMinMedida
+                                }}</mat-cell>
+                        </ng-container>
+
+                    </mat-table>
+                </div>
+
+            </div>
+            <div class="datos-diluyente padding margin">
+                <div class="d-flex flex-row flex-wrap justify-content-between">
+                    <div class="col-md-8 d-flex flex-column ">
+                        <span class="etiqueta">Diluyente</span>
+                        <span class="texto">{{modelDiluyente.desCortaDiluyente}}</span>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Dosis</span>
+                        <span class="texto">{{modelDiluyente.numDosisDiluyente}}</span>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Unidad de medida</span>
+                        <span class="texto">{{modelDiluyente.refUnidadMinMedida}}</span>
+                    </div>
+                </div>
+                <hr class="hr-azul" />
+                <div class="d-flex flex-row flex-wrap justify-content-between">
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Fecha de aplicación</span>
+                        <span class="texto">{{modelDiluyente.fechaAplicacion}}</span>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Cada</span>
+                        <span class="texto">{{modelDiluyente.desAplicacionCada}}</span>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Número total de dosis</span>
+                        <span class="texto">{{modelDiluyente.totalDosis}}</span>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Vía de administración</span>
+                        <span class="texto">{{modelDiluyente.desViaAdministracion}}</span>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Tiempo de infusión</span>
+                        <span class="texto">{{modelDiluyente.desTiempoInfusion}}</span>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column">
+                        <span class="etiqueta">Velocidad de infusión (ml/hrs)</span>
+                        <span class="texto">{{modelDiluyente.refVelInfusion}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-detalle-progreso *ngIf="this.role == 8"></app-detalle-progreso>

@@ -1,0 +1,366 @@
+@import "../../../../../../styles-estatus.scss"; 
+
+.titulo-dialogo {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    font-size: 16px;
+    background-color: #eff4f4;
+    font-weight: 600;
+    height: 43px;
+    border-radius: 10px 10px 0 0;
+}
+
+.contenido-dialogo {
+    .datos-header {
+        background-color: #368ea8;
+        color: #fff !important;
+
+    }
+}
+
+.datos-header{
+    min-height: 73px;
+  }
+
+  
+.padding {
+    padding: 14px 27px 3px 27px;
+}
+
+.margin {
+    margin: 0 27px;
+}
+
+
+.separador {
+    background-image: url('../../../../../../assets/images/separadorHDm.svg');
+    background-repeat: repeat-y;
+    background-repeat: repeat-y;
+    height: 36px;
+    width: 23px;
+    margin-top: 7px;
+
+}
+
+
+.datos {
+    label.form-label.bold {
+        font-size: 14px;
+        font-weight: 600 !important;
+        margin-bottom: 0rem;
+    }
+
+    .label-texto-value {
+        font-size: 14px;
+        font-weight: 400 !important;
+
+
+    }
+}
+
+
+.datos-diagnostico {
+    font-size: 14px;
+    font-weight: 500 !important;
+
+    .detalle-diagnostico {
+
+        font-size: 14px;
+        font-weight: 400 !important;
+
+    }
+}
+
+.header-table .titulo .text {
+
+    font-size: 14px;
+    font-weight: 500 !important;
+
+
+}
+
+::ng-deep .mdc-dialog .contenido-dialogo {
+    padding: 0;
+}
+
+::ng-deep .mdc-dialog__surface {
+    overflow-y: initial;
+}
+
+.bandera {
+    font-size: 14px;
+    min-height: 18px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 110px;
+    column-gap: 5px;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+.bandera .circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+}
+
+.circle.green {
+    border: solid 1px #00d494;
+
+    div {
+        background-color: #00d494;
+    }
+}
+
+.bandera.green {
+    background-color: #d9f9ef;
+    color: #00d494;
+}
+
+.circle.blue {
+    border: solid 1px #1dd3ec;
+
+    div {
+        background-color: #1dd3ec;
+    }
+}
+
+.bandera.blue {
+    background-color: #e9fbfe;
+    color: #1dd3ec;
+}
+
+.circle.orange {
+    border: solid 1px #ff820e;
+
+    div {
+        background-color: #ff820e;
+    }
+}
+
+.bandera.orange {
+    background-color: #ffe6cf;
+    color: #ff820e;
+}
+
+.circle.red {
+    border: solid 1px #ef7373;
+
+    div {
+        background-color: #ef7373;
+    }
+}
+
+.bandera.red {
+    background-color: #fce3e3;
+    color: #ef7373;
+}
+
+
+.datos-diluyente {
+    box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.1);
+    padding-bottom: 14px;
+
+    .etiqueta {
+        font-size: 14px;
+        font-weight: 500 !important;
+
+    }
+
+    .texto {
+        font-size: 14px;
+        font-weight: 500 !important;
+    }
+}
+
+.datos-progreso {
+    background-color: #f8f8f8;
+    border: none;
+    border-radius: 0px;
+    box-shadow: unset;
+
+    .panel-header {
+        margin: -13px -22px 0 -29px;
+    }
+}
+
+.hr-azul {
+    color: #8ebfcd;
+}
+
+.s-progreso {
+    .etiqueta {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .texto {
+        font-size: 14px;
+        font-weight: 600;
+        color: #a9a8a9;
+    }
+}
+
+.progreso .radio {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div.circle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+
+        div.check {
+            cursor: default;
+            background-size: 14px;
+            transform: translate(7px, 9px);
+        }
+    }
+}
+
+.radio.green {
+    border: solid 1px #00d494;
+
+    div.circle {
+        background-color: #00d494;
+    }
+}
+
+
+.radio.blue {
+    border: solid 1px #1dd3ec;
+
+    div.circle {
+        background-color: #1dd3ec;
+    }
+}
+
+.radio.orange {
+    border: solid 1px #ff820e;
+
+    div.circle {
+        background-color: #ff820e;
+    }
+}
+
+.radio.red {
+    border: solid 1px #ef7373;
+
+    div.circle {
+        background-color: #ef7373;
+    }
+}
+
+.radio.gray {
+    border: solid 1px #1dd3ec;
+
+    div.circle {
+        background-color: #fff;
+    }
+}
+
+
+.borde.d-flex.w-100 {
+    border-bottom: solid 35px #41abca;
+    margin-top: -31px;
+    border-radius: 0 0 10px 10px;
+}
+
+.datos-medico {
+    padding-top: 13px;
+    box-shadow: 0px -5px 14px 0px rgba(0, 0, 0, 0.1);
+
+    .img-ico-doc {
+        background-image: url('../../../../../../assets/images/icon-doctor.svg');
+        background-repeat: no-repeat;
+        width: 90px;
+        height: 90px;
+    }
+
+    .etiqueta {
+        font-size: 14px;
+        color: #1daac8;
+        font-weight: 600;
+    }
+
+    .texto {
+        font-size: 20px;
+        color: #000;
+        font-weight: 400;
+    }
+
+}
+
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 10px;
+}
+
+.texto.orange,
+.mat-icon.orange.material-icons{
+    color: #ef7373;
+}
+
+.mat-icon.orange.material-icons{
+    transform: scale(0.9);
+}
+
+.tooltip-contenido p {
+    text-align: justify;
+
+    strong,
+    b {
+        color: white;
+
+    }
+
+}
+::ng-deep .tool-rechazo.tooltip{
+    --bs-tooltip-bg:#626262;
+}
+
+.datos-boton-duplicar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+.botones-DM{
+    background: #3995B0 !important;
+    border-color: #3995B0 !important;
+}
+
+.padding-header {
+    padding: 10px 20px 10px 20px;
+}
+
+.botones-DM{
+    background: #3995B0 !important;
+    border-color: #3995B0 !important;
+    width: 85px;
+    margin-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+  }

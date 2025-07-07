@@ -1,0 +1,84 @@
+<div class="card-ceme">
+    <div class="card card-body">
+            <mat-panel-title class="align-header">
+                <div class="impresion"></div>
+                <div class="text-teatle">Reimpresión de etiquetas</div>
+                <div class="line-panel-header w-100"></div>
+            </mat-panel-title>
+        <form [formGroup]="form">
+
+            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+            <!--<div>{{modelTipoMezcla | json}}  form valido : {{formTipoMezcla}} fiel : {{fieldsTipoMezcla}}</div> -->
+        </form>
+
+        <br>
+        <div class="header-table">
+            <div class="titulo-tabla d-flex align-items-center">
+                <div class="ico-clipboard"></div>
+                <span class="text" style="font-weight: 600;">Listado de etiquetas para reimpresión</span>
+            </div>
+            <div class="accion">
+                <!--<div class="resTxt">Resultados totales {{myData.length}}</div>
+                <button type="button" class="btn btn-outline-basic btn-ico"><i class="bi report"></i> Generar reporte de aprobadas</button>-->
+            </div>
+        </div>
+
+
+        <div class="table-responsive scroll-table">
+            <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="folioMezcla" matSortDirection="asc"
+                matSort #sort="matSort" (matSortChange)="shortTable($event)">
+
+                <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+                <ng-container matColumnDef="folioMezcla">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Folio de la mezcla </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        {{ element.folioMezcla }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="motivoReimpresion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Motivo de reimpresión </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{ element.motivoReimpresion }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="desTipoMezcla">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de mezcla </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{ element.desTipoMezcla }}</mat-cell>
+                </ng-container>
+
+               <ng-container matColumnDef="reimpresion">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <a style="cursor: pointer;" class="textReimprimir"> 
+                            <img src="../../../../../assets/images/impresion.svg" class="image-secundario" alt="Rechazar" title="rechazar" >
+                            <span style="padding-left: 10px;" (click)="reimprimir(element)">Reimprimir</span></a>
+                    </mat-cell>
+                </ng-container>
+
+            </mat-table>
+
+        </div>
+        <ng-container *ngIf="!(totalElements > 0)">
+            <app-no-medicamento></app-no-medicamento>
+        </ng-container>
+        <div class=" paginador d-flex justify-content-end w-100 align-items-center">
+            <div class="textResult">Folios totales:  <span class="textNegritas">{{totalElements == null ? 0 :
+                    totalElements}}</span></div>
+            <div class=" d-flex justify-content-end w-100 align-items-center">
+                <ngb-pagination class="me-5" [(page)]="paginaActual" [collectionSize]="totalElements"
+                    (pageChange)="pageChanged($event)" [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true"
+                    [ellipses]="true" [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA">
+
+                    <ng-template ngbPaginationPrevious>&lt;</ng-template>
+                    <ng-template ngbPaginationNext>&gt;</ng-template>
+
+                </ngb-pagination>
+                <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>

@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+::ng-deep app-side-bar,
+.body-offcanvas{
+  height: 100%;
+}
+
+.botones-offcanvas{
+  display: flex;
+  width: 382px;
+  padding: 8px 7px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--secundario-azul-tono-10, rgba(51, 97, 255, 0.05));
+}

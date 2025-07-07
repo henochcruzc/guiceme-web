@@ -1,0 +1,148 @@
+<div>
+
+    <form [formGroup]="formTipoMezcla">
+  
+      <formly-form [model]="modelNTP" [fields]="fieldsNTP" [form]="formNTP"></formly-form>
+      <br>
+  
+      <mat-panel-title style="justify-content: space-between;">
+        <div style="display: flex;">
+            <div class="solicitud"></div>
+            <div class="text-teatle" style="margin-top: 8px;">Lista de componentes</div>
+        </div>
+        <div>Componentes totales: {{this.componenteTotal}}</div>
+      </mat-panel-title>
+      <br>
+  
+      <mat-tab-group>
+        <mat-tab *ngFor="let tab of tabsNTP" [label]="tab.nombre + ' ' + tab.counter">
+          <div class="d-flex">
+            <mat-table class="fullTable" [dataSource]="tab.data" matSortActive="medicamento" matSortDirection="asc"
+              matSort>
+              <mat-header-row *matHeaderRowDef="tab.displayCols"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: tab.displayCols;"></mat-row>
+  
+              <ng-container matColumnDef="medicamento">
+                <mat-header-cell *matHeaderCellDef mat-sort-header
+                  class="columna-300"><strong>Componentes</strong></mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.medicamento ? element.medicamento :
+                  element.desCortaMedicamento}}</mat-cell>
+              </ng-container>
+  
+              <ng-container matColumnDef="dosis">
+                <mat-header-cell *matHeaderCellDef mat-sort-header
+                  class="columna-300"><strong>Volumen</strong></mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.dosis}}</mat-cell>
+              </ng-container>
+  
+              <ng-container matColumnDef="unidadMedida">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Unidad de
+                    medida</strong></mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.unidadMedida}}</mat-cell>
+              </ng-container>
+  
+              <ng-container matColumnDef="rechazar">
+                <mat-header-cell *matHeaderCellDef><strong>Eliminar</strong></mat-header-cell>
+                <mat-cell *matCellDef="let element" class="alinearIcono">
+                  <button [disabled]="isDisabled" class="btn"> <span><img src="../../../../../assets/images/rechazar.svg" class="image-secundario"
+                        alt="Rechazar" title="rechazar" (click)="rechazarNtp(element, tab.id)">
+                    </span></button>
+                </mat-cell>
+              </ng-container>
+  
+            </mat-table>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+  
+  
+      <!--<div [ngbNavOutlet]="nav" class="mt-2"></div>-->
+      <formly-form [model]="modelAbajoNtp" [fields]="fieldsAbajoNtp" [form]="formAbajoNtp"></formly-form>
+  
+      <!--dias-->
+      <br>
+      <div class="txt-header3">
+        <div *ngIf="this.tabs.length != 0"><mat-checkbox [disabled]="isDisabled" (change)="seleccionarTodo($event.checked)" [checked]="seleccionTodo">Seleccionar
+            todo:</mat-checkbox></div>
+        <div style="padding-left: 20px;">
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs w-100 gap-3"
+            (navChange)="onNavChangeNTP($event)">
+            <ng-template ngFor let-item [ngForOf]="tabs" let-index="index">
+              <li class="mes" [ngbNavItem]="index" [class.active]="index === 0">
+                <button ngbNavLink>
+                  {{ tabs[index].nombreMes }}
+                </button>
+                <ng-template ngbNavContent>
+                  <div class="d-flex gap-3 flex-wrap mt-3">
+                    <ng-template ngFor let-item [ngForOf]="tabs[index].dias" let-index="index">
+                      <mat-checkbox class="check-dias" [checked]="item.check" [disabled]="isDisabled"
+                        (change)="actualizarDia($event.checked,item)">
+                        {{item.nombreDia}}
+  
+                      </mat-checkbox>
+                    </ng-template>
+                  </div>
+  
+                </ng-template>
+  
+  
+  
+              </li>
+  
+            </ng-template>
+          </ul>
+        </div>
+      </div>
+  
+      <div [ngbNavOutlet]="nav" class="mt-2" *ngIf="this.tabs.length != 0"></div>
+      <!--dias-->
+      <formly-form [model]="modelViaAdminNtp" [fields]="fieldsViaAdminNtp" [form]="formViaAdminNtp"></formly-form>
+      <br>
+      <br>
+  
+      <div class="botones">
+        <button type="button" class="btn btnEliminar" [disabled]="saveEdicion" (click)="eliminarMezcla();"
+          *ngIf="eliminar" style="margin-right: 20px;"><img src="../../../../assets/images/eliminarMezcla.svg" alt="">
+          Eliminar mezcla</button>
+        <!-- <div style="display: flex; cursor: pointer;" (click)="eliminarMezcla();" *ngIf="eliminar">
+        <div ><svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
+          <path d="M4.50195 5.00003L13.5023 14.0004" stroke="#FB6753" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4.50195 14L13.5023 4.9996" stroke="#FB6753" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg></div>
+        <div class="boton-eliminar" disabled=disabledEliminar><span>Eliminar mezcla</span></div>
+      </div> -->
+  
+        <button type="button" class="btn btnCancelar" (click)="cancelarEdicion()" style="margin-right: 20px;"
+          *ngIf="canceEdicion"><img src="../../../../assets/images/cancelarEdicion.svg" alt=""> Cancelar edición</button>
+  
+        <!-- <div style="display: flex; cursor: pointer;" *ngIf="canceEdicion">
+        <div ><svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
+          <path d="M7.365 14.2317C3.84971 14.2317 1 11.382 1 7.86668C1 4.35139 3.84971 1.50168 7.365 1.50168C10.8803 1.50168 13.73 4.35139 13.73 7.86668C13.73 11.382 10.8803 14.2317 7.365 14.2317Z" stroke="#FB6753" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.8702 12.37L2.86133 3.36105" stroke="#FB6753" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg></div>
+        <div class="boton-eliminar" (click)="cancelarEdicion()">Cancelar edición</div>
+      </div>
+       -->
+        <button type="button" class="btn btnEditar" (click)="editarMezcla();" *ngIf="editar" style="margin-right: 20px;">
+          <img src="../../../../assets/images/Editar_mezcla.svg" alt=""> Editar mezcla</button>
+        <!-- <div style="display: flex; cursor: pointer;" (click)="editarMezcla();" *ngIf="editar">
+        <div ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+          <path d="M10.4062 17.9963L6 19.23L7.23375 14.8238L15.3021 6.79461C15.3933 6.70135 15.5022 6.62724 15.6224 6.57665C15.7426 6.52606 15.8717 6.5 16.0022 6.5C16.1326 6.5 16.2617 6.52606 16.382 6.57665C16.5022 6.62724 16.6111 6.70135 16.7023 6.79461L18.4354 8.53752C18.5272 8.62855 18.6 8.73684 18.6497 8.85616C18.6994 8.97548 18.725 9.10347 18.725 9.23273C18.725 9.36199 18.6994 9.48997 18.6497 9.60929C18.6 9.72861 18.5272 9.83691 18.4354 9.92793L10.4062 17.9963Z" stroke="#41ABCA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg></div>
+        <div class="boton-editar" (click)="editarMezcla()">Editar mezcla</div>
+      </div> -->
+  
+        <button type="button" class="btn btnGuardar" (click)="guardarEdicion();" *ngIf="saveEdicion"><img
+            src="../../../../assets/images/Editar_mezcla.svg" alt=""> Guardar edición</button>
+  
+        <!-- <div style="display: flex; cursor: pointer;" (click)="guardarEdicion();" *ngIf="saveEdicion">
+        <div ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+          <path d="M10.4062 17.9963L6 19.23L7.23375 14.8238L15.3021 6.79461C15.3933 6.70135 15.5022 6.62724 15.6224 6.57665C15.7426 6.52606 15.8717 6.5 16.0022 6.5C16.1326 6.5 16.2617 6.52606 16.382 6.57665C16.5022 6.62724 16.6111 6.70135 16.7023 6.79461L18.4354 8.53752C18.5272 8.62855 18.6 8.73684 18.6497 8.85616C18.6994 8.97548 18.725 9.10347 18.725 9.23273C18.725 9.36199 18.6994 9.48997 18.6497 9.60929C18.6 9.72861 18.5272 9.83691 18.4354 9.92793L10.4062 17.9963Z" stroke="#41ABCA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg></div>
+        <div class="boton-guardar">Guardar edición</div>
+      </div> -->
+      </div>
+  
+    </form>
+  
+  </div>

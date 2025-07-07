@@ -1,0 +1,67 @@
+<div class="titulo-dialogo padding d-flex">
+    <div class="d-flex">
+        <span> Detalle de mezcla</span>&nbsp; &nbsp;&nbsp;
+        <div class="bandera" ngClass="{{ findClass(data.registro.estatus.id) }}">
+            <div class="circle " ngClass="{{ findClass(data.registro.estatus.id) }}">
+                <div></div>
+            </div>
+            <span>{{ data.registro.estatus.descripcion }}</span>
+        </div>
+    </div>
+    <div>
+        <button class="btn " style="border: none;" [mat-dialog-close]="true">
+            <mat-icon class="icon-close"></mat-icon>
+        </button>
+    </div>
+
+</div>
+<div mat-dialog-content class="contenido-dialogo">
+    <div class="datos-header padding">
+        <div class="separador"></div>
+        <div class="datos">
+            <form [formGroup]="form">
+                <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+            </form>
+
+        </div>
+    </div>
+    <div class="datos-diagnostico padding">
+        <div class="lblDg"> Diagnóstico </div>
+        <div class="lblDgDs">{{strDiagnostico}}</div>
+    </div>
+    <div style="margin-left: 27px; margin-right: 27px;">
+        <div>
+
+            <app-listado-medicamentos [paramsData]="detalleAntibiotico" [paramsTitulo]="blnTituloMedicamentos"
+                *ngIf="detalleAntibiotico != undefined"></app-listado-medicamentos>
+        </div>
+        <div>
+
+            <app-listado-diluyente [paramsDiluyente]="modelDiluyente" *ngIf="modelDiluyente != undefined">
+            </app-listado-diluyente>
+
+        </div>
+    </div>
+
+    <div *ngIf="progreso != undefined" class="datos-progreso  padding margin card mt-3" >
+        <app-listado-progreso [paramsData]="progreso"></app-listado-progreso>
+    </div>
+    <div class="datos-medico d-flex w-100 flex-row mt-3" *ngIf="detalleMezcla != undefined">
+        <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+            <div class="img-ico-doc"></div>
+        </div>
+        <div class="col-md-6 d-flex flex-column">
+            <span class="etiqueta">Nombre del médico</span>
+            <span class="texto">{{ detalleMezcla.nomMedicoPrescribe }}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Matrícula</span>
+            <span class="texto">{{detalleMezcla.refMatricula}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Cédula profesional</span>
+            <span class="texto">{{detalleMezcla.refCedulaProfesional}}</span>
+        </div>
+    </div>
+    <div class="borde d-flex w-100"></div>
+</div>

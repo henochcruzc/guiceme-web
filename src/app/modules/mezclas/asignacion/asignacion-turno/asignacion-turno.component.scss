@@ -1,0 +1,49 @@
+.line-panel-header1 {
+    border-bottom: 1px solid #41ABCA;
+    //margin-left: 10px;
+    padding-top: 12px;
+}
+
+.text-teatle {
+    width: 465px;
+    padding-left: 1rem;
+    ;
+}
+
+.mat-column-check{
+    flex: 0 0 56px !important;
+    width: 56px !important;
+  }
+
+  
+  .textResult{
+    color: #666;
+    text-align: right;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 11%;
+    text-align: start;
+    padding-left: 7px;
+  }
+  
+  .textNegritas{
+    color: #222;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  
+  .btns {
+    margin-top: 42px;
+  }

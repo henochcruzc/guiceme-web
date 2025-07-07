@@ -1,0 +1,119 @@
+<app-header-detalle-mezcla [headerData]="headerData"></app-header-detalle-mezcla>
+
+<div class="card-ceme">
+
+    <div class="card card-body">
+        <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+            <div class="icon-drip"></div>&nbsp;&nbsp;
+            <div class="text-teatle"> Aplicación de mezclas estériles</div>
+            <div class="line-panel-header w-100 "></div>
+        </mat-panel-title>
+
+
+        <form [formGroup]="form" class="mb-3">
+            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+
+        </form>
+
+
+
+        <div class="header-table d-flex align-items-center justify-content-between ">
+            <div class="subtitulo d-flex align-items-center">
+                <div class="ico-clipboard"></div>
+                <span class="text">Listado de mezclas</span>
+            </div>
+            <div class="pull-right subtitulo">
+                Resultados totales <div class="resultados">{{totalElements}}</div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="table-responsive scroll-table">
+            <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="folioSolicitud" matSortDirection="asc"
+                matSort #tSort="matSort">
+
+                <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+                <ng-container matColumnDef="folioSolicitudMezcla">
+                    <mat-header-cell class="borde" *matHeaderCellDef mat-sort-header> <span class="justify-content-center">Folio de
+                            solicitud </span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        {{ element.folioSolicitudMezcla }}
+
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="folioMezclaDosis">
+                    <mat-header-cell class="borde"  *matHeaderCellDef mat-sort-header> Folio de mezcla </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        {{ element.folioMezclaDosis }}
+
+
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="desTipoMezcla">
+                    <mat-header-cell  class="borde"  *matHeaderCellDef mat-sort-header> Tipo de mezcla </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{ element.desTipoMezcla }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaAplicacion">
+                    <mat-header-cell class="borde"  *matHeaderCellDef mat-sort-header> Fecha de aplicación </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{ element.fechaAplicacion }}</mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="desEstatusMezcla">
+                    <mat-header-cell  class="justify-content-center" *matHeaderCellDef > Aplicación </mat-header-cell>
+                    <mat-cell class="justify-content-center" *matCellDef="let element" (click)="onVerDetalle(element)">
+
+                        <div class="bandera select" ngClass="{{ findClass(element.desEstatusMezcla,element.indPorAplicar , element.indEnProceso ) }}">
+                            <div class="icon-estatusAplicada" *ngIf="element.idEstatus == 11"></div>
+                            <div class="icon-estatusPorAplicar" *ngIf="element.idEstatus == 9 && !element.indEnProceso || element.indPorAplicar == 1" ></div>
+                            
+                            
+                            <div class="icon-danger" *ngIf="element.idEstatus == 12"></div>
+                            <div class="icon-estatusEnProceso" *ngIf=" element.indEnProceso == 1"></div>
+                            
+                         <span *ngIf=" element.indEnProceso != 1">  {{ element.desEstatusMezcla }}</span>
+                            <span *ngIf="element.indEnProceso == 1"> En Proceso</span>
+                            
+                         
+                            
+                        </div>
+                        
+                    </mat-cell>
+                </ng-container>
+
+
+
+            </mat-table>
+        </div>
+
+        <div class=" paginador d-flex justify-content-between w-100 align-items-center">
+            <div>Resultados &nbsp;&nbsp;&nbsp;<div class="resultados">{{pageSize}}</div>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <ngb-pagination class="me-5" [(page)]="paginaActual" [collectionSize]="collectionSize"
+                    (pageChange)="pageChanged($event)" [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true"
+                    [ellipses]="true" [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA">
+
+                    <ng-template ngbPaginationPrevious>&lt;</ng-template>
+                    <ng-template ngbPaginationNext>&gt;</ng-template>
+
+                </ngb-pagination>
+                <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div style="height: 60px;"></div>
+
+    </div>

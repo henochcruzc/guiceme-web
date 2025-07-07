@@ -1,0 +1,553 @@
+.botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  
+  .d-flex-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .txt-paciente {
+    color: var(--Icono_tabla, #BC955C);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+  }
+  
+  .txt-nomPaciente {
+    color: #222;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    /* 136.364% */
+  }
+  
+  .txt-header {
+    color: #000;
+    text-align: right;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url("../../../../assets/images/headerCom.svg");
+    background-repeat: no-repeat;
+  }
+  
+  .txt-header2 {
+    background-image: url("../../../../assets/images/headerTeatle2.svg");
+  }
+  
+  
+  .img-container-header {
+    padding: 0%;
+    max-height: 5.1rem;
+    z-index: -5;
+    border-top-right-radius: 1rem;
+  }
+  
+  .img-container {
+    padding: 0%;
+    max-height: 5rem;
+  }
+  
+  .img-container-regresar {
+    padding: 0%;
+    max-height: 2rem;
+    cursor: pointer;
+  }
+  
+  /* img{
+    border-radius: 1rem;
+  } */
+  
+  .col-img {
+    max-width: 7rem;
+  }
+  
+  .img-end {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .img-start {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .card-body {
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    /* border-radius: 1rem; */
+  }
+  
+  .card-body label {
+    color: #95A4B7;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 30px;
+  }
+  
+  .content {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+  
+  .d-flex {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .line-panel-header {
+    border-bottom: 1px solid #41ABCA;
+    //margin-left: 10px;
+    padding-top: 12px;
+  }
+  
+  .text-teatle {
+    color: var(--Text-Titulos, #626262);
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .w-80 {
+    width: 80% !important;
+  }
+  
+  .d-flex-radios {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mdc-form-field {
+    display: inline-flex;
+    vertical-align: middle !important;
+    flex-direction: column !important;
+  }
+  
+  // 
+  .custom-checkbox {
+    position: relative;
+  }
+  
+  .number {
+    position: absolute;
+    top: 8px;
+    left: 7px;
+    //background-color: #2196f3; /* Color de fondo del número */
+    //color: white; /* Color del texto del número */
+    width: 26px;
+    /* Ancho del contenedor del número */
+    height: 23px;
+    /* Altura del contenedor del número */
+    border-radius: 50%;
+    /* Para que el contenedor del número sea circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    /* Asegura que el número esté por encima del checkbox */
+    margin: 5px;
+    /* Ajusta el espacio entre el número y los bordes del checkbox */
+  }
+  
+  .custom-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    /* ajusta el espacio para el checkbox */
+  }
+  
+  .custom-checkbox mat-checkbox {
+    //position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 0px;
+    margin-left: 5px;
+  }
+  
+  .color-w {
+    color: #fff;
+  }
+  
+  .color-b {
+    color: #000;
+  }
+  
+  .contenido1,
+  .contenido-no-color1 {
+    display: flex;
+    padding: 0px;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 5px;
+  }
+  
+  .boton-eliminar {
+    display: flex;
+    height: 35px;
+    padding: 8px 0px;
+    align-items: center;
+    gap: 2px;
+    color: #FB6753;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .boton-editar {
+    display: flex;
+    height: 35px;
+    padding: 8px 0px;
+    align-items: center;
+    gap: 2px;
+    color: var(--turquesa-primario, #41ABCA);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .boton-guardar {
+    display: flex;
+    height: 35px;
+    padding: 8px 0px;
+    align-items: center;
+    gap: 2px;
+    color: var(--turquesa-primario, #41ABCA);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .custom-checkbox {
+    position: relative;
+  }
+  
+  ::ng-deep .custom-checkbox-radio {
+  
+    .mat-checkbox-background,
+    .mat-checkbox-frame {
+      border-radius: 50% !important;
+      scale: 1.8 !important;
+    }
+  }
+  
+  
+  .botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  
+  .d-flex-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .txt-paciente {
+    color: var(--Icono_tabla, #BC955C);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+  }
+  
+  .txt-nomPaciente {
+    color: #222;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    /* 136.364% */
+  }
+  
+  .txt-header {
+    color: #000;
+    text-align: right;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url("../../../../assets/images/headerCom.svg");
+    background-repeat: no-repeat;
+  }
+  
+  .txt-header2 {
+    background-image: url("../../../../assets/images/headerTeatle2.svg");
+  }
+  
+  
+  .img-container-header {
+    padding: 0%;
+    max-height: 5.1rem;
+    z-index: -5;
+    border-top-right-radius: 1rem;
+  }
+  
+  .img-container {
+    padding: 0%;
+    max-height: 5rem;
+  }
+  
+  .img-container-regresar {
+    padding: 0%;
+    max-height: 2rem;
+    cursor: pointer;
+  }
+  
+  /* img{
+    border-radius: 1rem;
+  } */
+  
+  .col-img {
+    max-width: 7rem;
+  }
+  
+  .img-end {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .img-start {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .card-body {
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    /* border-radius: 1rem; */
+  }
+  
+  .card-body label {
+    color: #95A4B7;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 30px;
+  }
+  
+  .content {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+  
+  .d-flex {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .line-panel-header {
+    border-bottom: 1px solid #41ABCA;
+    //margin-left: 10px;
+    padding-top: 12px;
+  }
+  
+  .text-teatle {
+    color: var(--Text-Titulos, #626262);
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .w-80 {
+    width: 80% !important;
+  }
+  
+  .d-flex-radios {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mdc-form-field {
+    display: inline-flex;
+    vertical-align: middle !important;
+    flex-direction: column !important;
+  }
+  
+  // 
+  .custom-checkbox {
+    position: relative;
+  }
+  
+  ::ng-deep .custom-checkbox-radio {
+  
+    .mat-checkbox-background,
+    .mat-checkbox-frame {
+      border-radius: 50% !important;
+      scale: 1.8 !important;
+    }
+  }
+  
+  .number {
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    //background-color: #2196f3; /* Color de fondo del número */
+    //color: white; /* Color del texto del número */
+    width: 26px;
+    /* Ancho del contenedor del número */
+    height: 23px;
+    /* Altura del contenedor del número */
+    border-radius: 50%;
+    /* Para que el contenedor del número sea circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    /* Asegura que el número esté por encima del checkbox */
+    margin: 5px;
+    /* Ajusta el espacio entre el número y los bordes del checkbox */
+  }
+  
+  .custom-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    /* ajusta el espacio para el checkbox */
+  }
+  
+  .custom-checkbox mat-checkbox {
+    //position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 0px;
+    margin-left: 5px;
+  }
+  
+  .color-w {
+    color: #fff;
+  }
+  
+  .color-b {
+    color: #000;
+  }
+  
+  .txt-header3 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+    border-color: var(--mdc-checkbox-unselected-icon-color);
+    background-color: #fff !important;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+  .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background,
+  .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background {
+    border-color: var(--mdc-checkbox-selected-icon-color);
+    background-color: var(--mdc-checkbox-selected-icon-color);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+  }
+  
+  label.mdc-label {
+    padding-right: 20px !important;
+  }
+  
+  .mdc-form-field>label {
+    padding-right: 20px !important;
+  }
+  
+  .btnGuardar {
+    color: var(--turquesa-primario, #41ABCA);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .btnCancelar {
+    color: #FB6753;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .btnEliminar {
+    color: #FB6753;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .btnEditar {
+    color: var(--turquesa-primario, #41ABCA);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  ::gn-dep .mdc-checkbox .mdc-checkbox__native-control[disabled]:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+    border-color: var(--mdc-checkbox-disabled-unselected-icon-color);
+    background-color: transparent !important;
+  }
+
+ .btn:disabled, .btn.disabled, fieldset:disabled .btn {
+    color: var(--bs-btn-disabled-color);
+    pointer-events: none !important;
+    background-color: var(--bs-btn-disabled-bg) !important;
+    border-color: transparent !important;
+    opacity: 0.50 !important;
+  }

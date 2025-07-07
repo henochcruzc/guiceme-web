@@ -1,0 +1,322 @@
+<div class="card-ceme">
+  <div class="card card-body">
+            <mat-panel-title class="align-header">
+                <div class="solicitud"></div>
+                <div class="text-teatle">Orden de distribución</div>
+                <div class="line-panel-header w-100"></div>
+            </mat-panel-title>
+        <form [formGroup]="form">
+
+            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+            <!--<div>{{modelTipoMezcla | json}}  form valido : {{formTipoMezcla}} fiel : {{fieldsTipoMezcla}}</div> -->
+        </form>
+
+        <br>
+        <div class="header-table titulo-tabla " >
+          <div class="titulo d-flex align-items-center">
+              <div class="ico-clipboard"></div>
+              <span class="text">Listado de solicitudes</span>
+          </div>
+          <div class="accion">
+            <div class="text">Resultados totales <span class="resTxt"> {{totalElements}}</span></div><!--<button type="button" class="btn btn-outline-basic btn-ico"><i class="bi report"></i> Generar reporte de aprobadas</button>-->
+          </div>
+      </div>
+
+
+        <div class="table-responsive scroll-table">
+            <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="cveFolioMezclaDosis" matSortDirection="asc" matSort
+              #sort="matSort" (matSortChange)="shortTable($event)">
+        
+              <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+        
+              <ng-container matColumnDef="cveFolioMezclaDosis">
+                <mat-header-cell *matHeaderCellDef mat-sort-header > Folio de la mezcla </mat-header-cell>
+                <mat-cell *matCellDef="let element" >
+                  <span *ngIf="element.estatusReimpresion.idEstatusReimpresion != 1" >{{ element.cveFolioMezclaDosis }} </span>
+                  <a  *ngIf="element.estatusReimpresion.idEstatusReimpresion == 1" class="estiloUrl" (click)="redirecciona(element)">{{ element.cveFolioMezclaDosis }}</a>
+                </mat-cell>
+              </ng-container>
+        
+              <ng-container matColumnDef="cveFolioSolicitudMezcla">
+                <mat-header-cell *matHeaderCellDef mat-sort-header > Folio de la solicitud </mat-header-cell>
+                <mat-cell *matCellDef="let element" >{{ element.cveFolioSolicitudMezcla }}</mat-cell>
+              </ng-container>
+        
+              <ng-container matColumnDef="desUnidadMedica">
+                <mat-header-cell *matHeaderCellDef mat-sort-header > Unidad médica </mat-header-cell>
+                <mat-cell *matCellDef="let element" >{{ element.desUnidadMedica }}</mat-cell>
+              </ng-container>
+        
+              <ng-container matColumnDef="fechaAplicacion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header > Fecha de aplicación </mat-header-cell>
+                <mat-cell *matCellDef="let element" >{{ element.fechaAplicacion }}</mat-cell>
+              </ng-container>
+        
+              <ng-container matColumnDef="estatusReimpresion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus de reimpresión</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <div class="bandera" ngClass="{{ findClass(element.estatusReimpresion.desEstatusReimpresion) }}">
+                        <div class="circle " ngClass="{{ findClass(element.estatusReimpresion.desEstatusReimpresion) }}">
+                            <div></div>
+                        </div>
+
+                        <span>{{ element.estatusReimpresion.desEstatusReimpresion }}</span>
+                    </div>
+                </mat-cell>
+            </ng-container>
+        
+
+              <ng-container matColumnDef="check">
+                <mat-header-cell *matHeaderCellDef class="d-flex justify-content-center">
+                    <mat-checkbox   
+                        (change)="$event ? masterToggle() : null"
+                        (click)="$event.stopPropagation()"
+                        [checked]="proveedorSeleccionadas.hasValue() && isAllSelected()"
+                        [indeterminate]="proveedorSeleccionadas.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="d-flex justify-content-center">
+                    <mat-checkbox 
+                        [disabled]="row.estatusReimpresion.idEstatusReimpresion === 2" 
+                        (click)="$event.stopPropagation()" 
+                        (change)="$event ? toggleRow(row) : null"
+                        [checked]="proveedorSeleccionadas.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+              
+              
+        
+            </mat-table>
+        
+          </div>
+          <div class=" paginador d-flex justify-content-end w-100 align-items-center">
+            <div class="textResult">Resultados <span class="textNegritas">{{pageSize}}</span></div>
+            <div class=" d-flex justify-content-end w-100 align-items-center">
+                <ngb-pagination class="me-5" [(page)]="paginaActual" [collectionSize]="totalElements" (pageChange)="pageChanged($event)" [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true"
+              [ellipses]="true" [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA" >
+            
+              <ng-template ngbPaginationPrevious>&lt;</ng-template>
+	          <ng-template ngbPaginationNext>&gt;</ng-template>          
+
+            </ngb-pagination>
+              <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+            </div>
+          </div>
+        </div>
+</div>
+
+<div class="contenido">
+
+  <div class="botones w-100 d-flex justify-content: space-between;">
+      <div>
+          <span>
+          </span>
+      </div>
+      <div class="botones">
+          <div class="botones">
+              <button [disabled]="!(this.proveedorSeleccionadas.selected.length > 0)" type="button" class="btn btn-primary" 
+                (click)="dialogoAsiganrPro()" style="margin-right: 20px; width: 185px !important;">
+                Asignar proveedor </button>
+          </div>
+      </div>
+  </div>
+
+</div>
+
+<div  style="display:none">
+
+
+  <table *ngFor="let item of dataReporte?.tablaProveedoresLst; index as i;" id="proveedor-tableOrden{{item.id}}">
+    <thead>
+      <tr>
+        <th colspan="6">DATOS DEL PROVEEDOR</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">Número de Contrato:<br><br>{{item.numContrato}}</td>
+        <td colspan="2">RFC:<br><br>{{item.rfcProveedor}}</td>
+        <td colspan="2">Número de Proveedor:<br><br>{{item.numProveedor}}</td>
+
+      </tr>
+      <tr>
+        <td colspan="2">Razón social del proveedor:<br><br>{{item.razonSocialProveedor}}</td>
+        <td colspan="4">Dirección del proveedor:<br><br>{{item.domicilioProveedor}}</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+  <table *ngFor="let item of dataReporte?.tablaOrdenEntregaLst; index as i;" id="ordenEntrega-tableOrden{{item.id}}">
+    <thead>
+      <tr>
+        <th colspan="6">Orden de Entrega</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">Turno:<br><br> <strong>{{item.turno}}</strong></td>
+        <td colspan="2">Fecha y hora de expedición:<br><br>{{item.fechaExpedicion}} </td>
+        <td colspan="2">Fecha y hora máxima de entrega:<br><br>{{item.fechaEntrega}}</td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+  <table *ngFor="let item of dataReporte?.tablaAlmacenLst; index as i;" id="almacenes1-tableOrden{{item.id}}">
+    <thead>
+      <tr>
+
+        <th colspan="6">ALMACENES</th>
+
+      </tr>
+
+      <tr>
+        <th colspan="4">Punto de recolección</th>
+        <th colspan="2">Punto de entrega</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <td colspan="4">&nbsp;Clasificación presupuestal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Central de
+          Mezcla:<br><br>{{item.presupuestalRecoleccion}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.centralMezclaRecoleccion}}
+        </td>
+
+        <td colspan="2">&nbsp;Clasificación presupuestal:&nbsp;{{item.presupuestalEntrega}}<br><br><br>&nbsp;Unidad
+          Médica:&nbsp;{{item.unidadMedicaEntrega}}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+  <table *ngFor="let item of dataReporte?.tablaAlmacenLst; index as i;" id="almacenes2-tableOrden{{item.id}}">
+    <thead>
+      <tr>
+
+        <th colspan="6">ALMACENES</th>
+
+      </tr>
+
+      <tr>
+        <th colspan="4">Punto de recolección</th>
+        <th colspan="2">Punto de entrega</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+
+        <td colspan="4">Dirección<br>{{item.domicilioRecolecion}}</td>
+        <td colspan="2">Dirección<br>{{item.domicilioEntrega}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <table id="product-table4Orden">
+    <thead>
+      <tr>
+
+        <th colspan="10">Mezclas</th>
+
+      </tr>
+
+
+    </thead>
+    <tbody>
+      <tr>
+
+        <td colspan="2">Folio</td>
+
+        <td colspan="3">Descripción de la mezcla</td>
+        <td colspan="2">Presentación</td>
+        <td colspan="3">Folio de solicitud de la mezcla</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+  <!-- <table *ngFor="let item of dataReporte?.folioMezclaRechazadaLst; index as i;" id="reciboMezclaOrden-{{item.id}}"> -->
+  <table  >
+    <thead>
+      <tr>
+
+        <th colspan="10">Mezclas</th>
+
+      </tr>
+
+
+    </thead>
+    <tbody *ngFor="let item of dataReporte?.folioMezclaRechazadaLst; index as i;" id="reciboMezclaOrden-{{item.id}}">
+
+      <tr style="border: 1px solid black;" *ngFor="let prueba of foliosPrueba;">
+
+        <td  colspan="2">{{prueba.folio}}</td>
+        <td colspan="3">{{prueba.descripcion}}</td>
+        <td colspan="2"> </td>
+        <td colspan="3">{{prueba.folioSolicitud}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+  <table *ngFor="let item of dataReporte?.folioMezclaRechazadaLst; index as i;" id="observacion{{item.id}}">
+    <thead>
+      <tr>
+
+        <th colspan="10">Observaciones</th>
+
+      </tr>
+
+
+    </thead>
+    <tbody>
+
+      <tr>
+
+        <td colspan="10"><br> </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <table *ngFor="let item of dataReporte?.tablaAlmacenLst; index as i;" id="firma-orden{{item.id}}" >
+    <thead style="border:0">
+      <tr>
+
+        <th colspan="6"></th>
+
+      </tr>
+
+      <tr>
+        <th colspan="4"></th>
+        <th colspan="2"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <td colspan="4" style="font-weight: 600;">_____________________________________________________<br>
+          &nbsp;&nbsp;&nbsp;Matrícula, nombre completo y firma de quien recibe
+        </td>
+
+        <td colspan="2" style="font-weight: 600;">_____________________________________________________<br>
+          &nbsp;&nbsp;&nbsp; Nombre completo y firma de quien recibe en conformidad
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+  
+  
+</div>
+<!--  -->

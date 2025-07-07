@@ -1,0 +1,385 @@
+<div class="card-ceme header-data ">
+
+    <div class="card card-body header">
+        <div class="data-no-icon">
+
+            <div class="d-flex flex-row  w-100 ">
+                <div class="flex-shrink-0 d-flex align-items-center">
+                    <button class="btn" (click)="onAtras()">
+                        <img class="imagen" [src]="'../../../../assets/images/ico-arrow-left.svg'" />
+                    </button>
+                </div>
+                <div class="flex-grow-1">
+                    <div class="d-flex flex-row w-100 flex-wrap align-items-center justify-content-between">
+                        <div class="d-flex flex-row justify-content-around gap-5">
+                            <div class="seccion">
+                                <div class="titulo ">Paciente</div>
+                                <div class="texto color-title">{{nombrePaciente}}</div>
+                            </div>
+                            <div class="seccion">
+                                <div class="titulo ">Folio de mezcla</div>
+                                <div class="texto color-title">{{mezclaSeleccionada.cveFolioMezclaDosis}}</div>
+                            </div>
+                            <div class="seccion">
+                                <div class="titulo ">Folio de solicitud</div>
+                                <div class="texto color-title" >{{mezclaSeleccionada.cveFolioSolicitud}}</div>
+                            </div>
+                        </div>
+                        <div class="me-3">
+                            <div class="titulo color-title">Preparación de mezcla</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-ceme pt-0">
+    <div class="card card-body">
+        <div class="d-flex align-items-center">
+            <div><span class="text-title color-title ">Detalle de la mezcla:</span> &nbsp;<span
+                    class="text-title-com">{{mezclaSeleccionada.desTipoMezcla}}</span> </div>
+            <div class="flex-grow-1">
+                <div class="ms-2 line-panel-header"></div>
+            </div>
+        </div>
+        <div class="mt-2 d-flex align-items-center data-detalle justify-content-between">
+            <div class="">
+                <div class="titulo">Fecha de aplicación</div>
+                <div class="texto color-title"><b>{{mezclaSeleccionada.fechaAplicacion}}</b></div>
+            </div>
+            <div>
+                <div class="titulo">Cada</div>
+                <div class="texto color-title"><b>{{mezclaSeleccionada.desAplicacionCada}}</b></div>
+            </div>
+            <div>
+                <div class="titulo">Número total de dosis</div>
+                <div class="texto color-title"><b>{{calcNumDosis(mezclaSeleccionada)}}</b></div>
+            </div>
+            <div>
+                <div class="titulo">Vía de administración</div>
+                <div class="texto color-title"><b>{{mezclaSeleccionada.desViaAdministracion}}</b></div>
+            </div>
+            <div>
+                <div class="titulo">Tiempo de infusión</div>
+                <div class="texto color-title"><b>{{mezclaSeleccionada.desTiempoInfusion}}</b></div>
+            </div>
+            <div class="me-5">
+                <div class="titulo">Velocidad de infusión (ml/hrs)</div>
+                <div class="texto color-title"><b>{{mezclaSeleccionada.refVelInfusion}}</b></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-ceme pt-0">
+    <div class="card card-body">
+        <div class="d-flex align-items-center">
+            <div class="addMezcla"></div>
+            <div *ngIf="mezclaSeleccionada.desTipoMezcla != 'Nutrición Parenteral'" class="text-title-l-m color-title">Listado de medicamentos</div>
+            <div *ngIf="mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral'" class="text-title-l-m color-title">Listado de componentes</div>
+            <div class="float-end me-3 agregados"> Agregados a la mezcla <strong>{{conteoAsignados}}/{{collectionSize}}</strong></div>
+
+
+        </div>
+
+        
+
+        <div class="d-flex w-109 ">
+            <div class="col-lg-9">
+
+                <div class="table-responsive scroll-table mt-4">
+
+                    <mat-table class="fullTable " [dataSource]="this.tableEnc" >
+
+                        <!-- <mat-header-row *matHeaderRowDef="displayedColumns1 "></mat-header-row> -->
+                        
+                        <mat-row *matRowDef="let row; columns: displayedColumnsNPT ;"></mat-row>
+
+                        <ng-container matColumnDef="no">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                               <strong>      </strong> 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="base">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                               <strong>{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral'? 'Solución base' : 'Diluyente'}}</strong> 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="volumen">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Volumen(ml)</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="presentacion">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Presentación</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="estatus">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Estatus</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                    </mat-table>
+                </div>
+
+
+
+                <div class="table-responsive scroll-table table-medicamento mt-4">
+                    <mat-table class="fullTable " [dataSource]="tableDS">
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
+                            [ngClass]="{'lightSelect': modelSelected.numero == row.numero,'lightSelectAsig':row.asignado == 1}"></mat-row>
+
+                        <ng-container matColumnDef="no">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div class="d-flex flex-row gap-1 align-items-center">
+                                    {{ element.numero }}<div
+                                        [ngClass]="{'ico-diluy':element.tipo == 0 || element.idTipoComponente == 4,'ico-medic':element.tipo ==1 && element.idTipoComponente != 4}"></div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="desCorta">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                               <strong>{{ desCorta(element) }}</strong> 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dosis">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                {{ numDosis(element) }}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="unidadMedid">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                 {{ unidadMedida(element,0) }} &nbsp;<strong>{{ unidadMedida(element,1) }} </strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="estatus">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div *ngIf="element.asignado == 0" class="d-flex flex-row gap-2 align-items-center">
+                                    Por asignar<div class="ico-clock"></div>
+                                </div>
+                                <div *ngIf="element.asignado == 1" class="d-flex flex-row gap-2 align-items-center">
+                                    Asignada<div class="ico-asig"></div>
+                                </div>
+
+                            </mat-cell>
+                        </ng-container>
+
+                    </mat-table>
+                </div>
+
+                <div class="table-responsive scroll-table mt-4">
+
+                    <mat-table class="fullTable " [dataSource]="tableEnc1">
+
+                        
+                        <mat-row *matRowDef="let row; columns: displayedColumns1 ;"></mat-row>
+
+                        <ng-container matColumnDef="no">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                               <strong>      </strong> 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="componente">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                               <strong >{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral'?'Componentes':'Medicamento'}}</strong> 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dosis">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Dosis(mg)</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="volumen1">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Volumen(ml)</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="viales1">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Viales a utilizar (pz)</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ml">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>ml de medicamento</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="solucion">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Volumen de solución (ml)</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="estatus1">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <strong>Estatus</strong>
+                            </mat-cell>
+                        </ng-container>
+
+                    </mat-table>
+                </div>
+
+                <div class="table-responsive scroll-table table-medicamento mt-4">
+                    <mat-table class="fullTable " [dataSource]="tableDS1">
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns2 "></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns2 ;" (click)="highlight(row)"
+                            [ngClass]="{'lightSelect': modelSelected.no == row.no,'lightSelectAsig':row.asignado == 1}"></mat-row>
+
+                        <ng-container matColumnDef="no">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div class="d-flex flex-row gap-1 align-items-center">
+                                    {{ element.numero }}<div
+                                        [ngClass]="{'ico-diluy':element.tipo == 0,'ico-medic':element.tipo ==1}"></div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="desCorta1">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                               <strong>{{ desCorta(element) }}</strong> 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dosis1">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                {{ numDosis(element) }}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="volumen">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                 <!-- {{ unidadMedida(element,0) }}  -->
+                                 {{volumenComNTP ? volumenComNTP:volumenComAnti}} 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="viales">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                 <!-- {{ unidadMedida(element,0) }}  -->
+                                 {{ element.divViales }} 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="ml">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                 {{ element.ml }} 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="solucion">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                 <!-- {{ unidadMedida(element,0) }}  -->
+                                 {{ element.solucion}} 
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="estatus1">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div *ngIf="element.asignado == 0" class="d-flex flex-row gap-2 align-items-center">
+                                    Por asignar<div class="ico-clock"></div>
+                                </div>
+                                <div *ngIf="element.asignado == 1" class="d-flex flex-row gap-2 align-items-center">
+                                    Asignada<div class="ico-asig"></div>
+                                </div>
+
+                            </mat-cell>
+                        </ng-container>
+
+                    </mat-table>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-3 ms-3 card-detalle-med card-body">
+                <div class=" mt-2">
+                    <div class="d-flex align-items-center">
+                        <div ngClass=""  [ngClass]="{'ico-det-diluy': modelSelected.tipo == 0, 'ico-det-med':modelSelected.tipo == 1 }"></div>
+                        <div class="text-title-l-m color-title ">{{ desCorta(modelSelected) }}</div>
+                        <!--{{modelSelected | json}}-->
+                    </div>
+                </div>
+                <hr class="hr" />
+                <div>
+                    <div>
+                        <form [formGroup]="form">
+                            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+                        </form>
+                    </div>
+
+                    <div class="mt-4 d-flex flex-row data-detalle align-items-center">
+                        <div class="col-lg-6">
+                            <div class="titulo">Fabricante</div>
+                            <div class="texto"><b>{{modelSelected.desFabricante}}</b></div>
+                        </div>
+                        <!-- <div class="col-lg-6">
+                            <div class="titulo">Marca</div>
+                            <div class="texto"><b>{{modelSelected.desMarca}}</b></div> -->
+                        <!-- </div> -->
+                    </div>
+                    <div class="mt-4 d-flex flex-row data-detalle align-items-center">
+                        <div class="col-lg-6">
+                            <div class="titulo">Marca</div>
+                            <div class="texto"><b>{{modelSelected.desMarca}}</b></div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr blue" />
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="card-ceme mt-0 pt-0 "> 
+    <div *ngIf="tipoAccion == 1" ><button type="button" class="btn btn-primary float-end ps-5 pe-5" [disabled]="validaAsignaciones()" (click)="onAsignarTodo()" >Finalizar</button></div>  
+    <div *ngIf="tipoAccion == 2"><button type="button" class="btn btn-primary float-end ps-5 pe-5"  (click)="onImprimir()">Imprimir</button></div>  
+</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

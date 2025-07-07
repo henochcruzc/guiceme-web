@@ -1,0 +1,83 @@
+<app-header-detalle-mezcla [headerData]="headerData" ></app-header-detalle-mezcla>
+
+<div class="card-ceme"> 
+    <div class="card card-body">
+        <div class="header-table">  
+            <div class="titulo d-flex align-items-center">
+                <div class="ico-clipboard"></div>
+                <span class="text">Listado de medicamentos</span>
+            </div>  
+            <form [formGroup]="formTipoMezcla">
+        
+                <br>
+            <br>
+        
+            <mat-tab-group>
+                <mat-tab *ngFor="let tab of tabsNTP" [label]="tab.nombre + ' ' + tab.counter">
+                <div class="d-flex">
+                    <mat-table class="fullTable" [dataSource]="tab.data" matSortActive="medicamento" matSortDirection="asc"
+                    matSort>
+                    <mat-header-row *matHeaderRowDef="tab.displayCols"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: tab.displayCols;"></mat-row>
+        
+                    <ng-container matColumnDef="medicamento">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="columna-300"><strong>Componentes</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.medicamento ? element.medicamento :
+                        element.desCortaMedicamento}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="dosis">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="columna-300"><strong>Volumen</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.dosis}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="unidadMedida">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Unidad de
+                            medida</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.unidadMedida}}</mat-cell>
+                    </ng-container>
+        
+                   
+                    </mat-table>
+                </div>
+                </mat-tab>
+            </mat-tab-group>
+        
+        
+            <!--<div [ngbNavOutlet]="nav" class="mt-2"></div>-->
+            <formly-form [model]="modelAbajoNtp" [fields]="fieldsAbajoNtp" [form]="formAbajoNtp"></formly-form>
+            <div class="line-panel-header w-80"></div><br>
+            <!-- <formly-form [model]="modelAbajoNtp2" [fields]="fieldsAbajoNtp2" [form]="formAbajoNtp2"></formly-form>
+            <div class="line-panel-header w-80"></div><br> -->
+            <formly-form [model]="modelAbajoNtp3" [fields]="fieldsAbajoNtp3" [form]="formAbajoNtp3"></formly-form>
+
+           
+           
+        
+            </form>
+
+        </div>
+  </div>
+  </div>
+
+<div class="card-ceme" *ngIf="this.obsRatificacion"> 
+    <div class="card card-body">
+        <div class="header-table">  
+            <div class="titulo-obs d-flex align-items-center">
+                <span class="text">Observaciones de ratificación</span>
+            </div>
+            <div class="content-obs">
+                {{this.obsRatificacion}}
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="botones">
+    <div class="d-flex justify-content-end w-100 align-items-center mt-3 mb-3 gap-3" >
+        <button type="button" [disabled]="isRatificada" class="btn btn-danger" (click)="dialogoRechazar();">No aprobada</button>
+        <button type="button" class="btn btn-primary" (click)="aprobarMezcla();">Aprobar mezcla</button>
+      </div>
+</div>

@@ -1,0 +1,186 @@
+
+    <div class="d-flex titulo" style="justify-content: space-between;">
+        <div class="iconMedRejoMedic" style="margin-top: 10px;"><div style="margin-left: 30px;">{{nombreMedicamento}}</div></div>
+        <div class="d-flex" >
+          <mat-radio-group  [(ngModel)]="estadoMedicamento"  [disabled]="indGuardadoCompleto">
+            <mat-radio-button value="1">Buen estado</mat-radio-button>
+            <mat-radio-button value="2">Mal estado</mat-radio-button>
+          </mat-radio-group>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="865" height="2" viewBox="0 0 865 2" fill="none">
+        <path d="M0 1H865" stroke="#D8D8D8"/>
+        </svg>
+    <form [formGroup]="formReceta">
+
+        <formly-form [model]="modelReceta" [fields]="fieldsReceta" [form]="formReceta"></formly-form>
+
+        <div class="table-responsive scroll-table">
+            <div class="d-flex titulo-tabla titulo1" style="width: 30%;">
+                <div class="lista-med"></div>
+                Lotes de medicamento
+                <br>
+            </div>
+            <mat-table class="fullTable" [dataSource]="antibioticosDataSource" matSortActive="medicamento"
+                matSortDirection="asc" matSort (matSortChange)="shortTableAnti($event)">
+
+                <mat-header-row *matHeaderRowDef="antibioticosDisplayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: antibioticosDisplayedColumns;"> </mat-row>
+
+                <ng-container matColumnDef="lote">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="columna-300"><strong>Lote</strong>
+                    </mat-header-cell>
+                    <mat-cell
+                        *matCellDef="let element">{{element.lote}}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="fabricante">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="columna-300"><strong>Fabricante</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.fabricante}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="marca">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Marca</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.marca}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="numEnvase">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Envase</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.numEnvase?element.numEnvase:element.envase}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="eliminar">
+                    <mat-header-cell *matHeaderCellDef><strong>Eliminar</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class=" alinearIcono">
+                        <button [disabled]="indGuardadoCompleto" class="btn">     <span><img src="../../../../../assets/images/rechazar.svg" class="image-secundario"
+                                alt="Rechazar" title="rechazar" (click)="eliminarLote(element)" ></span></button>
+
+
+                    </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="totalEvases" style="display: flex; justify-content: flex-end;">
+                    <td mat-footer-cell *matFooterCellDef colspan="1" >
+                        <br>
+                        Total de envases: &nbsp;<strong>{{totalEvases}} </strong>
+                    </td>
+
+                </ng-container>
+                <br>
+                <tr  style="display: flex; justify-content: flex-end;" mat-footer-row *matFooterRowDef="['totalEvases']"></tr>
+
+            </mat-table>
+        </div>
+    </form>
+
+    <div class="line-panel-header w-80"></div><br>
+
+    <div class="d-flex titulo">
+        <div class="addMezcla"></div>
+        Ficha técnica
+        <br>
+    </div>
+    <form [formGroup]="formFT">
+
+        <formly-form [model]="modelFT" [fields]="fieldsFT" [form]="formFT"></formly-form>
+        <ng-container *ngIf="tipoPeriodoVal==1">
+            <formly-form [model]="modelAmbiente" [fields]="fieldsAmbiente" [form]="formAmbiente"></formly-form>
+        </ng-container>
+        <ng-container *ngIf="tipoPeriodoVal==2">
+            <formly-form [model]="modelRedFria" [fields]="fieldsRedFria" [form]="formRedFria"></formly-form>
+        </ng-container>
+        <ng-container *ngIf="tipoPeriodoVal==3">
+            <formly-form [model]="modelAmbiente" [fields]="fieldsAmbiente" [form]="formAmbiente"></formly-form>
+            <formly-form [model]="modelRedFria" [fields]="fieldsRedFria" [form]="formRedFria"></formly-form>
+ 
+        </ng-container>
+
+    </form>
+
+    <br>
+    <br>
+
+    <div class="d-flex titulo">
+        <div class="addMezcla"></div>
+        Diluyentes
+    </div>
+
+    <form [formGroup]="formDil">
+
+        <formly-form [model]="modelDil" [fields]="fieldsDil" [form]="formDil"></formly-form>
+
+        <div class="table-responsive scroll-table">
+            <div class="d-flex titulo">
+                <div class="lista-med"></div>
+                Lista de diluyentes
+                <br>
+            </div>
+            <mat-table class="fullTable" [dataSource]="diluyentesDataSource" matSortActive="medicamento"
+                matSortDirection="asc" matSort (matSortChange)="shortTableDil($event)">
+
+                <mat-header-row *matHeaderRowDef="diluyentesDisplayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: diluyentesDisplayedColumns;"> </mat-row>
+
+                <ng-container matColumnDef="Diluyente">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="columna-300"><strong>Diluyente</strong>
+                    </mat-header-cell>
+                    <mat-cell
+                        *matCellDef="let element">{{element.desCortaDiluyente}}
+                    </mat-cell>
+                </ng-container>
+
+                
+
+                <ng-container matColumnDef="perDilacion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Período de validez diluido ambiente(hrs.)</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.perValDilucionAmbiente}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="redFria">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                        class="columna-300"><strong>Período de validez diluido red fría(hrs.)</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.perValDilucionFria}} </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="eliminar">
+                    <mat-header-cell *matHeaderCellDef><strong>Eliminar</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class=" alinearIcono">
+                        
+                    <button [disabled]="indGuardadoCompleto" class="btn"> 
+                        <span><img src="../../../../../assets/images/rechazar.svg" class="image-secundario"
+                                alt="Rechazar" title="rechazar" (click)="eliminarDil(element)"></span></button>
+
+
+                    </mat-cell>
+                </ng-container>
+                
+               
+                <br>
+             
+
+            </mat-table>
+        </div>
+    </form>
+
+    <div class="contenido">
+
+        <div class="botones w-100 d-flex justify-content: space-between;">
+            <div>
+                <span>
+                </span>
+            </div>
+            <div class="botones">
+                <div class="botones">
+                    <button *ngIf="!indGuardadoCompleto" [disabled]="btnDisabled()" type="button" class="btn btn-primary" style="margin-right: 20px;" (click)="actualizar()">
+                        Guardar información</button>
+                    <button *ngIf="indGuardadoCompleto" [disabled]="btnDisabled()" type="button" class="btn btn-primary" style="margin-right: 20px;" (click)="actualizar()">
+                        Actualizar información</button>
+                </div>
+            </div>
+        </div>
+    
+    </div>

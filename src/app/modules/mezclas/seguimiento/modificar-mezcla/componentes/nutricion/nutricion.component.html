@@ -1,0 +1,99 @@
+<div>
+<!-- {{mezclaNutricionSelect | json}} -->
+    <div class="mt-3 d-flex ">
+        <div class="text-teatle">Mezcla: Nutrición Parenteral</div>
+    </div>
+
+    <formly-form [model]="modelNPT" [fields]="fieldsNPT" [form]="formNPT"></formly-form>
+    <br>
+
+    <!-- {{modelNPT | json}} -->
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <div class="ico-clipboard"></div>
+            <div class="text-teatle">Lista de componentes</div>
+        </div>
+        <div class="me-5">Componentes totales: {{componenteTotal}}</div>
+    </div>
+    <mat-tab-group class="mb-3">
+        <mat-tab *ngFor="let tab of tabsNPT" [label]="tab.nombre + ' (' + tab.counter + ')'">
+            <div class="d-flex">
+                <mat-table class="fullTable" [dataSource]="tab.data" matSortActive="medicamento" matSortDirection="asc"
+                    matSort>
+                    <mat-header-row *matHeaderRowDef="tab.displayCols"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: tab.displayCols;"></mat-row>
+
+                    <ng-container matColumnDef="medicamento">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                            class="columna-300"><strong>Componentes</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.medicamento ? element.medicamento :
+                            element.desCortaMedicamento}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dosis">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header
+                            class="columna-300"><strong>Volumen</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.dosis}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="unidadMedida">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Unidad de
+                                medida</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.unidadMedida}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="rechazar">
+                        <mat-header-cell *matHeaderCellDef><strong>Eliminar</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let element" class="alinearIcono">
+                            <button class="btn"> <span><img
+                                        src="../../../../../assets/images/rechazar.svg" class="image-secundario"
+                                        alt="Rechazar" title="rechazar" (click)="rechazarNtp(element, tab.id)">
+                                </span></button>
+                        </mat-cell>
+                    </ng-container>
+                </mat-table>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+<!-- {{modelAbajoNpt | json}}
+{{tabsMes | json}} -->
+    <formly-form [model]="modelAbajoNpt" [fields]="fieldsAbajoNpt" [form]="formAbajoNpt"></formly-form>
+
+    <!--dias-->
+
+    <div class="txt-header3 mt-3">
+        <div *ngIf="this.tabsMes.length != 0"><mat-checkbox 
+                (change)="seleccionarTodo($event.checked)" [checked]="seleccionTodo">Seleccionar
+                todo:</mat-checkbox></div>
+        <div style="padding-left: 20px;">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs w-100 gap-3">
+                <ng-template ngFor let-item [ngForOf]="tabsMes" let-index="index">
+                    <li class="mes" [ngbNavItem]="index" [class.active]="index === 0">
+                        <button ngbNavLink>
+                            {{ tabsMes[index].nombreMes }}
+                        </button>
+                        <ng-template ngbNavContent>
+                            <div class="d-flex gap-3 flex-wrap mt-3">
+                                <ng-template ngFor let-item [ngForOf]="tabsMes[index].dias" let-index="index">
+                                    <mat-checkbox class="check-dias" [checked]="item.check" [disabled]="item.disabled" [ngClass]="item.actual ? 'doble' : ''"
+                                        (change)="actualizarDia($event.checked,item)">
+                                        {{item.nombreDia}}
+                                    </mat-checkbox>
+                                </ng-template>
+                            </div>
+                        </ng-template>
+                    </li>
+                </ng-template>
+            </ul>
+        </div>
+    </div>
+
+    <div [ngbNavOutlet]="nav" class="mt-2" *ngIf="this.tabsMes.length != 0"></div>
+    <!--dias-->
+    <formly-form [model]="modelViaAdminNpt" [fields]="fieldsViaAdminNpt" [form]="formViaAdminNpt"></formly-form>
+    <div class="line-panel-header w-100"></div>
+
+    <div class="d-flex justify-content-end w-100 align-items-center mt-3 mb-3 gap-3">
+        <button type="button" [disabled]="validaFormularios()" class="btn btn-primary" (click)="onActualizar()" >Guardar edición</button>
+    </div>
+</div>

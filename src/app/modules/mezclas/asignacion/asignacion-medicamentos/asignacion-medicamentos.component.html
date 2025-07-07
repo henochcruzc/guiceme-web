@@ -1,0 +1,216 @@
+<div class="card-ceme">
+    <div class="card card-body">
+
+
+        <div class="d-flex align-items-center">
+            <div class="solicitud "></div>
+            <div class="text-teatle color-title">Asignación de medicamentos</div>
+            <div class="flex-grow-1">
+                <div class="ms-2 line-panel-header"></div>
+            </div>
+        </div>
+        
+        <div class="d-flex">
+            <div class="col-lg-8">
+                <form [formGroup]="form1" class=" ">
+                    <formly-form [model]="model1" [fields]="fields1" [form]="form1"></formly-form>
+                </form>
+            </div>
+
+            <div class="ms-3 d-flex gap-3 col-lg-4 btns">
+                <button type="button" class="btn btn-danger ps-3 pe-3 btn-formu" [disabled]="form1.invalid"
+                    (click)="resetForm()">Limpiar</button>
+                <button type="button" class="btn btn-primary ps-3 pe-3 btn-formu" [disabled]="form1.invalid"
+                    (click)="buscaMedicamento(this.model.turno, this.model.campana)">Consultar</button>
+            </div>
+        </div>
+</div>
+</div>
+
+<div class="card-ceme">
+    <div class="card card-body">
+        <div class="d-flex align-items-center">
+            <div class="addMezcla"></div>
+            <div class="text-title-l-m ">Listado de medicamentos</div>
+            
+
+
+        </div>
+        <app-no-medicamento *ngIf="tableDS?.data?.length == 0"
+            [class]="'asig-med-sin'"></app-no-medicamento>
+        <div class="d-flex w-109  agregados " style="padding-left: 530px;" *ngIf="tableDS?.data?.length > 0">
+            <div><strong>{{this.medicamentosUpTotal}}/{{collectionSize}}</strong></div>
+        </div>
+
+        
+
+        <div class="d-flex w-100 ">
+            <div class="col-lg-4">
+                <div class="table-responsive scroll-table table-medicamento">
+                    <mat-table class="fullTable " [dataSource]="tableDS">
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
+                            [ngClass]="{'lightSelect': modelSelected.idMedicamento == row.idMedicamento,'lightSelectAsig':row.indAsignado == 1}"></mat-row>
+
+                        <ng-container matColumnDef="no">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <div class="d-flex flex-row gap-2 align-items-center">
+                                    {{ element.num }}<div class='ico-medic'></div>
+                                </div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="desCorta">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <b>{{ element.desCorta }} {{ element.numUniMinMedPz }} {{ element.reUnMinMed }}</b>
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="total">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                Cantidad total &nbsp;<b>{{ element.numDosisTotal}} {{element.reUnMinMed}}</b>
+                            </mat-cell>
+                        </ng-container>
+                    </mat-table>
+                </div>
+            </div>
+
+
+            <div class="col-lg-8 ms-3 card-detalle-med card-body" *ngIf="isConsulta">
+                <div>
+                    <div class="d-flex align-items-center">
+                        <div ngClass="" class="ico-medic"></div>
+                        <div class="text-title-l-m ">{{modelSelected.desCorta}}</div>
+
+                    </div>
+                </div>
+                <hr class="hr" />
+                <div>
+
+                    <div>
+                        <form [formGroup]="form">
+                            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+                        </form>
+                        <br>
+                        <br>
+
+                        <div class="table-responsive scroll-table">
+                            <div class="d-flex titulo-tabla titulo1" style="width: 30%;">
+                                <div class="lista-med"></div>
+                                Lotes de medicamento
+                            </div>
+    
+    
+                            <mat-table class="fullTable" [dataSource]="diluyentesDataSource" matSortActive="medicamento"
+                                matSortDirection="asc" matSort (matSortChange)="shortTableDil($event)">
+    
+                                <mat-header-row *matHeaderRowDef="diluyentesDisplayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: diluyentesDisplayedColumns;"> </mat-row>
+    
+                                <ng-container matColumnDef="lote">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Lote</strong>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.lote}}
+                                    </mat-cell>
+                                </ng-container>
+    
+                                <ng-container matColumnDef="fecCaducidad">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header ><strong>Fecha(s) de caducidad</strong> </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.fecTemp?element.fecTemp:(element.fechaCad | date:"dd/MM/yyyy")}} </mat-cell>
+                                </ng-container>
+    
+                                <ng-container matColumnDef="piezas">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Piezas</strong> </mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.numPiezas?element.numPiezas:element.numPieza }} </mat-cell>
+                                </ng-container>
+    
+    
+                                <ng-container matColumnDef="eliminar">
+                                    <mat-header-cell *matHeaderCellDef><strong>Eliminar</strong> </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class=" alinearIcono">
+    
+                                        <button class="btn">
+                                            <span><img src="../../../../../assets/images/rechazar.svg"
+                                                    class="image-secundario" alt="Rechazar" title="rechazar"
+                                                    (click)="eliminarDil(element)"></span></button>
+    
+    
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="totalEvases" style="display: flex; justify-content: flex-end;">
+                                    <td mat-footer-cell *matFooterCellDef colspan="1">
+                                        <br>
+                                        Total de piezas: &nbsp;<strong>{{totalEvases}} </strong>
+                                    </td>
+    
+                                </ng-container>
+                                <br>
+                                <tr style="display: flex; justify-content: flex-end;" mat-footer-row
+                                    *matFooterRowDef="['totalEvases']"></tr>
+    
+    
+    
+                            </mat-table>
+                        </div>
+                    </div>
+
+                    
+                   
+
+                    <div class="contenido">
+
+                        <div class="botones w-100 d-flex justify-content: space-between;">
+                            <div>
+                                <span>
+                                </span>
+                            </div>
+                            <div class="botones">
+                                <div class="botones">
+                                    <button type="button"
+                                        class="btn btn-primary" [disabled]="diluyentesDataSource.data.length == 0 || this.btnAsigna" (click)="guardar()" >
+                                        Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <hr class="hr blue" />
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+    
+</div>
+
+
+
+<div class="contenido">
+
+    <div class="botones w-100 d-flex justify-content: space-between;">
+        <div>
+            <span>
+            </span>
+        </div>
+        <div class="botones">
+            <div class="botones">
+               
+                <button  type="button" class="btn btn-primary" [disabled]="this.medicamentosUpTotal!=collectionSize"   (click)="registrar()">
+                    Asignación de medicamentos</button>
+            </div>
+        </div>
+    </div>
+
+</div>

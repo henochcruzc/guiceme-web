@@ -1,0 +1,152 @@
+<div class="titulo-dialogo padding d-flex">
+    <div class="d-flex">
+        <span> Detalle de mezcla</span>&nbsp; &nbsp;&nbsp;
+        <div class="bandera" ngClass="{{findClass(data.registro.estatus.id)}}">
+            <div class="circle " ngClass="{{findClass(data.registro.estatus.id)}}">
+                <div></div>
+            </div>
+            <span>{{ data.registro.estatus.descripcion }}</span>
+        </div>
+    </div>
+    <div>
+        <button class="btn " style="border: none;" [mat-dialog-close]="true">
+            <mat-icon class="icon-close"></mat-icon>
+        </button>
+    </div>
+
+</div>
+<div mat-dialog-content class="contenido-dialogo">
+    <div class="datos-header ">
+        <div class="separador"></div>
+        <div class="datos">
+            <form [formGroup]="form">
+                <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+            </form>
+        </div>
+    </div>
+    <div class="datos-diagnostico padding">
+        <div class="lblDg"> Diagnóstico </div>
+        <div class="lblDgDs">{{model.desDiagnosticoCie}} </div>
+    </div>
+    <div class=" padding">
+
+        <div class="header-table headerComponentes d-flex align-items-center justify-content-between ">
+            <div class="titulo d-flex align-items-center">
+                <div class="ico-clipboard"></div>
+                <span class="subtitulo">Lista de componentes</span>
+            </div>
+            <div class="titulo d-flex pull-right">
+
+                <span class="subtitulo">Componentes totales:
+                    <strong>{{detalleComponente?.lstComponentesTabs.length}}</strong></span>
+            </div>
+
+
+        </div>
+        <div>
+            <app-listado-componentes [data]="detalleComponente" *ngIf="detalleComponente != undefined">
+            </app-listado-componentes>
+        </div>
+        <div>
+
+
+
+        </div>
+
+
+    </div>
+    <div class="datos-diluyente padding margin">
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Nitrógeno (gr)</span>
+                <span class="texto">{{mezcla?.numNitrogeno}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Proteínas (gr)</span>
+                <span class="texto">{{mezcla?.numProteinas}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Kcal no proteicas (Kcal)</span>
+                <span class="texto">{{mezcla?.numKcalNoProteicas}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Kcal totales (Kcal)</span>
+                <span class="texto">{{mezcla?.numKcalTotales}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Volumen total (ml)</span>
+                <span class="texto">{{mezcla?.numVolumenTotal}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Osmolaridad (mOsmol/ml)</span>
+                <span class="texto">{{mezcla?.numOsmolaridad}}</span>
+            </div>
+        </div>
+
+        <!-- <div class="hr-azul"></div>
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+            <div class="col-md-8 d-flex flex-column ">
+                <span class="etiqueta">Diluyente</span>
+                <span class="texto">{{diluyente?.desCortaDiluyente}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Dosis</span>
+                <span class="texto">{{diluyente?.numDosisDiluyente}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Unidad de medida</span>
+                <span class="texto">{{diluyente?.refUnidadMinMedida}}</span>
+            </div>
+        </div> -->
+
+        <div class="hr-azul"></div>
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Fecha de aplicación</span>
+                <span class="texto">{{diluyente?.fechaAplicacion}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Cada</span>
+                <span class="texto">{{diluyente?.desAplicacionCada}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Número total de dosis</span>
+                <span class="texto">{{diluyente?.numTotalDosis}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Vía de administración</span>
+                <span class="texto">{{diluyente?.desViaAdministracion}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Tiempo de infusión</span>
+                <span class="texto">{{diluyente?.desTiempoInfusion}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Velocidad de infusión (ml/hrs)</span>
+                <span class="texto">{{diluyente?.refVelInfusion}}</span>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="progreso != undefined" class="datos-progreso padding margin card mt-3">
+        <app-listado-progreso [paramsData]="progreso"></app-listado-progreso>
+    </div>
+
+    <div class="datos-medico d-flex w-100 flex-row mt-3" *ngIf="mezcla != undefined">
+        <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+            <div class="img-ico-doc"></div>
+        </div>
+        <div class="col-md-6 d-flex flex-column">
+            <span class="etiqueta">Nombre del médico</span>
+            <span class="texto">{{ mezcla.nomMedicoPrescribe}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Matrícula</span>
+            <span class="texto">{{ mezcla?.refMatricula}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Cédula profesional</span>
+            <span class="texto">{{ mezcla?.refCedulaProfesional}}</span>
+        </div>
+    </div>
+    <div class="borde d-flex w-100"></div>
+</div>

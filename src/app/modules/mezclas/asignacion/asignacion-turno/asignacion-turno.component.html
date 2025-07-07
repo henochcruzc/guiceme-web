@@ -1,0 +1,121 @@
+<div class="card-ceme">
+  <div class="card card-body">
+      <mat-panel-title class="align-header">
+        <div class="solicitud"></div>
+        <div class="text-teatle">Asignación de turno por mezcla</div>
+        <div class="line-panel-header1 w-100"></div>
+      </mat-panel-title>
+
+
+    <div class="d-flex">
+      <div class="col-lg-12">
+        <form [formGroup]="form" class=" ">
+          <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+        </form>
+      </div>
+    </div>
+
+
+    <br>
+    <div class="header-table">
+      <div class="titulo d-flex align-items-center">
+        <div class="ico-clipboard"></div>
+        <span class="text">Listado de mezclas</span>
+      </div>
+    </div>
+
+    
+
+    <div class="table-responsive scroll-table">
+      <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="idSolicitudMezcla" matSortDirection="asc" matSort
+        #sort="matSort" (matSortChange)="shortTable($event)">
+
+        <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+
+
+        <ng-container matColumnDef="cveFolioMezclaDosis">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Folio de la mezcla </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.cveFolioMezclaDosis }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cveFolioSolicitudMezcla">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Folio de la solicitud </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.cveFolioSolicitudMezcla }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="desTipoMezcla">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de mezcla </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.desTipoMezcla }}</mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="fechaAplicacion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de aplicación </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.fechaAplicacion }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="check">
+          <mat-header-cell *matHeaderCellDef class="d-flex justify-content-center">
+            <mat-checkbox 
+            (change)="$event ? toggleAllRows() : null"
+            (click)="$event.stopPropagation()"
+            [checked]="mezclasSeleccionadas.hasValue() && isAllSelected()"
+            [indeterminate]="mezclasSeleccionadas.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="d-flex justify-content-center">
+            <mat-checkbox 
+            (click)="$event.stopPropagation()"
+            (change)="$event ? toggleRow(element) : null"
+            [checked]="mezclasSeleccionadas.isSelected(element)"
+            >
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+      </mat-table>
+
+    </div>
+
+    <app-no-medicamento *ngIf="tableDS?.data?.length == 0 || !tableDS"
+            [class]="'asig-turno-sin'"></app-no-medicamento>
+
+
+    <div class=" paginador d-flex justify-content-end w-100 align-items-center">
+      <div class="textResult">Resultados <span class="textNegritas">{{totalElements == null ? 0 : totalElements}}</span>
+      </div>
+      <div class=" d-flex justify-content-end w-100 align-items-center">
+        <ngb-pagination class="me-5" [(page)]="paginaActual" [collectionSize]="totalElements"
+          (pageChange)="pageChanged($event)" [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true"
+          [ellipses]="true" [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA">
+
+          <ng-template ngbPaginationPrevious>&lt;</ng-template>
+          <ng-template ngbPaginationNext>&gt;</ng-template>
+
+        </ngb-pagination>
+        <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contenido">
+
+  <div class="botones w-100 d-flex justify-content: space-between;">
+    <div>
+      <span>
+      </span>
+    </div>
+    <div class="botones">
+      <div class="botones">
+        <button [disabled]="!(this.mezclasSeleccionadas.selected.length > 0)" type="button" class="btn btn-primary"
+          (click)="dialogoAsiganrPro()" style="margin-right: 20px; width: 185px !important;">
+          Asigna campana </button>
+      </div>
+    </div>
+  </div>
+
+</div>

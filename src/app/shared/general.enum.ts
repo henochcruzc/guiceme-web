@@ -1,0 +1,87 @@
+export  enum Perfiles {
+    ADMINISTRADOIR_GENERAL = 1,
+  }
+
+export enum ConfigTabla{
+  NUM_ELEMENTOS_TABLA = 10,
+  NUM_ELEMENTOS_PAGINADOR = 5
+}
+
+export enum EstatusMezcla {
+  SOLICITADA = 1,
+  NO_APROBADA = 2,
+  APROBADA = 3,
+  EN_PREPARACION = 4,
+  PREPARADA = 5,
+  NO_APROBADA_MESA_ATENCION = 6,
+  DISPONIBLE = 7,
+  EN_RUTA = 8,
+  RECIBIDA_UNIDAD_MEDICA = 9,
+  RECHAZADA_UNIDAD_MEDICA = 10,
+  APLICADA = 11,
+  NO_APLICADA = 12,
+  RATIFICADA = 13,
+  NO_APROBADA_CANCELADA_SISTEMA = 14,
+  SUSPENDER = 15,
+  CANCELADA = 16,
+  APROBADA_MESA_ATENCION = 17,
+  RESOLUCION_INVESTIGACION = 18,
+  EN_PROCESO = 19,
+  POR_APLICAR = 20,
+}
+
+export enum TipoMezcla {
+  CITOTOXICO = 1,
+  NUTRICION = 2,
+  ANTIBIOTICO = 3,
+
+
+}
+
+export enum DescripcionEstatusMezcla {
+  EN_PROCESO = 'en proceso',
+  APLICADA = 'aplicada',
+  NO_APLICADA = 'no aplicada',
+  POR_APLICAR = 'por aplicar'
+
+}
+
+
+
+export enum GrupoEdad {
+  RECIEN_NACIDO = 'RECIEN NACIDO',
+  INFANTE = 'INFANTE (7 SEMANAS 1 AÑO)',
+  LACTANTE = 'LACTANTE MAYOR (UNO A DOS AÑOS)',
+  PRESCOLAR = 'PRESCOLAR (DOS A SEIS AÑOS)',
+  ESCOLAR = 'ESCOLAR (SEIS A TRECE AÑOS)',
+  ADOLESCENTE = 'ADOLESCENTE (TRECE A 16 AÑOS)',
+  ADULTO = 'ADULTO',
+  
+ 
+
+}
+
+export enum Perfil {
+  MEDICO = 2,
+  ENFERMERIA = 14
+}
+
+export enum desPerfil {
+  MEDICO = 'Médico',
+  ENFERMERIA = 'Enfermería'
+}
+
+export enum eventoBitacora {
+  USUARIO_NO_REGISTRADO = 1,
+  USUARIO_CONTRASENA_INVALIDOS = 2,
+  SISTEMA_NO_DISPONIBLE = 3,
+  USUARIO_LOGUEADO_EXITOSAMENTE = 4,
+  LOGIN_EXITOSO_PHEDS_PRESCRIPCION = 5,	
+  LOGIN_EXITOSO_PHEDS_SEGUIMIENTO = 6,	
+  LOGIN_EXITOSO_PHEDS_APLICACION = 7,	
+}
+
+export enum EstatusReimpresion {
+  APROBADA_MESA_ATENCION = 4,
+
+}

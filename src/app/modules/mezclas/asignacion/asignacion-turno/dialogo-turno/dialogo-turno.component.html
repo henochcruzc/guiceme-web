@@ -1,0 +1,75 @@
+<div mat-dialog-title class="d-h bar-n ">
+    <span class="bar-h"></span>
+    <span class="titulo d-flex w-100 ">
+        {{ data.title }}
+        <span class="btn-cerrar" (click)="closeDialog()"><img src="assets/images/close.svg" alt="cancel"></span>
+    </span>
+</div>
+<mat-dialog-content class="dialog-content">
+    <form [formGroup]="form">
+        <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+    </form>
+
+    <div class="header-table mt-2 d-flex align-items-center justify-content-between ">
+      <div class="titulo d-flex align-items-center">
+          <div class="ico-clipboard"></div>
+          <span class="text">Lista de mezclas</span>
+      </div>
+    
+    </div>
+
+    <div class="table-responsive scroll-table table-mezclas">
+      <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="cveFolioMezclaDosis" matSortDirection="asc" matSort
+        #sort="matSort" (matSortChange)="shortTable($event)">
+
+        <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+        <ng-container matColumnDef="cveFolioMezclaDosis">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Folios de mezcla </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.cveFolioMezclaDosis }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="umAplicacion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> UM de aplicación </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.umAplicacion }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaAplicacion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de aplicación </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.fechaAplicacion }}</mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="accion">
+          <mat-header-cell *matHeaderCellDef> Eliminar </mat-header-cell>
+          <mat-cell *matCellDef="let element,let i = index ">
+            <button  class="btn"> <span><img src="../../../../../../assets/images/rechazar.svg" class="image-secundario"
+              alt="eliminar" title="eliminar" (click)="eliminar(element,i)">
+          </span></button>
+          
+          </mat-cell>
+        </ng-container>
+
+        
+
+      </mat-table>
+
+    </div>
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="customAcciones d-flex flex-row align-items-center" >
+
+  <div class=" d-flex flex-row align-items-center texto-total">
+  Total de mezclas por asignar &nbsp; <strong>{{tableDS?.data?.length}}</strong>
+  </div>
+  <div>
+    <button [disabled]="form.invalid || tableDS?.data?.length == 0" type="button" class="btn btn-primary" (click)="confirmDialog()"
+        *ngIf="data.confirmTxtBtn">{{data.confirmTxtBtn}}</button>
+  </div>
+
+
+</mat-dialog-actions>

@@ -1,0 +1,10 @@
+﻿<div  *ngFor="let alert of alerts" class="{{cssClass(alert)}} d-flex flex-row" >
+    <div class="content-icon">
+        <div class="{{cssClassIcon(alert)}}"></div>
+    </div>
+    <div style="align-items: center; text-align: center;">
+        <span class="align-self-center mr-auto ml-auto " [innerHTML]="alert.message"></span>
+    </div>
+    <div class="content-icon"></div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="removeAlert(alert)" aria-label="Close"></button>
+</div>

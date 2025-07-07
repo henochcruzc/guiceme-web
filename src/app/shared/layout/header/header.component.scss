@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+app-header{
+  position: sticky;
+}
+
+.header-principal {
+  display: flex;
+  height: 62px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: var(--gobierno-verde-plecas, #0C231E);
+
+  /* ShadowClassic */
+  box-shadow: 0px 0px 13px 0px rgba(1, 1, 1, 0.10);
+  padding: 20px 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 74.054px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.texto {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  color: #FFFFFF;
+}

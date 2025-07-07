@@ -1,0 +1,241 @@
+<div class="card-ceme">
+
+    <div class="card card-body">
+        <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+            <div class="icon-drip"></div>&nbsp;&nbsp;
+            <div class="text-teatle"> Seguimiento de mezclas</div>
+            <div class="line-panel-header w-100 "></div>
+        </mat-panel-title>
+      
+
+        <form [formGroup]="form" class="mb-3">
+            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+
+        </form>
+    
+        <div class="titulo" style="height:28px">
+            Resultados de búsqueda
+        </div>
+
+        <div class="header-table d-flex align-items-center justify-content-between ">
+            <div class="subtitulo d-flex align-items-center">
+                <div class="ico-clipboard"></div>
+                <span class="text">Historial de mezclas</span>
+            </div>
+        <!--     <div class="abr" *ngIf="collectionSize > 0">
+                <strong> S=</strong> Solicitada
+                &nbsp;&nbsp;<strong> MA=</strong> Mezcla aprobada
+                &nbsp;&nbsp;<strong> EP=</strong> En preparación
+                &nbsp;&nbsp;<strong> MD=</strong> Mezcla disponible
+                &nbsp;&nbsp;<strong> RU=</strong> Recibida por UM
+                &nbsp;&nbsp;<strong> MAP=</strong> Mezcla aplicada
+            </div> -->
+
+            <div class="abr" *ngIf="collectionSize > 0">
+                <strong> S=</strong> Solicitada
+                &nbsp;&nbsp;<strong> MA=</strong> Mezcla aprobada
+                &nbsp;&nbsp;<strong> PM=</strong> Preparador de mezcla
+                &nbsp;&nbsp;<strong> RMA=</strong> Responsable MA
+                &nbsp;&nbsp;<strong> ER=</strong> En ruta
+                &nbsp;&nbsp;<strong> RU=</strong> Recibida por UM
+                &nbsp;&nbsp;<strong> MAP=</strong> Mezcla aplicada
+            </div>
+
+        </div>
+        <div style="margin-top: -5px;">
+            <div class="table-responsive scroll-table">
+                <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="medicamento" matSortDirection="asc"
+                    matSort #sort="matSort" (matSortChange)="shortTable($event)">
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+                    <ng-container matColumnDef="folioSolicitud">
+                        <mat-header-cell *matHeaderCellDef> <span >Folio de
+                                solicitud
+                            </span>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{ element.folioSolicitud }}
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="folioMezcla">
+                        <mat-header-cell *matHeaderCellDef> Folio de mezcla </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <a mat-button routerLink="." (click)="onVerDetalle(element)"> {{ element.folioMezcla }}</a>
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="tipoMezcla">
+                        <mat-header-cell *matHeaderCellDef> Tipo de mezcla </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.tipoMezcla }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ultimaFecha">
+                        <mat-header-cell *matHeaderCellDef> Última fecha </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.ultimaFecha }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estatus">
+                        <mat-header-cell *matHeaderCellDef> Estatus </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <div class="bandera" ngClass="{{ _coloresEstatus.findClassColorEstatus(element.estatus.id) }}">
+                                <div class="circle " ngClass="{{ _coloresEstatus.findClassColorEstatus(element.estatus.id) }}">
+                                    <div></div>
+                                </div>
+
+                                <span *ngIf="element.estatus.id != 14">{{ element.estatus.descripcion }}</span>
+                                <span *ngIf="element.estatus.id == 14">No aprobada</span>
+                            </div>
+                            <div class="icon " ngClass="{{ 'clock-'+ _coloresEstatus.findClassColorClock(element.estatus.id) }}"></div>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="seguimiento">
+                        <mat-header-cell *matHeaderCellDef> Seguimiento de mezcla </mat-header-cell>
+                        <mat-cell class=" no-padding" *matCellDef="let element">
+                            <div class="w-100 d-flex progress-cell">
+                                <div class=" cell" style="width: 150px;">
+                                    <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu12Seguimiento(element.estatus.id,1) ">
+                                        <div></div>
+                                    </div>
+                                    <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu12HrR(element.estatus.id,1) "></div>
+                                </div>
+                                <div class="  cell" style="width: 150px;">
+                                    <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu12HrL(element.estatus.id,2) "></div>
+                                    <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu12Seguimiento(element.estatus.id,2) ">
+                                        <div></div>
+                                    </div>
+                                    <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu12HrR(element.estatus.id,2) "></div>
+                                </div>
+                                <div class=" cell" style="width: 150px;">
+                                    <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu12HrL(element.estatus.id,3) "></div>
+                                    <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu12Seguimiento(element.estatus.id,3) ">
+                                        <div></div>
+                                    </div>
+                                    <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu12HrR(element.estatus.id,3) "></div>
+                                </div>
+                                <div class=" cell" style="width: 150px;">
+                                    <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu12HrL(element.estatus.id,4) "></div>
+                                    <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu12Seguimiento(element.estatus.id,4) ">
+                                        <div></div>
+                                    </div>
+                                    <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu12HrR(element.estatus.id,4) "></div>
+
+                                </div>
+                                <div class=" cell" style="width: 150px;">
+                                    <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu12HrL(element.estatus.id,5) "></div>
+                                    <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu12Seguimiento(element.estatus.id,5) ">
+                                        <div></div>
+                                    </div>
+                                    <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu12HrR(element.estatus.id,5) "></div>
+                                </div>
+                                <div class=" cell" style="width: 150px;">
+                                    <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu12HrL(element.estatus.id,6) "></div>
+                                    <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu12Seguimiento(element.estatus.id,6) ">
+                                        <div></div>
+                                    </div>
+                                    <div class="hr-r" [ngClass]="_coloresEstatus.findClassColorCu12HrR(element.estatus.id,6) "></div>
+                                </div>
+                                <div class=" cell" style="width: 150px;">
+                                    <div class="hr-l" [ngClass]="_coloresEstatus.findClassColorCu12HrL(element.estatus.id,7) "></div>
+                                    <div class="circle" [ngClass]="_coloresEstatus.findClassColorCu12Seguimiento(element.estatus.id,7) ">
+                                        <div></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+
+
+
+                    <ng-container matColumnDef="item-folioSolicitud">
+                        <mat-header-cell class="mat-column-folioSolicitud color-gray" mat-header-cell *matHeaderCellDef>
+                        </mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="item-folioMezcla">
+                        <mat-header-cell class="mat-column-folioMezcla color-gray" mat-header-cell *matHeaderCellDef>
+                        </mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="item-tipoMezcla">
+                        <mat-header-cell class="mat-column-tipoMezcla color-gray" mat-header-cell *matHeaderCellDef>
+                        </mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="item-ultimaFecha">
+                        <mat-header-cell class="mat-column-ultimaFecha color-gray" mat-header-cell *matHeaderCellDef>
+                        </mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="item-estatus">
+                        <mat-header-cell class="mat-column-estatus color-gray" mat-header-cell *matHeaderCellDef>
+                        </mat-header-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="item-seguimiento">
+                        <mat-header-cell class="mat-column-seguimiento no-padding" mat-header-cell *matHeaderCellDef>
+                            <div class="progress-header">
+                                <div class=" uno" style="width: 150px;">S</div>
+                                <div class=" dos" style="width: 150px;">MA</div>
+                                <div class=" uno" style="width: 150px;">PM</div>
+                                <div class=" dos" style="width: 150px;">RMA</div>
+                                <div class=" uno" style="width: 150px;">ER</div>
+                                <div class=" dos" style="width: 150px;">RU</div>
+                                <div class=" uno" style="width: 150px;">MAP</div>
+                            </div>
+                        </mat-header-cell>
+                    </ng-container>
+
+
+                    <mat-header-row
+                        *matHeaderRowDef="['item-folioSolicitud', 'item-folioMezcla','item-tipoMezcla', 'item-ultimaFecha','item-estatus', 'item-seguimiento']"
+                        class="example-second-header-row">
+                    </mat-header-row>
+
+                </mat-table>
+
+            </div>
+        </div>
+
+        <div class=" paginador d-flex justify-content-between w-100 align-items-center">
+            <div style="padding-left: 7px; font-size: 14px; font-weight: 500; color: #666;">Resultados &nbsp;&nbsp;&nbsp;<div class="resultados">{{collectionSize}}</div>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <ngb-pagination class="me-5" [(page)]="paginaActual" [collectionSize]="collectionSize"
+                    (pageChange)="pageChanged($event)" [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true"
+                    [ellipses]="true" [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA">
+
+                    <ng-template ngbPaginationPrevious>&lt;</ng-template>
+                    <ng-template ngbPaginationNext>&gt;</ng-template>
+
+                </ngb-pagination>
+                <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>

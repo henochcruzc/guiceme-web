@@ -1,0 +1,210 @@
+
+<div class="contenido" *ngIf="origenAcondicionamiento">
+
+    <div class="botones w-100 d-flex justify-content: space-between;">
+        <div>
+            <span>
+            </span>
+        </div>
+        <div class="botones">
+            <div class="botones">
+                <section *ngIf="idEstatusMezcla === 5">
+                    <button type="button" class="btn btn-danger" (click)="dialogoNoAprobar()"
+                        style="margin-right: 20px; width: 140px;">
+                        No aprobada </button>
+                    <button type="button" class="btn btn-primary" (click)="dialogoAprobar()"
+                        style="margin-right: 20px; width: 140px;">
+                        Aprobar mezcla </button>
+                </section>
+                <button *ngIf="idEstatusMezcla === 7 &&  (dataResolucion.modelo.idEstatusReimpresion === null || dataResolucion.modelo.idEstatusReimpresion != undefined && dataResolucion.modelo.idEstatusReimpresion  != 4 ) " 
+                    type="button" class="btn btn-primary" (click)="dialogoReimpresion()" style="margin-right: 20px; width: 185px;">
+                    Solicitar reimpresión </button>
+
+                <button *ngIf="idEstatusMezcla === 7 &&  dataResolucion.modelo.idEstatusReimpresion != undefined && dataResolucion.modelo.idEstatusReimpresion  === 4 " 
+                    type="button" class="btn btn-primary" (click)="dialogoAprobar()" style="margin-right: 20px; width: 180px;">
+                        Imprimir etiqueta </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="contenido" *ngIf="origenOrdenDistribucion">
+
+    <div class="botones w-100 d-flex justify-content: space-between;">
+        <div>
+            <span>
+            </span>
+        </div>
+        <div class="botones">
+            <div class="botones">
+                <button type="button" class="btn btn-primary" (click)="dialogoAprobar()" style="margin-right: 20px; width: 180px;">
+                    Imprimir etiqueta </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="display: none;">
+   
+    <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="medicamentosEtiqueta" style="border:0">
+      <thead style="border:0">
+        <tr style="border:0">
+          <th colspan="6" style="border:0">Lista de medicamentos que componen la mezcla:</th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prueba of tablaMedicamentos;">
+          <td colspan="6">{{prueba.descripcion}}</td>
+        
+  
+        </tr>
+        
+      </tbody>
+    </table>
+    <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="diluyentesEtiqueta" style="border:0">
+      <thead style="border:0">
+        <tr style="border:0">
+          <th colspan="6" style="border:0">Diluyente</th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prueba of tablaDiluyentes;">
+          <td colspan="6">{{prueba.descripcion}}</td>
+         
+  
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  
+<!-- ///NTP -->
+  <div style="display: none;" >
+    <!-- <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="medicamentosEtiquetaNTPPruebaCambioA" style="border:0; width: 100px;">
+      <thead style="border:0">
+        <tr style="border:0">
+          <th colspan="10" style="border:0">Listado de medicamentos que componen la mezcla::</th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let folio of arrayComponentes;">
+            <td colspan="5" >{{folio.desc1}}</td>
+            <td colspan="5">{{folio.desc2}}</td>
+           
+        </tr>
+         
+        
+      </tbody>
+    </table> -->
+    <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="medicamentosEtiquetaNTPPruebaCambio" >
+      <thead style="border:0">
+        <tr style="border:0">
+          <th ></th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let folio of tablaComponentes;">
+            <td >{{folio.descripcion}}</td>
+            <!-- <td colspan="5" >{{folio.desc2}}</td> -->
+            <!-- <td colspan="3">{{folio.desc3}}</td> -->
+        </tr>
+         
+        
+      </tbody>
+    </table>
+    <!-- <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="medicamentosEtiquetaNTPEstado" style="border:0; width: 100px;">
+        <thead style="border:0">
+          <tr style="border:0">
+            <th  style="border:0"></th>
+    
+    
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prueba of tablaMedicamentos;">
+              <td >{{prueba.descripcion}}</td>
+             
+          
+          </tr>
+           
+          
+        </tbody>
+      </table> -->
+    
+    <!-- <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="medicamentosEtiquetaNTP" style="border:0; width: 100px;">
+      <thead style="border:0">
+        <tr style="border:0">
+          <th  style="border:0"></th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prueba of tablaMedicamentos;">
+            <td >{{prueba.descripcion}}</td>
+           
+        
+        </tr>
+         
+        
+      </tbody>
+    </table> -->
+    <!-- <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="medicamentosEtiquetaNTP2" style="border:0; width: 100px;">
+        <thead style="border:0">
+          <tr style="border:0">
+            <th  style="border:0"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prueba of tablaMedicamentos2;">
+              <td >{{prueba.descripcion}}</td>
+          </tr>
+          
+        </tbody>
+      </table> -->
+
+      <!-- <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="medicamentosEtiquetaNTP3" style="border:0; width: 100px;">
+        <thead style="border:0">
+          <tr style="border:0">
+            <th  style="border:0"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prueba of tablaMedicamentos3;">
+              <td >{{prueba.descripcion}}</td>
+             
+          
+          </tr>
+        </tbody>
+      </table> -->
+
+
+    <table *ngFor="let item of dataEtiqueta?.paciente; index as i;"  id="diluyentesEtiquetaNTP" style="border:0">
+      <thead style="border:0">
+        <tr style="border:0">
+          <th colspan="6" style="border:0">Diluyente</th>
+  
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prueba of tablaDiluyentes;">
+          <td colspan="6">{{prueba.descripcion}}</td>
+          
+  
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>

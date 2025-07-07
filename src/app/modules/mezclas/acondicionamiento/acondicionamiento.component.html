@@ -1,0 +1,98 @@
+<div class="card-ceme">
+  <div class="card card-body">
+    <mat-panel-title class="align-header">
+      <div class="solicitud"></div>
+      <div class="text-teatle">Acondicionamiento</div>
+      <div class="line-panel-header w-100"></div>
+    </mat-panel-title>
+    <form [formGroup]="form">
+
+      <formly-form [model]="model" [fields]="fields" [form]="form" class="my-custom-style"></formly-form>
+      <!--<div>{{modelTipoMezcla | json}}  form valido : {{formTipoMezcla}} fiel : {{fieldsTipoMezcla}}</div> -->
+    </form>
+
+    <br>
+    <div class="header-table titulo-tabla ">
+      <div class="titulo d-flex align-items-center">
+        <div class="ico-clipboard"></div>
+        <span class="text">Listado de mezclas</span>
+      </div>
+      <div class="accion">
+        <div class="resTxt" style="font-weight: 500;">Resultados totales <span class="resTxt">{{totalElements}}</span>
+        </div>
+        <!--<button type="button" class="btn btn-outline-basic btn-ico"><i class="bi report"></i> Generar reporte de aprobadas</button>-->
+      </div>
+    </div>
+
+
+    <div class="table-responsive scroll-table">
+      <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="cveFolioMezclaDosis" matSortDirection="asc"
+        matSort (matSortChange)="shortTable($event)" #sort="matSort">
+
+        <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+        <ng-container matColumnDef="cveFolioMezclaDosis">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Folio de la mezcla </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a class="estiloUrl" (click)="redirecciona(element)">{{ element.cveFolioMezclaDosis }}</a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cveFolioSolicitudMezcla">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Folio de la solicitud </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.cveFolioSolicitudMezcla }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="desTipoMezcla">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de mezcla </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.desTipoMezcla }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaAplicacion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de aplicación </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.fechaAplicacion }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="estatusDosis">
+
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+          
+          <mat-cell *matCellDef="let element">
+            <div class="bandera" ngClass="{{ findClass(element) }}">
+
+              <div class="circle " ngClass="{{ findClass(element) }}">
+                <div>
+                </div>
+              </div>
+            
+              <span *ngIf="element.idEstatusReimpresion != 4 "> {{ element.estatusDosis.desEstatusMezcla }} </span>
+              <span *ngIf="element.idEstatusReimpresion != undefined && element.idEstatusReimpresion != null
+                   &&  element.idEstatusReimpresion === 4"> {{ element.desEstatusReimpresion }}  </span>
+            </div>
+
+          </mat-cell>
+
+
+        </ng-container>
+
+      </mat-table>
+
+    </div>
+    <div class=" paginador d-flex justify-content-end w-100 align-items-center">
+      <div class="textResult">Resultados <span class="textNegritas">{{pageSize}}</span></div>
+      <div class=" d-flex justify-content-end w-100 align-items-center">
+        <ngb-pagination class="me-5" [(page)]="paginaActual" [collectionSize]="totalElements"
+          (pageChange)="pageChanged($event)" [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true"
+          [ellipses]="true" [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA">
+
+          <ng-template ngbPaginationPrevious>&lt;</ng-template>
+          <ng-template ngbPaginationNext>&gt;</ng-template>
+
+        </ngb-pagination>
+        <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<br>

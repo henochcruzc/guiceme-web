@@ -1,0 +1,55 @@
+::ng-deep .form-control:disabled {
+    background-color: var(--bs-secondary-bg);
+    opacity: 1;
+
+    color: var(--Gobierno-Escala-de-grises-Tono7, #A9A8A9);
+    font-feature-settings: 'clig' off, 'liga' off;
+    
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    
+
+}
+
+.datosSV{
+margin-top: 7px;
+
+    .etiqueta{
+        color: var(--Text-Titulos, #626262);
+        font-feature-settings: 'clig' off, 'liga' off;
+        
+        font-family: Montserrat;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%; 
+    }
+
+    .texto{
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: Montserrat;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 120%; 
+
+    }
+
+
+}
+
+
+.rojo{
+    color:red;
+}
+
+.azul{
+    color: #1DD3EC;
+}
+
+.verde{
+    color:#00D494;
+}

@@ -1,0 +1,32 @@
+.login-content{
+  flex-wrap: wrap;
+  flex-direction: row;
+  min-height: calc(100% - 147px);
+  background-image: url("../../../../../assets/images/fondo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: right;
+}
+
+.col-title{
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.col-form {
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.filtro{
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: -webkit-fill-available;
+  background: var(--transparencia-transparencia, rgba(16, 49, 43, 0.60));
+}
+

@@ -1,0 +1,50 @@
+
+re-captcha.is-invalid>div {
+  border: 1px solid #dc3545 !important;
+  border-radius: 10.2rem;
+}
+
+.title {
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 120%;
+  /* 38.4px */
+}
+
+.form-login {
+  max-width: 55%;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  border-top: solid 10px #41abca;
+  min-width: 400px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.line{
+background-color: #41abca;
+height: 10px;
+}
+
+.footer{
+  display: flex;
+  justify-content: flex-end;
+  background-color: #f6faff;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  border-radius: 0 0 10px 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: -15px -15px -32px -15px !important;
+  button{
+    width: 10rem;
+  }
+}
+
+.contenedor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

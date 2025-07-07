@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.titulo-obs {
+  font-family: Montserrat;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  color: #626262;
+}
+
+.botones {
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+padding-right: 2%;
+}
+
+.content-obs{
+font-family: Montserrat;
+font-size: 12px;
+font-weight: 400;
+line-height: 14.4px;
+text-align: justify;
+margin-top: 10px;
+}

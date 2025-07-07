@@ -1,0 +1,37 @@
+.botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    column-gap: 23px;
+  }
+
+::ng-deep .mat-mdc-tab-labels .mdc-tab.mat-mdc-tab.mdc-tab-indicator--active {
+  background-color: #40a8c6;
+  border-radius: 10px 10px 0px 0px;
+  background: var(--turquesa-primario, #41ABCA);
+}
+
+::ng-deep .mat-mdc-tab-header-pagination-controls-enabled .mat-mdc-tab-header-pagination {
+  display: flex;
+  border-right: 1.5px solid var(--Lineas, #D8D8D8) !important;
+  background: #E6F1F7 !important;
+}
+
+::ng-deep .mat-mdc-tab-header-pagination-chevron {
+  border-color: var(--turquesa-primario, #41ABCA) !important;
+}
+
+::ng-deep .btn-outline-basic:disabled, .btn-outline-basic.disabled {
+  color: rgba(0, 0, 0, 0.87) !important;
+  background-image: none;
+  background-color: transparent;
+  border: none;
+}
+.hr-azul {
+  color: #8ebfcd;
+}
+.texto{
+  color: #222;
+    font-weight: 600;
+    font-size: 14px;
+}

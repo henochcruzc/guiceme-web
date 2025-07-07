@@ -1,0 +1,17 @@
+
+<div  class="contenedor">
+  <form [formGroup]="form" class="form-login">
+    
+    <span class="title">Inicio de sesión</span>
+    <formly-form [form]="form" [fields]="fields" [model]="model">
+      
+    </formly-form>
+    <div class="footer">
+      <button type="button" class="btn btn-primary" [disabled]="disableLogin()" (click)="doLogin()">Ingresar</button>     
+    </div>
+    
+  </form>
+  
+</div>
+
+

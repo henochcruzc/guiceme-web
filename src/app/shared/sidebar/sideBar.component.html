@@ -1,0 +1,22 @@
+
+  <!-- contenido que se envia a canvas para mostrar modal -->
+  <div class="body-offcanvas d-flex flex-column">
+    <div class="offcanvas-header2">
+        <h4 class="offcanvas-title">{{tituloOffCanvas}}</h4>
+    </div>
+    <div class="rectangle">
+    </div>
+    <div class="offcanvas-body">
+      <form [formGroup]="formOffCanvas" class="w-100">
+        <formly-form [model]="modelOffCanvas" [fields]="fieldsOffCanvas" [form]="formOffCanvas"></formly-form>
+    </form>
+    <span class="texto">
+      * Campos obligatorios
+  </span>
+    </div>
+    <div class="botones-offcanvas">
+      <button type="button" class="btn btn-cancel" (click)="closeOffCanvas()">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="confirmOffCanvas()"> Aceptar</button>
+  </div>
+    
+</div>

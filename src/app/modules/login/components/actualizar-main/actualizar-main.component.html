@@ -1,0 +1,27 @@
+<div class="formulario-login">
+  <div class="w-100 d-flex justify-content-center">
+    <form [formGroup]="form" class="form-login">
+      <div class=" w-100 d-flex justify-content-center">
+        <div class="d-flex" style="margin-right: 40px;; cursor: pointer; align-items: center;" (click)="regresarLogin()">
+          <span class="brand">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 14" fill="none">
+              <path
+                d="M0.888671 5.72092L0.358341 6.25125L-0.171989 5.72092L0.358341 5.19059L0.888671 5.72092ZM15.8609 12.832C15.8609 13.2462 15.5251 13.582 15.1109 13.582C14.6967 13.582 14.3609 13.2462 14.3609 12.832L15.8609 12.832ZM4.80279 10.6957L0.358341 6.25125L1.419 5.19059L5.86345 9.63503L4.80279 10.6957ZM0.358341 5.19059L4.80279 0.746146L5.86345 1.80681L1.419 6.25125L0.358341 5.19059ZM0.888671 4.97092L9.1109 4.97092L9.1109 6.47092L0.888671 6.47092L0.888671 4.97092ZM15.8609 11.7209L15.8609 12.832L14.3609 12.832L14.3609 11.7209L15.8609 11.7209ZM9.1109 4.97092C12.8388 4.97092 15.8609 7.993 15.8609 11.7209L14.3609 11.7209C14.3609 8.82142 12.0104 6.47092 9.1109 6.47092L9.1109 4.97092Z"
+                fill="#41ABCA" />
+            </svg></span>
+            <div class="estiloRegresar">Regresar</div>
+        </div>
+        <span class="title">Actualizar contraseña</span>
+      </div>
+      <formly-form [form]="form" [fields]="fields" [model]="model">
+        <br>
+      </formly-form>
+      <br>
+      <div class="footer">
+        <button type="button" class="btn btn-primary"
+          [disabled]="!(model.password && model.passwordUpdate && this.form.valid)"
+          (click)="doUpdate()">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</div>

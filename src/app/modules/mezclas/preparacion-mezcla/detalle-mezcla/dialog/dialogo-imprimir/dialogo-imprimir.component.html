@@ -1,0 +1,11 @@
+<div mat-dialog-title class="d-h bar-n ">
+    <span class="bar-h" ></span>
+    <span class="titulo d-flex w-100 ">
+        {{ data.title }}
+        <span class="btn-cerrar" (click)="closeDialog()"><img src="assets/images/close.svg" alt="cancel"></span>
+    </span>
+</div>
+<mat-dialog-content class="dialog-content barras">
+<span class="codigo-barra" ><img [src]="data.codigo" alt="codigoBarra"> </span>
+<p class="folio-mezcla"><strong>{{data.message}}</strong></p>
+</mat-dialog-content>

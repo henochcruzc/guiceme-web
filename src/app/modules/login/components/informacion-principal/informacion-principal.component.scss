@@ -1,0 +1,16 @@
+.titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 47px;
+  font-weight: bold;
+  text-align: center;
+
+  .text-1 {
+    color: #bd9b3b;
+  }
+
+  .text-2 {
+    color: #ffffff;
+  }
+}

@@ -1,0 +1,162 @@
+<app-titulo [titulo]="'app-titulo'"></app-titulo>
+
+<div class="contenido">
+
+
+
+  <ul ngbNav #nav="ngbNav" class="nav-tabs w-100" (navChange)="onNavChange($event)">
+
+    <ng-template ngFor let-item [ngForOf]="tabs" let-index="index" >
+      
+      <li [ngbNavItem]="index">
+        <button ngbNavLink>
+          Tab {{ index }}
+        </button>
+  
+        <ng-template ngbNavContent>
+          <ng-container *ngIf="index === 1 then uno else dos">
+          </ng-container>
+    
+          <ng-template #uno>
+           
+          </ng-template>
+        
+    
+          <ng-template #dos>
+            <ng-container *ngIf="index === 2;else tres">
+             
+            </ng-container>
+          </ng-template>
+    
+          <ng-template [ngIf]="index == 3" #tres>
+            nadaaa
+          </ng-template>
+        </ng-template>
+  
+        
+  
+      </li>
+
+    </ng-template>
+
+
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+  <pre>Active: {{ active }}</pre>
+
+
+  <div class="botones d-flex  w-100">
+    <button type="button" class="btn btn-primary">btn btn-primary</button>
+    <button type="button" class="btn btn-cancel">btn btn-cancel</button>
+    <button type="button" class="btn btn-basic" (click)="pageChanged($event)">btn btn-basic</button>
+
+    <button type="button" class="btn btn-primary" (click)="dialogo()">Dialog</button>
+    <button type="button" class="btn btn-primary" (click)="dialogoRecomendaciones()">Dialogo Recomendaciones AntCito</button>
+    <button type="button" class="btn btn-primary" (click)="dialogoRecomendacionesNTP()">Dialogo Recomendaciones NTP</button>
+    <button type="button" class="btn btn-primary" (click)="dialogoRechazarAtribuible()">Dialogo Rehazo Atribuible</button>
+    
+
+  </div>
+
+  <p class="titulo">Titulo </p>
+
+  {{model | json}}
+  <form [formGroup]="form" class="w-100">
+    <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+  </form>
+
+
+  <div>{{model | json}}  form valido : {{form.valid}}</div>
+  <div class="table-responsive scroll-table">
+    <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="expediente" matSortDirection="asc" matSort
+      #sort="matSort" (matSortChange)="shortTable($event)">
+
+      <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+      <ng-container matColumnDef="titulo1">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 1 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400">{{ element.firstName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo2">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 2 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400">{{ element.lastName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo3">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 3 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400">{{ element.age }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo4">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 4 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400">{{ element.text }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo5">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 5 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400">{{ element.text }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo6">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 6 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400"> {{ element.text }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo7">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 7 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400">{{ element.text }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="titulo8">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> TITULO 8 </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="columna-400">{{ element.text }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-400"> Ver detalle </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="d-flex justify-content-around columna-400">
+          <span class="btn-acciones">
+            <span class="view" (click)="clickAccion()" title="accion1"></span>
+          </span>
+        </mat-cell>
+      </ng-container>
+
+    </mat-table>
+
+  </div>
+
+  <div class=" paginador d-flex justify-content-end w-100 align-items-center">
+    <ngb-pagination class="me-5" [(page)]="paginaActual" [collectionSize]="myData.length" (pageChange)="pageChanged($event)" [maxSize]="ConfigTabla.NUM_ELEMENTOS_PAGINADOR" [rotate]="true"
+      [ellipses]="true" [boundaryLinks]="false" [pageSize]="ConfigTabla.NUM_ELEMENTOS_TABLA" >
+    
+      <ng-template ngbPaginationPrevious>&lt;</ng-template>
+    <ng-template ngbPaginationNext>&gt;</ng-template>          
+
+    </ngb-pagination>
+      <span>Página </span><span class="num-pagina">{{paginaActual}}</span>
+  </div>
+
+
+  <app-no-data></app-no-data>
+
+
+  <ng-template #content let-offcanvas>
+    <div class="offcanvas-header">
+      <h4 class="offcanvas-title">Offcanvas title</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>One fine body&hellip;</p>
+      <div class="text-end">
+        <button type="button" class="btn btn-outline-dark" (click)="offcanvas.close('Close click')">Close</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <button class="btn btn-primary mb-2 me-2" (click)="openSideBar()">off canvas side bar</button>
+  
+</div>

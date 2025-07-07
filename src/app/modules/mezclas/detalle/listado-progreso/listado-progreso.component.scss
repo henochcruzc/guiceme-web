@@ -1,0 +1,295 @@
+.bandera {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    min-height: 18px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 110px;
+    column-gap: 5px;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+.bandera .circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+}
+
+.circle.green {
+    border: solid 1px #00d494;
+
+    div {
+        background-color: #00d494;
+    }
+}
+
+.bandera.green {
+
+    background: rgba(0, 212, 148, 0.15);
+    color: var(--Verde-check, #00D494);
+
+
+}
+
+.circle.blue {
+    border: solid 1px #1dd3ec;
+
+    div {
+        background-color: #1dd3ec;
+    }
+}
+
+.bandera.blue {
+    background: #E8FBFD;
+    color: var(--Azul-track, #1DD3EC);
+}
+
+.circle.orange {
+    border: solid 1px #ff820e;
+
+    div {
+        background-color: #ff820e;
+    }
+}
+
+.bandera.orange {
+    background-color: #FFE6CF;
+    color: #FF820E;
+}
+
+.circle.red {
+    border: solid 1px #ef7373;
+
+    div {
+        background-color: #ef7373;
+    }
+}
+
+.bandera.red {
+    background: rgba(239, 115, 115, 0.21);
+    color: var(--Cancelar, #EF7373);
+}
+
+.datos-progreso {
+    background-color: #f8f8f8;
+    border: none;
+    border-radius: 0px;
+    box-shadow: unset;
+
+
+
+}
+.progress-cell .circle {
+    z-index: 50;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    div {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+  }
+.progress-cell .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 32px;
+  
+    .hr-r {
+      z-index: 20;
+      width: 51%;
+      position: absolute;
+      margin-right: 0px;
+      margin-left: 50%;
+    }
+  
+    .hr-r.gray {
+      border: solid 1.5px #d8d8d8;
+    }
+  
+    .hr-r.blue {
+      border: solid 1.5px #1dd3ec;
+    }
+  
+    .hr-r.green {
+      border: solid 1.5px #00d494;
+    }
+  
+    .hr-l {
+      z-index: 20;
+      width: 51%;
+      position: absolute;
+      margin-right: 50%;
+      margin-left: 0px;
+    }
+  
+    .hr-l.gray {
+      border: solid 1.5px #d8d8d8;
+    }
+  
+    .hr-l.blue {
+      border: solid 1.5px #1dd3ec;
+    }
+  
+    .hr-l.green {
+      border: solid 1.5px #00d494;
+    }
+  }
+
+.hr-azul {
+    height: 1px;
+    background-color: #8EBFCD;
+}
+
+.s-progreso {
+    .etiqueta {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--Grises-Gris-tono1, var(--Txt_title, #404041));
+        font-feature-settings: 'clig' off, 'liga' off;
+        /* Link/Body/M/M . Medium.12 */
+        font-family: Montserrat;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%;
+    }
+
+    .texto {
+        font-size: 12px;
+        font-weight: 600;
+        color: #a9a8a9;
+    }
+}
+
+.progreso .radio {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div.circle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+
+        div.check {
+            cursor: default;
+            background-size: 14px;
+            transform: translate(7px, 9px);
+        }
+    }
+}
+
+.radio.green {
+    border: solid 1px #00d494;
+
+    div.circle {
+        background-color: #00d494;
+    }
+}
+
+
+
+.estatus {
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    /* 125% */
+}
+
+.estatus.blue {
+    color: #1dd3ec;
+}
+
+.estatus.orange {
+    color: #FF820E;
+}
+
+.estatus.red {
+    color: #ef7373;
+}
+
+.estatus.green {
+    color: #00d494;
+}
+
+
+.radio.blue {
+    border: solid 1px #1dd3ec;
+
+    div.circle {
+        background-color: #1dd3ec;
+    }
+}
+
+.radio.orange {
+    border: solid 1px #ff820e;
+
+    div.circle {
+        background-color: #ff820e;
+    }
+}
+
+.radio.red {
+    border: solid 1px #ef7373;
+
+    div.circle {
+        background-color: #ef7373;
+    }
+}
+
+.radio.gray {
+    border: solid 1px #1dd3ec;
+
+    div.circle {
+        background-color: #fff;
+    }
+}
+
+.mat-icon.orange.material-icons {
+    transform: scale(0.9);
+}
+
+.tooltip-contenido p {
+    text-align: justify;
+
+strong,
+b{
+    color: white;
+  
+}
+
+}
+
+::ng-deep .tool-rechazo.tooltip {
+    --bs-tooltip-bg: #626262;
+}
+
+.icon-danger{
+    cursor: pointer;
+}

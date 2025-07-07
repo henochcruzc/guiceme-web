@@ -1,0 +1,252 @@
+<div class="titulo-dialogo d-flex">
+    <div class="d-flex ms-3">
+        <span> Detalle de mezcla</span>&nbsp; &nbsp;&nbsp;
+        <div class="bandera" ngClass="{{_coloresEstatus.findClassColorEstatus(data.mezcla.estatus.id) }}">
+            <div class="circle " ngClass="{{ _coloresEstatus.findClassColorEstatus(data.mezcla.estatus.id) }}">
+                <div></div>
+            </div>
+            <span>{{ data.mezcla.estatus.descripcion }}</span>
+        </div>
+        &nbsp;&nbsp;
+        <div class="icon-clock " ngClass="{{ 'clock-'+ _coloresEstatus.findClassColorClock(data.mezcla.estatus.id) }}"></div>
+    </div>
+    <div>
+        <button class="btn " [mat-dialog-close]="true">
+            <mat-icon class="close-icon" >close</mat-icon>
+          </button>
+    </div>
+
+</div>
+<div mat-dialog-content class="contenido-dialogo">
+    <div class="datos-header padding d-flex flex-row">
+        <div class="separador flex-shrink-0"></div>
+        <div class="datos flex-grow-1">
+            <form [formGroup]="form">
+                <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+            </form>
+        </div>
+    </div>
+    <div class="datos-diagnostico padding">
+        <div> <strong>Diagnóstico</strong> </div>
+        <div>{{model.desDiagnosticoCie}} </div>
+    </div>
+    <div class="lista-medicamento padding">
+
+        <div class="header-table d-flex align-items-center justify-content-between ">
+            <div class="titulo d-flex align-items-center">
+                <div class="ico-clipboard"></div>
+                <span class="text"><strong>Lista de componentes</strong></span>
+            </div>
+
+        </div>
+        <mat-tab-group >
+            <mat-tab  *ngFor="let tab of tabsNTP" [label]="tab.nombre + '  (' + tab.counter + ')'" >
+
+                <div class="table-responsive scroll-table">
+                    <mat-table class="fullTable " [dataSource]="tab.data" matSortActive="medicamento" matSortDirection="asc"
+                        matSort #sort="matSort" >
+        
+                        <mat-header-row *matHeaderRowDef="tab.displayCols "></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: tab.displayCols ;"></mat-row>
+        
+                        <ng-container matColumnDef="medicamento">
+                            <mat-header-cell class="col-md-9" *matHeaderCellDef mat-sort-header> Componentes </mat-header-cell>
+                            <mat-cell class="col-md-9" *matCellDef="let element">
+                                {{ element.medicamento }}
+        
+                            </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="dosis">
+                            <mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header> Volumen </mat-header-cell>
+                            <mat-cell class="col-md-1" *matCellDef="let element">
+                                {{ element.dosis }}
+                            </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="unidadMedida">
+                            <mat-header-cell class="col-md-2" *matHeaderCellDef mat-sort-header> Unidad de medida </mat-header-cell>
+                            <mat-cell class="col-md-2" *matCellDef="let element">{{ element.unidadMedida }}</mat-cell>
+                        </ng-container>
+        
+                    </mat-table>
+        
+                </div>
+              
+            </mat-tab>
+          </mat-tab-group>
+        
+
+
+    </div>
+    <div class="datos-diluyente padding margin">
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Nitrógeno (gr)</span>
+                <span class="texto">{{detalleMezcla?.numNitrogeno }}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Proteínas (gr)</span>
+                <span class="texto">{{detalleMezcla?.numProteinas}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Kcal no proteicas (Kcal)</span>
+                <span class="texto">{{detalleMezcla?.numKcalNoProteicas}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Kcal totales (Kcal)</span>
+                <span class="texto">{{detalleMezcla?.numKcalTotales}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Volumen total (ml)</span>
+                <span class="texto">{{detalleMezcla?.numVolumenTotal}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Osmolaridad (mOsmol/ml)</span>
+                <span class="texto">{{detalleMezcla?.numOsmolaridad}}</span>
+            </div>
+        </div>
+        <!-- <hr class="hr-azul"/>
+        <div class="d-flex flex-row flex-wrap justify-content-between" >
+            <div class="col-md-8 d-flex flex-column ">
+                <span class="etiqueta">Diluyente</span>
+                <span class="texto">{{detalleDiluyente?.desCortaDiluyente}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Dosis</span>
+                <span class="texto">{{detalleDiluyente?.numDosisDiluyente}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Unidad de medida</span>
+                <span class="texto">{{detalleDiluyente?.refUnidadMinMedida}}</span>
+            </div>
+        </div> -->
+        <hr class="hr-azul"/>
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Fecha de aplicación</span>
+                <span class="texto">{{detalleDiluyente?.fechaAplicacion}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Cada</span>
+                <span class="texto">{{detalleDiluyente?.desAplicacionCada}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Número total de dosis</span>
+                <span class="texto">{{detalleDiluyente?.numTotalDosis}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Vía de administración</span>
+                <span class="texto">{{detalleDiluyente?.desViaAdministracion}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Tiempo de infusión</span>
+                <span class="texto">{{detalleDiluyente?.desTiempoInfusion}}</span>
+            </div>
+            <div class="col-md-2 d-flex flex-column">
+                <span class="etiqueta">Velocidad de infusión (ml/hrs)</span>
+                <span class="texto">{{detalleDiluyente?.refVelInfusion}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="datos-progreso padding margin card mt-3">
+        <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+            <div class="ico-dato-paciente"></div>&nbsp;&nbsp;
+            <div class="text-teatle">Progreso</div>
+            <div class="line-panel-header w-100 "></div>
+        </mat-panel-title>
+
+        <div class="d-flex flex-column">
+            <ng-template ngFor let-itemProg [ngForOf]="listProg" let-i="index">
+                <div class="d-flex w-100 flex-row mb-3 s-progreso flex-wrap">
+                    <div class="col-md-3 d-flex justify-content-center align-items-center">
+                        <div class="progreso" ngClass="{{ _coloresEstatus.findClassColorEstatus(itemProg.estatus.id) }}">
+                            <div class="radio " ngClass="{{ _coloresEstatus.findClassColorEstatus(itemProg.estatus.id) }}">
+                                <div class="circle">
+                                    <div class="ico-check-wh check"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #tipContent>
+                        <div class="tooltip-contenido">
+                            <p><strong>Motivo:&nbsp;</strong>{{itemProg.validPrescrip.motivoRechazo.desMotivoRechazo}}
+                            </p>
+                            <p><strong>Observaciones:&nbsp;</strong>{{itemProg.validPrescrip.refobs}}</p>
+                        </div>
+
+                    </ng-template>
+
+                    <div class="col-md-3 d-flex flex-column ">
+                        <span class="etiqueta">{{itemProg.nombre}}</span>
+                        <span class="texto">{{itemProg.perfil}}</span>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column">
+                        <span class="etiqueta">Fecha y hora</span>
+                        <span class="texto">{{itemProg.fechaHora}}</span>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column">
+                        <span class="etiqueta">Estatus</span>
+                        <div class="d-flex flex-row">
+                           <!-- <span class="texto "
+                                [ngClass]="{'orange': itemProg.estatus.id == 2}">{{itemProg.estatus.descripcion}}</span>-->
+                                <span class="estatus" ngClass="{{ _coloresEstatus.findClassColorEstatus(itemProg.estatus.id) }}">{{itemProg.estatus.descripcion}}</span>
+                            &nbsp;
+                            <mat-icon *ngIf="itemProg.estatus.id == 2" class="orange" fontIcon="error_outline"
+                                [ngbTooltip]="tipContent" [closeDelay]="300000" tooltipClass="tool-rechazo"></mat-icon>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template ngFor let-itemProg [ngForOf]="[].constructor(getFaltantes())" let-i="index">
+                <div class="d-flex w-100 flex-row mb-3 s-progreso flex-wrap">
+                    <div class="col-md-3 d-flex justify-content-center align-items-center">
+                        <div class="progreso" ngClass="gray">
+                            <div class="radio " ngClass="gray">
+                                <div class="circle">
+                                    <div class="ico-check-wh check"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column ">
+                        <span class="etiqueta">---</span>
+                        <span class="texto">--- </span>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column">
+                        <span class="etiqueta">Fecha y hora</span>
+                        <span class="texto">---</span>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column">
+                        <span class="etiqueta">Estatus</span>
+                        <span class="texto">---</span>
+                    </div>
+                </div>
+            </ng-template>
+
+        </div>
+
+
+    </div>
+    <div class="datos-medico d-flex w-100 flex-row mt-3">
+        <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+            <div class="img-ico-doc"></div>
+        </div>
+        <div class="col-md-6 d-flex flex-column">
+            <span class="etiqueta">Nombre del médico</span>
+            <span class="texto">{{ (data.objUrl.medico_nombre || '') + ' ' + (data.objUrl.medico_apaterno ||'') + ' ' +
+                (data.objUrl.medico_amaterno ||'')}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Matrícula</span>
+            <span class="texto">{{data.objUrl.medico_mat}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Cédula profesional</span>
+            <span class="texto">{{data.objUrl.medico_cedula}}</span>
+        </div>
+    </div>
+    <div class="borde d-flex w-100"></div>
+</div>

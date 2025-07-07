@@ -1,0 +1,35 @@
+<div class="principal">
+<div mat-dialog-title class="d-h bar-n ">
+    <span class="bar-h" ></span>
+    <span class="titulo d-flex w-100 ">
+        {{ titulo }}
+        <span class="btn-cerrar" (click)="closeDialog()"><img src="assets/images/close.svg" alt="cancel"></span>
+    </span>
+</div>
+
+<mat-dialog-content >
+    <div *ngIf="model.indEnProceso ==0 || !model.indEnProceso">
+        <form [formGroup]="form" class="mb-3">
+
+            <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+
+        </form>
+    </div>
+    <div *ngIf="model.indEnProceso ==1 ">
+        <form [formGroup]="formProceso" class="mb-3">
+
+            <formly-form [model]="model" [fields]="fieldsProceso" [form]="formProceso"></formly-form>
+
+        </form>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="justify-content-end" >
+   
+    <button type="button " class="boton btn btn-primary  pull-right" (click)="btnAceptar()"
+    [disabled]="blnBtnAceptarBloqueado">Aceptar</button>
+</mat-dialog-actions>
+
+
+
+</div>

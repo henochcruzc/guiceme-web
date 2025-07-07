@@ -1,0 +1,235 @@
+<app-header-detalle-mezcla [headerData]="headerData"></app-header-detalle-mezcla>
+
+<div class="card-ceme">
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div class="solicitud"></div>
+                <div class="text-teatle">Solicitud</div>
+                <div class="line-panel-header w-100"></div>
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <form [formGroup]="formTipoMezcla">
+            <!-- <div>{{modelTipoMezcla | json}}  form valido : {{formTipoMezcla}} fiel : {{fieldsTipoMezcla}}</div> -->
+            <formly-form [model]="modelTipoMezcla" [fields]="fieldsTipoMezcla" [form]="formTipoMezcla"></formly-form>
+
+            <br>
+            <p class="titulo">Mezcla: {{this.destipoMezcla}}</p>
+
+            <ng-container *ngIf="!noMezcla">
+                <app-no-medicamento></app-no-medicamento>
+            </ng-container>
+
+            <ng-container *ngIf="this.tipoMezcla==3">
+                <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+                <formly-form [model]="modelAbajoAnti" [fields]="fieldsAbajoAnti" [form]="formAbajoAnti"></formly-form>
+                <!--dias-->
+                <br>
+                <div class="txt-header3">
+                    <div *ngIf="this.tabs.length != 0"><mat-checkbox (change)="seleccionarTodo($event.checked)"
+                            [checked]="seleccionTodo">Seleccionar todo:</mat-checkbox></div>
+                    <div style="padding-left: 20px;">
+                        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs w-100 gap-3"
+                            (navChange)="onNavChange($event)">
+                            <ng-template ngFor let-item [ngForOf]="tabs" let-index="index">
+                                <li class="mes" [ngbNavItem]="index" [class.active]="index === 0">
+                                    <button ngbNavLink>
+                                        {{ tabs[index].nombreMes }}
+                                    </button>
+                                    <ng-template ngbNavContent>
+                                        <div class="d-flex gap-3 flex-wrap mt-3">
+                                            <ng-template ngFor let-item [ngForOf]="tabs[index].dias" let-index="index">
+                                                <mat-checkbox class="check-dias" [checked]="item.check"
+                                                    (change)="actualizarDia($event.checked,item)">
+                                                    {{item.nombreDia}}
+                                                </mat-checkbox>
+                                            </ng-template>
+                                        </div>
+                                    </ng-template>
+                                </li>
+                            </ng-template>
+                        </ul>
+                    </div>
+                </div>
+
+                <div [ngbNavOutlet]="nav" class="mt-2" *ngIf="this.tabs.length != 0"></div>
+                <!--dias-->
+
+                <formly-form [model]="modelViaAdmin" [fields]="fieldsViaAdmin" [form]="formViaAdmin"></formly-form>
+            </ng-container>
+            <ng-container *ngIf="this.tipoMezcla==2">
+                <formly-form [model]="modelNTP" [fields]="fieldsNTP" [form]="formNTP"></formly-form>
+                <br>
+                <br>
+
+                <mat-panel-title style="justify-content: space-between;">
+                    <div style="display: flex;">
+                        <div class="solicitud"></div>
+                        <div class="text-teatle" style="margin-top: 8px;">Lista de componentes</div>
+                    </div>
+                    <div>Componentes totales: {{this.componenteTotal}}</div>
+                </mat-panel-title>
+                <br>
+                <mat-tab-group>
+                    <mat-tab *ngFor="let tab of tabsNTP" [label]="tab.nombre + ' ' + tab.counter">
+                        <div class="d-flex">
+                            <mat-table class="fullTable" [dataSource]="tab.data" matSortActive="medicamento"
+                                matSortDirection="asc" matSort (matSortChange)="shortTable($event, tab.data)">
+                                <mat-header-row *matHeaderRowDef="tab.displayCols"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: tab.displayCols;"></mat-row>
+
+                                <ng-container matColumnDef="medicamento">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                        class="columna-300"><strong>Componentes</strong></mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.medicamento ? element.medicamento :
+                                        element.desCortaMedicamento}}</mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="dosis">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                        class="columna-300"><strong>Volumen</strong></mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.dosis}}</mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="unidadMedida">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                                        class="columna-200"><strong>Unidad de medida</strong></mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.unidadMedida}}</mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="rechazar">
+                                    <mat-header-cell *matHeaderCellDef><strong>Eliminar</strong></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" class="alinearIcono">
+                                        <span><img src="../../../../../assets/images/rechazar.svg"
+                                                class="image-secundario" style="cursor: pointer;" alt="Rechazar"
+                                                title="rechazar" (click)="rechazarNtp(element, tab.id)"></span>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <ng-container matColumnDef="medicamentosTotal">
+                                    <td mat-footer-cell *matFooterCellDef colspan="1">
+                                        <!--<br>Agregados: &nbsp;<strong>{{tab.counter}}</strong></td>-->
+                                </ng-container>
+
+                                <tr mat-footer-row *matFooterRowDef="['medicamentosTotal']"></tr>
+                            </mat-table>
+
+
+                        </div>
+
+                    </mat-tab>
+                </mat-tab-group>
+
+
+                <formly-form [model]="modelAbajoNtp" [fields]="fieldsAbajoNtp" [form]="formAbajoNtp"></formly-form>
+                <br>
+                <div class="txt-header3">
+                    <div *ngIf="this.tabs.length != 0"><mat-checkbox (change)="seleccionarTodo($event.checked)"
+                            [checked]="seleccionTodo">Seleccionar todo:</mat-checkbox></div>
+                    <div class="ms-1 calendario-lineal">
+                        <ul ngbNav #nav2="ngbNav" [(activeId)]="active" class="nav-tabs w-100 gap-3"
+                            (navChange)="onNavChangeNTP($event)">
+                            <ng-template ngFor let-item [ngForOf]="tabs" let-index="index">
+                                <li class="mes" [ngbNavItem]="index" [class.active]="index === 0">
+                                    <button ngbNavLink>
+                                        {{ tabs[index].nombreMes }}
+                                    </button>
+                                    <ng-template ngbNavContent>
+                                        <div class="d-flex gap-3 flex-wrap mt-3">
+                                            <ng-template ngFor let-item [ngForOf]="tabs[index].dias" let-index="index">
+                                                <mat-checkbox class="check-dias" [checked]="item.check"
+                                                    (change)="actualizarDia($event.checked,item)">
+                                                    {{item.nombreDia}}
+                                                </mat-checkbox>
+                                            </ng-template>
+                                        </div>
+                                    </ng-template>
+                                </li>
+                            </ng-template>
+                        </ul>
+                    </div>
+                </div>
+                <div [ngbNavOutlet]="nav2" class="mt-2" *ngIf="this.tabs.length != 0"></div>
+                <formly-form [model]="modelViaAdminNtp" [fields]="fieldsViaAdminNtp"
+                    [form]="formViaAdminNtp"></formly-form>
+
+
+
+            </ng-container>
+
+
+        </form>
+
+        <mat-action-row>
+
+            <button type="button" class="btn btn-primary estiloDuplicar botones-tamano" *ngIf="existeHistorial"
+                (click)="redireccionDuplicar();"> Duplicar mezcla</button>
+
+            <button type="button" class="btn btn-primary botones-tamano"
+                [disabled]="!((form.valid && formAbajoAnti.valid && formTipoMezcla.valid && formViaAdmin.valid))"
+                *ngIf="tipoMezcla == 3 || tipoMezcla == undefined || tipoMezcla == '' " (click)="agregarMezclaAnti();">
+                Agregar mezcla</button>
+
+            <button type="button" class="btn btn-primary botones-tamano" *ngIf="tipoMezcla == 2"
+                [disabled]="!(formAbajoNtp.valid && formTipoMezcla.valid && formViaAdminNtp.valid && componenteTotal > 0)"
+                (click)="agregarMezclaAnti();"> Agregar mezcla</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+</div>
+
+<div class="card-ceme">
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div class="addMezcla"></div>
+                <div class="text-teatle">Mezclas agregadas</div>
+                <div class="line-panel-header w-80"></div>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true" *ngFor="let item of items">
+
+                    <mat-expansion-panel-header>{{item.name}}</mat-expansion-panel-header>
+                    <ng-container *ngIf="item.tipoMezcla==3">
+                        <app-detalle-mezcla [mezclaDetails]="item.value" [mezclaName]="item.name"
+                            (onSelected)="onEditMezclaDetail($event)" (onDisabledSend)="boton=$event">
+                        </app-detalle-mezcla>
+                    </ng-container>
+                    <ng-container *ngIf="item.tipoMezcla==2">
+                        <app-detalle-mezcla-ntp [mezclaDetails]="item.value" [componenteTotal2]="this.componenteTotal"
+                            [mezclaName]="item.name" (onSelected)="onEditMezclaDetail($event)"
+                            (onDisabledSend)="boton=$event">
+                        </app-detalle-mezcla-ntp>
+
+                    </ng-container>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card>
+    </mat-expansion-panel>
+
+</div>
+
+
+<div class="contenido">
+
+    <div class="botones w-100 d-flex justify-content: space-between;">
+        <div>
+            <span>
+            </span>
+        </div>
+        <div class="botones">
+            <div class="botones">
+                <button [disabled]="boton" type="button" class="btn btn-primary botones-tamano" (click)="continuar();"
+                    style="margin-right: 20px;">
+                    Enviar solicitud</button>
+            </div>
+        </div>
+    </div>
+
+</div>

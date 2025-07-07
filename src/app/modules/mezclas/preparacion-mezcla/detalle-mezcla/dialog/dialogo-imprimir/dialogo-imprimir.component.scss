@@ -1,0 +1,92 @@
+::ng-deep .mat-mdc-dialog-surface {
+  border-radius: 10px !important;
+}
+
+.mat-mdc-dialog-title {
+  padding: 0px;
+}
+
+.m-dialog-content {
+  border-radius: 10px 10px 0px 0px;
+  padding: 0 24px 20px 24px;
+}
+
+mat-dialog-content {
+  text-align: center;
+  padding: 20px!important;
+  margin: 26px 20px 20px 20px;
+  font-family: Montserrat!important;
+  font-size: 14px!important;
+  font-style: normal!important;
+  font-weight: 400!important;
+  line-height: normal!important;
+}
+
+mat-dialog-actions{
+  column-gap: 30px;
+  padding: 0px;
+  margin: 20px;
+}
+
+.d-h {
+  height: 60px;
+
+  background-color: #3361ff0d;
+
+  .titulo {
+      color: #000000;
+      font-size: 16px;
+      padding: 0px 10px 20px 10px !important;
+  }
+
+  .btn-cerrar {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+      cursor: pointer;
+      margin-top: 12px;
+  }
+}
+
+.bar-h {
+  border-radius: 4px 4px 0px 0px;
+  height: 8px;
+  width: 100%;
+  background-color: #41ABCA;
+  margin-top: -53px;
+}
+
+.bar-n{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.folio-mezcla{
+    
+  font-size: 25px;
+  font-weight: 600;
+  /* padding: 34px; */
+
+}
+
+.codigo-barra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.codigo-barra{
+  width: 384px;
+  height: 120px;
+  img{
+    width: 382px;
+    height: 120px;
+  }
+}
+
+.dialog-content.barras{
+  padding: 0 !important;
+  margin: 0;
+  height: 192px;
+}

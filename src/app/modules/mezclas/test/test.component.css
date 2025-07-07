@@ -1,0 +1,6 @@
+:host {
+  display: block;
+}
+.botones{
+  column-gap: 30px;
+}

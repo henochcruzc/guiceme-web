@@ -1,0 +1,62 @@
+
+
+.botones {
+   
+    display: flex !important;
+    /* align-content: space-around; */
+    justify-content: space-between;
+  }
+  .mat-column-aprobar{
+    flex: 0 0 200px !important;
+    width: 200px !important;
+  }
+   .mat-column-rechazar{
+    flex: 0 0 90px !important;
+    width: 90px !important;
+  }
+  .mat-column-estatus{
+    flex: 0 0 150px !important;
+    width: 150px !important;
+  }
+  .mat-radio-group{
+    width: 130px !important;
+  }
+  .header-table{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .textResult{
+    color: #666;
+    text-align: right;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 11%;
+    text-align: start;
+    padding-left: 7px;
+  }
+  
+  .textNegritas{
+    color: #222;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .textoBackgroundGray{
+    background-color: #FEFCFE;
+    width: 300px;
+    height: 30px;
+  }
+ 
+.data-detalle {
+  .titulo {
+    font-size: 12px;
+    font-weight: 500;
+  }
+}

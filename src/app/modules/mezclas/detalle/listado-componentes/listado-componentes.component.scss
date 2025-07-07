@@ -1,0 +1,87 @@
+.pos{
+    margin-top: 10px;
+}
+
+.headerTab{
+    height: 38px;
+}
+
+.etiquetaTab{
+    font-size: 14px;
+    color: #626262;
+}
+
+::ng-deep .mat-mdc-tab-labels .mdc-tab.mat-mdc-tab.mdc-tab-indicator--active {
+    
+    border-radius: 10px 0px 0px 0px;
+    
+}
+
+::ng-deep .mat-mdc-tab-body-wrapper1 {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    transition: height 500ms cubic-bezier(0.35, 0, 0.25, 1);
+    width: 100%;
+}
+
+
+.mat-mdc-tab-body-content {
+    height: 100%;
+    overflow: hidden;
+}
+
+
+::ng-deep  .mat-mdc-tab-header-pagination {
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  min-width: 32px;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  touch-action: none;
+  box-sizing: content-box;
+  background: none;
+  border: none;
+  outline: 0;
+  background: #F4F8FF;
+  padding: 0;
+}
+
+::ng-deep .mat-mdc-tab-header-pagination-controls-enabled .mat-mdc-tab-header-pagination {
+  display: flex;
+  border-right: 1.5px solid var(--Lineas, #D8D8D8) !important;
+  background: #E6F1F7 !important;
+}
+
+::ng-deep .mat-mdc-tab-header-pagination-chevron {
+  border-color: var(--turquesa-primario, #41ABCA) !important;
+}
+
+
+
+::ng-deep .mat-mdc-tab-body.mat-mdc-tab-body-active {
+
+  margin-top: -16px;
+}
+
+.mat-mdc-tab-body.mat-mdc-tab-body-active {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1;
+  flex-grow: 1;
+  margin-top: 0px;
+}
+
+.table-responsive {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 18.75px;
+  overflow-y: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}

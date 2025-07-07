@@ -1,0 +1,109 @@
+
+<form [formGroup]="formAplicacion" class="mb-3" *ngIf="blnCamposBloqueados  ">
+    <formly-form [model]="miModelo" [fields]="fieldsAplicacion" [form]="formAplicacion"></formly-form>
+
+</form>
+
+
+<!-- estatus no aplicada antes de iniciar la aplicación:-->
+<div class="datosSV" *ngIf="blnLectura && blnNoAplicada && model != undefined && miModelo.stpAplicacInicio == null" > 
+    <div class="d-flex flex-row flex-wrap justify-content-between">
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Estatus</span>
+            
+            <span class="texto " *ngIf="miModelo.desEstatusMezcla !='No aplicada'">{{miModelo.desEstatusMezcla}}</span>
+            <span class="texto rojo" *ngIf="miModelo.desEstatusMezcla =='No aplicada'">{{miModelo.desEstatusMezcla}}</span>
+        </div>
+        <div class="col-md-4 d-flex flex-column">
+            <span class="etiqueta">Motivo de no aplicación</span>
+            <span class="texto">{{miModelo.desMotivoNoAdminMezcla?miModelo.desMotivoNoAdminMezcla:''}}</span>
+        </div>
+        <div class="col-md-6 d-flex flex-column">      
+        </div>
+    </div>
+    <div class="d-flex flex-row flex-wrap justify-content-between" style="margin-top: 10px;">
+        <div class="col-md-12 d-flex flex-column ">
+            <span class="etiqueta">Observaciones</span>
+            <span class="texto">{{miModelo.refNoAdminObs?miModelo.refNoAdminObs:''}}</span>
+        </div>
+       
+    </div>
+
+</div>
+
+<!-- estatus no aplicada despues de iniciar la aplicación:-->
+<div class="datosSV" *ngIf="blnLectura && blnNoAplicada && model != undefined && miModelo.stpAplicacInicio != null" > 
+    <div class="d-flex flex-row flex-wrap justify-content-between">
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Fecha y hora de inicio</span>
+            <span class="texto">{{miModelo.stpAplicacInicio?miModelo.stpAplicacInicio:''}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Turno de inicio</span>
+            
+            <span class="texto azul" *ngIf="miModelo.idTurnoInicio ==1">Matutino</span>
+            <span class="texto verde" *ngIf="miModelo.idTurnoInicio ==2">Vespertino</span>
+            <span class="texto rojo" *ngIf="miModelo.idTurnoInicio ==3">Nocturno</span>
+        </div>
+       
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Estatus</span>
+            <span class="texto " *ngIf="miModelo.desEstatusMezcla !='No aplicada'">{{miModelo.desEstatusMezcla}}</span>
+            <span class="texto rojo" *ngIf="miModelo.desEstatusMezcla =='No aplicada'">{{miModelo.desEstatusMezcla}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">¿Reacción adversa?</span>
+            <span class="texto" *ngIf="miModelo.idAplicacReaccAdversa == 1">Sí</span>
+            <span class="texto" *ngIf="miModelo.idAplicacReaccAdversa == 2">No</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Reacciones adversas</span>
+            <span class="texto">{{miModelo.desReaccionAdversa?miModelo.desReaccionAdversa:''}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+          
+        </div>
+    </div>
+    <div class="d-flex flex-row flex-wrap justify-content-between" style="margin-top: 10px;">
+        <div class="col-md-12 d-flex flex-column ">
+            <span class="etiqueta">Observaciones</span>
+            <span class="texto">{{miModelo.refAplicacReaccionObs?miModelo.refAplicacReaccionObs:''}}</span>
+        </div>
+       
+    </div>
+
+</div>
+<!-- estatus aplicada -->
+<div class="datosSV" *ngIf="blnLectura && blnAplicada && miModelo!= undefined" style="margin-top: 10px;"> 
+    <div class="d-flex flex-row flex-wrap justify-content-between">
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Fecha y hora de inicio</span>
+            <span class="texto">{{miModelo.stpAplicacInicio?miModelo.stpAplicacInicio:''}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Turno que inició</span>
+            
+            <span class="texto azul" *ngIf="miModelo.idTurnoInicio ==1">Matutino</span>
+            <span class="texto verde" *ngIf="miModelo.idTurnoInicio ==2">Vespertino</span>
+            <span class="texto rojo" *ngIf="miModelo.idTurnoInicio ==3">Nocturno</span>
+        </div>
+       
+    
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Fecha y hora de término</span>
+            <span class="texto">{{miModelo.stpAplicacTermino?miModelo.stpAplicacTermino:''}}</span>
+        </div>
+    
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Turno que termino</span>
+            <span class="texto azul" *ngIf="miModelo.idTurnoTermino ==1">Matutino</span>
+            <span class="texto verde" *ngIf="miModelo.idTurnoTermino ==2">Vespertino</span>
+            <span class="texto rojo" *ngIf="miModelo.idTurnoTermino ==3">Nocturno</span>
+        </div>
+        <div class="col-md-4 d-flex flex-column ">
+           
+        </div>
+       
+    </div>
+
+</div>

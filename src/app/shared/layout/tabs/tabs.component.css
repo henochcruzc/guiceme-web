@@ -1,0 +1,62 @@
+:host {
+  display: block;
+}
+
+.menu-gral {
+  padding: 0 1.735rem 0;
+  .nav-tabs {
+    border-bottom: 2px solid rgba(51, 97, 255, 0.05) !important;
+  }
+
+  >.nav-tabs .nav-item .nav-link {
+    margin-bottom: calc(-1 * var(--bs-nav-tabs-border-width));
+    border: 0px solid transparent !important;
+    border-radius: 0 !important;
+    color: #7D8FB3;
+    border-bottom: 2px solid  rgba(51, 97, 255, 0.05)!important;
+    min-height: 46px;
+    background-color:#fff;
+    line-height: 120%;
+  }
+
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    color: #1CC494;
+    background-color: rgba(28, 196, 148, 0.05);
+    border-bottom: 2px solid #FE8E13 !important;
+  }
+
+}
+.menu-gral.scroll-tabs {
+  overflow-y: auto;
+}
+
+.menu-gral.scroll-tabs::-webkit-scrollbar {
+
+  height: 5px;
+}
+
+.menu-gral.scroll-tabs::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border-radius: 4px;
+  
+}
+
+.menu-gral.scroll-tabs::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.menu-gral.scroll-tabs::-webkit-scrollbar-thumb:active {
+  background-color: #999999;
+}
+
+.menu-gral.scroll-tabs::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.menu-gral.scroll-tabs::-webkit-scrollbar-track:hover,
+.menu-gral.scroll-tabs::-webkit-scrollbar-track:active {
+  background: #ffffff;
+}

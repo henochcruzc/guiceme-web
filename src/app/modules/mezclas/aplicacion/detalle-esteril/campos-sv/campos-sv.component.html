@@ -1,0 +1,41 @@
+
+<form [formGroup]="form" class="mb-3" *ngIf="blnCamposBloqueados && model != undefined">
+    <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+
+</form>
+
+<div class="datosSV" *ngIf="blnModoLectura">
+    <div class="d-flex flex-row flex-wrap justify-content-between">
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Tensión arterial sistólica</span>
+            <span class="texto">{{model.numPacTenArtSistolica}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Tensión arterial diastólica</span>
+            <span class="texto">{{model.numPacTenArtDiastolica}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Frecuencia cardiaca</span>
+            <span class="texto">{{model.numPacFrecCardiaca}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Frecuencia respiratoria</span>
+            <span class="texto">{{model.numPacFrecRespiratoria}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Temperatura</span>
+            <span class="texto">{{model.numPacTemperatura}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+       
+        </div>
+    </div>
+    <div class="d-flex flex-row flex-wrap justify-content-between" style="margin-top: 10px;">
+        <div class="col-md-12 d-flex flex-column ">
+            <span class="etiqueta">Observaciones</span>
+            <span class="texto">{{model.refPacObs}}</span>
+        </div>
+       
+    </div>
+
+</div>

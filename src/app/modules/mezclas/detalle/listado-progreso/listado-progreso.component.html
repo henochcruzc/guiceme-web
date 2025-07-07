@@ -1,0 +1,85 @@
+<div class="datos-progreso " style="overflow-y: scroll;">
+    <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+        <div class="ico-dato-paciente"></div>&nbsp;&nbsp;
+        <div class="text-teatle">Progreso</div>
+        <div class="line-panel-header w-100 "></div>
+    </mat-panel-title>
+
+    <div class="d-flex flex-column">
+        <div *ngFor="let reg of progreso">
+            <div class="d-flex w-100 flex-row mb-3 s-progreso flex-wrap">
+
+
+                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                    <div class="progreso" ngClass="{{ findClassSeguimiento(reg.estatus.id,1) }}">
+                        <div class="radio " ngClass="{{ findClassSeguimiento(reg.estatus.id,1) }}">
+                            <div class="circle">
+                                <div class="ico-check-wh check" *ngIf="
+                                reg.estatus.id != 2 
+                                && reg.estatus.id != 6
+                                && reg.estatus.id != 12
+                                && reg.estatus.id != 15 
+                                && reg.estatus.id != 16 
+                                && reg.estatus.id != 10  &&reg.estatus.id != 14  "></div>
+                                <div class="ico-check-wh-wrong  check" *ngIf="
+                                reg.estatus.id == 2 
+                                || reg.estatus.id == 6 
+                                ||  reg.estatus.id == 15 
+                                ||  reg.estatus.id == 16 
+                                || reg.estatus.id == 12
+                                ||reg.estatus.id == 10   ||reg.estatus.id == 14"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <ng-template #tipContent>
+                    <div class="tooltip-contenido">
+                        <p><strong>Motivo:&nbsp;</strong>{{reg.validPrescrip.motivoRechazo.desMotivoRechazo}}
+                        </p>
+                        <p><strong>Observaciones:&nbsp;</strong>{{reg.validPrescrip.refobs}}</p>
+                    </div>
+
+                </ng-template>
+                <div class="col-md-3 d-flex flex-column ">
+                    <span class="etiqueta">{{reg.nombre}}</span>
+                    <span class="texto">{{reg.perfil?reg.perfil: '--'}}</span>
+
+                </div>
+                <div class="col-md-3 d-flex flex-column">
+                    <span class="etiqueta">Fecha y hora</span>
+                    <span class="texto">{{reg.fechaHora?reg.fechaHora:'--'}}</span>
+                </div>
+                <div class="col-md-3 d-flex flex-column">
+                    <span class="etiqueta">Estatus</span>
+                    <span class="estatus" *ngIf="reg.estatus.id != 2 && reg.estatus.id != 14"
+                        ngClass="{{ findClass(reg.estatus.id) }}">{{reg.estatus.descripcion?reg.estatus.descripcion:'--'}}
+
+
+
+
+                    </span>
+
+                    <span class="estatus" *ngIf="reg.estatus.id == 2 "
+                        ngClass="{{ findClass(reg.estatus.id) }}">{{reg.estatus.descripcion?reg.estatus.descripcion:'--'}}
+                        <div class="icon-danger" style="display: inline-block;" *ngIf="reg.estatus.id == 2 "
+                            [ngbTooltip]="tipContent" [closeDelay]="300000" tooltipClass="tool-rechazo"></div>
+
+
+
+                    </span>
+                    <span class="estatus" *ngIf=" reg.estatus.id == 14" ngClass="{{ findClass(reg.estatus.id) }}">No
+                        aprobada
+
+                        <!--  <div class="icon-danger-red" style="display: inline-block;" 
+                            [ngbTooltip]="tipContent" [closeDelay]="300000" tooltipClass="tool-rechazo">
+                        </div> -->
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

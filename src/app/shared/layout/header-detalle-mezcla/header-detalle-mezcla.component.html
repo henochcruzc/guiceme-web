@@ -1,0 +1,65 @@
+<div class="card-ceme header-data ">
+
+    <div class="card card-body header">
+        <div class="data-no-icon">
+
+            <div class="d-flex flex-row justify-content-between w-100 h-uno">
+                <div class=" atras d-flex align-items-center" *ngIf="headerData['navAtras']">
+                    <button class="btn" (click)="onAtras()">
+                        <img class="imagen" [src]="'../../../../assets/images/ico-arrow-left.svg'" />
+                    </button>
+                </div>
+                <div class="w-100">
+                    <div class="d-flex flex-row justify-content-between w-100 h-minimos">
+                        <ng-template ngFor let-itemUno [ngForOf]="headerData['uno']" let-i="index">
+                            <div class="seccion">
+                                <div class="titulo ">{{itemUno['titulo']}} 
+                                    <ng-template #tipContent>
+                                        <div class="tooltip-contenido">
+                                            <p><strong>Diagnóstico:&nbsp;</strong>{{itemUno['texto']}}</p>
+                                        </div>
+                                    </ng-template></div>
+                                <div class="texto"  [class.diagnostico] = "itemUno['isDiagnostico']" >                                     
+                                    <span *ngIf="itemUno['isDiagnostico']"  [class.ellipse] = "itemUno['isDiagnostico']">
+                                        <span #idDiagnostico >{{itemUno['texto']}}</span>
+                                    </span> 
+                                    <span *ngIf="!itemUno['isDiagnostico']">
+                                        {{itemUno['texto']}}
+                                    </span>                                       
+                                    <span><i class="icon-info w-tool-tip" style="display: inline-block;"
+                                        *ngIf="itemUno['isDiagnostico'] && heightD > 48" [ngbTooltip]="tipContent" [closeDelay]="300000"
+                                        tooltipClass="tool-diagnostico">
+                                        </i></span>       
+                                </div>
+                            </div>
+                        </ng-template>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="data-icon">
+            <ng-template ngFor let-itemDos [ngForOf]="headerData['dos']" let-i="index">
+                <div class="seccion" ngClass="{{itemDos['class']}}">
+
+                    <div class="icon " ngClass="{{itemDos['colorClass']}}">
+                        <img class="imagen" [src]="'../../../../assets/images/' + itemDos['iconName']" />
+                        <img class="separador" src="../../../../assets/images/separator.svg" alt="sp" />
+                    </div>
+
+                    <div class="data-space d-flex flex-row justify-content-around w-100 flex-wrap centrar-titulo">
+                        <ng-template ngFor let-itemTres [ngForOf]="itemDos['informacion']" let-i="index">
+                            <img *ngIf="itemTres['separador']" class="imagen" src="../../../../assets/images/sp-v.svg"
+                                alt="spv" />
+                            <div class="data">
+                                <div class="titulo ">{{itemTres['titulo']}}</div>
+                                <div class="texto">{{itemTres['texto']}}</div>
+                            </div>
+                        </ng-template>
+                    </div>
+
+
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

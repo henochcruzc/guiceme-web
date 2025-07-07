@@ -1,0 +1,26 @@
+{
+  "/msceme-auth": {
+    "target": "https://ceme-qa.apps.ocp.imss.gob.mx/msceme-auth",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msceme-auth": "" }
+  },
+  "/msceme-catalogos": {
+    "target": "https://ceme-qa.apps.ocp.imss.gob.mx/msceme-catalogos",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msceme-catalogos": "" }
+  },
+  "/msceme-mezclas": {
+    "target": "https://ceme-qa.apps.ocp.imss.gob.mx/msceme-mezclas",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msceme-mezclas": "" }
+  },
+  "/msceme-reportes": {
+    "target": "https://ceme-qa.apps.ocp.imss.gob.mx/msceme-reportes",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msceme-reportes": "" }
+  }
+}

@@ -1,0 +1,77 @@
+<div *ngIf="blnDatos" class="datos-diluyente ">
+
+
+    <div class="d-flex flex-row flex-wrap justify-content-between" *ngIf="paramsMezcla != undefined">
+        <div class="col-md-2 d-flex flex-column ">
+            <span class="etiqueta">Osmolaridad (mOsmol/ml)</span>
+            <span class="texto">{{paramsMezcla?.numOsmolaridad}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Nitrógeno (gr)</span>
+            <span class="texto">{{paramsMezcla?.numNitrogeno}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Proteínas (gr)</span>
+            <span class="texto">{{paramsMezcla?.numProteinas}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Kcal no proteicas (Kcal)</span>
+            <span class="texto">{{paramsMezcla?.numKcalNoProteicas}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Kcal totales (Kcal)</span>
+            <span class="texto">{{paramsMezcla?.numKcalTotales}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Volumen total (ml)</span>
+            <span class="texto">{{paramsMezcla?.numVolumenTotal}}</span>
+        </div>
+  
+    </div>
+
+    
+    
+    <div class="hr-azul" *ngIf="showDiluyente"></div>
+  <div class="d-flex flex-row flex-wrap justify-content-between" *ngIf="showDiluyente">
+        <div class="col-md-8 d-flex flex-column ">
+            <span class="etiqueta">Diluyente</span>
+            <span class="texto">{{paramsDiluyente?.desCortaDiluyente?paramsDiluyente.desCortaDiluyente:''}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Dosis</span>
+            <span class="texto">{{paramsDiluyente?.numDosisDiluyente}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Unidad de medida</span>
+            <span class="texto">{{paramsDiluyente?.refUnidadMinMedida}}</span>
+        </div>
+    </div>
+
+    <div class="hr-azul"></div>
+    <div class="d-flex flex-row flex-wrap justify-content-between">
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Fecha de aplicación</span>
+            <span class="texto">{{paramsDiluyente?.fechaAplicacion}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Cada</span>
+            <span class="texto">{{paramsDiluyente?.desAplicacionCada}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Número total de dosis</span>
+            <span class="texto">{{paramsDiluyente?.totalDosis}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Vía de administración</span>
+            <span class="texto">{{paramsDiluyente?.desViaAdministracion}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Tiempo de infusión</span>
+            <span class="texto">{{paramsDiluyente?.desTiempoInfusion}}</span>
+        </div>
+        <div class="col-md-2 d-flex flex-column">
+            <span class="etiqueta">Velocidad de infusión (ml/hrs)</span>
+            <span class="texto">{{paramsDiluyente?.refVelInfusion}}</span>
+        </div>
+    </div> 
+</div>

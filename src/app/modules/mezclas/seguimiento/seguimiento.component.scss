@@ -1,0 +1,58 @@
+
+.mat-column-folioSolicitud{
+  flex: 0 0 210px !important;
+  width: 210px !important;
+  justify-content: center;
+}
+
+.mat-column-folioSolicitud[role=cell],
+.mat-column-folioMezcla[role=cell],
+.mat-column-tipoMezcla[role=cell]{
+  justify-content: left;
+}
+
+.mat-column-folioSolicitud[role=columnheader],
+.mat-column-folioMezcla[role=columnheader],
+.mat-column-tipoMezcla[role=columnheader],
+.mat-column-ultimaFecha[role=columnheader],
+.mat-column-estatus[role=columnheader],
+.mat-column-seguimiento[role=columnheader]{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+.mat-column-folioMezcla{
+  flex: 0 0 240px !important;
+  width: 240px !important;
+  justify-content: center;
+}
+
+.mat-column-tipoMezcla{
+  flex: 0 0 250px !important;
+  width: 250px !important;
+  justify-content: center;
+
+}
+
+.mat-column-ultimaFecha{
+  flex: 0 0 150px !important;
+  width: 150px !important;
+  justify-content: center;
+}
+
+
+.mat-column-seguimiento{
+
+  min-width: 753px !important;
+  justify-content: center;
+  border: none;
+  
+}
+
+
+
+::ng-deep .fullTable {
+  width: 100%;
+  min-width: 100%;
+}

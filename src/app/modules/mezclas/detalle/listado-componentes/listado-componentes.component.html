@@ -1,0 +1,44 @@
+<div *ngIf="blnMostrar">
+    sdsd
+</div>
+
+
+<mat-tab-group>
+    <mat-tab class=" etiquetaTab" *ngFor="let tab of lsComponentes; index as i"
+        [label]="tab.nombre +  '  (' + tab.length + ')'">
+        <div style=" margin-top: 15px;">
+            <div class=" table-responsive  ">
+                <mat-table class=" fullTable" [dataSource]="tab.data" matSortActive="medicamento" matSortDirection="asc"
+                    matSort #tSort="matSort" style="overflow: hidden;">
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
+
+                    <ng-container matColumnDef="medicamento">
+                        <mat-header-cell class="col-md-8" *matHeaderCellDef mat-sort-header="medicamento"> Componentes
+                        </mat-header-cell>
+                        <mat-cell class="col-md-8" *matCellDef="let element">
+                            {{ element.medicamento }}
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dosis">
+                        <mat-header-cell class="col-md-1" *matHeaderCellDef mat-sort-header> Dosis </mat-header-cell>
+                        <mat-cell class="col-md-1" *matCellDef="let element">
+                            {{ element.dosis }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="unidadMedida">
+                        <mat-header-cell class="col-md-3" *matHeaderCellDef mat-sort-header> Unidad de medida
+                        </mat-header-cell>
+                        <mat-cell class="col-md-3" *matCellDef="let element">{{ element.unidadMedida }}</mat-cell>
+                    </ng-container>
+
+                </mat-table>
+
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

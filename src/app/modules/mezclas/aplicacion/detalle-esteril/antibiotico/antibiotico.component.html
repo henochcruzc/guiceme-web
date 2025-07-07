@@ -1,0 +1,132 @@
+<app-header-detalle-mezcla [headerData]="headerData"></app-header-detalle-mezcla>
+<div class="card-ceme">
+    <div class="card card-body">
+        <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+            <div class="icon-mas"></div>&nbsp;&nbsp;
+            <div class="text-teatle"> Detalle de la mezcla: <div class="estatus" *ngIf="detalle.registro != undefined">
+                    {{detalle.registro.desTipoMezcla}}</div>
+            </div>
+            <div class="line-panel-header w-100 "></div>
+        </mat-panel-title>
+
+        <div mat-dialog-content>
+
+
+            <div>
+                <app-listado-medicamentos [paramsData]="detalleAntibiotico" [paramsTitulo]="true"
+                    *ngIf="detalleAntibiotico != undefined">
+                </app-listado-medicamentos>
+            </div>
+            <div class="separadorSeccion"></div>
+            <div class="padding ">
+
+                <app-listado-diluyente [paramsDiluyente]="modelDiluyente" *ngIf="modelDiluyente != undefined">
+                </app-listado-diluyente>
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <div style="height: 15px;"></div>
+    <div class="card card-body">
+        <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+            <div class="icon-signos-blue"></div>&nbsp;&nbsp;
+            <div class="text-teatle2"> Signos vitales
+
+            </div>
+            <div class="line-panel-header w-100 "></div>
+        </mat-panel-title>
+
+        <div mat-dialog-content>
+
+            <form [formGroup]="form" class="mb-3" *ngIf="blnSVcamposEditar && blnEstatusPorAplicar">
+
+                <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+
+            </form>
+            
+            <div *ngIf="!blnSVcamposEditar && blnHaySV">
+
+                <app-campos-sv [model]="model" [blnCamposBloqueados]="blnSVcamposBloquear"></app-campos-sv>
+            </div>
+
+            <div>
+
+                <app-campos-sv [model]="model" [blnModoLectura]="blnSVLectura"></app-campos-sv>
+            </div>
+            
+            <div class="row pull-right" *ngIf="blnMostrarBtnSV">
+                <button *ngIf="!blnBtnEditar" type="button" class="btnBlanco" (click)="registrarSignos()"
+                    [disabled]="blnRegistrar">
+                    <div class="icon-notas" *ngIf="!blnRegistrar "></div>
+                    <div class="icon-notas-gray" *ngIf="blnRegistrar"></div>Registrar signos
+                </button>
+                <div *ngIf="!blnOcultarEditarSV">
+                    <button *ngIf="blnBtnEditar" type="button" class="btnBlanco" [disabled]="!blnBtnEditar"
+                        (click)="editarSignos()">
+                        <div class="icon-ediatr-azul " *ngIf="blnBtnEditar"></div>
+                        <div class="icon-notas-gray" *ngIf="!blnBtnEditar "></div>Editar signos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 15px;"></div>
+    <div class="card card-body">
+        <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+            <div class="icon-aplicacion-blue"></div>&nbsp;&nbsp;
+            <div class="text-teatle3"> Aplicación de mezcla
+            </div>
+            <div class="line-panel-header w-100 "></div>
+        </mat-panel-title>
+
+        <div mat-dialog-content>
+            <div>
+
+                <app-campos-aplicacion [blnCamposBloqueados]="blnAplicarcamposBloquear">
+                </app-campos-aplicacion>
+            </div>
+
+            <div *ngIf="blnHaySV">
+
+                <!--  campos lectura estatus aplicada -->
+                <app-campos-aplicacion [model]="model" [idEstatus]="estatusMezcla.id"
+                    [blnLectura]="blnAplicacionLectura">
+                </app-campos-aplicacion>
+            </div>
+            
+            <div *ngIf="blnAplicarcamposEditar ">
+
+                <form [formGroup]="formAplicacion" class="mb-3">
+                    <formly-form [model]="model" [fields]="fieldsAplicacion" [form]="formAplicacion">
+                    </formly-form>
+                </form>
+            </div>
+
+
+        </div>
+        
+        <div *ngIf="blnMostrarBtnIniciar ">
+            <div class="row pull-right">
+                <button type="button" class="btnBlanco" (click)="btnIiniciarAplicacion()" [disabled]="blnBtnAplicar">
+                    <div class="icon-clock-blue " *ngIf="!blnBtnAplicar"></div>
+                    <div class="icon-clock-gray" *ngIf="blnBtnAplicar"></div>Iniciar aplicación
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 15px;"></div>
+
+    <div *ngIf="blnMostrarBtnFinalizar">
+
+        <button type="button " class="boton-Finalizar btn btn-primary  pull-right" [disabled]="blnBloquearFinalizar"
+            (click)="btnFinalizarAplicacion()">Finalizar aplicación</button>
+        <button type="button" class="btn btn-danger  pull-right" (click)="btnNoAplicar()">No aplicar</button>
+    </div>
+
+
+</div>

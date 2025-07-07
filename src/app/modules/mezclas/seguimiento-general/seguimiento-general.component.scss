@@ -1,0 +1,178 @@
+
+
+.btnBlue:disabled{
+  background-color: #41ABCA;
+  cursor: no-drop;
+}
+
+
+.titulo {
+  color: var( #626262);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 10px;
+
+}
+
+.ancho{
+  width: 105px;
+}
+.subtitulo {
+  color: var( #404041);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+}
+
+strong {
+  color: var( #626262);
+font-feature-settings: 'clig' off, 'liga' off;
+font-family: Montserrat;
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: 120%; /* 14.4px */
+}
+.abr{
+  color: var(#626262);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+.resultados{
+  display: inline-block;
+  color: #626262;
+
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+select.form-control.option {
+  color: red;
+  font-size: 14px;
+}
+.text-teatle{
+  width: 367px;
+  padding-left: 1rem;;
+}
+
+
+ 
+  .mat-column-folioSolicitud[role=cell],
+  .mat-column-folioMezcla[role=cell],
+  .mat-column-tipoMezcla[role=cell],
+  .mat-column-estatus[role=cell],
+  .mat-column-ultimaFecha[role=cell]{
+    justify-content: left;
+  }
+  
+  .mat-column-folioMezcla{
+    flex: 0 0 210px !important;
+    width: 210px !important;
+    
+  }
+  
+  .mat-column-tipoMezcla{
+    flex: 0 0 250px !important;
+    width: 250px !important;
+    
+  
+  }
+  
+  .mat-column-ultimaFecha{
+    flex: 0 0 150px !important;
+    width: 150px !important;
+    
+  }
+
+  
+  .mat-column-seguimiento{
+  /*   flex: 0 0 785px !important; */
+    min-width: 785px !important;
+    justify-content: center;
+    border: none;
+    
+  }
+  
+  
+  .progress-header{
+    display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      min-height: 32px;
+    div{
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+  }
+  
+  .no-padding{
+    padding: 0;
+  }
+  .progress-header{
+    .uno{
+  background-color: #dbffc0!important;
+    }
+     .dos{
+  background-color: #8dd755;
+     }
+  }
+  
+  
+  .no-visible{
+    color: transparent;
+  }
+  
+  .no-border{
+    border:none!important;
+  }
+
+
+  
+.headercell{
+  color: var(--Txt_title, #404041);
+font-feature-settings: 'clig' off, 'liga' off;
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 120%; /* 16.8px */
+}
+
+.icon-drip{
+  background-image: url("../../../../assets/images/dato_paciente.svg");
+  background-repeat: no-repeat;
+  size: 35px;
+  width: 35px;
+  height: 35px;
+  margin-left: 8px;
+  margin-right: 5px;
+}
+
+.mat-mdc-table {
+  --mat-table-row-item-outline-width: 1px;
+  table-layout: auto;
+  white-space: normal;
+  background-color: var(--mat-table-background-color);
+  border: 1px solid #D8D8D8;
+}
+
+.ico-clipboard{
+  margin-right: 17px;
+}

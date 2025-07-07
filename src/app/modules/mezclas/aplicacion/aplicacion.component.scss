@@ -1,0 +1,370 @@
+.btn{
+    width: 105px;
+}
+
+.resultados{
+    display: inline-block;
+    color: #626262;
+  
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .bandera {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    min-height: 18px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 110px;
+    column-gap: 5px;
+    
+    padding-left: 10px;
+    padding-top: 2px;
+    border-radius: 5px;
+
+  }
+  
+  .bandera .circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    div {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+  }
+  
+  .circle.green {
+    border: solid 1px #00d494;
+    div {
+      background-color: #00d494;
+    }
+  }
+  
+  .bandera.green {
+    background-color: #d9f9ef;
+    color: #00d494;
+  }
+  
+  .circle.blue {
+    border: solid 1px #1dd3ec;
+    div {
+      background-color: #1dd3ec;
+    }
+  }
+  .bandera.blue {
+   background-color: white;
+    color: #1dd3ec;
+  }
+  
+  .circle.orange {
+    border: solid 1px #ff820e;
+    div {
+      background-color: #ff820e;
+    }
+  }
+  .bandera.orange {
+    background-color: #ffe6cf;
+    color: #ff820e;
+  }
+  
+  .circle.red {
+    border: solid 1px #ef7373;
+    div {
+      background-color: #ef7373;
+    }
+  }
+  .bandera.red {
+    background-color: #fce3e3;
+    color: #ef7373;
+  }
+  .bandera.purple {
+    background-color:  rgba(95, 140, 220, 0.20);  
+    color:  #5F8CDC;
+  }
+  
+  .mat-column-folioSolicitud{
+    flex: 0 0 210px !important;
+    width: 210px !important;
+    justify-content: center;
+  }
+  
+  .mat-column-folioSolicitud[role=cell],
+  .mat-column-folioMezcla[role=cell],
+  .mat-column-tipoMezcla[role=cell],
+  .mat-column-ultimaFecha[role=cell]{
+    justify-content: left;
+  }
+  
+  .mat-column-folioMezcla{
+    flex: 0 0 240px !important;
+    width: 240px !important;
+    justify-content: center;
+  }
+  
+  .mat-column-tipoMezcla{
+    flex: 0 0 250px !important;
+    width: 250px !important;
+    justify-content: center;
+  
+  }
+  
+  .mat-column-ultimaFecha{
+    flex: 0 0 150px !important;
+    width: 150px !important;
+    justify-content: center;
+  }
+  
+  .mat-column-estatus{
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    justify-content: center;
+    column-gap: 8px;
+    .icon {
+      width: 17px;
+      height: 17px;
+    }
+    .clock-orange {
+      background: url('../../../../assets/images/clock-orange.svg') no-repeat center / contain;
+    }
+    .clock-red {
+      background-color: red; 
+      background: url('../../../../assets/images/clock-red.svg') no-repeat center / contain;
+    }
+    
+  }
+  
+  .mat-column-seguimiento{
+    flex: 0 0 753px !important;
+    min-width: 753px !important;
+    justify-content: center;
+    border: none;
+    
+  }
+  
+  
+  .progress-header{
+    display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      min-height: 32px;
+    div{
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+  }
+  
+  .no-padding{
+    padding: 0;
+  }
+  .progress-header{
+    .uno{
+  background-color: #dbffc0!important;
+    }
+     .dos{
+  background-color: #8dd755;
+     }
+  }
+  
+  .progress-cell .cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 32px;
+  
+    .hr-r{
+      z-index: 20;
+      width: 51%;
+      position: absolute;
+      margin-right: 0px;
+      margin-left: 50%;
+    }
+    .hr-r.gray{
+      border: solid 1.5px #d8d8d8;
+    }
+    .hr-r.blue{
+      border: solid 1.5px #1dd3ec;
+    }
+    .hr-r.green{
+      border: solid 1.5px #00d494;
+    }
+    .hr-l{
+      z-index: 20;
+      width: 51%;
+      position: absolute;
+      margin-right: 50%;
+      margin-left: 0px;
+    }
+    .hr-l.gray{
+      border: solid 1.5px #d8d8d8;
+    }
+    .hr-l.blue{
+      border: solid 1.5px #1dd3ec;
+    }
+    .hr-l.green{
+      border: solid 1.5px #00d494;
+    }
+  }
+  
+  
+  .progress-cell .circle{
+    z-index: 50;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    div {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+  }
+  
+
+  
+  .no-visible{
+    color: transparent;
+  }
+  
+  .circle.gray {
+    border: solid 0px #d8d8d8;
+    div {
+      background-color: #d8d8d8;
+    }
+  }
+  
+  .no-border{
+    border:none!important;
+  }
+
+  .circle.green {
+    border: solid 1px #00d494;
+    div {
+      background-color: #00d494;
+    }
+  }
+  
+  .bandera.green {
+    background-color: #d9f9ef;
+    color: #00d494;
+  }
+  
+
+cle.blue {
+    border: solid 1px #1dd3ec;
+    div {
+      background-color: #1dd3ec;
+    }
+  }
+
+  
+  .circle.orange {
+    border: solid 1px #ff820e;
+    div {
+      background-color: #ff820e;
+    }
+  }
+  .bandera.orange {
+    background-color: #ffe6cf;
+    color: #ff820e;
+  }
+  
+  .circle.red {
+    border: solid 1px #ef7373;
+    div {
+      background-color: #ef7373;
+    }
+  }
+  .bandera.red {
+    background-color: #fce3e3;
+    color: #ef7373;
+  }
+
+  .icon-drip{
+    background-image: url("../../../../assets/images/Drip.svg");
+    background-repeat: no-repeat;
+    size: 35px;
+    width: 35px;
+    height: 35px;
+    margin-left: 8px;
+    margin-right: 5px;
+  }
+
+  .select{
+    cursor: pointer;
+  }
+
+  .text-teatle {
+    color: var(--Text-Titulos, #626262);
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    width: 375px;
+}
+.header-table{
+  background-color: #FEFCFE;
+}
+
+.subtitulo {
+
+  color: var(--Txt_title, #404041);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+}
+
+.icon-danger {
+
+   margin-left: -3px; 
+}
+
+
+.icon-estatusAplicada {
+  
+  margin-right: -9px;
+}
+
+
+.icon-estatusPorAplicar {
+  
+  margin-right: -5px;
+}
+
+
+.icon-estatusEnProceso  {
+  
+  margin-right: -6px;
+}
+
+
+.borde{
+  border-right: solid 1px #D8D8D8;
+}

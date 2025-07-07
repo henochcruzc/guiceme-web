@@ -1,0 +1,88 @@
+<!-- --------------------- -->
+
+<div class="card-ceme">
+    <div class="card card-body">
+        <div class="datos-progreso padding margin card mt-3">
+            <mat-panel-title class="panel-header d-flex flex-row align-items-center">
+                <div class="solicitud"></div>&nbsp;&nbsp;
+                <div class="text-teatle">Progreso</div>
+                <div class="line-panel-header w-100 "></div>
+            </mat-panel-title>
+    
+            <div class="d-flex flex-column">
+    
+    
+                
+                <ng-template ngFor let-itemProg [ngForOf]="listProg" let-i="index">
+                    <div class="d-flex w-100 flex-row mb-3 s-progreso flex-wrap">
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <div class="progreso" ngClass="{{ _coloresEstatus.findClassColorEstatus(itemProg.estatus.id) }}">
+                                <div class="radio " ngClass="{{ _coloresEstatus.findClassColorEstatus(itemProg.estatus.id) }}">
+                                    <div class="circle">
+                                        <div class="ico-check-wh check"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex flex-column ">
+                            <span class="etiqueta">{{itemProg.nombre}}</span>
+                            <span class="texto">{{itemProg.perfil}}</span>
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <span class="etiqueta">Fecha y hora</span>
+                            <span class="texto">{{itemProg.fechaHora}} hrs</span>
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <span class="etiqueta">Estatus</span>
+                            <span class="texto">{{itemProg.estatus.descripcion}}</span>
+                        </div>
+                    </div>
+                </ng-template>
+    
+                <ng-template ngFor let-itemProg [ngForOf]="[].constructor(getFaltantes())" let-i="index">
+                    <div class="d-flex w-100 flex-row mb-3 s-progreso flex-wrap">
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <div class="progreso" ngClass="gray">
+                                <div class="radio " ngClass="gray">
+                                    <div class="circle">
+                                        <div class="ico-check-wh check"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex flex-column ">
+                            <span class="etiqueta">---</span>
+                            <span class="texto">---  </span>
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <span class="etiqueta">Fecha y hora</span>
+                            <span class="texto">---</span>
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <span class="etiqueta">Estatus</span>
+                            <span class="texto">---</span>
+                        </div>
+                    </div>
+                </ng-template>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contenido">
+
+    <div class="botones w-100 d-flex justify-content: space-between;">
+        <div>
+            <span>
+            </span>
+        </div>
+        <div class="botones">
+            <div class="botones">
+                <button type="button" class="btn btn-primary"  style="margin-right: 20px; width: 140px;" (click)="dialogoResolucion()">
+                    Resolución </button>
+            </div>
+        </div>
+    </div>
+
+</div>

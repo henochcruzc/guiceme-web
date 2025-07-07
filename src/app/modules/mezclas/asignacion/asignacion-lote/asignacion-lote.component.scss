@@ -1,0 +1,50 @@
+.botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .titulo {
+    font-family: Montserrat;
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    align-items: center;
+}
+
+::ng-deep .form-label{
+  margin-top: 16px !important;
+  margin-bottom: 0px;
+  color: var(--gobierno-escala-de-grises-tono-1, #000);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+::ng-deep .btn-outline-basic:disabled, .btn-outline-basic.disabled {
+  color: rgb(131 200 220) !important;
+  background-image: none;
+  background-color: transparent;
+  border: none;
+}
+
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+  color: var(--bs-btn-disabled-color);
+  pointer-events: none !important;
+  background-color: var(--bs-btn-disabled-bg) !important;
+  border-color: transparent !important;
+  opacity: 0.50 !important;
+}
+
+.titulo1 {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  align-items: center;
+}

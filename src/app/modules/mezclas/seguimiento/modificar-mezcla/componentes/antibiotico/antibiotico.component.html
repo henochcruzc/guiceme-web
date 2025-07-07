@@ -1,0 +1,42 @@
+<div>
+
+  <form [formGroup]="formAntibiotico">
+    <formly-form [model]="modelAntibiotico" [fields]="fieldsAntibiotico" [form]="formAntibiotico"></formly-form>
+  </form>
+
+  <br>
+  <div class="txt-header3 d-flex">
+    <div *ngIf="this.tabsMes?.length != 0"><mat-checkbox (change)="seleccionarTodo($event.checked)"
+        [checked]="seleccionTodo">Seleccionar todo:</mat-checkbox></div>
+    <div style="padding-left: 20px;">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs w-100 gap-3">
+        <ng-template ngFor let-item [ngForOf]="tabsMes" let-index="index">
+          <li class="mes" [ngbNavItem]="index" [class.active]="index === 0">
+            <button ngbNavLink>
+              {{ tabsMes[index].nombreMes }}
+            </button>
+            <ng-template ngbNavContent>
+              <div class="d-flex gap-3 flex-wrap mt-3">
+                <ng-template ngFor let-item [ngForOf]="tabsMes[index].dias" let-index="index">
+                  <mat-checkbox class="check-dias" [checked]="item.check" [disabled]="item.disabled" [ngClass]="item.actual ? 'doble' : ''"
+                    (change)="actualizarDia($event.checked,item)">
+                    <div class="aro"></div>
+                    <span class="texto">{{item.nombreDia}}</span>
+                  </mat-checkbox>
+                </ng-template>
+              </div>
+            </ng-template>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+  <div [ngbNavOutlet]="nav" class="mt-2" *ngIf="this.tabsMes.length != 0"></div>
+  <!--dias-->
+  <formly-form [model]="modelViaAdmin" [fields]="fieldsViaAdmin" [form]="formViaAdmin"></formly-form>
+  <div class="line-panel-header w-100"></div>
+  <div class="d-flex justify-content-end w-100 align-items-center mt-3 mb-3 gap-3">
+    <button type="button" class="btn btn-primary" (click)="onActualizar()" [disabled]="validaFormularios()">Guardar
+      edición</button>
+  </div>
+</div>
