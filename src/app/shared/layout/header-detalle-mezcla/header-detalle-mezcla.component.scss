@@ -1,3 +1,50 @@
+@media screen and (max-width: 1169px) {
+  .header-data .data-no-icon,
+  .header-data .data-icon {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-data .data-no-icon .seccion,
+  .header-data .data-icon .seccion {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+
+  .header-data .data-icon .icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .header-data .data-icon .separador {
+    height: 60px;
+    right: -6px;
+  }
+
+  .header-data .data-icon .data-space {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-data .data-icon .data-space .data {
+    margin-top: 0.5rem;
+  }
+
+  .h-uno, .h-minimos {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .h-uno div.atras {
+    width: 100%;
+  }
+
+  .btn {
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+
 .card.card-body.header {
   padding: 0;
 }
