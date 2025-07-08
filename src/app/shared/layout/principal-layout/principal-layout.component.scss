@@ -25,7 +25,7 @@
   flex-shrink: 0;
 }
 
-.brand {
+.brand,.cerrar{
   font-family: Montserrat;
   font-size: 14px;
   font-style: normal;
@@ -159,7 +159,8 @@
   .sub-brand{
     font-size: 12px!important;
   }
-  .brand {
+  .cerrar {
    font-size: 12px!important;
+   min-width: fit-content!important;
   }
 }
