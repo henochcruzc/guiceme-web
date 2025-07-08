@@ -249,6 +249,12 @@ select {
   background-position-x: 97%;
   background-position-y: 4px;
   padding-right: 30px !important;
+  option{
+    max-width: 5px!important;
+    min-width: 5px!important;
+    width: 5px!important;
+    overflow: hidden;
+  }
 }
 
 
@@ -847,7 +853,7 @@ formly-field-textarea {
 .ico-analista-calidad {
   background-image: url('assets/images/buzonMezclaNoAprobadas.svg');
   background-repeat: no-repeat;
-  width: 45px;
+  width: 56px;
   height: 39px;
 }
 

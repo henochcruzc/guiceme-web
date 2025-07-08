@@ -97,10 +97,10 @@ export class AnalistaCalidadComponent extends GeneralComponent implements OnInit
           }
         },{
           fieldGroupClassName: 'row',
-          className: "col-md-3",
+          className: "col-lg-3 col-md-6",
           fieldGroup:
             [{
-              className: "col-lg-5 col-md-6",
+              className: "col-6",
               key: 'btn-limpiar',
               type: 'button',
               props: {
@@ -120,7 +120,7 @@ export class AnalistaCalidadComponent extends GeneralComponent implements OnInit
             },
             },
             {
-              className: "col-lg-5 col-md-6",
+              className: "col-6",
               key: 'btn-buscar',
               type: 'button',
               props: {

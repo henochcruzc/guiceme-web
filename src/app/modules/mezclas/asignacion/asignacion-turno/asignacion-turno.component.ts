@@ -61,7 +61,7 @@ export class AsignacionTurnoComponent extends GeneralComponent {
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-6 col-md-6",
+          className: " col-md-7 col-lg-6",
           key: 'tipoMezcla',
           type: 'select',
           props: {
@@ -75,10 +75,10 @@ export class AsignacionTurnoComponent extends GeneralComponent {
         },
         {
           fieldGroupClassName: 'row',
-          className: "col-md-3",
+          className: "col-md-5 col-lg-3",
           fieldGroup:
             [{
-              className: "col-lg-4 col-md-6",
+              className: "col-6",
               key: 'btn-limpiar',
               type: 'button',
               props: {
@@ -98,7 +98,7 @@ export class AsignacionTurnoComponent extends GeneralComponent {
               },
             },
             {
-              className: "col-lg-4 col-md-6",
+              className: "col-6",
               key: 'btn-buscar',
               type: 'button',
               props: {

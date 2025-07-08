@@ -58,7 +58,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-8 col-md-6",
+          className: "col-lg-8 col-md-12",
           key: 'loteDiluy',
           type: 'input',
           props: {
@@ -113,7 +113,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
         //   },
         // },
         {
-          className: "col-lg-8 col-md-6",
+          className: "col-lg-8 col-md-12",
           key: 'loteMed',
           type: 'select',
           props: {
@@ -314,7 +314,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
         //   },
         // },
         {
-          className: "col-lg-8 col-md-6",
+          className: "col-lg-8 col-md-12",
           key: 'caducidadDiluy',
           type: 'material-date',
           templateOptions: {
@@ -419,7 +419,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
         //   },
         // },
         {
-          className: "col-lg-8 col-md-6",
+          className: "col-lg-8 col-md-12",
           key: 'caducidadMed',
           type: 'select',
           props: {
@@ -473,7 +473,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
           },
         },
         {
-          className: 'col-lg-4 col-md-6',
+          className: 'col-lg-4 col-md-12',
           key: 'btnAdd',
           type: 'button',
           props: {

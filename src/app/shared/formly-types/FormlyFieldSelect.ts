@@ -18,7 +18,7 @@ export interface FormlySelectFieldConfig extends FormlyFieldConfig<SelectProps> 
   selector: 'formly-field-select',
   template: `
     <ng-template #fieldTypeTemplate>
-      <select
+      <select 
         *ngIf="props.multiple; else singleSelect"
         class="form-control"
         multiple
@@ -30,12 +30,12 @@ export interface FormlySelectFieldConfig extends FormlyFieldConfig<SelectProps> 
         <ng-container *ngIf="props.options | formlySelectOptions : field | async as opts">
           <ng-container *ngFor="let opt of opts">
             <option *ngIf="!opt.group; else optgroup" [ngValue]="opt.value" [disabled]="opt.disabled">
-              {{ opt.label }}
+              {{ strLargo(opt.label) }}
             </option>
             <ng-template #optgroup>
               <optgroup [label]="opt.label">
                 <option *ngFor="let child of opt.group" [ngValue]="child.value" [disabled]="child.disabled">
-                  {{ child.label }}
+                  {{ strLargo(opt.label) }}
                 </option>
               </optgroup>
             </ng-template>
@@ -52,18 +52,19 @@ export interface FormlySelectFieldConfig extends FormlyFieldConfig<SelectProps> 
           [compareWith]="props.compareWith"
           [class.is-invalid]="showError"
           [formlyAttributes]="field"
+          
         >
         
           <option *ngIf="props.placeholder" [ngValue]="undefined">{{ props.placeholder }}</option>
           <ng-container *ngIf="props.options | formlySelectOptions : field | async as opts">
             <ng-container *ngFor="let opt of opts">
-              <option *ngIf="!opt.group; else optgroup" [ngValue]="opt.value" [disabled]="opt.disabled">
-                {{ opt.label }}
+              <option class="" *ngIf="!opt.group; else optgroup" [ngValue]="opt.value" [disabled]="opt.disabled">
+                {{ strLargo(opt.label) }}
               </option>
               <ng-template #optgroup>
                 <optgroup [label]="opt.label">
-                  <option *ngFor="let child of opt.group" [ngValue]="child.value" [disabled]="child.disabled">
-                    {{ child.label }}
+                  <option style="width: fit-content;" *ngFor="let child of opt.group" [ngValue]="child.value" [disabled]="child.disabled">
+                    {{ strLargo(opt.label) }}
                   </option>
                 </optgroup>
               </ng-template>
@@ -75,7 +76,7 @@ export interface FormlySelectFieldConfig extends FormlyFieldConfig<SelectProps> 
       </ng-template>
     </ng-template>
     `,
- 
+
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormlyFieldSelect extends FieldType<FieldTypeConfig<SelectProps>> {
@@ -87,6 +88,37 @@ export class FormlyFieldSelect extends FieldType<FieldTypeConfig<SelectProps>> {
     },
   };
 
+
+  widthTotal = 0;
+
+  ngOnInit() {
+    setTimeout(() => {
+      let select = document.getElementById(this.id) as HTMLSelectElement;
+      // console.log('select %%%%%%%%%%%%%%%%%%%%%%', this.id);
+      // console.log('*******************', select.getBoundingClientRect());
+      this.widthTotal = select.getBoundingClientRect().width;
+    }, 200);
+  }
+
+  strLargo(opt: string) {
+
+    const canvas = document.createElement('canvas');
+    const contexto = canvas.getContext('2d');
+    contexto.font = '14px Arial';
+    const medida = contexto.measureText(opt);
+    // return medida.width;
+    // console.log(medida.width)
+
+    if (medida.width <= this.widthTotal) {
+      return opt;
+    }
+
+    var optionText = opt;
+    var newOption = optionText.substring(0, 20);
+    return newOption + '...';
+    // return opt;
+
+  }
   // workaround for https://github.com/angular/angular/issues/10010
   /**
    * TODO: Check if this is still needed
@@ -126,7 +158,7 @@ export class FormlyFieldSelect extends FieldType<FieldTypeConfig<SelectProps>> {
   }
 
 
-  getTooltipDescripcion(valor: number){
+  getTooltipDescripcion(valor: number) {
     return 'metodo';
   }
 }
