@@ -125,7 +125,7 @@ export class PrescripcionComponent extends GeneralComponent {
 
                 },
                 {
-                    className: 'col-lg-1 col-md-6',
+                    className: 'col-lg-2 col-md-2',
                     key:'limpiar',
                     type: 'button',
                     templateOptions: {
@@ -153,7 +153,7 @@ export class PrescripcionComponent extends GeneralComponent {
           
                   },
                 {
-                    className: 'col-lg-1 col-md-6',
+                    className: 'col-lg-2 col-md-2',
                     key:'buscar',
                     type: 'button',
                     templateOptions: {
