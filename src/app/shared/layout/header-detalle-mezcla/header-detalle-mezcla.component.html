@@ -3,14 +3,14 @@
     <div class="card card-body header">
         <div class="data-no-icon">
 
-            <div class="d-flex flex-row justify-content-between w-100 h-uno">
+            <div class="d-flex flex-row justify-content-between w-100 h-uno head-Align">
                 <div class=" atras d-flex align-items-center" *ngIf="headerData['navAtras']">
                     <button class="btn" (click)="onAtras()">
                         <img class="imagen" [src]="'../../../../assets/images/ico-arrow-left.svg'" />
                     </button>
                 </div>
                 <div class="w-100">
-                    <div class="d-flex flex-row justify-content-between w-100 h-minimos">
+                    <div class="d-flex flex-row justify-content-between w-100 h-minimos head-Align-content">
                         <ng-template ngFor let-itemUno [ngForOf]="headerData['uno']" let-i="index">
                             <div class="seccion">
                                 <div class="titulo ">{{itemUno['titulo']}} 

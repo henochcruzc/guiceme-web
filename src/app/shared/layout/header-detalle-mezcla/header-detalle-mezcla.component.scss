@@ -1,3 +1,17 @@
+@media screen and (max-width: 890px) {
+    .head-Align{
+        flex-direction: column !important;
+    }
+    .head-Align-content{
+      flex-direction: column-reverse !important;
+    }
+
+    .header-data .data-no-icon {
+        // background-image: url(decoracion.svg);
+        background-image: none !important;
+    }
+}
+
 @media screen and (max-width: 1169px) {
   .header-data .data-no-icon,
   .header-data .data-icon {

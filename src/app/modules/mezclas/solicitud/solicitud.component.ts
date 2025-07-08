@@ -93,7 +93,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
   loginUrl = this.sessionStorageService.getLoginUrl();
 
 
-  headerData = {   
+  headerData = {
     uno: [
       {
         class: 'col-lg-3',
@@ -201,12 +201,12 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
     if (this.DatosDuplicar) {
 
       this.DatosDuplicarTipoM = this._sesionStorage.getDataDuplicadoSolicitud();
-       
+
       //se deserializa objeto para su consumo
       this.listaMezclasAgregadas = CircularJSON.parse(this._sesionStorage.getDataMezclasAgregadas());
       //console.log('obeto deserializado 2 ',this.listaMezclasAgregadas);
 
-      this.modelTipoMezcla = {...this._sesionStorage.getModelTipoMezcla()}
+      this.modelTipoMezcla = { ...this._sesionStorage.getModelTipoMezcla() }
       //console.log('get datoss para duplicar XD --> ', this.DatosDuplicar);
 
       this.llenaModelosDuplicar(this.DatosDuplicar);
@@ -215,7 +215,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
         this.items = this.listaMezclasAgregadas;
       }
 
-    }else{
+    } else {
       this._sesionStorage.setDataMezclasAgregadas(null);
       this.items = [];
     }
@@ -290,10 +290,10 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
                       }
 
                       if (this.loginUrl?.ORIGEN == 'ECE') {
-                          const indiceAEliminar = data.findIndex(objeto => objeto.id === 2);
-                          if (indiceAEliminar !== -1) {
-                            data.splice(indiceAEliminar, 1);
-                          }
+                        const indiceAEliminar = data.findIndex(objeto => objeto.id === 2);
+                        if (indiceAEliminar !== -1) {
+                          data.splice(indiceAEliminar, 1);
+                        }
                       }
 
                       field.props.options = data;
@@ -352,7 +352,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
                   this.destipoMezcla = '';
                 } else if (this.tipoMezcla != undefined) {
                   if (value === this.tipoMezcla) {
-                   // console.log('no limpiar ')
+                    // console.log('no limpiar ')
                   } else {
                     //console.log('limpiar ');
                     if (this.tipoMezcla === 3) {
@@ -432,9 +432,9 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
           },
           hooks: {
             afterViewInit: async (field) => {
-                const piso = this.loginUrl?.piso;
-                //console.log(piso)
-                field.form.get('piso').setValue(piso);
+              const piso = this.loginUrl?.piso;
+              //console.log(piso)
+              field.form.get('piso').setValue(piso);
             },
           },
         },
@@ -470,8 +470,8 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
             placeholder: '000.0',
             required: true,
             maxLength: 5,
-            numEnteros:3,
-            numDecimales:1, 
+            numEnteros: 3,
+            numDecimales: 1,
           },
           hooks: {
 
@@ -486,7 +486,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
                       if (tallaValue != null && !isNaN(tallaValue)) {
                         let tallaNumber = parseFloat(tallaValue);
                         let refPesoNumber = parseFloat(x);
-                        this.calculoIMC = refPesoNumber/(tallaNumber * tallaNumber);
+                        this.calculoIMC = refPesoNumber / (tallaNumber * tallaNumber);
                         field.form.get('refSuperfCorporal').setValue(this.calculoIMC.toFixed(2));
                       }
                     }
@@ -506,8 +506,8 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
             placeholder: '0.00',
             required: true,
             maxLength: 4,
-            numEnteros:1,
-            numDecimales:2, 
+            numEnteros: 1,
+            numDecimales: 2,
           },
           hooks: {
             onInit: async (field) => {
@@ -521,11 +521,12 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
                       if (refPeso != null && !isNaN(refPesoValue)) {
                         let tallaNumber = parseFloat(x);
                         let refPesoNumber = parseFloat(refPesoValue);
-                        this.calculoIMC = refPesoNumber/(tallaNumber * tallaNumber);
+                        this.calculoIMC = refPesoNumber / (tallaNumber * tallaNumber);
                         field.form.get('refSuperfCorporal').setValue(this.calculoIMC.toFixed(2));
                       }
                     }
-                  }})
+                  }
+                })
               }
             }
           },
@@ -543,7 +544,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
             disabled: true
           },
           hooks: {
-            
+
           },
         }
 
@@ -632,8 +633,8 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
             placeholder: 'Ingresar la dosis',
             //appInputMaskType: 'integer',
             maxLength: 11,//2
-            numEnteros:8,
-            numDecimales:2,
+            numEnteros: 8,
+            numDecimales: 2,
             required: true,
           },
         },
@@ -741,8 +742,8 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
             placeholder: 'Ingresa la dosis',
             required: true,
             maxLength: 11,//2
-            numEnteros:8,
-            numDecimales:2,
+            numEnteros: 8,
+            numDecimales: 2,
           },
         },
         {
@@ -947,7 +948,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
           },
         },
         {
-          className: "col-md-2",
+          className: "col-lg-4 col-md-2",
           key: 'unidadTiempo',
           type: 'select',
           props: {
@@ -1142,8 +1143,8 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
             label: 'Volumen',
             placeholder: 'Ingresa el volumen',
             maxLength: 11,//2
-            numEnteros:8,
-            numDecimales:2,
+            numEnteros: 8,
+            numDecimales: 2,
             required: true,
           },
         },
@@ -1861,12 +1862,12 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
 
     this._sesionStorage.setDuplicadoSolicitudData(null);
     this._sesionStorage.setDataDuplicadoSolicitud(null);
-    
+
     //let serializedItems = flatted.stringify(this.items);
     let serializedObj = CircularJSON.stringify(this.items);
 
     //console.log('obteto serializado' , serializedObj)
-    
+
     this._sesionStorage.setDataMezclasAgregadas(serializedObj);
 
     //let deserializedObject = flatted.parse(serializedItems);
@@ -1981,7 +1982,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
       if (this.modelTipoMezcla.tipoMezcla == 2) {
         //console.log('componentes ---> ' , this.items[i].value.componentes)
         this.items[i].value.componentes.forEach(element => {
-          if(element.data.data){
+          if (element.data.data) {
             element.data.data.forEach(componente => {
               //console.log('componente tabs ->', componente);
               let componentes = {
@@ -1990,7 +1991,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
               }
               this.lstMedicamentos.push(componentes)
             });
-          }else{
+          } else {
             //console.log(element.data.filteredData)
             element.data.filteredData.forEach(componente => {
               //console.log('componente tabs ->', componente);
@@ -2012,9 +2013,9 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
         this.lstMedicamentos.push(componentes)
       }
 
-      let lstIdDiluyenteAux = undefined ;      
-      
-      if(this.modelTipoMezcla.tipoMezcla == this.TipoMezcla.ANTIBIOTICO){
+      let lstIdDiluyenteAux = undefined;
+
+      if (this.modelTipoMezcla.tipoMezcla == this.TipoMezcla.ANTIBIOTICO) {
         lstIdDiluyenteAux = [
           {
             "idDiluyente": this.items[i].value.diluyente.diluyente,
@@ -2022,7 +2023,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
           }
         ]
       }
-     
+
 
       let modelMezclasOps = {
         "lstMedicamentos": this.lstMedicamentos,
@@ -2355,7 +2356,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
   }
 
   obtenerFechaDeNacimiento(curp: string): Date | null {
-       
+
 
     // Extraer los primeros 10 caracteres que representan la fecha de nacimiento
     const fechaNacimientoStr = curp.substring(4, 10);
@@ -2444,7 +2445,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
 
     if (this.tipoMezcla === 2) {
       this.cargaNpt()
-    }else{
+    } else {
       this.cargaAntibiotico()
     }
 
@@ -2452,80 +2453,154 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
   cargaAntibiotico() {
     this._seguimientoService.getDetalleAntibiotico(this.DatosDuplicar.idMezclaAplicDiaDosis).then(
       resp => {
-          this.model = { ...resp.detalleMezcla };
-          //console.log('carga desde historico --->>> ',resp)
+        this.model = { ...resp.detalleMezcla };
+        //console.log('carga desde historico --->>> ',resp)
 
-          this.model = {...this.model,
-            medicamento: resp.medicamentos[0].idMedicamento,
-            dosis: resp.medicamentos[0].numDosisMedicamento,
-            unidadMedida: resp.medicamentos[0].refUnidadMinMedida,
-          }
+        this.model = {
+          ...this.model,
+          medicamento: resp.medicamentos[0].idMedicamento,
+          dosis: resp.medicamentos[0].numDosisMedicamento,
+          unidadMedida: resp.medicamentos[0].refUnidadMinMedida,
+        }
 
-          this.modelAbajoAnti= {...this.modelAbajoAnti,
-            diluyente: resp.diluyentes[0].idDiluyente,
-            dosis: Number(resp.diluyentes[0].numDosisDiluyente),
-            unidadMedidaDil: resp.diluyentes[0].refUnidadMinMedida,
-          }
+        this.modelAbajoAnti = {
+          ...this.modelAbajoAnti,
+          diluyente: resp.diluyentes[0].idDiluyente,
+          dosis: Number(resp.diluyentes[0].numDosisDiluyente),
+          unidadMedidaDil: resp.diluyentes[0].refUnidadMinMedida,
+        }
 
-          this.modelViaAdmin = {...this.modelViaAdmin,
-            viaAdmon: resp.diluyentes[0].idViaAdministracion,
-            unidadTiempo: resp.diluyentes[0].idTiempoInfusion,
-            velocidadInfusion: resp.diluyentes[0].refVelInfusion,
-          }
+        this.modelViaAdmin = {
+          ...this.modelViaAdmin,
+          viaAdmon: resp.diluyentes[0].idViaAdministracion,
+          unidadTiempo: resp.diluyentes[0].idTiempoInfusion,
+          velocidadInfusion: resp.diluyentes[0].refVelInfusion,
+        }
       }
-  );
+    );
   }
   cargaNpt() {
 
     this.catalogService.getTipoComponente()
-        .then(
-          (data: any) => {
-            if (data) {
-              this.lsComponentes = data;
-              const compareFn = (a, b) => (a.id < b.id ? -1 : 0);
-              let sortArray = data.sort(compareFn);
-              for (let index = 0; index < sortArray.length; index++) {
-                const element = sortArray[index];
-                let dataSource = new MatTableDataSource<any>([]);
-                let compData = {
-                    nombre: sortArray[index].desTipoComponente,
-                    counter: 0,
-                    id: sortArray[index].id,
-                    data: dataSource,
-                    active: false,
-                    displayCols: this.displayedColumns,
-                    original: null
-                }
-                this.tabsNTP.push(compData)
+      .then(
+        (data: any) => {
+          if (data) {
+            this.lsComponentes = data;
+            const compareFn = (a, b) => (a.id < b.id ? -1 : 0);
+            let sortArray = data.sort(compareFn);
+            for (let index = 0; index < sortArray.length; index++) {
+              const element = sortArray[index];
+              let dataSource = new MatTableDataSource<any>([]);
+              let compData = {
+                nombre: sortArray[index].desTipoComponente,
+                counter: 0,
+                id: sortArray[index].id,
+                data: dataSource,
+                active: false,
+                displayCols: this.displayedColumns,
+                original: null
+              }
+              this.tabsNTP.push(compData)
             }
-              
-            } 
-         },
-          
-        );
+
+          }
+        },
+
+      );
 
 
-   /* this._seguimientoService.getDetalleNpt(this.DatosDuplicar.idMezclaAplicDiaDosis).then(
+    /* this._seguimientoService.getDetalleNpt(this.DatosDuplicar.idMezclaAplicDiaDosis).then(
+       resp => {
+ 
+         if (resp) {
+ 
+           this.tabsNTP = [];
+           for (let index = 0; index < resp.componentes.length; index++) {
+             const element = resp.componentes[index];
+             let data = JSON.parse(JSON.stringify(element.data));
+             let aminoAcidosDataSource = new MatTableDataSource<any>(data);
+             let compData = {
+               nombre: element.nombre,
+               counter: element.data.length,
+               id: element.id,
+               data: aminoAcidosDataSource,
+               active: false,
+ 
+               displayCols: this.displayedColumns,
+             }
+ 
+             this.componenteTotal = element.data.length + this.componenteTotal;
+ 
+             if (this.componenteTotal >= 50) {
+               this.btnAddDisabled = true
+ 
+             } else {
+               this.btnAddDisabled = false
+             }
+             this.tabsNTP.push(compData)
+           }
+           console.log(resp)
+           this.modelViaAdminNtp = {
+             ...this.modelViaAdminNtp,
+             viaAdmon: resp.detalleDiluyente.idViaAdministracion,
+             unidadTiempo: resp.detalleDiluyente.idTiempoInfusion,
+             velocidadInfusion: resp.detalleDiluyente.refVelInfusion,
+           }
+ 
+           this.modelAbajoNtp = {
+             ...this.modelAbajoNtp,
+ 
+             diluyente: resp.detalleDiluyente.idDiluyente,
+             dosis: resp.detalleDiluyente.numDosisDiluyente,
+             unidadMedidaDil: resp.detalleDiluyente.refUnidadMinMedida,
+             osmolaridad: resp.detalleMezcla.numOsmolaridad,
+             nitrogeno: resp.detalleMezcla.numNitrogeno,
+             proteinas: resp.detalleMezcla.numProteinas,
+             kcnoproteicas: resp.detalleMezcla.numKcalNoProteicas,
+             kctotales: resp.detalleMezcla.numKcalTotales,
+             volumenTotal: resp.detalleMezcla.numVolumenTotal,
+           }
+         }
+       }
+     );*/
+
+    this._seguimientoService.getDetalleNpt(this.DatosDuplicar.idMezclaAplicDiaDosis).then(
       resp => {
 
         if (resp) {
+          //this.model = { ...resp.detalleMezcla };
+          //this.detalleDiluyente = {...resp.detalleDiluyente}
+          //this.detalleMezcla = resp.detalleMezcla;
 
-          this.tabsNTP = [];
-          for (let index = 0; index < resp.componentes.length; index++) {
-            const element = resp.componentes[index];
-            let data = JSON.parse(JSON.stringify(element.data));
-            let aminoAcidosDataSource = new MatTableDataSource<any>(data);
-            let compData = {
-              nombre: element.nombre,
-              counter: element.data.length,
-              id: element.id,
-              data: aminoAcidosDataSource,
-              active: false,
+          if (resp.componentes) {
+            const compareFn = (a, b) => (a.idComponente < b.idComponente ? -1 : 0);
+            let sortArray = resp.componentes.sort(compareFn);
+            //this.tabsNTP = [];
+            for (let index = 0; index < sortArray.length; index++) {
+              const element = sortArray[index];
+              let dataSource = new MatTableDataSource<any>(sortArray[index].data);
+              let compData = {
+                nombre: sortArray[index].nombre,
+                counter: sortArray[index].data.length,
+                id: sortArray[index].idComponente,
+                data: dataSource,
+                active: false,
+                displayCols: this.displayedColumns,
+                original: sortArray[index]
+              }
 
-              displayCols: this.displayedColumns,
+              this.tabsNTP = this.replaceOrAppend(this.tabsNTP, compData, (a, b) => a.id === b.id);
+
+              // this.tabsNTP.push(compData)
             }
 
-            this.componenteTotal = element.data.length + this.componenteTotal;
+            // Utilizando map() y flat()
+            this.componenteExcluidos = this.tabsNTP.map(tabNTP =>
+              tabNTP.data.data.map(element => ({ medicamento: element.idMedicamento }))
+            ).flat();
+
+
+            this.componenteTotal = this.componenteExcluidos.length;
 
             if (this.componenteTotal >= 50) {
               this.btnAddDisabled = true
@@ -2533,9 +2608,8 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
             } else {
               this.btnAddDisabled = false
             }
-            this.tabsNTP.push(compData)
           }
-          console.log(resp)
+
           this.modelViaAdminNtp = {
             ...this.modelViaAdminNtp,
             viaAdmon: resp.detalleDiluyente.idViaAdministracion,
@@ -2546,9 +2620,9 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
           this.modelAbajoNtp = {
             ...this.modelAbajoNtp,
 
-            diluyente: resp.detalleDiluyente.idDiluyente,
-            dosis: resp.detalleDiluyente.numDosisDiluyente,
-            unidadMedidaDil: resp.detalleDiluyente.refUnidadMinMedida,
+            // diluyente: resp.detalleDiluyente.idDiluyente,
+            // dosis: resp.detalleDiluyente.numDosisDiluyente,
+            // unidadMedidaDil: resp.detalleDiluyente.refUnidadMinMedida,
             osmolaridad: resp.detalleMezcla.numOsmolaridad,
             nitrogeno: resp.detalleMezcla.numNitrogeno,
             proteinas: resp.detalleMezcla.numProteinas,
@@ -2558,77 +2632,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
           }
         }
       }
-    );*/
-
-    this._seguimientoService.getDetalleNpt(this.DatosDuplicar.idMezclaAplicDiaDosis).then(
-      resp => {
-         
-          if (resp) {
-              //this.model = { ...resp.detalleMezcla };
-              //this.detalleDiluyente = {...resp.detalleDiluyente}
-              //this.detalleMezcla = resp.detalleMezcla;
-              
-              if (resp.componentes) {
-                  const compareFn = (a, b) => (a.idComponente < b.idComponente ? -1 : 0);
-                  let sortArray = resp.componentes.sort(compareFn);
-                  //this.tabsNTP = [];
-                  for (let index = 0; index < sortArray.length; index++) {
-                      const element = sortArray[index];
-                      let dataSource = new MatTableDataSource<any>(sortArray[index].data);
-                      let compData = {
-                          nombre: sortArray[index].nombre,
-                          counter: sortArray[index].data.length,
-                          id: sortArray[index].idComponente,
-                          data: dataSource,
-                          active: false,
-                          displayCols: this.displayedColumns,
-                          original: sortArray[index]
-                      }
-
-                      this.tabsNTP = this.replaceOrAppend(this.tabsNTP , compData, (a, b) => a.id === b.id);
-
-                      // this.tabsNTP.push(compData)
-                  }
-
-                  // Utilizando map() y flat()
-                  this.componenteExcluidos = this.tabsNTP.map(tabNTP =>
-                    tabNTP.data.data.map(element => ({ medicamento: element.idMedicamento }))
-                  ).flat();
-
-                  
-                  this.componenteTotal = this.componenteExcluidos.length;
-
-                  if (this.componenteTotal >= 50) {
-                    this.btnAddDisabled = true
-
-                  } else {
-                    this.btnAddDisabled = false
-                  }
-              }
-
-              this.modelViaAdminNtp = {
-                ...this.modelViaAdminNtp,
-                viaAdmon: resp.detalleDiluyente.idViaAdministracion,
-                unidadTiempo: resp.detalleDiluyente.idTiempoInfusion,
-                velocidadInfusion: resp.detalleDiluyente.refVelInfusion,
-              }
-    
-              this.modelAbajoNtp = {
-                ...this.modelAbajoNtp,
-    
-                // diluyente: resp.detalleDiluyente.idDiluyente,
-                // dosis: resp.detalleDiluyente.numDosisDiluyente,
-                // unidadMedidaDil: resp.detalleDiluyente.refUnidadMinMedida,
-                osmolaridad: resp.detalleMezcla.numOsmolaridad,
-                nitrogeno: resp.detalleMezcla.numNitrogeno,
-                proteinas: resp.detalleMezcla.numProteinas,
-                kcnoproteicas: resp.detalleMezcla.numKcalNoProteicas,
-                kctotales: resp.detalleMezcla.numKcalTotales,
-                volumenTotal: resp.detalleMezcla.numVolumenTotal,
-              }
-          }
-      }
-  );
+    );
   }
 
   replaceOrAppend(arr, val, compFn) {
@@ -2639,7 +2643,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
     return res;
   };
 
-  calculaEdad(fechaNacimientoUrl){
+  calculaEdad(fechaNacimientoUrl) {
     const moment = require('moment');
 
     // Fecha de nacimiento
