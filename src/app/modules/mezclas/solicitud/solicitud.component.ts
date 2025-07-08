@@ -37,9 +37,7 @@ const DATA_MEZCLAS_AGREGADAS = 'mezclas-agregadas'
   imports: [
     CommonModule,
     SharedModule,
-    TituloComponent,
     DetalleMezclaComponent,
-    DatosPacienteComponent,
     NoMedicamentoComponent,
     DetalleMezclaNTPComponent,
     HeaderDetalleMezclaComponent
@@ -948,7 +946,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
           },
         },
         {
-          className: "col-lg-4 col-md-2",
+          className: "col-md-6 col-lg-2",
           key: 'unidadTiempo',
           type: 'select',
           props: {
@@ -1561,7 +1559,7 @@ export class SolicitudComponent extends GeneralComponent implements OnInit {
           },
         },
         {
-          className: "col-md-2",
+          className: "col-md-6 col-lg-2",
           key: 'unidadTiempo',
           type: 'select',
           props: {

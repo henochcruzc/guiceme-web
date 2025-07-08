@@ -19,9 +19,7 @@ import { Subject } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
-    SharedModule,
-    TituloComponent
-
+    SharedModule
   ],
   styleUrls: ['./detalle-mezcla-ntp.component.scss']
 })
@@ -48,12 +46,12 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
   @Input() mezclaDetails: any;
   @Input() mezclaName: any;
   @Input() componenteTotal2: number;
-  @Input() componenteExcluidos2: any= [];
+  @Input() componenteExcluidos2: any = [];
   @Output() onSelected = new EventEmitter<any>();
   @Output() onDisabledSend = new EventEmitter<any>();
 
- componenteTotal: number = 0;
- componenteExcluidos: any= [];
+  componenteTotal: number = 0;
+  componenteExcluidos: any = [];
 
   dosisTotales: number = 0;
   cadaLst: any;
@@ -87,7 +85,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
   btnDisabled: boolean = false;
   componenteTotalBackup: number;
   fechObs: any;
-    onNavChangeNTP(changeEvent: NgbNavChangeEvent) {
+  onNavChangeNTP(changeEvent: NgbNavChangeEvent) {
 
   }
 
@@ -146,16 +144,16 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
     this.modelNTP.dosis = this.mezclaDetails.dosis
     this.modelNTP.unidadMedidaNpt = this.mezclaDetails.medicamento.unidadMedida
     this.modelAbajoNtp.osmolaridad = this.mezclaDetails.diluyente.osmolaridad,
-    this.modelAbajoNtp.nitrogeno = this.mezclaDetails.diluyente.nitrogeno,
-    this.modelAbajoNtp.proteinas = this.mezclaDetails.diluyente.proteinas,
-    this.modelAbajoNtp.kcnoproteicas = this.mezclaDetails.diluyente.kcnoproteicas,
-    this.modelAbajoNtp.kctotales = this.mezclaDetails.diluyente.kctotales,
-    this.modelAbajoNtp.volumenTotal = this.mezclaDetails.diluyente.volumenTotal,
-    // this.modelAbajoNtp.diluyente = this.mezclaDetails.diluyente.diluyente;
-    // this.modelAbajoNtp.dosis = this.mezclaDetails.diluyente.dosis;
-    // this.modelAbajoNtp.unidadMedidaDil = this.mezclaDetails.diluyente.unidadMedida
+      this.modelAbajoNtp.nitrogeno = this.mezclaDetails.diluyente.nitrogeno,
+      this.modelAbajoNtp.proteinas = this.mezclaDetails.diluyente.proteinas,
+      this.modelAbajoNtp.kcnoproteicas = this.mezclaDetails.diluyente.kcnoproteicas,
+      this.modelAbajoNtp.kctotales = this.mezclaDetails.diluyente.kctotales,
+      this.modelAbajoNtp.volumenTotal = this.mezclaDetails.diluyente.volumenTotal,
+      // this.modelAbajoNtp.diluyente = this.mezclaDetails.diluyente.diluyente;
+      // this.modelAbajoNtp.dosis = this.mezclaDetails.diluyente.dosis;
+      // this.modelAbajoNtp.unidadMedidaDil = this.mezclaDetails.diluyente.unidadMedida
 
-    this.modelAbajoNtp.fecApl = this.mezclaDetails.fecApl;
+      this.modelAbajoNtp.fecApl = this.mezclaDetails.fecApl;
 
     this.modelAbajoNtp.cada = this.mezclaDetails.cada;
     this.modelAbajoNtp.numDosis = this.mezclaDetails.numDosis;
@@ -163,11 +161,11 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
     this.modelViaAdminNtp.tiempoInfusion = this.mezclaDetails.unidadTiempo;
     this.modelViaAdminNtp.velocidadInfusion = this.mezclaDetails.velocidadInfusion;
     this.modelViaAdminNtp.unidadTiempo = this.mezclaDetails.unidadTiempo,
-    this.componenteExcluidos = this.mezclaDetails.componenteExcluidos
+      this.componenteExcluidos = this.mezclaDetails.componenteExcluidos
     //this.componenteExcluidos.push(this.mezclaDetails.componenteExcluidos);
 
-      //this.tabs = this.mezclaDetails.mesesDosis;
-      this.tabs = JSON.parse(JSON.stringify(this.mezclaDetails.mesesDosis));
+    //this.tabs = this.mezclaDetails.mesesDosis;
+    this.tabs = JSON.parse(JSON.stringify(this.mezclaDetails.mesesDosis));
     //console.log("tabs recibidas", this.tabs);
     this.formAbajoNtp.disable();
     this.formNTP.disable();
@@ -325,7 +323,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
             label: 'Dosis',
             placeholder: 'Ingresa la dosis',
             appInputMaskType: 'integer',
-            maxLength:6,
+            maxLength: 6,
 
             required: true,
           },
@@ -352,7 +350,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
         },
         {
           className: 'col-lg-2 col-md-6',
-          key:'btnAdd',
+          key: 'btnAdd',
           type: 'button',
           props: {
             label: ' ',
@@ -369,14 +367,14 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
           },
           expressionProperties: {
             'props.disabled': (model: any) => {
-                if (this.btnAddDisabled == true ) {
-                    return true
-                }else {
-                  return false
-                }
-                
+              if (this.btnAddDisabled == true) {
+                return true
+              } else {
+                return false
+              }
+
             },
-         },
+          },
         },
 
       ]
@@ -607,8 +605,8 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
                     if (x != null && x != '') {
                       this.tabs = this.getTabsMesDias(x);
                     }
-                    }
-                  
+                  }
+
                 });
               }
             },
@@ -802,7 +800,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
           },
         },
         {
-          className: "col-md-2",
+          className: "col-md-6 col-lg-2",
           key: 'unidadTiempo',
           type: 'select',
           props: {
@@ -880,20 +878,20 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
 
     const dialogRef = this._dialog.open(
       DialogComponent,
-      this._dialogService.modalGenerico('Eliminar componente','¿Deseas eliminar este componente de la mezcla?',null,'Eliminar componente')
+      this._dialogService.modalGenerico('Eliminar componente', '¿Deseas eliminar este componente de la mezcla?', null, 'Eliminar componente')
     );
 
     dialogRef.afterClosed().subscribe(
       async data => {
         if (data == true) {
-          this.eliminarComponente(element,data, tabId)
+          this.eliminarComponente(element, data, tabId)
         }
       }
     );
 
   }
 
-  eliminarComponente(element, data, tabId){
+  eliminarComponente(element, data, tabId) {
     let tabElement = this.tabsNTP.find(e => e.id == tabId);
 
     const index = tabElement.data.data.findIndex((e) => e.idMedicamento === element.idMedicamento);
@@ -909,7 +907,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
     if (this.componenteTotal >= 50) {
       this.btnAddDisabled = true
 
-    }else{
+    } else {
       this.btnAddDisabled = false
     }
 
@@ -946,7 +944,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
       if (this.componenteTotal >= 50) {
         this.btnAddDisabled = true
 
-      }else{
+      } else {
         this.btnAddDisabled = false
       }
 
@@ -973,7 +971,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
 
   actualizarSeleccionTodo(): void {
     let todosSeleccionados = true;
-  
+
     this.tabs.forEach(tab => {
       tab.dias.forEach(dia => {
         if (!dia.check) {
@@ -981,12 +979,12 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
           return; // Salir del bucle interno tan pronto como se encuentre un día no seleccionado
         }
       });
-  
+
       if (!todosSeleccionados) {
         return; // Salir del bucle externo tan pronto como se encuentre un día no seleccionado
       }
     });
-  
+
     this.seleccionTodo = todosSeleccionados;
   }
 
@@ -1028,7 +1026,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
     this.formAbajoNtp.controls['kcnoproteicas'].enable();
     this.formAbajoNtp.controls['kctotales'].enable();
     this.formAbajoNtp.controls['volumenTotal'].enable();
-    
+
     // this.formAbajoNtp.controls['dosis'].enable();
     this.formAbajoNtp.controls['fecApl'].enable();
     // this.formAbajoNtp.controls['diluyente'].enable();
@@ -1037,11 +1035,11 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
     this.formViaAdminNtp.controls['velocidadInfusion'].enable();
     this.isDisabled = !this.isDisabled;
 
-    
+
     if (this.componenteTotal >= 50) {
       this.btnAddDisabled = true
 
-    }else{
+    } else {
       this.btnAddDisabled = false
     }
 
@@ -1093,11 +1091,11 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
     // this.diluyenteBackup = this.modelAbajoNtp.diluyente;
 
     this.osmolaridadBackup = this.mezclaDetails.diluyente.osmolaridad,
-    this.nitrogenoBackup = this.mezclaDetails.diluyente.nitrogeno,
-    this.proteinasBackup = this.mezclaDetails.diluyente.proteinas,
-    this.proteinasBackup = this.mezclaDetails.diluyente.kcnoproteicas,
-    this.kctotalesBackup = this.mezclaDetails.diluyente.kctotales,
-    this.volumenTotalBackup = this.mezclaDetails.diluyente.volumenTotal
+      this.nitrogenoBackup = this.mezclaDetails.diluyente.nitrogeno,
+      this.proteinasBackup = this.mezclaDetails.diluyente.proteinas,
+      this.proteinasBackup = this.mezclaDetails.diluyente.kcnoproteicas,
+      this.kctotalesBackup = this.mezclaDetails.diluyente.kctotales,
+      this.volumenTotalBackup = this.mezclaDetails.diluyente.volumenTotal
     this.componenteTotalBackup = this.componenteTotal
 
   }
@@ -1121,7 +1119,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
       this.tabsNTP.push(compData)
 
     }
-    
+
     this.tabs = JSON.parse(JSON.stringify(this.tabsBackup));
 
     //console.log("restore info de meses", this.tabs);
@@ -1149,7 +1147,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
       diluyente: this.diluyenteBackup,
     }
 
-    this.componenteTotal =  this.componenteTotalBackup;
+    this.componenteTotal = this.componenteTotalBackup;
 
     //this.modelAbajoAnti.fecApl = this.mezclaDetails.fecApl;
     let fecha = {
@@ -1214,12 +1212,12 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
   guardarEdicion() {
 
     if (this.formAbajoNtp.valid && this.formTipoMezcla.valid && this.formViaAdminNtp.valid && this.componenteTotal > 0) {
-      let mensaje = "¿Deseas guardar los cambios realizados en la <b>"+this.mezclaName+"</b> ?"
+      let mensaje = "¿Deseas guardar los cambios realizados en la <b>" + this.mezclaName + "</b> ?"
       const dialogRef = this._dialog.open(
         DialogComponent,
         this._dialogService.modalGenerico("Guardar cambios", mensaje, null, "Guardar cambios")
       );
-  
+
       dialogRef.afterClosed().subscribe(
         async data => {
           if (data == true) {
@@ -1236,12 +1234,12 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
               // dosis: this.modelAbajoNtp.dosis,
               // unidadMedida: this.modelAbajoNtp.unidadMedidaDil
             }
-        
+
             mezclaDetailUpdate = {
               id: this.mezclaDetails.id,
               operacion: 'update',
               tipoMezcla: this.mezclaDetails.tipoMezcla,
-        
+
               componentes: this.tabsNTP,// se quito la tabla ahora es solo uno
               diluyente: nvoDiluyente,
               fecApl: this.modelAbajoNtp.fecApl,
@@ -1253,27 +1251,27 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
               unidadTiempo: this.modelViaAdminNtp.unidadTiempo,
               mesesDosis: this.tabs
             }
-        
-        
+
+
             this.onSelected.emit(mezclaDetailUpdate);
             this.canceEdicion = false
             this.editar = true
             this.saveEdicion = false
             this.disabledEliminar = true
             this.disabled = true
-        
+
             this.formNTP.controls['dosis'].disable();
             this.formNTP.controls['componente'].disable();
             this.formNTP.controls['tipoComponente'].disable();
             this.formAbajoNtp.controls['cada'].disable();
-        
+
             this.formAbajoNtp.controls['osmolaridad'].disable();
             this.formAbajoNtp.controls['nitrogeno'].disable();
             this.formAbajoNtp.controls['proteinas'].disable();
             this.formAbajoNtp.controls['kcnoproteicas'].disable();
             this.formAbajoNtp.controls['kctotales'].disable();
             this.formAbajoNtp.controls['volumenTotal'].disable();
-        
+
             // this.formAbajoNtp.controls['diluyente'].disable();
             // this.formAbajoNtp.controls['dosis'].disable();
             this.formAbajoNtp.controls['fecApl'].disable();
@@ -1281,12 +1279,12 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
             this.formViaAdminNtp.controls['viaAdmon'].disable();
             this.formViaAdminNtp.controls['velocidadInfusion'].disable();
             this.isDisabled = !this.isDisabled;
-          } 
+          }
         }
       );
     }
   }
-  
+
   eliminarMezcla() {
 
     const dialogRef = this._dialog.open(
@@ -1302,7 +1300,7 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
             operacion: 'delete',
           }
           this.onSelected.emit(mezclaDetailUpdated);
-        } 
+        }
       }
     );
 
@@ -1398,11 +1396,11 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
 
     this.isDisabled = !this.isDisabled;
 
-    
+
     if (this.componenteTotal >= 50) {
       this.btnAddDisabled = true
 
-    }else{
+    } else {
       this.btnAddDisabled = false
     }
 
@@ -1415,13 +1413,13 @@ export class DetalleMezclaNTPComponent extends GeneralComponent implements OnIni
   }
 
   eliminarMedicamento(medicamento: any) {
-    let list ={
+    let list = {
       medicamento
-    }    
+    }
     this.componenteExcluidos.push(list);
 
-      this.lsMedicamentos = [];
-    
+    this.lsMedicamentos = [];
+
 
     const selectField = this.fieldsNTP.reduce((foundField, groupField) => {
       // Buscar dentro de cada grupo de campos

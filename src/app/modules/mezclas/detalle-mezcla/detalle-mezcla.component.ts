@@ -20,7 +20,6 @@ import { Subject } from 'rxjs';
   imports: [
     CommonModule,
     SharedModule,
-    TituloComponent
 
   ],
   styleUrls: ['./detalle-mezcla.component.scss']
@@ -143,7 +142,7 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
             placeholder: 'Ingresar dosis',
             appInputMaskType: 'integer',
             disable: true,
-            maxLength:6,
+            maxLength: 6,
             required: true,
           },
           expressionProperties: {
@@ -248,7 +247,7 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
           props: {
             label: 'Dosis',
             placeholder: 'Ingresa la dosis',
-            maxLength:6,
+            maxLength: 6,
             required: true
           },
           expressionProperties: {
@@ -425,7 +424,7 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
           props: {
             label: 'Numero total de dosis',
             placeholder: '-------------',
-           
+
             disabled: true
           },
           expressionProperties: {
@@ -537,7 +536,7 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
         //   },
         // },
         {
-          className: "col-md-2",
+          className: "col-md-6 col-lg-2",
           key: 'unidadTiempo',
           type: 'select',
           props: {
@@ -575,7 +574,7 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
           },
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-md-6 col-lg-2",
           key: 'velocidadInfusion',
           type: 'input',
           props: {
@@ -731,13 +730,13 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
         DialogComponent,
         this._dialogService.modalGenerico("Guardar cambios", mensaje, null, "Guardar cambios")
       );
-  
+
       dialogRef.afterClosed().subscribe(
         async data => {
           if (data == true) {
             this.onDisabledSend.emit(!this.saveEdicion);
             let mezclaDetailUpdate;
-  
+
             let nvoDiluyente = {
               diluyente: this.modelAbajoAnti.diluyente,
               dosis: this.modelAbajoAnti.dosis,
@@ -747,7 +746,7 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
               medicamento: this.model.medicamento,
               dosis: this.model.dosis,
             };
-  
+
             mezclaDetailUpdate = {
               id: this.mezclaDetails.id,
               operacion: 'update',
@@ -762,15 +761,15 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
               unidadTiempo: this.modelViaAdmin.unidadTiempo,
               mesesDosis: this.tabs
             }
-  
-  
+
+
             this.onSelected.emit(mezclaDetailUpdate);
             this.canceEdicion = false
             this.editar = true
             this.saveEdicion = false
             this.disabledEliminar = true
             this.disabled = true
-  
+
             this.form.controls['dosis'].disable();
             this.form.controls['medicamento'].disable();
             this.formAbajoAnti.controls['cada'].disable();
@@ -909,16 +908,16 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
 
     let modelFechas = {
 
-       startDate: null,
-       endDate: null
+      startDate: null,
+      endDate: null
 
-     }
+    }
 
-     this.model = {
-       ...this.model,
-       medicamento: this.medicamentoBackup,
-       dosis: this.dosisMedicamentoBackup
-     }
+    this.model = {
+      ...this.model,
+      medicamento: this.medicamentoBackup,
+      dosis: this.dosisMedicamentoBackup
+    }
 
     this.modelViaAdmin = {
       ...this.modelViaAdmin,
@@ -941,7 +940,7 @@ export class DetalleMezclaComponent extends GeneralComponent implements OnInit {
     this.fechObs.next(fecha)
 
     this.modelAbajoAnti.cada = this.cadaBackup,
-    this.modelAbajoAnti.numDosis = this.numTotalDosisBackup
+      this.modelAbajoAnti.numDosis = this.numTotalDosisBackup
 
     this.cd.detectChanges();
   }
