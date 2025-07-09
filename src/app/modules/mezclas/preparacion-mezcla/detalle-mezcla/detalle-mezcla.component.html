@@ -277,7 +277,7 @@
                         <ng-container matColumnDef="desCorta1">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element" class="d-flex flex-column flex-lg-row">
-                              <strong class="d-flex d-lg-none" >{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral:'?'Componentes:':'Medicamento:'}}&nbsp;</strong>   <strong>{{ desCorta(element) }}</strong> 
+                              <strong class="d-flex d-lg-none" >{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral:'?'Componentes:':'Medicamento:'}}&nbsp;</strong>   <strong class=" overflow-auto">{{ desCorta(element) }}</strong> 
                             </mat-cell>
                         </ng-container>
 
