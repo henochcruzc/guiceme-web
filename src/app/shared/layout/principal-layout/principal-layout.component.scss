@@ -164,3 +164,28 @@
    min-width: fit-content!important;
   }
 }
+
+@media (max-width: 650px) { 
+  .user {
+    font-size: 10px!important;
+  }
+   .rol {
+    font-size: 8px!important;
+  }
+  .um {
+    font-size: 9px!important;
+  }
+  .sub-brand{
+    font-size: 11px!important;
+  }
+  .cerrar {
+   font-size: 12px!important;
+   min-width: fit-content!important;
+  }
+}
+
+.rol-responsive{
+  display: flex; 
+  justify-content: flex-end; 
+  flex-wrap: wrap;
+}

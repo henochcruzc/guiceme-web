@@ -345,10 +345,10 @@
   }
 
 
-.botones-DM{
-    background: #3995B0 !important;
-    border-color: #3995B0 !important;
-}
+// .botones-DM{
+//     background: #3995B0 !important;
+//     border-color: #3995B0 !important;
+// }
 
 .padding-header {
     padding: 10px 20px 10px 20px;
@@ -364,3 +364,34 @@
     display: flex;
     align-items: center;
   }
+
+// .botones-DM {
+//   background: #3995B0 !important;
+//   border-color: #3995B0 !important;
+//   min-width: 85px; /* en lugar de width fija */
+//   padding: 5px 10px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   white-space: nowrap;
+// }
+
+.datos-header {
+  display: flex;
+  flex-wrap: wrap; /* Para que botones bajen en pantallas pequeñas */
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .botones-DM {
+    flex: 1 1 auto;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .datos-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
