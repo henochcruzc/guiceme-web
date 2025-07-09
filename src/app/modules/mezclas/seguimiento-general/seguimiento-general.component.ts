@@ -190,7 +190,7 @@ export class SeguimientoGeneralComponent extends GeneralComponent {
           },
         },
         {
-          className: "col-lg-1 col-md-6",
+          className: "col-lg-2 col-md-3",
           key: 'btn-limpiar',
           type: 'button',
           props: {
