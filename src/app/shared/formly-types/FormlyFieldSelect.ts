@@ -108,14 +108,16 @@ export class FormlyFieldSelect extends FieldType<FieldTypeConfig<SelectProps>> {
     const medida = contexto.measureText(opt);
     // return medida.width;
     // console.log(medida.width)
+    // console.log(this.widthTotal)
 
-    if (medida.width <= this.widthTotal) {
-      return opt;
+    if (medida.width >= this.widthTotal) {
+      var optionText = opt;
+      var newOption = optionText.substring(0, 36);
+      return newOption + '...';
     }
+    return opt;
 
-    var optionText = opt;
-    var newOption = optionText.substring(0, 20);
-    return newOption + '...';
+
     // return opt;
 
   }
