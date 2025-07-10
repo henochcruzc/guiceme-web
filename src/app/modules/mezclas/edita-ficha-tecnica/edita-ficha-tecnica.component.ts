@@ -93,7 +93,7 @@ export class EditaFichaTecnicaComponent extends GeneralComponent {
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-4 col-md-4",
+          className: "col-lg-4 col-md-6",
           key: 'medicamento',
           type: 'select',
           props: {
@@ -107,7 +107,7 @@ export class EditaFichaTecnicaComponent extends GeneralComponent {
 
         },
         {
-          className: "col-lg-4 col-md-4",
+          className: "col-lg-4 col-md-6",
           key: 'fabricante',
           type: 'select',
           props: {
@@ -145,7 +145,7 @@ export class EditaFichaTecnicaComponent extends GeneralComponent {
 
         },
         {
-          className: "col-lg-4 col-md-4",
+          className: "col-lg-4 col-md-6",
           key: 'marca',
           type: 'select',
           props: {

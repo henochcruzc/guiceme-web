@@ -220,7 +220,7 @@ mat-footer-cell:first-of-type {
 }
 
 .text-title-l-m {
-  color:  #626262;
+  color: #626262;
   font-family: Montserrat;
   font-size: 18px;
   font-style: normal;
@@ -234,9 +234,15 @@ mat-footer-cell:first-of-type {
   justify-content: flex-end !important;
 }
 
-.agregaDil{
-  display: flex; 
-  justify-content: flex-end; 
-  cursor: pointer; 
+.agregaDil {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
   border: none;
+}
+
+.celda-nom-med {
+  font-size: 11px !important;
+  padding: 2px;
+  margin: 2px;
 }

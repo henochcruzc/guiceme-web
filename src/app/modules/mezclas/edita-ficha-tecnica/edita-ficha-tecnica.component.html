@@ -7,7 +7,7 @@
                 <div class="line-panel-header " style="width: 75% !important;"></div>
             </mat-panel-title>
 
-        <div class="d-flex">
+        <div class="d-flex flex-lg-row flex-column">
             <div class="col-lg-8">
                 <form [formGroup]="form1" class=" ">
                     <formly-form [model]="model1" [fields]="fields1" [form]="form1"></formly-form>
@@ -32,15 +32,12 @@
             <div class="addMezcla"></div>
             <div class="text-title-l-m ">Resultados de búsqueda</div>
             <div class="line-panel-header " style="width: 75% !important;"></div>
-
-
-
         </div>
         <app-no-medicamento *ngIf="tableDS?.data?.length < 0 || !tableDS" [class]="'no-med-ft'"></app-no-medicamento>
-        <div class="d-flex w-100 ">
-            <div class="col-lg-4">
+        <div class="d-flex mt-2 flex-row">
+            <div class="col-lg-4" [ngClass]="{'col-4':isConsulta}">
                 <div class="table-responsive scroll-table table-medicamento">
-                    <mat-table class="fullTable " [dataSource]="tableDS">
+                    <mat-table class="fullTable w-100" [dataSource]="tableDS">
 
                         <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
@@ -58,7 +55,7 @@
                         <ng-container matColumnDef="desCorta">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
-                                <b>{{ element.desCorta }} {{ element.numUniMinMedPz }} {{
+                                <b  [ngClass]="{'celda-nom-med ':isConsulta}" >{{ element.desCorta }} {{ element.numUniMinMedPz }} {{
                                     element.refUnidadMinMedida }}</b>
                             </mat-cell>
                         </ng-container>
@@ -66,9 +63,7 @@
                     </mat-table>
                 </div>
             </div>
-
-
-            <div class="col-lg-8 ms-3 card-detalle-med card-body" *ngIf="isConsulta">
+            <div class="col-lg-8 col-8 ms-3 card-detalle-med card-body" *ngIf="isConsulta">
                 <div>
                     <div class="d-flex align-items-center">
                         <div ngClass="" class="ico-medic"></div>
@@ -101,9 +96,9 @@
                     <br>
 
                     <div class="d-flex titulo col-md-12">
-                        <div class="col-md-6"> <img src="../../../../assets/images/Drip.svg">Diluyentes</div>
+                        <div class="col-md-6"> <img src="../../../../assets/images/Drip.svg">&nbsp;Diluyentes</div>
                         
-                        <button class="col-md-6 btn btn-outline-basic agregaDil" [disabled]="this.agregaDiluyenteDis()"  (click)="this.agregarDiluyente()" > <img src="assets/images/add.svg" alt="" style="cursor: pointer;" >Agregar Diluyente</button>
+                        <button class="col-md-6 btn btn-outline-basic agregaDil d-flex align-items-center gap-2" [disabled]="this.agregaDiluyenteDis()"  (click)="this.agregarDiluyente()" > <img src="assets/images/add.svg" alt="" style="cursor: pointer;" >Agregar Diluyente</button>
                     </div>
                     
     
@@ -113,9 +108,9 @@
                         <br>
 
                         <div class="table-responsive scroll-table">
-                            <div class="d-flex titulo-tabla titulo1" style="width: 27%;">
+                            <div class="d-flex titulo-tabla titulo1 gap-2" >
                                 <div class="lista-med"></div>
-                                Lista de diluyentes
+                               <span> Lista de diluyentes</span>
                                 <br>
                             </div>
                             <mat-table class="fullTable" [dataSource]="diluyentesDataSource" matSortActive="medicamento"
@@ -172,13 +167,10 @@
 
 
     </div>
-
 </div>
 
 
-
 <div class="contenido-no-color">
-
     <div class="botones w-100 d-flex justify-content: space-between;">
         <div>
             <span>
@@ -193,5 +185,4 @@
             </div>
         </div>
     </div>
-
 </div>
