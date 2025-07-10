@@ -3,7 +3,7 @@
 <div class="card-ceme">
     <div class="card card-body">
         <div class="header-table">
-            <div >
+            <div>
                 <div class="titulo">
                     <div style="display: flex;align-items: center; font-size: 18px;">
                         <div class="ico-detalle-mezcla"></div>
@@ -12,9 +12,13 @@
                         <div style="border-bottom: 1px solid #41ABCA; padding-top: 10px; width: 80% !important;"></div>
                     </div>
                     <div style="display: flex; align-items: center; padding-left: 10px;">
-                        <div class="col-md-6" style="    display: flex;align-items: center;"><div class="ico-clipboard"></div><span style="font-size: 14px;font-weight: 500;" class="text">Lista de componentes</span></div>
-                        <div class="col-md-6 text" style="font-size: 14px;font-weight: 500; padding-right: 20px;text-align: right;"> Componentes totales: <span
-                                style="font-weight: 700;"> {{componentesTotales}} </span></div>
+                        <div class="col-md-6" style="    display: flex;align-items: center;">
+                            <div class="ico-clipboard"></div><span style="font-size: 14px;font-weight: 500;"
+                                class="text">Lista de componentes</span>
+                        </div>
+                        <div class="col-md-6 text"
+                            style="font-size: 14px;font-weight: 500; padding-right: 20px;text-align: right;">
+                            Componentes totales: <span style="font-weight: 700;"> {{componentesTotales}} </span></div>
                     </div>
                 </div>
             </div>
@@ -25,14 +29,13 @@
                         <!-- <mat-table class="fullTable " [dataSource]="tab.data" matSortActive="medicamento"
                             matSortDirection="asc" matSort #sort="matSort"
                              (matSortChange)="shortTable($event, tab.data)"> -->
-                        <mat-table class="fullTable " [dataSource]="tab.data" matSortActive="medicamento" matSortDirection="asc" 
-                          matSort>
+                        <mat-table class="fullTable " [dataSource]="tab.data" matSortActive="medicamento"
+                            matSortDirection="asc" matSort>
                             <mat-header-row *matHeaderRowDef="tab.displayCols "></mat-header-row>
                             <mat-row *matRowDef="let row; columns: tab.displayCols ;"></mat-row>
 
                             <ng-container matColumnDef="medicamento">
-                                <mat-header-cell class="col-md-9" *matHeaderCellDef mat-sort-header
-                                > Componentes
+                                <mat-header-cell class="col-md-9" *matHeaderCellDef mat-sort-header> Componentes
                                 </mat-header-cell>
                                 <mat-cell class="col-md-9" *matCellDef="let element">
                                     {{ element.medicamento }}
@@ -66,74 +69,62 @@
 
         </div>
         <div class="datos-diluyente padding margin">
-            <div class="d-flex flex-row flex-wrap justify-content-between">
-                <div class="col-md-2 d-flex flex-column">
+            <div class="row">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Nitrógeno (gr)</span>
-                    <span class="texto">{{detalleMezcla?.numNitrogeno }}</span>
+                    <span class="texto">{{detalleMezcla?.numNitrogeno}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Proteínas (gr)</span>
                     <span class="texto">{{detalleMezcla?.numProteinas}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Kcal no proteicas (Kcal)</span>
                     <span class="texto">{{detalleMezcla?.numKcalNoProteicas}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Kcal totales (Kcal)</span>
                     <span class="texto">{{detalleMezcla?.numKcalTotales}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Volumen (ml)</span>
                     <span class="texto">{{detalleMezcla?.numVolumenTotal}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Osmolaridad (mOsmol/ml)</span>
                     <span class="texto">{{detalleMezcla?.numOsmolaridad}}</span>
                 </div>
             </div>
+
             <hr class="hr-azul" />
-            <!-- <div class="d-flex flex-row flex-wrap justify-content-between">
-                <div class="col-md-8 d-flex flex-column ">
-                    <span class="etiqueta">Diluyente</span>
-                    <span class="texto">{{detalleDiluyente?.desCortaDiluyente}}</span>
-                </div>
-                <div class="col-md-2 d-flex flex-column">
-                    <span class="etiqueta">Dosis</span>
-                    <span class="texto">{{detalleDiluyente?.numDosisDiluyente}}</span>
-                </div>
-                <div class="col-md-2 d-flex flex-column">
-                    <span class="etiqueta">Unidad de medida</span>
-                    <span class="texto">{{detalleDiluyente?.refUnidadMinMedida}}</span>
-                </div>
-            </div>
-            <hr class="hr-azul" /> -->
-            <div class="d-flex flex-row flex-wrap justify-content-between">
-                <div class="col-md-2 d-flex flex-column">
+
+            <div class="row">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Fecha de aplicación</span>
                     <span class="texto">{{detalleDiluyente?.fechaAplicacion}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Cada</span>
                     <span class="texto">{{detalleDiluyente?.desAplicacionCada}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Número total de dosis</span>
                     <span class="texto">{{detalleDiluyente?.numTotalDosis}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Vía de administración</span>
                     <span class="texto">{{detalleDiluyente?.desViaAdministracion}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Tiempo de infusión</span>
                     <span class="texto">{{detalleDiluyente?.desTiempoInfusion}}</span>
                 </div>
-                <div class="col-md-2 d-flex flex-column">
+                <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                     <span class="etiqueta">Velocidad de infusión (ml/hrs)</span>
                     <span class="texto">{{detalleDiluyente?.refVelInfusion}}</span>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

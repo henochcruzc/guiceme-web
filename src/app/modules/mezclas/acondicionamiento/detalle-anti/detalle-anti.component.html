@@ -9,9 +9,11 @@
                     <div class="titulo">
                         <div style="display: flex; align-items: center;">
                             <div class="ico-detalle-mezcla"></div>
-                            <div style="margin-right: 10px;width: 280px;"><span class="text2">Detalle de la mezcla:</span><span style="font-weight: 500;">&nbsp;Antibiótico</span>
+                            <div style="margin-right: 10px;width: 280px;"><span class="text2">Detalle de la
+                                    mezcla:</span><span style="font-weight: 500;">&nbsp;Antibiótico</span>
                             </div>
-                            <div style="border-bottom: 1px solid #41ABCA; padding-top: 10px; width: 82% !important;"></div>
+                            <div style="border-bottom: 1px solid #41ABCA; padding-top: 10px; width: 82% !important;">
+                            </div>
                         </div>
                         <div style="display: flex; align-items: center; padding-left: 10px;">
                             <div class="ico-clipboard"></div>
@@ -57,43 +59,45 @@
 
             </div>
             <div class="datos-diluyente padding margin">
-                <div class="d-flex flex-row flex-wrap justify-content-between">
-                    <div class="col-md-8 d-flex flex-column ">
+                <div class="row">
+                    <div class="col-12 col-md-8 mb-3 d-flex flex-column">
                         <span class="etiqueta">Diluyente</span>
                         <span class="texto">{{modelDiluyente.desCortaDiluyente}}</span>
                     </div>
-                    <div class="col-md-2 d-flex flex-column">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Dosis</span>
                         <span class="texto">{{modelDiluyente.numDosisDiluyente}}</span>
                     </div>
-                    <div class="col-md-2 d-flex flex-column">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Unidad de medida</span>
                         <span class="texto">{{modelDiluyente.refUnidadMinMedida}}</span>
                     </div>
                 </div>
+
                 <hr class="hr-azul" />
-                <div class="d-flex flex-row flex-wrap justify-content-between">
-                    <div class="col-md-2 d-flex flex-column">
+
+                <div class="row">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Fecha de aplicación</span>
                         <span class="texto">{{modelDiluyente.fechaAplicacion}}</span>
                     </div>
-                    <div class="col-md-2 d-flex flex-column">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Cada</span>
                         <span class="texto">{{modelDiluyente.desAplicacionCada}}</span>
                     </div>
-                    <div class="col-md-2 d-flex flex-column">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Número total de dosis</span>
                         <span class="texto">{{modelDiluyente.totalDosis}}</span>
                     </div>
-                    <div class="col-md-2 d-flex flex-column">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Vía de administración</span>
                         <span class="texto">{{modelDiluyente.desViaAdministracion}}</span>
                     </div>
-                    <div class="col-md-2 d-flex flex-column">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Tiempo de infusión</span>
                         <span class="texto">{{modelDiluyente.desTiempoInfusion}}</span>
                     </div>
-                    <div class="col-md-2 d-flex flex-column">
+                    <div class="col-6 col-md-2 mb-3 d-flex flex-column">
                         <span class="etiqueta">Velocidad de infusión (ml/hrs)</span>
                         <span class="texto">{{modelDiluyente.refVelInfusion}}</span>
                     </div>

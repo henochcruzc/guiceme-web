@@ -48,9 +48,9 @@ export class AcondicionamientoComponent extends GeneralComponent {
         {
             fieldGroupClassName: 'row',
             fieldGroup: [
-                
+
                 {
-                    className: "col-lg-3 col-md-3",
+                    className: "col-lg-3 col-md-6",
                     key: 'tipoMezcla',
                     type: 'select',
                     props: {
@@ -81,9 +81,9 @@ export class AcondicionamientoComponent extends GeneralComponent {
                         }
                     },
 
-                }, 
+                },
                 {
-                    className: "col-lg-3 col-md-3",
+                    className: "col-lg-3 col-md-6",
                     key: 'folioMezcla',
                     type: 'input',
                     props: {
@@ -93,7 +93,7 @@ export class AcondicionamientoComponent extends GeneralComponent {
                     },
                 },
                 {
-                    className: "col-lg-1 col-md-6",
+                    className: "col-lg-1 col-md-3 col-xs-6",
                     key: 'btn-limpiar',
                     type: 'button',
                     props: {
@@ -117,7 +117,7 @@ export class AcondicionamientoComponent extends GeneralComponent {
                         },
                     },
                 }, {
-                    className: "col-lg-1 col-md-6",
+                    className: "col-lg-1 col-md-3 col-xs-6",
                     key: 'btn-buscar',
                     type: 'button',
                     props: {
@@ -152,16 +152,16 @@ export class AcondicionamientoComponent extends GeneralComponent {
 
     buscarMezclas() {
 
-          if(this.model.tipoMezcla != null || this.model.folioMezcla != null){
+        if (this.model.tipoMezcla != null || this.model.folioMezcla != null) {
             this.getDetalleList(0, 10, this.model.tipoMezcla, this.model.folioMezcla);
         }
-        
+
         /*if (this.model.tipoMezcla != null) 
             this.getDetalleList(0, 10, this.model.tipoMezcla);*/
 
     }
 
-    
+
 
     displayedColumns = ['cveFolioMezclaDosis', 'cveFolioSolicitudMezcla', 'desTipoMezcla', 'fechaAplicacion', 'estatusDosis']
     myData;
@@ -200,12 +200,12 @@ export class AcondicionamientoComponent extends GeneralComponent {
 
     ngOnInit(): void {
 
-        this.getDetalleList(0,10,null,null);      
+        this.getDetalleList(0, 10, null, null);
 
     }
     pageSize = 0;
     getDetalleList(page, size, idTipoMezcla, folioMezcla) {
-        this.mezclaService.getSolicitudesAcondicionamiento(page, size, idTipoMezcla,folioMezcla )
+        this.mezclaService.getSolicitudesAcondicionamiento(page, size, idTipoMezcla, folioMezcla)
             .then(data => {
                 if (data.content.length != 0) {
 
@@ -230,13 +230,13 @@ export class AcondicionamientoComponent extends GeneralComponent {
 
     pageChanged(event: any) {
         //console.log(event)
-        
 
-        if(this.model.tipoMezcla != null) {
-            this.getDetalleList(event-1,10,this.model.tipoMezcla,null);
-          }else{
-            this.getDetalleList(event-1,10,null,null);
-          }
+
+        if (this.model.tipoMezcla != null) {
+            this.getDetalleList(event - 1, 10, this.model.tipoMezcla, null);
+        } else {
+            this.getDetalleList(event - 1, 10, null, null);
+        }
     }
 
 
@@ -252,77 +252,77 @@ export class AcondicionamientoComponent extends GeneralComponent {
             this.tableDS.data.forEach(row => this.selection.select(row));
     }
 
-    
-  limpiarCampos() {
-    //limpiamos los campos del formulario
-    this.form.reset();
-    //this.tableDS = null;
-    //this.totalElements = null;
-  }
 
-  redirecciona(modelo: any) {
-
-    let valor = {
-        modelo: modelo,
-        origen: NAV.acondicionamiento
+    limpiarCampos() {
+        //limpiamos los campos del formulario
+        this.form.reset();
+        //this.tableDS = null;
+        //this.totalElements = null;
     }
-    this._sesionStorage.setDataResolucion(valor);
-    
-    switch (modelo.idTipoMezcla) {
-      case 1:
-        this.router.navigate([NAV.detalleCitotoxicoAcondicionamiento]);
-        break;
-      case 2:
-        this.router.navigate([NAV.detalleNPTAcondicionamiento]);
-        break;
-      case 3:
-        this.router.navigate([NAV.detalleAntiAcondicionamiento]);
-        break;
-      default:
-       console.log('no es tipo mezcla valido')
-    }
-  }
 
+    redirecciona(modelo: any) {
 
-  findClass(element) {
+        let valor = {
+            modelo: modelo,
+            origen: NAV.acondicionamiento
+        }
+        this._sesionStorage.setDataResolucion(valor);
 
-    //console.info('tipo',tipo);
-    var estatus =  element.estatusDosis.idEstatusMezcla;
-    if( element.idEstatusReimpresion != undefined && element.idEstatusReimpresion != null &&  element.idEstatusReimpresion===4){
-        estatus=EstatusReimpresion.APROBADA_MESA_ATENCION;
+        switch (modelo.idTipoMezcla) {
+            case 1:
+                this.router.navigate([NAV.detalleCitotoxicoAcondicionamiento]);
+                break;
+            case 2:
+                this.router.navigate([NAV.detalleNPTAcondicionamiento]);
+                break;
+            case 3:
+                this.router.navigate([NAV.detalleAntiAcondicionamiento]);
+                break;
+            default:
+                console.log('no es tipo mezcla valido')
+        }
     }
 
 
+    findClass(element) {
 
-    switch (estatus) {
-        case EstatusMezcla.DISPONIBLE://Disponible
-            return 'blue';
-            break;
-        case EstatusReimpresion.APROBADA_MESA_ATENCION://cancelada
-            return 'green';
-            break;
-        case EstatusMezcla.PREPARADA://cancelada
-            return 'blue-light';
-            break;
-        default:
-            break;
+        //console.info('tipo',tipo);
+        var estatus = element.estatusDosis.idEstatusMezcla;
+        if (element.idEstatusReimpresion != undefined && element.idEstatusReimpresion != null && element.idEstatusReimpresion === 4) {
+            estatus = EstatusReimpresion.APROBADA_MESA_ATENCION;
+        }
+
+
+
+        switch (estatus) {
+            case EstatusMezcla.DISPONIBLE://Disponible
+                return 'blue';
+                break;
+            case EstatusReimpresion.APROBADA_MESA_ATENCION://cancelada
+                return 'green';
+                break;
+            case EstatusMezcla.PREPARADA://cancelada
+                return 'blue-light';
+                break;
+            default:
+                break;
+        }
+
+
+        return '';
     }
 
+    shortTable(sort: Sort) {
+        //console.log("colName " + sort);
 
-    return '';
-}
-
-    shortTable(sort:Sort) {
-    //console.log("colName " + sort);
-
-    const array = this.tableDS.data ;
-    let des = sort.direction == 'desc';
-    const sortedArray = this.sortArrayOfObjects(array, sort.active, des);    
-    //let otherModel = {...this.modelo};
-   // otherModel.content = sortedArray;
-   // console.log(otherModel)
-    this.tableDS = new MatTableDataSource(sortedArray);
-  }
+        const array = this.tableDS.data;
+        let des = sort.direction == 'desc';
+        const sortedArray = this.sortArrayOfObjects(array, sort.active, des);
+        //let otherModel = {...this.modelo};
+        // otherModel.content = sortedArray;
+        // console.log(otherModel)
+        this.tableDS = new MatTableDataSource(sortedArray);
+    }
 
 
 }
