@@ -908,7 +908,7 @@ export class RecepcionUnidadMedicaComponent extends GeneralComponent {
       let element = this.controlMezclas.items.find(e => e.idMezclaAplicDiaDosis == row.idMezclaAplicDiaDosis);
 
       console.log('elemento aprobar', element);
-      debugger;
+      // debugger;
       if (element.indRechazado) {
         console.log("intento de aprobar algo ya rechazado", element);
 

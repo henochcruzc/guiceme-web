@@ -96,17 +96,13 @@
                     <br>
 
                     <div class="d-flex titulo col-md-12">
-                        <div class="col-md-6"> <img src="../../../../assets/images/Drip.svg">&nbsp;Diluyentes</div>
-                        
+                        <div class="col-md-6"> <img src="../../../../assets/images/Drip.svg">&nbsp;Diluyentes</div>                        
                         <button class="col-md-6 btn btn-outline-basic agregaDil d-flex align-items-center gap-2" [disabled]="this.agregaDiluyenteDis()"  (click)="this.agregarDiluyente()" > <img src="assets/images/add.svg" alt="" style="cursor: pointer;" >Agregar Diluyente</button>
-                    </div>
-                    
+                    </div>                    
     
-                    <form [formGroup]="formDil">
-    
+                    <form [formGroup]="formDil">    
                         <formly-form [model]="modelDil" [fields]="fieldsDil" [form]="formDil"></formly-form>
                         <br>
-
                         <div class="table-responsive scroll-table">
                             <div class="d-flex titulo-tabla titulo1 gap-2" >
                                 <div class="lista-med"></div>

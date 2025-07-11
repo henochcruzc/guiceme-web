@@ -165,7 +165,7 @@ export class MultiselectField extends FieldType<FieldTypeConfig> {
   }
 
   removeSelectedItem(itemToRemove: any) {
-debugger
+// debugger
    // const updatedSelectedItems = this.selectedItems$.value.filter(item => item.id !== itemToRemove.id);
     let  data= this.selectedItems$.value;
     const indiceAEliminar =  data.findIndex(item => item.id === itemToRemove.id);
