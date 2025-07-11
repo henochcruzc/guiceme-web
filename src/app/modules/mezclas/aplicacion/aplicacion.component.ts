@@ -37,8 +37,6 @@ import { AuthService } from '../../login/services/auth.service';
     CommonModule,
     SharedModule,
     HeaderDetalleMezclaComponent,
-
-    CamposSvComponent
   ]
 })
 export class AplicacionComponent extends GeneralComponent {
@@ -134,7 +132,7 @@ export class AplicacionComponent extends GeneralComponent {
                   (data: any) => {
                     if (data) {
                       //        console.log(data)
-                    
+
                       for (let r of data) {
                         if (!r.desTipoMezcla.toLowerCase().includes('citotóxico')) {
                           lst.push(r);
@@ -268,7 +266,7 @@ export class AplicacionComponent extends GeneralComponent {
           //  console.log("getusuario: ",respuesta);
 
           //se integra evento bitacora en inicio de sesion 
-          let model ={
+          let model = {
             "idEvento": eventoBitacora.LOGIN_EXITOSO_PHEDS_APLICACION,
             "cveUsuario": respuesta.id,
             "refNombreUsuario": this.objUrl.medico_nombre + ' ' + this.objUrl.medico_apaterno + ' ' + this.objUrl.medico_amaterno,

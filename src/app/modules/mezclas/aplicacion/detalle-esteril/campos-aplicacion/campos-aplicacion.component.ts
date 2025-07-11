@@ -34,7 +34,7 @@ export class CamposAplicacionComponent extends GeneralComponent {
 
 
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-3 col-md-5",
           key: 'fechaInicio',
           type: 'material-date',
           templateOptions: {
@@ -46,13 +46,13 @@ export class CamposAplicacionComponent extends GeneralComponent {
           },
         },
         {
-          className: "col-lg-1 col-md-6",
+          className: "col-lg-1 col-md-2",
 
           type: 'lineaAzul',
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-3 col-md-5",
           key: 'fechaFin',
           type: 'material-date',
           templateOptions: {
@@ -74,17 +74,17 @@ export class CamposAplicacionComponent extends GeneralComponent {
   blnNoAplicada = false;
   ngOnInit() {
     this.miModelo = this.model;
-  
+
 
     switch (this.idEstatus) {
       case 11://aplicada
         this.blnAplicada = true;
         break;
 
-        case 12://no aplicada
+      case 12://no aplicada
         this.blnNoAplicada = true;
         break;
-    
+
       default:
         break;
     }

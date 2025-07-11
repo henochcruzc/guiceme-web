@@ -13,7 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
-    
+
 
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,8 +23,8 @@ export class CamposSvComponent extends GeneralComponent {
   @Input() blnCamposBloqueados: boolean;
   @Input() blnModoLectura: boolean;
 
-  
-  
+
+
   blnBloqueaCampos: boolean = true;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [
@@ -35,7 +35,7 @@ export class CamposSvComponent extends GeneralComponent {
 
 
         {
-          className: "col-lg-2 col-md-6",
+          className: "col-lg-2 col-md-4 col-sm-6 mb-3",
           key: 'numPacTenArtSistolica',
           type: 'input-mask',
           props: {
@@ -54,18 +54,18 @@ export class CamposSvComponent extends GeneralComponent {
           expressionProperties: {
             'props.disabled': () => {
               if (
-               this.model
-            ) {
-              
+                this.model
+              ) {
+
                 return true
-            }
-            return false
+              }
+              return false
             },
           },
-        
+
         },
         {
-          className: "col-lg-2 col-md-6",
+          className: "col-lg-2 col-md-4 col-sm-6 mb-3",
           key: 'numPacTenArtDiastolica',
           type: 'input-mask',
           props: {
@@ -81,16 +81,16 @@ export class CamposSvComponent extends GeneralComponent {
           },
           expressionProperties: {
             'props.disabled': (model: any) => {
-             
-              
-            return this.blnBloqueaCampos;
+
+
+              return this.blnBloqueaCampos;
 
             },
           },
-        
+
         },
         {
-          className: "col-lg-2 col-md-6",
+          className: "col-lg-2 col-md-4 col-sm-6 mb-3",
           key: 'numPacFrecCardiaca',
           type: 'input-mask',
           props: {
@@ -104,21 +104,21 @@ export class CamposSvComponent extends GeneralComponent {
               autocomplete: 'off',
             },
           },
-        /*   expressionProperties: {
-            'props.disabled': (model: any) => {
-              if (this.blnBloqueaCampos) {
-                return true
-              } else {
-                return false
-              }
+          /*   expressionProperties: {
+              'props.disabled': (model: any) => {
+                if (this.blnBloqueaCampos) {
+                  return true
+                } else {
+                  return false
+                }
+  
+              },
+            }, */
 
-            },
-          }, */
-         
         },
 
         {
-          className: "col-lg-2 col-md-6",
+          className: "col-lg-2 col-md-4 col-sm-6 mb-3",
           key: 'numPacFrecRespiratoria',
           type: 'input-mask',
           props: {
@@ -142,10 +142,10 @@ export class CamposSvComponent extends GeneralComponent {
 
             },
           }, */
-         
+
         },
         {
-          className: "col-lg-2 col-md-6",
+          className: "col-lg-2 col-md-4 col-sm-6 mb-3",
           key: 'numPacTemperatura',
           type: 'numFloat',
           props: {
@@ -160,16 +160,16 @@ export class CamposSvComponent extends GeneralComponent {
               autocomplete: 'off',
             },
           },
-         /*  expressionProperties: {
-            'props.disabled': (model: any) => {
-              if (this.blnBloqueaCampos) {
-                return true
-              } else {
-                return false
-              }
-
-            },
-          }, */
+          /*  expressionProperties: {
+             'props.disabled': (model: any) => {
+               if (this.blnBloqueaCampos) {
+                 return true
+               } else {
+                 return false
+               }
+ 
+             },
+           }, */
           validation: {
             messages: {
 
@@ -223,7 +223,7 @@ export class CamposSvComponent extends GeneralComponent {
 
   ];
 
-  ngOnInit(){
-  
+  ngOnInit() {
+
   }
 }

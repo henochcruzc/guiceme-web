@@ -288,10 +288,10 @@ export class AntibioticoComponent extends GeneralComponent {
             placeholder: 'Ingresa la temperatura',
 
             required: true,
-            
-          
-            numEnteros:2,
-            numDecimales:2,
+
+
+            numEnteros: 2,
+            numDecimales: 2,
             //            pattern: /^([0-9]{1,2}(.[0-9]{0,2})?)$/,
             attributes: {
               autocomplete: 'off',
@@ -304,14 +304,14 @@ export class AntibioticoComponent extends GeneralComponent {
                 campo.valueChanges.subscribe(x => {
                   if (this.parametrosVitales != undefined) {
                     //se comenta por ajuste de decimales
-                 //  field.props.max = this.parametrosVitales.numPacTemperaturaMax;
-                  //  field.props.min = this.parametrosVitales.numPacTemperaturaMin;
+                    //  field.props.max = this.parametrosVitales.numPacTemperaturaMax;
+                    //  field.props.min = this.parametrosVitales.numPacTemperaturaMin;
                   }
                 })
               }
             }
           },
-         
+
         },
 
 
@@ -355,7 +355,7 @@ export class AntibioticoComponent extends GeneralComponent {
 
 
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-3 col-md-5",
           key: 'stpAplicacInicio',
           type: 'material-date-place',
           props: {
@@ -400,7 +400,7 @@ export class AntibioticoComponent extends GeneralComponent {
         },
 
         {
-          className: "col-lg-1 ",
+          className: "col-lg-1 col-md-2",
           key: 'desTurnoInicio',
           type: 'turno',
           props: {
@@ -409,13 +409,13 @@ export class AntibioticoComponent extends GeneralComponent {
           expressions: { hide: '!model.desTurnoInicio' },
         },
         {
-          className: "col-lg-1 col-md-6",
+          className: "col-lg-1 col-md-2",
 
           type: 'lineaAzul',
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-3 col-md-5",
           key: 'stpAplicacTermino',
           type: 'material-date-place',
           templateOptions: {

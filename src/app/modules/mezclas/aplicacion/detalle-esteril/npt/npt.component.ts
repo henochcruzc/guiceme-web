@@ -36,7 +36,6 @@ import * as moment from 'moment';
     CommonModule,
     SharedModule,
     HeaderDetalleMezclaComponent,
-    ListadoMedicamentosComponent,
     ListadoDiluyenteComponent,
     ListadoComponentesComponent,
     CamposSvComponent,
@@ -280,16 +279,16 @@ export class NptComponent extends GeneralComponent {
             placeholder: 'Ingresa la temperatura',
 
             required: true,
-           
-            numEnteros:2,
-                      numDecimales:2,
-          
-          //  pattern: /^([0-9]{1,2}(.[0-9]{0,2})?)$/,
+
+            numEnteros: 2,
+            numDecimales: 2,
+
+            //  pattern: /^([0-9]{1,2}(.[0-9]{0,2})?)$/,
             attributes: {
               autocomplete: 'off',
             },
           },
-        
+
         },
 
 

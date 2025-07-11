@@ -98,7 +98,7 @@ export class NoAplicadaComponent extends GeneralComponent implements OnInit {
 
         {
           className: "col-md-5 pull-left",
-          key: 'idAplicacReaccAdversa' ,
+          key: 'idAplicacReaccAdversa',
           type: 'mat-radio-left',
           props: {
             label: '¿Reacción adversa a la mezcla?',
@@ -112,7 +112,7 @@ export class NoAplicadaComponent extends GeneralComponent implements OnInit {
           },
           hooks: {
             onInit: (field) => {
-              
+
               console.log('field', field)
 
             }
@@ -148,14 +148,14 @@ export class NoAplicadaComponent extends GeneralComponent implements OnInit {
             'props.disabled': (model: any) => {
               if ((
                 this.model.idAplicacReaccAdversa == 2 || this.model.idAplicacReaccAdversa == undefined)
-               
-            ) {
+
+              ) {
                 return true;
-            }
-      
-            return false;
+              }
+
+              return false;
             },
-        },
+          },
         },
       ]
     },
@@ -228,7 +228,7 @@ export class NoAplicadaComponent extends GeneralComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     console.log("init: ", this.model)
     if (this.model.indEnProceso == 1) {
       this.model.idAplicacReaccAdversa;
@@ -247,22 +247,22 @@ export class NoAplicadaComponent extends GeneralComponent implements OnInit {
     dato.idUsuarioResponsable = this.model.idUsuarioResponsable;
     if (this.model.indEnProceso == 1) {
 
-    
+
       dato.idAplicacReaccAdversa = this.model.idAplicacReaccAdversa;
-    
+
       dato.refAplicacReaccionObs = this.model.refAplicacReaccionObs;
-      if(dato.idAplicacReaccAdversa == 1){
+      if (dato.idAplicacReaccAdversa == 1) {
         dato.idReaccionAdversa = this.model.idReaccionAdversa;
       }
     } else {
-      
+
 
       dato.idMotivoNoAdminMezcla = this.model.idMotivoNoAdminMezcla;
       dato.refNoAdminObs = this.model.refNoAdminObs;
       dato.idMezclaAplicDiaDosis = this.model.idMezclaAplicDiaDosis;
       dato.idPaciente = this.model.idPaciente;
-      
-      
+
+
       if (!this.model.stpAplicacInicio
         && !this.model.stpAplicacTermino
       ) {
@@ -272,7 +272,7 @@ export class NoAplicadaComponent extends GeneralComponent implements OnInit {
         delete this.model['indEnProceso'];
       }
     }
-    console.log("guardar no aplica ",dato);
+    console.log("guardar no aplica ", dato);
     this.noAplicar(dato);
   }
 
@@ -286,15 +286,15 @@ export class NoAplicadaComponent extends GeneralComponent implements OnInit {
         console.log("_accionService.noAplic ", resp);
         this.closeDialog();
         this.irPrincipal();
-      
+
         setTimeout(() => {
           if (this.model.indEnProceso == 1) {
             this._alertServices.success(this._Mensajes.MSG43);
-          }else{
+          } else {
             this._alertServices.success(this._Mensajes.MSG44);
           }
-          
-      
+
+
         }, 1000);
 
 
