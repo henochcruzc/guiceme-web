@@ -7,8 +7,14 @@
     }
 
     .header-data .data-no-icon {
-        // background-image: url(decoracion.svg);
-        background-image: none !important;
+        background-size: 40px auto !important;
+        background-position: top right !important;
+        background-image: url('../../../../assets/images/decoracion.svg');
+        background-repeat: no-repeat !important;
+        background-position: top right !important;
+        background-size: contain !important; /* o 'auto' si no quieres que escale */
+        background-origin: content-box !important;
+        background-attachment: scroll !important;
     }
 }
 
