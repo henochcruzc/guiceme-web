@@ -3,14 +3,14 @@
     <div class="card card-body header">
         <div class="data-no-icon">
 
-            <div class="d-flex flex-row  w-100 ">
+            <div class="d-flex flex-lg-row flex-column w-100 ">
                 <div class="flex-shrink-0 d-flex align-items-center">
                     <button class="btn" (click)="onAtras()">
                         <img class="imagen" [src]="'../../../../assets/images/ico-arrow-left.svg'" />
                     </button>
                 </div>
                 <div class="flex-grow-1">
-                    <div class="d-flex flex-row w-100 flex-wrap align-items-center justify-content-between">
+                    <div class="d-flex flex-lg-row flex-column w-100 flex-wrap align-items-center justify-content-between">
                         <div class="d-flex flex-row justify-content-around gap-5">
                             <div class="seccion">
                                 <div class="titulo ">Paciente</div>
@@ -25,7 +25,7 @@
                                 <div class="texto color-title" >{{mezclaSeleccionada.cveFolioSolicitud}}</div>
                             </div>
                         </div>
-                        <div class="me-3">
+                        <div class="p-2">
                             <div class="titulo color-title">Preparación de mezcla</div>
                         </div>
                     </div>
@@ -44,28 +44,28 @@
                 <div class="ms-2 line-panel-header"></div>
             </div>
         </div>
-        <div class="mt-2 d-flex align-items-center data-detalle justify-content-between">
-            <div class="">
+        <div class="mt-2 d-flex align-items-center data-detalle justify-content-between row  row-cols-3 gap-2 row-cols-lg-auto">
+            <div class="col">
                 <div class="titulo">Fecha de aplicación</div>
                 <div class="texto color-title"><b>{{mezclaSeleccionada.fechaAplicacion}}</b></div>
             </div>
-            <div>
+            <div class="col">
                 <div class="titulo">Cada</div>
                 <div class="texto color-title"><b>{{mezclaSeleccionada.desAplicacionCada}}</b></div>
             </div>
-            <div>
+            <div class="col">
                 <div class="titulo">Número total de dosis</div>
                 <div class="texto color-title"><b>{{calcNumDosis(mezclaSeleccionada)}}</b></div>
             </div>
-            <div>
+            <div class="col">
                 <div class="titulo">Vía de administración</div>
                 <div class="texto color-title"><b>{{mezclaSeleccionada.desViaAdministracion}}</b></div>
             </div>
-            <div>
+            <div class="col">
                 <div class="titulo">Tiempo de infusión</div>
                 <div class="texto color-title"><b>{{mezclaSeleccionada.desTiempoInfusion}}</b></div>
             </div>
-            <div class="me-5">
+            <div class="col">
                 <div class="titulo">Velocidad de infusión (ml/hrs)</div>
                 <div class="texto color-title"><b>{{mezclaSeleccionada.refVelInfusion}}</b></div>
             </div>
