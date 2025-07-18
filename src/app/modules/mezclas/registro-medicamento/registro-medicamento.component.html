@@ -25,33 +25,33 @@
         </div>
 
         <div class="d-flex w-100 ">
-            <div class="col-lg-4">
+            <div class="col-lg-6 col-xxl-4">
                 <div class="table-responsive scroll-table table-medicamento">
                     <mat-table class="fullTable " [dataSource]="tableDS">
 
                         <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
-                            [ngClass]="{'lightSelect': modelSelected.idMedicamento == row.idMedicamento,'lightSelectAsig':row.idRecColMedic!=null && row.idLoteFabMed!=null}"></mat-row>
+                        <mat-row [ngClass]="{}" *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
+                            [ngClass]="{'lightSelect': modelSelected.idMedicamento == row.idMedicamento,'lightSelectAsig':row.idRecColMedic!=null && row.idLoteFabMed!=null,'d-flex flex-column flex-xl-row ':isConsulta}"></mat-row>
 
                         <ng-container matColumnDef="no">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
+                            <mat-cell class="border-bottom-0" *matCellDef="let element ; let i = index">                                
                                 <div class="d-flex flex-row gap-2 align-items-center">
-                                    {{ element.numMedicamento }}<div class='ico-medic'></div>
+                                     <div class='ico-medic'></div>
                                 </div>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="desCorta">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
+                            <mat-cell class="border-bottom-0"  *matCellDef="let element">
                                 <b>{{ element.desCorta }} {{ element.medida }} {{ element.unidadMedida }}</b>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="total">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
+                            <mat-cell class="border-bottom-0" *matCellDef="let element">
                                 Cantidad &nbsp;<b>{{ element.numEnvSAI}}&nbsp;piezas</b>
                             </mat-cell>
                         </ng-container>
@@ -60,33 +60,35 @@
             </div>
 
 
-            <div class="col-lg-8 ms-3 card-detalle-med card-body" *ngIf="isConsulta">
+            <div class="col-6 col-lg-6 col-xxl-8 ms-3 card-detalle-med card-body" *ngIf="isConsulta">
 
-                <div class="d-flex titulo" style="justify-content: space-between;">
+                <div class="d-flex titulo flex-column flex-lg-row" style="justify-content: space-between; ">
                     <div>
                         <div class="d-flex align-items-center">
                             <div ngClass="" class="ico-medic"></div>
                             <div class="text-title-l-m ">{{modelSelected.desCorta}}</div>
-    
+
                         </div>
                     </div>
 
                     <div class="d-flex">
-                        <mat-radio-group [(ngModel)]="estadoMedicamento" (ngModelChange)="cambioEstadoMed()" [disabled]="indGuardadoCompleto">
+                        <mat-radio-group [(ngModel)]="estadoMedicamento" (ngModelChange)="cambioEstadoMed()"
+                            [disabled]="indGuardadoCompleto">
                             <mat-radio-button value=true>Buen estado*</mat-radio-button>
                             <mat-radio-button value=false>Mal estado*</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="865" height="2" viewBox="0 0 865 2" fill="none">
-                    <path d="M0 1H865" stroke="#D8D8D8" />
-                </svg>
+
+                 <div class="line-panel-header border-light-subtle w-80"></div><br>
+
+            
                 <form [formGroup]="formReceta">
 
                     <formly-form [model]="modelReceta" [fields]="fieldsReceta" [form]="formReceta"></formly-form>
                     <br>
                     <div class="table-responsive scroll-table">
-                        <div class="d-flex titulo-tabla titulo1" style="width: 30%;">
+                        <div class="d-flex titulo-tabla titulo1">
                             <div class="lista-med"></div>
                             Lotes de medicamento
                             <br>
@@ -162,7 +164,7 @@
                 <form [formGroup]="formFT">
 
                     <formly-form [model]="modelFT" [fields]="fieldsFT" [form]="formFT"></formly-form>
-                 <!--
+                    <!--
                     <ng-container *ngIf="tipoPeriodoVal==1">
                         <formly-form [model]="modelAmbiente" [fields]="fieldsAmbiente" [form]="formAmbiente"></formly-form>
                     </ng-container>                   
@@ -177,22 +179,24 @@
                 </form>
                 <form [formGroup]="formAmbiente">
                     <!--<ng-container *ngIf="tipoPeriodoVal==1">-->
-                        <formly-form [model]="modelAmbiente" [fields]="fieldsAmbiente" [form]="formAmbiente"></formly-form>
-                   <!-- </ng-container>  --> 
-                </form>  
+                    <formly-form [model]="modelAmbiente" [fields]="fieldsAmbiente" [form]="formAmbiente"></formly-form>
+                    <!-- </ng-container>  -->
+                </form>
                 <form [formGroup]="formRedFria">
                     <formly-form [model]="modelRedFria" [fields]="fieldsRedFria" [form]="formRedFria"></formly-form>
-                    
-                </form>  
-                
-              
+
+                </form>
+
+
                 <br>
                 <br>
 
                 <div class="d-flex titulo col-md-12">
                     <div class="col-md-6"> <img src="../../../../assets/images/Drip.svg">Diluyentes</div>
-                    
-                    <button class="col-md-6 btn btn-outline-basic agregaDil" [disabled]="this.agregaDiluyenteDis()"  (click)="this.agregarDiluyente()" > <img src="assets/images/add.svg" alt="" style="cursor: pointer;" >Agregar Diluyente</button>
+
+                    <button class="col-md-6 btn btn-outline-basic agregaDil d-flex gap-2 align-items-center" [disabled]="this.agregaDiluyenteDis()"
+                        (click)="this.agregarDiluyente()"> <img src="assets/images/add.svg" alt=""
+                            style="cursor: pointer;">Agregar Diluyente</button>
                 </div>
 
                 <form [formGroup]="formDil">
@@ -220,15 +224,17 @@
                                 </mat-cell>
                             </ng-container>
 
-                           
+
 
                             <ng-container matColumnDef="perDilacion">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Período de validez diluido ambiente (hrs.)</strong> </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-200"><strong>Período
+                                        de validez diluido ambiente (hrs.)</strong> </mat-header-cell>
                                 <mat-cell *matCellDef="let element">{{element.perValDilucionAmbiente}} </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="redFria">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-300"><strong>Período de validez diluido red fría (hrs.)</strong> </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef mat-sort-header class="columna-300"><strong>Período
+                                        de validez diluido red fría (hrs.)</strong> </mat-header-cell>
                                 <mat-cell *matCellDef="let element">{{element.perValDilucionFria}} </mat-cell>
                             </ng-container>
 
@@ -260,7 +266,7 @@
                             <span>
                             </span>
                         </div>
-                        <div class="botones" >
+                        <div class="botones">
                             <div class="botones">
                                 <button *ngIf="!indGuardadoCompleto " [disabled]="btnDisabled()" type="button"
                                     class="btn btn-primary" style="margin-right: 20px;" (click)="actualizar()">
@@ -292,8 +298,10 @@
         </div>
         <div class="botones">
             <div class="botones">
-               
-                <button  *ngIf="!indGuardadoCompleto" type="button" class="btn btn-primary"  [disabled]="this.medicamentosUpTotal==this.medicamentoList.length &&  this.indGuardadoCompleto==false ? false:true" style="margin-right: 20px;" (click)="registrarReceta()">
+
+                <button *ngIf="!indGuardadoCompleto" type="button" class="btn btn-primary"
+                    [disabled]="this.medicamentosUpTotal==this.medicamentoList.length &&  this.indGuardadoCompleto==false ? false:true"
+                    style="margin-right: 20px;" (click)="registrarReceta()">
                     Registrar receta</button>
             </div>
         </div>

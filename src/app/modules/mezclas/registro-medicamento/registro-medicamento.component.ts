@@ -340,7 +340,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
       fieldGroup: [
 
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-6 col-xl-3 col-md-6",
           key: 'dosisMedicV',
           type: 'decimal',
           props: {
@@ -382,7 +382,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-6 col-xl-3 col-md-6",
           key: 'volumenReconsV',
           type: 'decimal',
           props: {
@@ -436,7 +436,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-xl-3 col-md-6",
           key: 'Concentracion',
           type: 'decimal',
           props: {
@@ -457,7 +457,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
         },
 
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-xl-3 col-md-6",
           key: 'reqCons',
           type: 'select',
           props: {
@@ -498,7 +498,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
-              className: "col-lg-6 col-md-6",
+              className: "col-xl-6 col-md-6",
               key: 'tipoPeriodoValidez',
               type: 'select',
               props: {
@@ -743,7 +743,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-4 col-md-6",
+          className: "col-xl-4 col-md-6",
           key: 'diluyente',
           type: 'select',
 
@@ -775,7 +775,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
           },
         },
         {
-          className: "col-lg-4 col-md-6",
+          className: "col-xl-4 col-md-6",
           key: 'perValAmbiente',
           type: 'input-mask-reloj',
           props: {
@@ -788,7 +788,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-4 col-md-6",
+          className: "col-xl-4 col-md-6",
           key: 'perValRedFria',
           type: 'input-mask-reloj',
           props: {
@@ -812,7 +812,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-5 col-md-6",
+          className: "col-xl-5 col-lg-6 col-md-6 ",
           key: 'fabricante',
           type: 'select',
           props: {
@@ -846,7 +846,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-4 col-md-6",
+          className: "col-lg-6 col-xl-4 col-md-6",
           key: 'marca',
           type: 'select',
           props: {
@@ -921,7 +921,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-6 col-xl-3 col-md-6",
           key: 'numEnvases',
           type: 'input-mask',
           props: {
@@ -981,7 +981,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-2 col-md-6",
+          className: " col-lg-6 col-xl-2 col-md-6",
           key: 'lote',
           type: 'input',
           props: {
@@ -993,7 +993,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-6 col-xl-3 col-md-6",
           key: 'fechaApl',
           type: 'material-date',
           templateOptions: {
@@ -1006,7 +1006,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-2 col-md-6",
+          className: "col-lg-6 col-xl-2 col-md-6",
           key: 'conDiluyente',
           type: 'mat-radio',
           props: {
@@ -1040,7 +1040,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-lg-6 col-xl-3 col-md-6",
           key: 'caducidadDiluyente',
           type: 'material-date',
           props: {
@@ -1085,7 +1085,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: 'col-lg-2 col-md-6',
+          className: ' col-lg-6 col-xl-2 col-md-6',
           key: 'btnAgregar',
           type: 'button',
           props: {
