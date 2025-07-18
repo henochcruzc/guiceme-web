@@ -743,7 +743,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-xl-4 col-md-6",
+          className: "col-xl-4 col-md-12",
           key: 'diluyente',
           type: 'select',
 
@@ -775,7 +775,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
           },
         },
         {
-          className: "col-xl-4 col-md-6",
+          className: "col-xl-4 col-md-12",
           key: 'perValAmbiente',
           type: 'input-mask-reloj',
           props: {
@@ -788,7 +788,7 @@ export class RegistroMedicamentoComponent extends GeneralComponent implements On
 
         },
         {
-          className: "col-xl-4 col-md-6",
+          className: "col-xl-4 col-md-12",
           key: 'perValRedFria',
           type: 'input-mask-reloj',
           props: {
