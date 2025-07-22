@@ -104,7 +104,7 @@ export class RecepcionUnidadMedicaComponent extends GeneralComponent {
         },
 
         {
-          className: 'col-lg-1 col-md-2 col-sm-3',
+          className: 'col-lg-2 col-xxl-1 col-md-2 col-sm-3',
           key: 'limpiar',
           type: 'button',
           templateOptions: {
@@ -131,7 +131,7 @@ export class RecepcionUnidadMedicaComponent extends GeneralComponent {
 
         },
         {
-          className: 'col-lg-1 col-md-2 col-sm-3',
+          className: 'col-lg-2  col-xxl-1 col-md-2 col-sm-3',
           key: 'buscar',
           type: 'button',
           templateOptions: {
