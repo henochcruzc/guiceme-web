@@ -93,7 +93,7 @@ export class AcondicionamientoComponent extends GeneralComponent {
                     },
                 },
                 {
-                    className: "col-lg-1 col-md-3 col-xs-6",
+                    className: "col-lg-2 col-md-3 col-xs-6",
                     key: 'btn-limpiar',
                     type: 'button',
                     props: {
@@ -117,7 +117,7 @@ export class AcondicionamientoComponent extends GeneralComponent {
                         },
                     },
                 }, {
-                    className: "col-lg-1 col-md-3 col-xs-6",
+                    className: "col-lg-2 col-md-3 col-xs-6",
                     key: 'btn-buscar',
                     type: 'button',
                     props: {
