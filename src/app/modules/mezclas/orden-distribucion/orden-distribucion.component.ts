@@ -131,7 +131,7 @@ export class OrdenDistribucionComponent extends GeneralComponent {
                     },
 
                 }, , {
-                    className: "col-lg-1 col-md-6",
+                    className: "col-lg-2 col-md-6",
                     key: 'btn-limpiar',
                     type: 'button',
                     props: {
@@ -155,7 +155,7 @@ export class OrdenDistribucionComponent extends GeneralComponent {
                         },
                     },
                 }, {
-                    className: "col-lg-1 col-md-6",
+                    className: "col-lg-2 col-md-6",
                     key: 'btn-buscar',
                     type: 'button',
                     props: {
