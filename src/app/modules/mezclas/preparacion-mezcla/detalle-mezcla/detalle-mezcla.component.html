@@ -87,9 +87,9 @@
         
 
         <div class="d-flex ">
-            <div class="col-lg-8 col-6">
+            <div class="col-xxl-8 col-6">
 
-                <div class="table-responsive scroll-table mt-4  d-none d-lg-flex ">
+                <div class="table-responsive scroll-table mt-4 d-none d-xxl-flex ">
 
                     <mat-table class="fullTable" [dataSource]="this.tableEnc" >
 
@@ -141,7 +141,7 @@
                     <mat-table class="fullTable " [dataSource]="tableDS">
 
                         <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
-                        <mat-row class="flex-column flex-lg-row" *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
+                        <mat-row class="flex-column flex-xxl-row" *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
                             [ngClass]="{'lightSelect': modelSelected.numero == row.numero,'lightSelectAsig':row.asignado == 1}"></mat-row>
 
                         <ng-container matColumnDef="no">
@@ -156,22 +156,22 @@
 
                         <ng-container matColumnDef="desCorta">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element" class="d-flex flex-column flex-lg-row">
-                              <strong class=" d-lg-none d-flex" >{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral:'? 'Solución base:' : 'Diluyente:'}} &nbsp;</strong>   <strong>{{ desCorta(element) }}</strong> 
+                            <mat-cell *matCellDef="let element" class="d-flex flex-column flex-lg-row gap-2">
+                              <strong class=" d-xxl-none d-flex" >{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral:'? 'Solución base:' : 'Diluyente:'}}&nbsp;</strong>   <strong>{{ desCorta(element) }}</strong> 
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="dosis">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
-                               <strong class=" d-lg-none d-flex"> Volumen(ml):&nbsp;</strong>  {{ numDosis(element) }}
+                               <strong class=" d-xxl-none d-flex"> Volumen(ml):&nbsp;</strong>  {{ numDosis(element) }}
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="unidadMedid">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
-                               <strong class=" d-lg-none d-flex"> Presentación: &nbsp;</strong>  {{ unidadMedida(element,0) }} &nbsp;<strong>{{ unidadMedida(element,1) }} </strong>
+                               <strong class=" d-xxl-none d-flex"> Presentación: &nbsp;</strong>  {{ unidadMedida(element,0) }} &nbsp;<strong>{{ unidadMedida(element,1) }} </strong>
                             </mat-cell>
                         </ng-container>
 
@@ -179,10 +179,10 @@
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
                                 <div *ngIf="element.asignado == 0" class="d-flex flex-row gap-2 align-items-center">
-                                  <strong class=" d-lg-none d-flex"> Estatus: &nbsp;</strong>  Por asignar<div class="ico-clock"></div>
+                                  <strong class=" d-xxl-none d-flex"> Estatus: &nbsp;</strong>  Por asignar<div class="ico-clock"></div>
                                 </div>
                                 <div *ngIf="element.asignado == 1" class="d-flex flex-row gap-2 align-items-center">
-                                  <strong class=" d-lg-none d-flex"> Estatus: &nbsp;</strong>  Asignada<div class="ico-asig"></div>
+                                  <strong class=" d-xxl-none d-flex"> Estatus: &nbsp;</strong>  Asignada<div class="ico-asig"></div>
                                 </div>
 
                             </mat-cell>
@@ -191,7 +191,7 @@
                     </mat-table>
                 </div>
 
-                <div class="table-responsive scroll-table mt-4 d-none d-lg-flex ">
+                <div class="table-responsive scroll-table mt-4 d-none d-xxl-flex ">
 
                     <mat-table class="fullTable " [dataSource]="tableEnc1">
 
@@ -261,7 +261,7 @@
                     <mat-table class="fullTable " [dataSource]="tableDS1">
 
                         <mat-header-row *matHeaderRowDef="displayedColumns2 "></mat-header-row>
-                        <mat-row class="flex-column flex-lg-row" *matRowDef="let row; columns: displayedColumns2 ;" (click)="highlight(row)"
+                        <mat-row class="flex-column flex-xxl-row" *matRowDef="let row; columns: displayedColumns2 ;" (click)="highlight(row)"
                             [ngClass]="{'lightSelect': modelSelected.no == row.no,'lightSelectAsig':row.asignado == 1}"></mat-row>
 
                         <ng-container matColumnDef="no">
@@ -276,15 +276,15 @@
 
                         <ng-container matColumnDef="desCorta1">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element" class="d-flex flex-column flex-lg-row">
-                              <strong class="d-flex d-lg-none" >{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral:'?'Componentes:':'Medicamento:'}}&nbsp;</strong>   <strong class=" overflow-auto">{{ desCorta(element) }}</strong> 
+                            <mat-cell *matCellDef="let element" class="d-flex flex-column flex-lg-row gap-2">
+                              <strong class="d-flex d-xxl-none" >{{mezclaSeleccionada.desTipoMezcla == 'Nutrición Parenteral:'?'Componentes:':'Medicamento:'}}&nbsp;</strong>   <strong class=" overflow-auto">{{ desCorta(element) }}</strong> 
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="dosis1">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
-                               <strong class="d-flex d-lg-none">Dosis(mg):&nbsp;</strong>  {{ numDosis(element) }}
+                               <strong class="d-flex d-xxl-none">Dosis(mg):&nbsp;</strong>  {{ numDosis(element) }}
                             </mat-cell>
                         </ng-container>
 
@@ -292,7 +292,7 @@
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
 
-                                <strong class="d-flex d-lg-none">Volumen(ml):&nbsp;</strong> <span>{{volumenComNTP ? volumenComNTP:volumenComAnti}} </span>
+                                <strong class="d-flex d-xxl-none">Volumen(ml):&nbsp;</strong> <span>{{volumenComNTP ? volumenComNTP:volumenComAnti}} </span>
 
                                  <!-- {{ unidadMedida(element,0) }}  -->
                                  
@@ -303,7 +303,7 @@
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
                                  <!-- {{ unidadMedida(element,0) }}  -->
-                                    <strong  class="d-flex d-lg-none">Viales a utilizar (pz):&nbsp;</strong> <span>{{ element.divViales }} </span>
+                                    <strong  class="d-flex d-xxl-none">Viales a utilizar (pz):&nbsp;</strong> <span>{{ element.divViales }} </span>
                                  
                             </mat-cell>
                         </ng-container>
@@ -311,7 +311,7 @@
                         <ng-container matColumnDef="ml">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
-                                 <strong  class="d-flex d-lg-none">ml de medicamento:&nbsp;</strong> <span>{{ element.ml }} </span> 
+                                 <strong  class="d-flex d-xxl-none">ml de medicamento:&nbsp;</strong> <span>{{ element.ml }} </span> 
                             </mat-cell>
                         </ng-container>
 
@@ -319,7 +319,7 @@
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
                                  <!-- {{ unidadMedida(element,0) }}  -->
-                                 <strong class="d-flex d-lg-none">Volumen de solución (ml):&nbsp;</strong> {{ element.solucion}} 
+                                 <strong class="d-flex d-xxl-none">Volumen de solución (ml):&nbsp;</strong> {{ element.solucion}} 
                             </mat-cell>
                         </ng-container>
 
@@ -327,10 +327,10 @@
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                             <mat-cell *matCellDef="let element">
                                 <div *ngIf="element.asignado == 0" class="d-flex flex-row gap-2 align-items-center">
-                                  <strong class="d-flex d-lg-none">Estatus:&nbsp;</strong>  Por asignar<div class="ico-clock"></div>
+                                  <strong class="d-flex d-xxl-none">Estatus:&nbsp;</strong>  Por asignar<div class="ico-clock"></div>
                                 </div>
                                 <div *ngIf="element.asignado == 1" class="d-flex flex-row gap-2 align-items-center">
-                                  <strong class="d-flex d-lg-none">Estatus:&nbsp;</strong>  Asignada<div class="ico-asig"></div>
+                                  <strong class="d-flex d-xxl-none">Estatus:&nbsp;</strong>  Asignada<div class="ico-asig"></div>
                                 </div>
 
                             </mat-cell>
@@ -342,7 +342,7 @@
 
 
 
-            <div class="col-lg-4 col-9 ms-3 card-detalle-med card-body">
+            <div class="col-xxl-4 col-9 ms-3 card-detalle-med card-body">
                 <div class=" mt-2">
                     <div class="d-flex align-items-center gap-2">
                         <div ngClass=""  [ngClass]="{'ico-det-diluy': modelSelected.tipo == 0, 'ico-det-med':modelSelected.tipo == 1 }"></div>
