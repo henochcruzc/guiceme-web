@@ -44,6 +44,12 @@
           <mat-cell *matCellDef="let element">{{ element.cveFolioSolicitudMezcla }}</mat-cell>
         </ng-container>
 
+         <ng-container matColumnDef="componentes">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Lista de componentes </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.componentes }}</mat-cell>
+        </ng-container>
+
+
         <ng-container matColumnDef="desTipoMezcla">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de mezcla </mat-header-cell>
           <mat-cell *matCellDef="let element">{{ element.desTipoMezcla }}</mat-cell>

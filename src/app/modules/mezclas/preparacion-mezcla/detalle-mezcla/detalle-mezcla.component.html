@@ -383,7 +383,9 @@
     </div>
 </div>
 
-<div class="card-ceme mt-0 pt-0 "> 
-    <div *ngIf="tipoAccion == 1" ><button type="button" class="btn btn-primary float-end ps-5 pe-5" [disabled]="validaAsignaciones()" (click)="onAsignarTodo()" >Finalizar</button></div>  
-    <div *ngIf="tipoAccion == 2"><button type="button" class="btn btn-primary float-end ps-5 pe-5"  (click)="onImprimir()">Imprimir</button></div>  
+<div class="card-ceme mt-0 pt-0 d-flex gap-2 flex-row-reverse "> 
+    <div *ngIf="tipoAccion == 1" ><button type="button" class="btn btn-primary float-end ps-5 pe-5" [disabled]="validaAsignaciones()" (click)="onAsignarTodo()" >Guardar</button></div>  
+    <div *ngIf="tipoAccion == 2"><button type="button" class="btn btn-primary float-end ps-5 pe-5" [disabled]="!this.impresionDb"   (click)="onAtrasFinalizar()">Finalizar Preparación</button></div>
+    <div *ngIf="tipoAccion == 2"><button type="button" class="btn btn-primary float-end ps-5 pe-5"   (click)="onImprimir()">Imprimir</button></div>  
+      
 </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

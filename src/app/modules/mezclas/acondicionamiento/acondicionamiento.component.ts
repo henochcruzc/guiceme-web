@@ -163,7 +163,7 @@ export class AcondicionamientoComponent extends GeneralComponent {
 
 
 
-    displayedColumns = ['cveFolioMezclaDosis', 'cveFolioSolicitudMezcla', 'desTipoMezcla', 'fechaAplicacion', 'estatusDosis']
+    displayedColumns = ['cveFolioMezclaDosis', 'cveFolioSolicitudMezcla','componentes','desTipoMezcla', 'fechaAplicacion', 'estatusDosis']
     myData;
     tableDS: MatTableDataSource<any>;
     selection = new SelectionModel<any>(true, []);

@@ -9,6 +9,7 @@ import { CatalogoService } from 'src/app/shared/services/catalogo.service';
 import { NoMedicamentoComponent } from "../../../shared/layout/no-medicamento/no-medicamento.component";
 import { Sort } from '@angular/material/sort';
 import { PreparacionService } from 'src/app/shared/services/preparacion.service';
+import { SessionStorageService } from '../../login/services/session-storage.service';
 
 @Component({
     selector: 'app-preparacion-mezcla',
@@ -73,15 +74,15 @@ export class PreparacionMezclaComponent extends GeneralComponent {
                             const idTurno = field.form.get('idTurno');
                             if (idTurno != null) {
                                 idTurno.valueChanges.subscribe(async x => {
-                                    if(x != null){
+                                    if (x != null) {
                                         await this._catalogoService.getTurnoCampanaPreparacion({ valCam: true, idCentralMezcla: this._accountService.getUser().cemetUsuarios[0].idCentralMezcla.id, idTurno: x }).then(resp => {
                                             const compareFn = (a, b) => (a.refNombreCampana < b.refNombreCampana ? -1 : 0);
-                                            
-                                            field.props.options =  resp.sort(compareFn);
+
+                                            field.props.options = resp.sort(compareFn);
                                         })
-                                        
-                                        
-                                    }else{
+
+
+                                    } else {
                                         field.props.options = [];
                                     }
                                 })
@@ -99,6 +100,14 @@ export class PreparacionMezclaComponent extends GeneralComponent {
     myData: any;
     ngOnInit() {
 
+        let modelTemp = this._sesionStorage.getModelTurnoCampana();
+        if (modelTemp) {
+            setTimeout(() => {
+                this.model = { ...modelTemp }
+                this.pageChanged(1);
+            }, 500);
+        }
+
     }
 
     shortTable(sort: Sort) {
@@ -113,10 +122,18 @@ export class PreparacionMezclaComponent extends GeneralComponent {
         return this.form.invalid;
     }
 
+
+
     async pageChanged(page) {
+
+
+
         this.model.page = page - 1;
         this.model.size = this.ConfigTabla.NUM_ELEMENTOS_TABLA
         this.model.idCentralMezcla = this._accountService.getUser().cemetUsuarios[0].idCentralMezcla.id
+        if (page === 1) {
+            this._sesionStorage.setModelTurnoCampana(this.model);
+        }
         this._preparacionService.busqueda(this.model).then(
             resp => {
                 if (resp != null && resp.totalElements > 0) {
@@ -133,8 +150,11 @@ export class PreparacionMezclaComponent extends GeneralComponent {
     }
 
     resetForm() {
-        this.model = { ...{} }
-        this.form.reset(this.model)
+        this.model = { ...{} };
+        this.form.reset(this.model);
+        this._sesionStorage.setModelTurnoCampana(undefined);
+        this.tableDS = new MatTableDataSource([]);
+        this.collectionSize = 0;
     }
 
     onPreparar(elemento) {

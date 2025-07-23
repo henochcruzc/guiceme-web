@@ -6,11 +6,13 @@ const USER_KEY = 'auth-user';
 const USER_MODULES = 'auth-modules';
 const ACTIVE_TAB = 'active-tab';
 const USER_URL = 'usuario_url';
-const DATA_RESOLUCION = 'data_resolucion'
-const DATA_DUPLICAR_SOLICITUD = 'duplicado_solicitud'
-const DUPLICAR_SOLICITUD_DATA = 'duplicar_solicitud_data'
-const DATA_MEZCLAS_AGREGADAS = 'mezclas-agregadas'
-const MODEL_TIPO_MEZCLA =  'modelo_tipo_mezcla'
+const DATA_RESOLUCION = 'data_resolucion';
+const DATA_DUPLICAR_SOLICITUD = 'duplicado_solicitud';
+const DUPLICAR_SOLICITUD_DATA = 'duplicar_solicitud_data';
+const DATA_MEZCLAS_AGREGADAS = 'mezclas-agregadas';
+const MODEL_TIPO_MEZCLA =  'modelo_tipo_mezcla';
+const PREP_MEZ_TURNO_CAMPANA = 'prep_mez_turno_campana'; 
+
 
 @Injectable({
   providedIn: 'root',
@@ -120,4 +122,19 @@ export class SessionStorageService {
   getModelTipoMezcla():any {
     return JSON.parse(this.storageService.getData(MODEL_TIPO_MEZCLA));
   }
+
+
+   setModelTurnoCampana(model: any) {
+    this.storageService.removeData(PREP_MEZ_TURNO_CAMPANA);
+    this.storageService.saveData(PREP_MEZ_TURNO_CAMPANA, JSON.stringify(model));
+  }
+
+  getModelTurnoCampana():any {
+    return JSON.parse(this.storageService.getData(PREP_MEZ_TURNO_CAMPANA));
+  }
+
+
+  
+
+
 }

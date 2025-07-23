@@ -546,7 +546,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
   volumenComNTP: any;
   volumenCom: any;
   volumenComAnti: any;
-  conteo:any ;
+  conteo: any;
 
   //auxiliares
   ngOnInit() {
@@ -580,10 +580,10 @@ export class DetalleMezclaComponent extends GeneralComponent {
         if (resp != null) {
           for (let i = 0; i < resp.length; i++) {
 
-          let numMed = i + 1;
-          resp[i].numero = numMed
-            
-            
+            let numMed = i + 1;
+            resp[i].numero = numMed
+
+
           }
           console.log(resp)
           this.mydataSb = resp.filter(sb => sb.idTipoComponente == 4 || sb.tipo == 0);
@@ -592,20 +592,20 @@ export class DetalleMezclaComponent extends GeneralComponent {
           this.myData = resp.sort((a, b) => (a.tipo < b.tipo ? -1 : 0));
           this.myData = resp.filter(com => com.idTipoComponente != 4 && com.tipo != 0);
           this.volumenCom = this.myData.reduce((acumulador, item) => acumulador + item.numDosisMedicamento, 0);
-          console.log(this.mydataSb )
-          console.log(this.mydataSb )
+          console.log(this.mydataSb)
+          console.log(this.mydataSb)
 
 
 
           for (let i = 0; i < this.myData.length; i++) {
-            this.myData[i].divViales = this.myData[i].numDosisMedicamento/this.myData[i].numPiezasPresentacion
-            this.myData[i].ml = this.myData[i].numDosisMedicamento/this.myData[i].numConcentracion
-            this.myData[i].solucion = (this.volumenComNTP?this.volumenComNTP:this.volumenComAnti) - this.myData[i].ml
-            
+            this.myData[i].divViales = this.myData[i].numDosisMedicamento / this.myData[i].numPiezasPresentacion
+            this.myData[i].ml = this.myData[i].numDosisMedicamento / this.myData[i].numConcentracion
+            this.myData[i].solucion = (this.volumenComNTP ? this.volumenComNTP : this.volumenComAnti) - this.myData[i].ml
+
             this.myData[i].divViales = this.myData[i].divViales.toFixed(2)
             this.myData[i].ml = this.myData[i].ml.toFixed(2)
             this.myData[i].solucion = this.myData[i].solucion.toFixed(2)
-            
+
           }
 
           console.log(this.myData)
@@ -663,7 +663,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
       });
     }
 
-   
+
 
     if (this.tableDS1?.data) {
       this.tableDS1.data.forEach(element => {
@@ -673,7 +673,7 @@ export class DetalleMezclaComponent extends GeneralComponent {
       });
     }
 
-    
+
 
     return this.collectionSizeAsig;
   }
@@ -744,8 +744,8 @@ export class DetalleMezclaComponent extends GeneralComponent {
       this.modelSelected.caducidadMed = this.model.caducidadMed;
 
       this.replaceOrAppend(this.myData, this.model, (a, b) => a.no === b.no);
-        this.tableDS = new MatTableDataSource(this.myData);
-        this.tableDS = new MatTableDataSource(this.mydataSb);
+      this.tableDS = new MatTableDataSource(this.myData);
+      this.tableDS = new MatTableDataSource(this.mydataSb);
     }
 
 
@@ -823,36 +823,34 @@ export class DetalleMezclaComponent extends GeneralComponent {
       });
 
     }
-    
 
-    
+
+
 
     return deshabilitado;
   }
 
   onAsignarTodo() {
+    // this._spinner.show();
+    setTimeout(() => {
+      this._alertServices.success('Se han agregado los medicamentos exitosamente.');
+      this.termine();
+      // this._spinner.hide();
+    }, 100);
 
 
 
-    const dialogRef = this._dialog.open(
-      DialogoFinalizarComponent,
-      this._dialogService.finalizarPreparacion()
-    );
+  }
 
-    dialogRef.afterClosed().subscribe(
-      async result => {
-        if (result != false) {
-          this._spinner.show();
-          setTimeout(() => {
-            this._alertServices.success('Se han agregado los medicamentos exitosamente');
-            this.termine();
-            this._spinner.hide();
-          }, 1500);
+  onAtrasFinalizar(){
 
-        }
-
-      }
-    );
+    setTimeout(() => {
+      this._alertServices.success('Se finaliza la preparación exitosamente.');
+      setTimeout(() => {
+         this.onAtras();
+      }, 500);
+      
+    }, 250);
 
   }
 
