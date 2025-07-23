@@ -27,23 +27,23 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
     SharedModule,
     DetalleProgresoComponent,
     HeaderDetalleMezclaComponent
-]
+  ]
 })
-export class AprobarNoAprobarComponent extends GeneralComponent{
+export class AprobarNoAprobarComponent extends GeneralComponent {
   origen: boolean;
   origenAcondicionamiento: boolean = false;
   origenOrdenDistribucion: boolean = false;
   idEstatusMezcla: any;
-  tablaMedicamentos=[] ;
-  tablaDiluyentes=[] ;
-  tablaMezcla=[];
-  tablaPacientes=[];
-  dataEtiqueta: any ;
-  tablaMedicamentos2=[]
-  tablaMedicamentos3=[]
-  tablaComponentes=[]
-  tablaMedicamentosAnt=[]
-  arrayComponentes=[]
+  tablaMedicamentos = [];
+  tablaDiluyentes = [];
+  tablaMezcla = [];
+  tablaPacientes = [];
+  dataEtiqueta: any;
+  tablaMedicamentos2 = []
+  tablaMedicamentos3 = []
+  tablaComponentes = []
+  tablaMedicamentosAnt = []
+  arrayComponentes = []
 
   textGrad = "°C";
 
@@ -61,21 +61,21 @@ export class AprobarNoAprobarComponent extends GeneralComponent{
   _catalogoService = inject(CatalogoService);
   dataResolucion = this.sessionStorageService.getDataResolucion();
   user = this.sessionStorageService.getUser();
-  
 
-  ngOnInit(){
+
+  ngOnInit() {
     //console.log('data resolucion ',this.dataResolucion.origen)
     //console.log('data modelo ',this.dataResolucion.modelo)
     //console.log('userrr', this.user)
-    console.log('data resolucion ',this.dataResolucion);
+    console.log('data resolucion ', this.dataResolucion);
     if (this.dataResolucion.origen == NAV.acondicionamiento) {
       this.origenAcondicionamiento = true
       this.idEstatusMezcla = this.dataResolucion.modelo.estatusDosis.idEstatusMezcla;
-    }else if(this.dataResolucion.origen == NAV.ordenDistribucion){
+    } else if (this.dataResolucion.origen == NAV.ordenDistribucion) {
       this.origenOrdenDistribucion = true
     }
 
- 
+
   }
 
   dialogoNoAprobar() {
@@ -87,7 +87,7 @@ export class AprobarNoAprobarComponent extends GeneralComponent{
 
     dialogRef.afterClosed().subscribe(
       async data => {
-        
+
         if (data != null) {
           this.noAprobada(data);
         }
@@ -96,82 +96,82 @@ export class AprobarNoAprobarComponent extends GeneralComponent{
   }
 
   dialogoAprobar() { // Aprobar mezcla - Acondicionamiento,3
-console.log("this.idEstatusMezcla",this.idEstatusMezcla);
+    console.log("this.idEstatusMezcla", this.idEstatusMezcla);
     //invocar aprobarPreparada
     if (this.idEstatusMezcla === 5) {//cuando se da click en Aprobar mezcla
-       
+
       this.preAprobarPreparada();
 
     } else {
-//se incorpora la mejora 18 y 19
-// debugger;
- if(this.dataResolucion.modelo.idTipoMezcla==3 || this.dataResolucion.modelo.idTipoMezcla==1){//antibiotico citotoxico
-   
-  const dialogRef = this._dialog.open(
-    DialogFormlyComponent,
-    this._dialogFormlyService.imprimirEtiquetaAntCito(this.dataResolucion.modelo.cveFolioMezclaDosis)
-  );
-  dialogRef.afterClosed().subscribe(
-    async data => {
-      //debugger
-      if (data !=null) {
-         console.log("data recomendaciones",data);
-         this.imprimirAprobada(data.recomendaciones);
-  
+      //se incorpora la mejora 18 y 19
+      // debugger;
+      if (this.dataResolucion.modelo.idTipoMezcla == 3 || this.dataResolucion.modelo.idTipoMezcla == 1) {//antibiotico citotoxico
 
-      }else {
-        console.log("data recomendaciones",data);
-        this.cerrarAprobada();
-    
-      }
-    }
-  );
-
- }
- else if(this.dataResolucion.modelo.idTipoMezcla==2){//NTP
-   
-  const dialogRef = this._dialog.open(
-    DialogFormlyComponent,
-    this._dialogFormlyService.imprimirEtiquetaNTP(this.dataResolucion.modelo.cveFolioMezclaDosis)
-  );
-  dialogRef.afterClosed().subscribe(
-    async data => {
-      //debugger
-      if (data !=null) {
-         console.log("data recomendaciones",data);
-         this.imprimirAprobada(data.recomendaciones);
-  
-
-      }else {
-        console.log("data recomendaciones",data);
-        this.cerrarAprobada();
-    
-      }
-    }
-  );
-
- }
+        const dialogRef = this._dialog.open(
+          DialogFormlyComponent,
+          this._dialogFormlyService.imprimirEtiquetaAntCito(this.dataResolucion.modelo.cveFolioMezclaDosis)
+        );
+        dialogRef.afterClosed().subscribe(
+          async data => {
+            //debugger
+            if (data != null) {
+              console.log("data recomendaciones", data);
+              this.imprimirAprobada(data.recomendaciones);
 
 
-/* se comenta por mejora 18 19
-      const dialogRef = this.dialog.open(
-        DialogComponent,
-        this._dialogService.modalGenerico('Aprobación de mezcla', '¿Deseas imprimir la mezcla con folio <b>' + this.dataResolucion.modelo.cveFolioMezclaDosis + '</b>?', null, 'Imprimir')
-      );
-      dialogRef.afterClosed().subscribe(
-        async result => {
-          if (result) {//aceptar
-            this.imprimirAprobada();
-          } else {//cerrar
-            console.log('cerrar Preparada acondicionamiento')
-            this.cerrarAprobada();
+            } else {
+              console.log("data recomendaciones", data);
+              this.cerrarAprobada();
+
+            }
           }
-          //setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 1000);
-        }
-      );*/
+        );
+
+      }
+      else if (this.dataResolucion.modelo.idTipoMezcla == 2) {//NTP
+
+        const dialogRef = this._dialog.open(
+          DialogFormlyComponent,
+          this._dialogFormlyService.imprimirEtiquetaNTP(this.dataResolucion.modelo.cveFolioMezclaDosis)
+        );
+        dialogRef.afterClosed().subscribe(
+          async data => {
+            //debugger
+            if (data != null) {
+              console.log("data recomendaciones", data);
+              this.imprimirAprobada(data.recomendaciones);
+
+
+            } else {
+              console.log("data recomendaciones", data);
+              this.cerrarAprobada();
+
+            }
+          }
+        );
+
+      }
+
+
+      /* se comenta por mejora 18 19
+            const dialogRef = this.dialog.open(
+              DialogComponent,
+              this._dialogService.modalGenerico('Aprobación de mezcla', '¿Deseas imprimir la mezcla con folio <b>' + this.dataResolucion.modelo.cveFolioMezclaDosis + '</b>?', null, 'Imprimir')
+            );
+            dialogRef.afterClosed().subscribe(
+              async result => {
+                if (result) {//aceptar
+                  this.imprimirAprobada();
+                } else {//cerrar
+                  console.log('cerrar Preparada acondicionamiento')
+                  this.cerrarAprobada();
+                }
+                //setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 1000);
+              }
+            );*/
     }
 
-    
+
   }
 
   dialogoReimpresion() {
@@ -183,8 +183,8 @@ console.log("this.idEstatusMezcla",this.idEstatusMezcla);
         let numero = data;
         let param1;
         let param2;
-        if (data !=null) {
-          
+        if (data != null) {
+
           if (numero === 1) {//si es 1,shabilitar Una impresion, deshabilitar Dos
             param1 = false;
             param2 = true;
@@ -226,119 +226,119 @@ console.log("this.idEstatusMezcla",this.idEstatusMezcla);
   modelModal: any = {};
   fieldsReimpresion: FormlyFieldConfig[] = [
     {
-        fieldGroupClassName: 'row',
-        
-        fieldGroup: [
-            {
-                className: "col-8",
-                key: 'idmotivoReimp',
-                type: 'select',
-                props: {
-                    label: 'Motivo de reimpresión',
-                    placeholder: 'Selecciona un motivo de reimpresión',
-                    valueProp: 'id',
-                    required: true,
-                    labelProp: 'desMotivoReimpresion',
-                    options: [],
-                },
-                hooks: {
-                    onInit: async (field) => {
+      fieldGroupClassName: 'row',
 
-                        this._catalogoService.getMotivoReimpresion()
-                            .then(
-                                (data: any) => {
-                                    if (data) {
+      fieldGroup: [
+        {
+          className: "col-8",
+          key: 'idmotivoReimp',
+          type: 'select',
+          props: {
+            label: 'Motivo de reimpresión',
+            placeholder: 'Selecciona un motivo de reimpresión',
+            valueProp: 'id',
+            required: true,
+            labelProp: 'desMotivoReimpresion',
+            options: [],
+          },
+          hooks: {
+            onInit: async (field) => {
 
-                                        field.props.options = data;
-                                    } else
-                                        this.alertServices.error("<strong>Error</strong> al obtener conceptos de Motivos de Reimpresión");
-                                },
-                                (_err) => {
-                                    this.alertServices.error("<strong>Error</strong> al obtener conceptos de Motivos de Reimpresión");
-                                }
-                            );
+              this._catalogoService.getMotivoReimpresion()
+                .then(
+                  (data: any) => {
+                    if (data) {
 
-                    },
-
-                },
-            },
-            {
-                className: "col-md-4",
-                key: 'mat_radio',
-                type: 'mat-radio',
-                props: {
-                    label: 'Número de impresiones',
-                    required: true,
-                    
-                    options: [
-                        { value: 1, label: 'Uno' , },
-                        { value: 2, label: 'Dos' , },
-                    ],
-                    valueProp: 'value',
-                },
-                hooks: {
-                  onInit: (field) => {
-                    console.log('field',field)
-                  }
-                },
-                expressionProperties: {
-                  'props.options[0].disabled' : (model: any) => {
-                    //console.log('valor model1', model)
-                    return model.bloquearUno
+                      field.props.options = data;
+                    } else
+                      this.alertServices.error("<strong>Error</strong> al obtener conceptos de Motivos de Reimpresión");
                   },
-                  'props.options[1].disabled' : (model: any) => {
-                    //console.log('valor model2', model)
-                    return model.bloquearDos
+                  (_err) => {
+                    this.alertServices.error("<strong>Error</strong> al obtener conceptos de Motivos de Reimpresión");
                   }
-                  
-                }
+                );
+
             },
-            
-            {
-                className: "col-12",
-                key: 'refObsResolucInvest',
-                type: 'textarea',
-                props: {
-                    rows: 5,
-                    label: 'Observaciones',
-                    maxLength: 500,
-                    required: true
-                },
+
+          },
+        },
+        {
+          className: "col-md-4",
+          key: 'mat_radio',
+          type: 'mat-radio',
+          props: {
+            label: 'Número de impresiones',
+            required: true,
+
+            options: [
+              { value: 1, label: 'Uno', },
+              { value: 2, label: 'Dos', },
+            ],
+            valueProp: 'value',
+          },
+          hooks: {
+            onInit: (field) => {
+              console.log('field', field)
+            }
+          },
+          expressionProperties: {
+            'props.options[0].disabled': (model: any) => {
+              //console.log('valor model1', model)
+              return model.bloquearUno
             },
-        ]
+            'props.options[1].disabled': (model: any) => {
+              //console.log('valor model2', model)
+              return model.bloquearDos
+            }
+
+          }
+        },
+
+        {
+          className: "col-12",
+          key: 'refObsResolucInvest',
+          type: 'textarea',
+          props: {
+            rows: 5,
+            label: 'Observaciones',
+            maxLength: 500,
+            required: true
+          },
+        },
+      ]
     },
-];
+  ];
 
-  
 
-solicitarReimpresion(data) {
-  let request =
-  {
-    "cveUsuarioAlta": this.user.cemetUsuarios[0].id,
-    "idUsuarioResponsable": this.user.cemetUsuarios[0].id,
-    "idSolicitudMezcla": this.dataResolucion.modelo.idSolicitudMezcla,
-    "idMezcla":  this.dataResolucion.modelo.idMezcla,
-    "idMezclaAplicDia": this.dataResolucion.modelo.idMezclaAplicDia,
-    "idMezclaAplicDiaDosis": this.dataResolucion.modelo.idMezclaAplicDiaDosis,
-    "idInspecCalidadMezcla": this.dataResolucion.modelo.idInspecCalidadMezcla,
-    "idMotivoReimpresion": data.idmotivoReimp,
-    "refReimpresionObs": data.refObsResolucInvest,
-    "numImpresionEtiqueta": data.mat_radio
-  };
-  
-  this.mezclaService.solicitarReimpresion(request)
+
+  solicitarReimpresion(data) {
+    let request =
+    {
+      "cveUsuarioAlta": this.user.cemetUsuarios[0].id,
+      "idUsuarioResponsable": this.user.cemetUsuarios[0].id,
+      "idSolicitudMezcla": this.dataResolucion.modelo.idSolicitudMezcla,
+      "idMezcla": this.dataResolucion.modelo.idMezcla,
+      "idMezclaAplicDia": this.dataResolucion.modelo.idMezclaAplicDia,
+      "idMezclaAplicDiaDosis": this.dataResolucion.modelo.idMezclaAplicDiaDosis,
+      "idInspecCalidadMezcla": this.dataResolucion.modelo.idInspecCalidadMezcla,
+      "idMotivoReimpresion": data.idmotivoReimp,
+      "refReimpresionObs": data.refObsResolucInvest,
+      "numImpresionEtiqueta": data.mat_radio
+    };
+
+    this.mezclaService.solicitarReimpresion(request)
       .then(data => {
         if (data) {
           console.log('respuesta re', data)
           //envia msg13 y redirecciona a acondicionamiento
           this._alertServices.success('La solicitud de <strong>reimpresión</strong> se envió con exito.');
-          setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 4000); 
+          setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 4000);
         } else
           this._alertServices.error("<strong>Error</strong> al solicitar reimpresión.");
       });
 
 
-}
+  }
 
   cerrarAprobada() {
     let request = {
@@ -354,32 +354,32 @@ solicitarReimpresion(data) {
       .then(data => {
         if (data) {
           this.alertServices.warn('La etiqueta de la mezcla <strong>' + this.dataResolucion.modelo.cveFolioMezclaDosis + '</strong> no se imprimió.');
-          if(this.dataResolucion.origen==='acondicionamiento'){
+          if (this.dataResolucion.origen === 'acondicionamiento') {
             setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 4000); //ver si es distribución o acoondicionamiento
-          }else{
-            setTimeout(() => this._router.navigate([this._nav.ordenDistribucion]), 4000); 
+          } else {
+            setTimeout(() => this._router.navigate([this._nav.ordenDistribucion]), 4000);
           }
-          
+
         } else
           this._alertServices.error("<strong>Error</strong> al cerrar la mezcla.");
       });
-    
+
   }
 
   imprimirAprobada(recoArray) {
     // (imprimir)
     let request =
     {
-      "cveUsuarioAlta": this.user.cemetUsuarios[0].id ,
+      "cveUsuarioAlta": this.user.cemetUsuarios[0].id,
       "idSolicitudMezcla": this.dataResolucion.modelo.idSolicitudMezcla,
       "idMezcla": this.dataResolucion.modelo.idMezcla,
       "idMezclaAplicDia": this.dataResolucion.modelo.idMezclaAplicDia,
       "idMezclaAplicDiaDosis": this.dataResolucion.modelo.idMezclaAplicDiaDosis,
       "idInspecCalidadMezcla": this.dataResolucion.modelo.idInspecCalidadMezcla,
-      "idRecomendaciones":recoArray//[1,4,5,6]
+      "idRecomendaciones": recoArray//[1,4,5,6]
     }
-    console.log("request",request);
-    
+    console.log("request", request);
+
     //validar el nombre del endpoint
     this.mezclaService.obtenerEtiqueta(request)
       .then(data => {
@@ -387,21 +387,21 @@ solicitarReimpresion(data) {
           this.alertServices.success('La etiqueta de la mezcla <strong>' + this.dataResolucion.modelo.cveFolioMezclaDosis + '</strong> se imprimió.');
           //llamar al servicio para imprimir las o la etiqueta
           //llama a servicio para imprimir etiqueta , IMP, evaluamos en tipo de mezcla
-          
-          if( this.dataResolucion.modelo.idTipoMezcla == 3 || this.dataResolucion.modelo.idTipoMezcla == 1){
+
+          if (this.dataResolucion.modelo.idTipoMezcla == 3 || this.dataResolucion.modelo.idTipoMezcla == 1) {
             this.impresionEtiquetaPdf(data);
-          }else{//NTP
+          } else {//NTP
             this.impresionEtiquetaPdfNTP(data);
           }
           //
 
           //********************************************** */
-          if(this.dataResolucion.origen==='acondicionamiento'){
+          if (this.dataResolucion.origen === 'acondicionamiento') {
             setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 4000);
-          }else{
+          } else {
             setTimeout(() => this._router.navigate([this._nav.ordenDistribucion]), 4000);
           }
-          
+
         } else
           this._alertServices.error("<strong>Error</strong> al aprobar la mezcla.");
       });
@@ -409,7 +409,7 @@ solicitarReimpresion(data) {
   }
 
   impresionEtiquetaPdfNTP(data) {
-    
+
     this.tablaDiluyentes = [];
     this.tablaMedicamentos = [];
     this.tablaMedicamentos2 = [];
@@ -422,14 +422,14 @@ solicitarReimpresion(data) {
 
     let numEtiquetas = data.numImpresionEtiqueta;
     let milVelInf = ' ';
-    
+
     if (data.datosMezcla.refVelInfusion !== null && data.datosMezcla.refVelInfusion != undefined) {
       let num = Number(data.datosMezcla.refVelInfusion);
 
-      if(num ){
+      if (num) {
         milVelInf = this.convertirMiles(num);
         milVelInf = String(milVelInf).concat(' ml/hrs')
-      }else{
+      } else {
         milVelInf = data.datosMezcla.refVelInfusion
         milVelInf = String(milVelInf).concat(' ml/hrs')
       }
@@ -437,8 +437,10 @@ solicitarReimpresion(data) {
 
     for (let index = 0; index < numEtiquetas; index++) {//si se imprime 1 o 2 veces
 
-      
+
       let paciente = {
+       nomMedico: data.datosMezcla.nombreMedico ,
+        diagnostico: data.datosMezcla.diagnostico,
         nombre: data.datosPaciente.nombrePaciente,
         fechaNac: data.datosPaciente.fecNacimiento ? data.datosPaciente.fecNacimiento : ' ',
         edad: data.datosPaciente.edad ? data.datosPaciente.edad : ' ',
@@ -528,7 +530,7 @@ solicitarReimpresion(data) {
     let milNitro = ' ';
     let milVol = ' ';
     let milProteinas = ' ';
-    
+
 
     if (data.detalleMezclaNpt.numOsmolaridad !== null && data.detalleMezclaNpt.numOsmolaridad !== undefined) {
       milOsmo = this.convertirMiles(data.detalleMezclaNpt.numOsmolaridad);
@@ -565,19 +567,19 @@ solicitarReimpresion(data) {
       volTotal: milVol,
       overfill: ' ',
       velInfu: milVelInf,
-      proteinas: milProteinas, 
+      proteinas: milProteinas,
       fPrep: data.datosMezcla.fechaPreparacion ? data.datosMezcla.fechaPreparacion : ' ',
       fAmb: data.datosMezcla.fechaCaducidadAmbiente ? data.datosMezcla.fechaCaducidadAmbiente : ' ',
       fFria: data.datosMezcla.fechaCaducidadRedFria ? data.datosMezcla.fechaCaducidadRedFria : ' '
     }
-   
-    let arreglo:any = [...data.temperaturaEstabilidad];
-    
 
-    let minNumTemperaturaEstbAmb =  Math.min(...arreglo.map(a => a.numTemperaturaEstbAmb));
-    let minNumTemperaturaEstbRf =  Math.min(...arreglo.map(a => a.numTemperaturaEstbRf));
+    let arreglo: any = [...data.temperaturaEstabilidad];
 
-    console.log('##################################### ',minNumTemperaturaEstbAmb, '           ',  minNumTemperaturaEstbRf)
+
+    let minNumTemperaturaEstbAmb = Math.min(...arreglo.map(a => a.numTemperaturaEstbAmb));
+    let minNumTemperaturaEstbRf = Math.min(...arreglo.map(a => a.numTemperaturaEstbRf));
+
+    console.log('##################################### ', minNumTemperaturaEstbAmb, '           ', minNumTemperaturaEstbRf)
 
     this.dataEtiqueta = {
       paciente: this.tablaPacientes,
@@ -592,10 +594,10 @@ solicitarReimpresion(data) {
       numImpresion: 2,
       nptMezcla: nptMezcla,
       direccion: data.datosMezcla.direcccion ? data.datosMezcla.direcccion : ' ',
-      temperatura: data.datosMezcla.numTemperaturaEstbFormato? data.datosMezcla.numTemperaturaEstbFormato : ' ',
+      temperatura: data.datosMezcla.numTemperaturaEstbFormato ? data.datosMezcla.numTemperaturaEstbFormato : ' ',
       tempEstabFria: minNumTemperaturaEstbAmb + this.textGrad,
       tempEstabAmb: minNumTemperaturaEstbRf + this.textGrad,
-      requisitoConservacion : data.requisitoConservacion,
+      requisitoConservacion: data.requisitoConservacion,
     }
     //console.log('dataEtiquetanpt',this.dataEtiqueta)
 
@@ -608,7 +610,7 @@ solicitarReimpresion(data) {
 
   }
 
- 
+
 
   convertirMiles(numero) {
     const exp = /(\d)(?=(\d{3})+(?!\d))/g;
@@ -617,61 +619,63 @@ solicitarReimpresion(data) {
     arr[0] = arr[0].replace(exp, rep);
     return arr[1] ? arr.join('.') : arr[0];
   }
- 
+
 
   impresionEtiquetaPdf(data) {
-   
-    
-    
-    this.tablaDiluyentes=[];
-    this.tablaMedicamentos=[];
-    this.tablaMezcla=[];
-    this.tablaPacientes=[];
-    this.tablaMedicamentos2=[];
-    this.tablaMedicamentos3=[];
-    this.tablaComponentes=[];
 
-    let numEtiquetas = data.numImpresionEtiqueta; 
+
+
+    this.tablaDiluyentes = [];
+    this.tablaMedicamentos = [];
+    this.tablaMezcla = [];
+    this.tablaPacientes = [];
+    this.tablaMedicamentos2 = [];
+    this.tablaMedicamentos3 = [];
+    this.tablaComponentes = [];
+
+    let numEtiquetas = data.numImpresionEtiqueta;
     let milVelInfu = ' ';
-    
+
     if (data.datosMezcla.refVelInfusion !== null || data.datosMezcla.refVelInfusion != undefined) {
       let num = Number(data.datosMezcla.refVelInfusion)
 
-      if(num ){
+      if (num) {
         milVelInfu = this.convertirMiles(num);
         milVelInfu = String(milVelInfu).concat(' ml/hrs')
-      }else{
+      } else {
         milVelInfu = data.datosMezcla.refVelInfusion
         milVelInfu = String(milVelInfu).concat(' ml/hrs')
       }
 
-      
+
     }
-    
+
     //index < numEtiquetas;
     for (let index = 0; index < numEtiquetas; index++) {
 
       let paciente = {
-        nombre: data.datosPaciente.nombrePaciente?data.datosPaciente.nombrePaciente : ' ',
+        nomMedico: data.datosMezcla.nombreMedico ,
+        diagnostico: data.datosMezcla.diagnostico,
+        nombre: data.datosPaciente.nombrePaciente ? data.datosPaciente.nombrePaciente : ' ',
         fechaNac: data.datosPaciente.fecNacimiento ? data.datosPaciente.fecNacimiento : ' ',
-        edad: data.datosPaciente.edad? data.datosPaciente.edad : ' ',
+        edad: data.datosPaciente.edad ? data.datosPaciente.edad : ' ',
         peso: data.datosPaciente.refPeso ? data.datosPaciente.refPeso : ' ',
-        piso: data.datosPaciente.refNombrePiso? data.datosPaciente.refNombrePiso : ' ',
-        cama: data.datosPaciente.refNombreCama? data.datosPaciente.refNombreCama : ' ',
-        nss: data.datosPaciente.refNss? data.datosPaciente.refNss : ' ',
-        agregado: data.datosPaciente.agregadoMedico? data.datosPaciente.agregadoMedico : ' ',
-        servicio: data.datosPaciente.desServicioEspecialidad? data.datosPaciente.desServicioEspecialidad : ' ',
-        unidad: data.datosPaciente.desUnidadMedica? data.datosPaciente.desUnidadMedica: ' '
+        piso: data.datosPaciente.refNombrePiso ? data.datosPaciente.refNombrePiso : ' ',
+        cama: data.datosPaciente.refNombreCama ? data.datosPaciente.refNombreCama : ' ',
+        nss: data.datosPaciente.refNss ? data.datosPaciente.refNss : ' ',
+        agregado: data.datosPaciente.agregadoMedico ? data.datosPaciente.agregadoMedico : ' ',
+        servicio: data.datosPaciente.desServicioEspecialidad ? data.datosPaciente.desServicioEspecialidad : ' ',
+        unidad: data.datosPaciente.desUnidadMedica ? data.datosPaciente.desUnidadMedica : ' '
       }
       this.tablaPacientes.push(paciente)
       let mezcla = {
-        via: data.datosMezcla.desViaAdministracion?data.datosMezcla.desViaAdministracion: ' ',
-        unidadMed: data.datosMezcla.refUnidadMinMedida?data.datosMezcla.refUnidadMinMedida : ' ',
+        via: data.datosMezcla.desViaAdministracion ? data.datosMezcla.desViaAdministracion : ' ',
+        unidadMed: data.datosMezcla.refUnidadMinMedida ? data.datosMezcla.refUnidadMinMedida : ' ',
         velocidad: milVelInfu,//data.datosMezcla.refVelInfusion?data.datosMezcla.refVelInfusion+' ml/hr': ' ',
         fPrepa: data.datosMezcla.fechaPreparacion ? data.datosMezcla.fechaPreparacion : ' ',
         ambiente: data.datosMezcla.fechaCaducidadAmbiente ? data.datosMezcla.fechaCaducidadAmbiente : ' ',
         fria: data.datosMezcla.fechaCaducidadRedFria ? data.datosMezcla.fechaCaducidadRedFria : ' ',
-        usuario: data.datosMezcla.nombreUsuarioPreparador?data.datosMezcla.nombreUsuarioPreparador : ' ' ,
+        usuario: data.datosMezcla.nombreUsuarioPreparador ? data.datosMezcla.nombreUsuarioPreparador : ' ',
         folio: data.datosMezcla.cveFolioMezclaDosis
       }
 
@@ -681,8 +685,8 @@ solicitarReimpresion(data) {
     }
 
     let med = {}
-    let unidad=' ';
-    let dosis= ' ';
+    let unidad = ' ';
+    let dosis = ' ';
 
     // for (let index = 0; index < 60; index++) { //pruebas para ver formato de tabla //hcc
     //   unidad = data.medicamentos[0].refUnidadMinMedida ? data.medicamentos[0].refUnidadMinMedida : ' ';
@@ -697,15 +701,15 @@ solicitarReimpresion(data) {
       unidad = data.medicamentos[i].refUnidadMinMedida ? data.medicamentos[i].refUnidadMinMedida : ' ';
       dosis = data.medicamentos[i].numDosisMedicamento ? data.medicamentos[i].numDosisMedicamento : ' ';
       med = {
-        descripcion: this.bulletPoint + data.medicamentos[i].desCortaMedicamento+' '+'- '+dosis+unidad//data.medicamentos[i].desCortaMedicamento + ' ' + dosis + ' ' + unidad
+        descripcion: this.bulletPoint + data.medicamentos[i].desCortaMedicamento + ' ' + '- ' + dosis + unidad//data.medicamentos[i].desCortaMedicamento + ' ' + dosis + ' ' + unidad
       }
       this.tablaMedicamentos.push(med)
     }
 
     let dil = {}
-    let unidadD=' ';
-    let dosisD=' ';
-    
+    let unidadD = ' ';
+    let dosisD = ' ';
+
 
     // for (let index = 0; index < 60; index++) { //pruebas para ver el formato de tablas
     //   unidadD = data.diluyentes[0].refUnidadMinMedida ?  data.diluyentes[0].refUnidadMinMedida:' ';
@@ -717,10 +721,10 @@ solicitarReimpresion(data) {
     // }
 
     for (let i = 0; i < data.diluyentes.length; i++) {
-       unidadD = data.diluyentes[i].refUnidadMinMedida ?  data.diluyentes[i].refUnidadMinMedida:' ';
-       dosisD = data.diluyentes[i].numDosisDiluyente ? data.diluyentes[i].numDosisDiluyente: ' ';
-       dil = {
-        descripcion:  this.bulletPoint + data.diluyentes[i].desCortaDiluyente+' '+'- '+dosisD+unidadD//data.diluyentes[i].desCortaDiluyente+' '+dosisD + ' / '+unidadD
+      unidadD = data.diluyentes[i].refUnidadMinMedida ? data.diluyentes[i].refUnidadMinMedida : ' ';
+      dosisD = data.diluyentes[i].numDosisDiluyente ? data.diluyentes[i].numDosisDiluyente : ' ';
+      dil = {
+        descripcion: this.bulletPoint + data.diluyentes[i].desCortaDiluyente + ' ' + '- ' + dosisD + unidadD//data.diluyentes[i].desCortaDiluyente+' '+dosisD + ' / '+unidadD
       }
       this.tablaDiluyentes.push(dil)
     }
@@ -730,10 +734,10 @@ solicitarReimpresion(data) {
 
     if (data.requisitoConservacion.length > 0) {
       if (data.requisitoConservacion.length == 1) {
-        if(data.requisitoConservacion[0].includes('MANTENER') || data.requisitoConservacion[0].includes('Mantener') ){
+        if (data.requisitoConservacion[0].includes('MANTENER') || data.requisitoConservacion[0].includes('Mantener')) {
           leyenda1 = data.requisitoConservacion[0];
           leyenda2 = ' ';
-        }else{
+        } else {
           leyenda1 = ' ';
           leyenda2 = data.requisitoConservacion[0];
         }
@@ -744,35 +748,35 @@ solicitarReimpresion(data) {
       }
     }
 
-      let conservacion = {
-        param1: leyenda1,
-        param2: leyenda2
-      }
+    let conservacion = {
+      param1: leyenda1,
+      param2: leyenda2
+    }
 
-   
-      let arreglo:any = [...data.temperaturaEstabilidad];
-    
-      let minNumTemperaturaEstbAmb =  Math.min(...arreglo.map(a => a.numTemperaturaEstbAmb));
-      let minNumTemperaturaEstbRf =  Math.min(...arreglo.map(a => a.numTemperaturaEstbRf));
-  
+
+    let arreglo: any = [...data.temperaturaEstabilidad];
+
+    let minNumTemperaturaEstbAmb = Math.min(...arreglo.map(a => a.numTemperaturaEstbAmb));
+    let minNumTemperaturaEstbRf = Math.min(...arreglo.map(a => a.numTemperaturaEstbRf));
+
 
     this.dataEtiqueta = {
-      paciente : this.tablaPacientes,
-      mezcla : this.tablaMezcla,
+      paciente: this.tablaPacientes,
+      mezcla: this.tablaMezcla,
       cons: conservacion,
-      medicamento : this.tablaMedicamentos,
+      medicamento: this.tablaMedicamentos,
       diluyente: this.tablaDiluyentes,
-      elabora : data.datosMezcla.nombreUsuarioElabora,
-      textoCodigo : data.textoCodigoBarra,
-      codigoBarra : 'data:image/png;base64,'+data.codigoBarraBytes,
-      tipoMezcla : data.datosMezcla.desTipoMezcla,
-      numImpresion : 2,
-      direccion : data.datosMezcla.direcccion?data.datosMezcla.direcccion : ' ',
-      temperatura: data.datosMezcla.numTemperaturaEstbFormato? data.datosMezcla.numTemperaturaEstbFormato: ' ',
+      elabora: data.datosMezcla.nombreUsuarioElabora,
+      textoCodigo: data.textoCodigoBarra,
+      codigoBarra: 'data:image/png;base64,' + data.codigoBarraBytes,
+      tipoMezcla: data.datosMezcla.desTipoMezcla,
+      numImpresion: 2,
+      direccion: data.datosMezcla.direcccion ? data.datosMezcla.direcccion : ' ',
+      temperatura: data.datosMezcla.numTemperaturaEstbFormato ? data.datosMezcla.numTemperaturaEstbFormato : ' ',
       tempEstabFria: minNumTemperaturaEstbRf + this.textGrad,
       tempEstabAmb: minNumTemperaturaEstbAmb + this.textGrad,
       velocidad: milVelInfu,
-      requisitoConservacion : data.requisitoConservacion,
+      requisitoConservacion: data.requisitoConservacion,
     }
     //console.log('dataEtiqueta',this.dataEtiqueta)
 
@@ -782,47 +786,47 @@ solicitarReimpresion(data) {
     });
   }
 
-  imprimirAprobadaPre(id,observArray){
+  imprimirAprobadaPre(id, observArray) {
     let request =
     {
-      "cveUsuarioAlta": this.user.cemetUsuarios[0].id ,
+      "cveUsuarioAlta": this.user.cemetUsuarios[0].id,
       "idSolicitudMezcla": this.dataResolucion.modelo.idSolicitudMezcla,
       "idMezcla": this.dataResolucion.modelo.idMezcla,
       "idMezclaAplicDia": this.dataResolucion.modelo.idMezclaAplicDia,
       "idMezclaAplicDiaDosis": this.dataResolucion.modelo.idMezclaAplicDiaDosis,
       "idInspecCalidadMezcla": id,
-      "idRecomendaciones":observArray//[2,4,5,6]
+      "idRecomendaciones": observArray//[2,4,5,6]
     }
     this.mezclaService.obtenerEtiqueta(request)
       .then(data => {
         //console.log('respuestaPreImprimir',data)
         if (data) {
-          
+
           //llama a servicio para imprimir etiqueta , IMP, evaluamos en tipo de mezcla
-          if( this.dataResolucion.modelo.idTipoMezcla == 3 || this.dataResolucion.modelo.idTipoMezcla == 1){
+          if (this.dataResolucion.modelo.idTipoMezcla == 3 || this.dataResolucion.modelo.idTipoMezcla == 1) {
             this.impresionEtiquetaPdf(data);
-          }else{//NTP
+          } else {//NTP
             this.impresionEtiquetaPdfNTP(data);
           }
           //
           this.alertServices.success('La etiqueta de la mezcla <strong>' + this.dataResolucion.modelo.cveFolioMezclaDosis + '</strong> se imprimió.');
-          if(this.dataResolucion.origen==='acondicionamiento'){
+          if (this.dataResolucion.origen === 'acondicionamiento') {
             setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 4000);
-          }else{
+          } else {
             setTimeout(() => this._router.navigate([this._nav.ordenDistribucion]), 4000);
           }
-          
+
         } else
           this._alertServices.error("<strong>Error</strong> al aprobar la mezcla.");
       });
   }
 
-  preAprobarPreparada() { 
+  preAprobarPreparada() {
 
     let request = {
-      "cveUsuarioAlta": this.user.cemetUsuarios[0].id ,
+      "cveUsuarioAlta": this.user.cemetUsuarios[0].id,
       "idUsuarioResponsable": this.user.cemetUsuarios[0].id,
-      "idSolicitudMezcla":this.dataResolucion.modelo.idSolicitudMezcla,
+      "idSolicitudMezcla": this.dataResolucion.modelo.idSolicitudMezcla,
       "idMezcla": this.dataResolucion.modelo.idMezcla,
       "idMezclaAplicDia": this.dataResolucion.modelo.idMezclaAplicDia,
       "idMezclaAplicDiaDosis": this.dataResolucion.modelo.idMezclaAplicDiaDosis,
@@ -831,57 +835,57 @@ solicitarReimpresion(data) {
     this.mezclaService.aprobarPreparada(request)
       .then(data => {
         if (data) {
-          
+
           //console.log('servicio correcto preaprobada ID', data)
-//se incorpora la mejora 18 y 19
-if(this.dataResolucion.modelo.idTipoMezcla==3 || this.dataResolucion.modelo.idTipoMezcla==1){//antibiotico citotoxico
-   
-  const dialogRef = this._dialog.open(
-    DialogFormlyComponent,
-    this._dialogFormlyService.imprimirEtiquetaAntCito(this.dataResolucion.modelo.cveFolioMezclaDosis)
-  );
-  dialogRef.afterClosed().subscribe(
-    async data1 => {
-      //debugger
-      if (data1 !=null) {
-         console.log("data recomendaciones",data1);
-       
-         this.imprimirAprobadaPre(data,data1.recomendaciones);
-  
+          //se incorpora la mejora 18 y 19
+          if (this.dataResolucion.modelo.idTipoMezcla == 3 || this.dataResolucion.modelo.idTipoMezcla == 1) {//antibiotico citotoxico
 
-      }else {
-        console.log("data recomendaciones",data1);
-        this.cerrarAprobada();
-    
-      }
-    }
-  );
+            const dialogRef = this._dialog.open(
+              DialogFormlyComponent,
+              this._dialogFormlyService.imprimirEtiquetaAntCito(this.dataResolucion.modelo.cveFolioMezclaDosis)
+            );
+            dialogRef.afterClosed().subscribe(
+              async data1 => {
+                //debugger
+                if (data1 != null) {
+                  console.log("data recomendaciones", data1);
 
- }
- else if(this.dataResolucion.modelo.idTipoMezcla==2){//NTP
-   
-  const dialogRef = this._dialog.open(
-    DialogFormlyComponent,
-    this._dialogFormlyService.imprimirEtiquetaNTP(this.dataResolucion.modelo.cveFolioMezclaDosis)
-  );
-  dialogRef.afterClosed().subscribe(
-    async data1 => {
-      //debugger
-      if (data1 !=null) {
-         console.log("data recomendaciones",data1);
-        
-         this.imprimirAprobadaPre(data,data1.recomendaciones);
-  
+                  this.imprimirAprobadaPre(data, data1.recomendaciones);
 
-      }else {
-        console.log("data recomendaciones",data1);
-        this.cerrarAprobada();
-    
-      }
-    }
-  );
 
- }
+                } else {
+                  console.log("data recomendaciones", data1);
+                  this.cerrarAprobada();
+
+                }
+              }
+            );
+
+          }
+          else if (this.dataResolucion.modelo.idTipoMezcla == 2) {//NTP
+
+            const dialogRef = this._dialog.open(
+              DialogFormlyComponent,
+              this._dialogFormlyService.imprimirEtiquetaNTP(this.dataResolucion.modelo.cveFolioMezclaDosis)
+            );
+            dialogRef.afterClosed().subscribe(
+              async data1 => {
+                //debugger
+                if (data1 != null) {
+                  console.log("data recomendaciones", data1);
+
+                  this.imprimirAprobadaPre(data, data1.recomendaciones);
+
+
+                } else {
+                  console.log("data recomendaciones", data1);
+                  this.cerrarAprobada();
+
+                }
+              }
+            );
+
+          }
 
           /* Se cometna mejora 18 19
           const dialogRef = this.dialog.open(
@@ -909,8 +913,8 @@ if(this.dataResolucion.modelo.idTipoMezcla==3 || this.dataResolucion.modelo.idTi
 
   noAprobada(data) {
     let request = {
-      "cveUsuarioAlta": this.user.cemetUsuarios[0].id ,
-      "idUsuarioResponsable":this.user.cemetUsuarios[0].id,
+      "cveUsuarioAlta": this.user.cemetUsuarios[0].id,
+      "idUsuarioResponsable": this.user.cemetUsuarios[0].id,
       "idSolicitudMezcla": this.dataResolucion.modelo.idSolicitudMezcla,
       "idMezcla": this.dataResolucion.modelo.idMezcla,
       "idMezclaAplicDia": this.dataResolucion.modelo.idMezclaAplicDia,
@@ -919,7 +923,7 @@ if(this.dataResolucion.modelo.idTipoMezcla==3 || this.dataResolucion.modelo.idTi
       "idMotivoRechInspecCalidad": data.idmotivoRch,
       "refRechInspecCalidadObs": data.refObsResolucInvest
     }
-    
+
     //console.log('request_>', request);
 
 
@@ -930,11 +934,11 @@ if(this.dataResolucion.modelo.idTipoMezcla==3 || this.dataResolucion.modelo.idTi
           //envia msg27 y redirecciona a acondicionamiento
           this._alertServices.success('La mezcla <strong>' + this.dataResolucion.modelo.cveFolioMezclaDosis + '</strong> no fue aprobada.');
           setTimeout(() => this._router.navigate([this._nav.acondicionamiento]), 4000);
-          
-        } else{
+
+        } else {
           this._alertServices.error("<strong>Error</strong> al no aprobar la mezcla.");
         }
-          
+
       });
 
   }

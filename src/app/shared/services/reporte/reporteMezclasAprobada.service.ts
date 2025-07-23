@@ -280,54 +280,57 @@ export class ReporteMezclasAprobada {
 
 	// 	return 'ok';
 	// }
-    
-    private async createFooterEtiquetaFormato(data: any, isNPT: boolean = false) {
-        const doc = this.doc;
-        const width = doc.internal.pageSize.width;
-        const height = doc.internal.pageSize.height;
 
-        const px = (p: number) => width * p;
-        const py = (p: number) => height * p;
+	private async createFooterEtiquetaFormato(data: any, isNPT: boolean = false) {
+		const doc = this.doc;
+		const width = doc.internal.pageSize.width;
+		const height = doc.internal.pageSize.height;
 
-        const boxHeight = py(0.11);
-        const boxY = height - boxHeight - py(0.01);
-        const boxX = px(0.01);
-        const boxWidth = width - px(0.03);
+		const px = (p: number) => width * p;
+		const py = (p: number) => height * p;
 
-        const bullet = this.bulletPoint ?? '•';
+		const boxHeight = py(0.11);
+		const boxY = height - boxHeight - py(0.01);
+		const boxX = px(0.01);
+		const boxWidth = width - px(0.03);
 
-        const pageCount = doc.internal.getNumberOfPages();
+		const bullet = this.bulletPoint ?? '•';
 
-        for (let i = 1; i <= pageCount; i++) {
-            doc.setPage(i);
+		const pageCount = doc.internal.getNumberOfPages();
 
-            // doc.setDrawColor(65, 171, 202);
+		for (let i = 1; i <= pageCount; i++) {
+			doc.setPage(i);
+			doc.setFontSize(4);
+			doc.text(`RECOMENDACIONES`, boxX + px(0.40), boxY - py(0.017));
+
+
+			// doc.setDrawColor(65, 171, 202);
 			// doc.setDrawColor(0, 0, 0);
-            // doc.setLineWidth(0.008);
-            // doc.rect(boxX, boxY, boxWidth, boxHeight, 'S');
+			// doc.setLineWidth(0.008);
+			// doc.rect(boxX, boxY, boxWidth, boxHeight, 'S');
 
 			this.doc.setDrawColor(0, 0, 0);
 			this.doc.setLineWidth(0.01);
 			this.doc.line(px(0.01), (boxY - .08) + py(0.03), px(0.83), (boxY - .08) + py(0.03));
 
-            if (data?.requisitoConservacion?.length) {
-                let posY = boxY + py(0.025);
-                const textX = boxX + px(0.01);
+			if (data?.requisitoConservacion?.length) {
+				let posY = boxY + py(0.025);
+				const textX = boxX + px(0.01);
 
-                doc.setFontSize(4);
-                doc.setFont('Montserrat-Regular');
-                doc.setTextColor(0, 0, 0);
+				doc.setFontSize(4);
+				doc.setFont('Montserrat-Regular');
+				doc.setTextColor(0, 0, 0);
 
-                for (const requisito of data.requisitoConservacion) {
-                    doc.text(`${bullet} ${requisito}`, textX, posY);
-                    posY += py(0.026); 
-                }
-            }
-        }
+				for (const requisito of data.requisitoConservacion) {
+					doc.text(`${bullet} ${requisito}`, textX, posY);
+					posY += py(0.026);
+				}
+			}
+		}
 
-        return 'ok';
-    }
-      
+		return 'ok';
+	}
+
 
 	async createFooterEtiquetaFormatoNPT(data) {
 		let posy = 25;
@@ -885,262 +888,265 @@ export class ReporteMezclasAprobada {
 		return 'ok';
 	}
 
-    async generarEtiquetaFormato(dataEtiqueta: any): Promise<string> {
-        this.preparePdfEtiquetaFormato(); // Crea el doc con pulgadas, carga fuentes, etc.
-        console.log('dataEtiqueta', dataEtiqueta);
-        for (let i = 0; i < dataEtiqueta.paciente.length; i++) {
+	async generarEtiquetaFormato(dataEtiqueta: any): Promise<string> {
+		this.preparePdfEtiquetaFormato(); // Crea el doc con pulgadas, carga fuentes, etc.
+		console.log('dataEtiqueta', dataEtiqueta);
+		for (let i = 0; i < dataEtiqueta.paciente.length; i++) {
 
-            this.createHeaderEtiquetaFormatoPorcentual(dataEtiqueta);
+			this.createHeaderEtiquetaFormatoPorcentual(dataEtiqueta);
 
-            this.drawPacienteInfoPorcentual(dataEtiqueta.paciente[i]);
+			this.drawPacienteInfoPorcentual(dataEtiqueta.paciente[i]);
 
-            this.drawMezclaInfoPorcentual(dataEtiqueta.mezcla[i], dataEtiqueta);
+			this.drawMezclaInfoPorcentual(dataEtiqueta.mezcla[i], dataEtiqueta);
 
-            this.drawTablasEtiqueta(dataEtiqueta.medicamento, dataEtiqueta.diluyente);
+			this.drawTablasEtiqueta(dataEtiqueta.medicamento, dataEtiqueta.diluyente);
 
-            if (i < dataEtiqueta.paciente.length - 1) {
-                this.doc.addPage();
-            }
-        }
+			if (i < dataEtiqueta.paciente.length - 1) {
+				this.doc.addPage();
+			}
+		}
 
-        return 'ok';
-    }
+		return 'ok';
+	}
 
-    private async createHeaderEtiquetaFormatoPorcentual(dataEtiqueta) {
-        const doc = this.doc;
-        const width = doc.internal.pageSize.width;
-        const height = doc.internal.pageSize.height;
+	private async createHeaderEtiquetaFormatoPorcentual(dataEtiqueta) {
+		const doc = this.doc;
+		const width = doc.internal.pageSize.width;
+		const height = doc.internal.pageSize.height;
 
-        const px = (percent: number) => width * percent;
-        const py = (percent: number) => height * percent;
+		const px = (percent: number) => width * percent;
+		const py = (percent: number) => height * percent;
 
-        doc.setFont('Montserrat-SemiBold');
-        doc.setFontSize(6);
-        doc.setTextColor(0, 0, 0);
-        doc.text('SIICEM', px(0.01), py(0.06));
-        doc.text(
-            'Sistema Informático Integral Centros de Mezclas',
-            px(0.11),
-            py(0.06)
-        );
+		doc.setFont('Montserrat-SemiBold');
+		doc.setFontSize(6);
+		doc.setTextColor(0, 0, 0);
+		doc.text('SIICEM', px(0.01), py(0.06));
+		doc.text(
+			'Sistema Informático Integral Centros de Mezclas',
+			px(0.11),
+			py(0.06)
+		);
 
-        // Logo IMSS
-        doc.addImage(
-            RESOURCES.base64ILogoIMSS,
-            'PNG',
-            px(0.73),
-            py(0.03),
-            px(0.13),
-            py(0.15)
-        );
+		// Logo IMSS
+		doc.addImage(
+			RESOURCES.base64ILogoIMSS,
+			'PNG',
+			px(0.73),
+			py(0.03),
+			px(0.13),
+			py(0.15)
+		);
 
-        // Código de barras
-        const barcodeX = px(0.92);
-        const barcodeY = py(0.90);
-        const barcodeWidth = px(0.55);
-        const barcodeHeight = py(0.15);
+		// Código de barras
+		const barcodeX = px(0.92);
+		const barcodeY = py(0.90);
+		const barcodeWidth = px(0.55);
+		const barcodeHeight = py(0.15);
 
-        doc.addImage(
-            dataEtiqueta.codigoBarra,
-            'PNG',
-            barcodeX,
-            barcodeY,
-            barcodeWidth,
-            barcodeHeight,
-            null,
-            null,
-            90
-        );
+		doc.addImage(
+			dataEtiqueta.codigoBarra,
+			'PNG',
+			barcodeX,
+			barcodeY,
+			barcodeWidth,
+			barcodeHeight,
+			null,
+			null,
+			90
+		);
 
-        doc.text(
-            dataEtiqueta.textoCodigo,
-            px(0.94),
-            py(0.75),
-            { angle: 90 }
-        );
+		doc.text(
+			dataEtiqueta.textoCodigo,
+			px(0.94),
+			py(0.75),
+			{ angle: 90 }
+		);
 
-        doc.setFontSize(4.3);
-        doc.setFont('Montserrat-Regular');
-        const splitTitle = doc.splitTextToSize(dataEtiqueta.direccion, px(0.30));
-        const baseX = px(0.96);
-        const baseY = py(1.60);
+		doc.setFontSize(4.3);
+		doc.setFont('Montserrat-Regular');
+		const splitTitle = doc.splitTextToSize(dataEtiqueta.direccion, px(0.30));
+		const baseX = px(0.96);
+		const baseY = py(1.60);
 
-        splitTitle.forEach((linea, index) => {
-            const offsetX = baseX + px(index * 0.015);
-            const textWidth = doc.getTextWidth(linea);
-            const offsetY = baseY - ((px(1.1) - textWidth) / 2);
-            doc.text(linea, offsetX, offsetY, null, 90);
-        });
+		splitTitle.forEach((linea, index) => {
+			const offsetX = baseX + px(index * 0.015);
+			const textWidth = doc.getTextWidth(linea);
+			const offsetY = baseY - ((px(1.1) - textWidth) / 2);
+			doc.text(linea, offsetX, offsetY, null, 90);
+		});
 
-    }
+	}
 
-    private async drawPacienteInfoPorcentual(dataPaciente: any) {
-        const doc = this.doc;
-        const width = doc.internal.pageSize.width;
-        const height = doc.internal.pageSize.height;
+	private async drawPacienteInfoPorcentual(dataPaciente: any) {
+		const doc = this.doc;
+		const width = doc.internal.pageSize.width;
+		const height = doc.internal.pageSize.height;
 
-        const px = (p: number) => width * p;
-        const py = (p: number) => height * p;
+		const px = (p: number) => width * p;
+		const py = (p: number) => height * p;
 
-        const col1X = px(0.01); 
-        const col2X = px(0.55); 
-        let posY = py(0.12);
-        const lineSpacing = py(0.04);
+		const col1X = px(0.01);
+		const col2X = px(0.40);
+		let posY = py(0.12);
+		const lineSpacing = py(0.04);
 
-        doc.setFontSize(5);
-        doc.setTextColor(0, 0, 0);
+		doc.setFontSize(5);
+		doc.setTextColor(0, 0, 0);
 
-        const col1Campos = [
-            ['Paciente', dataPaciente.nombre],
-            ['Fecha de nacimiento', dataPaciente.fechaNac],
-            ['Edad', dataPaciente.edad],
-            ['Peso', dataPaciente.peso],
-            ['Unidad médica', dataPaciente.unidad],
-            ['Servicio', dataPaciente.servicio]
-        ];
+		const col1Campos = [
+			['Paciente', dataPaciente.nombre],
+			['Fecha de nacimiento', dataPaciente.fechaNac],
+			['Edad', dataPaciente.edad],
+			['Peso', dataPaciente.peso],
+			['Unidad médica', dataPaciente.unidad],
+			['Servicio', dataPaciente.servicio]
+		];
 
-        const col2Campos = [
-            ['Piso', dataPaciente.piso],
-            ['Cama', dataPaciente.cama],
-            ['NSS', dataPaciente.nss],
-            ['Agregado médico', dataPaciente.agregado]
-        ];
+		const col2Campos = [
+			['Nombre del médico', dataPaciente.nomMedico],//'dsadasdasd asasdasd asd asd asd'],
+			['Diagnóstico', dataPaciente.diagnostico], //'J440 - Enfermedad pulmonar obstructiva crónica con infección aguda de las vías respiratorias inferiores'],
+			['Piso', dataPaciente.piso],
+			['Cama', dataPaciente.cama],
+			['NSS', dataPaciente.nss],
+			['Agregado médico', dataPaciente.agregado]
+		];
 
-        const drawCampo = (x: number, y: number, label: string, value: string) => {
-            doc.setFont('Montserrat-SemiBold');
-            doc.text(`${label}:`, x, y);
-            const labelWidth = doc.getTextWidth(`${label}: `);
-            doc.setFont('Montserrat-Regular');
-            doc.text(value, x + labelWidth + px(0.005), y); 
-        };
+		const drawCampo = (x: number, y: number, label: string, value: string) => {
+			doc.setFont('Montserrat-SemiBold');
+			doc.text(`${label}:`, x, y);
+			const labelWidth = doc.getTextWidth(`${label}: `);
+			doc.setFont('Montserrat-Regular');
+			doc.text(value, x + labelWidth + px(0.005), y);
+		};
 
-        col1Campos.forEach(([label, value]) => {
-            drawCampo(col1X, posY, label, value);
-            posY += lineSpacing;
-        });
+		col1Campos.forEach(([label, value]) => {
+			drawCampo(col1X, posY, label, value);
+			posY += lineSpacing;
+		});
 
-        posY = py(0.15);
+		posY = py(0.12);
 
-        col2Campos.forEach(([label, value]) => {
-            drawCampo(col2X, posY, label, value);
-            posY += lineSpacing;
-        });
+		col2Campos.forEach(([label, value]) => {
+			drawCampo(col2X, posY, label, value);
+			posY += lineSpacing;
+		});
 
-        // this.doc.setDrawColor(65, 171, 202);
+		// this.doc.setDrawColor(65, 171, 202);
 		this.doc.setDrawColor(0, 0, 0);
-        this.doc.setLineWidth(0.01);
-        this.doc.line(px(0.01), posY + py(0.03), px(0.83), posY + py(0.03));
-        
-    }
-      
-    private async drawMezclaInfoPorcentual(dataMezcla: any, dataEtiqueta: any) {
-        const doc = this.doc;
-        const width = doc.internal.pageSize.width;
-        const height = doc.internal.pageSize.height;
-      
-        const px = (p: number) => width * p;
-        const py = (p: number) => height * p;
-      
-        const col1X = px(0.01);
-        const col2X = px(0.55); 
-        let posY = py(0.42);
-        const posYTitulo = py(0.38);
-        const lineSpacing = py(0.04);
-      
-        doc.setFontSize(6);
-        doc.setFont('Montserrat-SemiBold');
-        doc.setTextColor(0, 0, 0);
-        doc.text(dataEtiqueta.tipoMezcla, col1X, posYTitulo);
-      
-        doc.setFontSize(5);
-        doc.setTextColor(0, 0, 0);
-      
-        const col1Campos = [
-          ['Vía de administración', dataMezcla.via],
-          ['Preparador de la mezcla', dataMezcla.usuario],
-          ['Fecha de preparación', dataMezcla.fPrepa],
-          ['Fecha de caducidad ambiente', dataMezcla.ambiente],
-          ['Fecha de caducidad red fría', dataMezcla.fria],
-        //   ['Folio de la mezcla', dataMezcla.folio],
-        ];
-      
-        const col2Campos = [
-          ['Temp Estab amb', dataMezcla.tempEstabAmb ?? ''],
-          ['Temp Estab fría', dataMezcla.tempEstabFria ?? ''],
-          ['Vel. Infusión', dataMezcla.velocidad ?? ''],
-        ];
-      
-        col1Campos.forEach(([label, value]) => {
-          doc.setFont('Montserrat-SemiBold');
-          doc.text(`${label}:`, col1X, posY);
-          const labelWidth = doc.getTextWidth(`${label}: `);
-          doc.setFont('Montserrat-Regular');
-          doc.text(value, col1X + labelWidth + px(0.005), posY);
-          posY += lineSpacing;
-        });
-      
-        posY = py(0.50);
-      
-        col2Campos.forEach(([label, value]) => {
-          doc.setFont('Montserrat-SemiBold');
-          doc.text(`${label}:`, col2X, posY);
-          const labelWidth = doc.getTextWidth(`${label}: `);
-          doc.setFont('Montserrat-Regular');
-          doc.text(value, col2X + labelWidth + px(0.005), posY);
-          posY += lineSpacing;
-        });
-      
-        posY = py(0.58);
+		this.doc.setLineWidth(0.01);
+		this.doc.line(px(0.01), posY - py(0.025), px(0.83), posY - py(0.025));
 
-        doc.setDrawColor(6, 171, 202);
+	}
+
+	private async drawMezclaInfoPorcentual(dataMezcla: any, dataEtiqueta: any) {
+		const doc = this.doc;
+		const width = doc.internal.pageSize.width;
+		const height = doc.internal.pageSize.height;
+
+		const px = (p: number) => width * p;
+		const py = (p: number) => height * p;
+
+		const col1X = px(0.01);
+		const col2X = px(0.55);
+		let posY = py(0.42);
+		const posYTitulo = py(0.38);
+		const lineSpacing = py(0.04);
+
+		doc.setFontSize(6);
+		doc.setFont('Montserrat-SemiBold');
+		doc.setTextColor(0, 0, 0);
+		doc.text(dataEtiqueta.tipoMezcla, col1X, posYTitulo);
+
+		doc.setFontSize(5);
+		doc.setTextColor(0, 0, 0);
+
+		const col1Campos = [
+			['Vía de administración', dataMezcla.via],
+			['Preparador de la mezcla', dataMezcla.usuario],
+			['Fecha de preparación', dataMezcla.fPrepa],
+			['Fecha de caducidad ambiente', dataMezcla.ambiente],
+			['Fecha de caducidad red fría', dataMezcla.fria],
+			//   ['Folio de la mezcla', dataMezcla.folio],
+		];
+
+		const col2Campos = [
+			['Temp Estab amb', dataMezcla.tempEstabAmb ?? ''],
+			['Temp Estab fría', dataMezcla.tempEstabFria ?? ''],
+			['Vel. Infusión', dataMezcla.velocidad ?? ''],
+		];
+
+		col1Campos.forEach(([label, value]) => {
+			doc.setFont('Montserrat-SemiBold');
+			doc.text(`${label}:`, col1X, posY);
+			const labelWidth = doc.getTextWidth(`${label}: `);
+			doc.setFont('Montserrat-Regular');
+			doc.text(value, col1X + labelWidth + px(0.005), posY);
+			posY += lineSpacing;
+		});
+
+		posY = py(0.50);
+
+		col2Campos.forEach(([label, value]) => {
+			doc.setFont('Montserrat-SemiBold');
+			doc.text(`${label}:`, col2X, posY);
+			const labelWidth = doc.getTextWidth(`${label}: `);
+			doc.setFont('Montserrat-Regular');
+			doc.text(value, col2X + labelWidth + px(0.005), posY);
+			posY += lineSpacing;
+		});
+
+		posY = py(0.58);
+
+		doc.setDrawColor(6, 171, 202);
 		doc.setDrawColor(0, 0, 0);
-        doc.setLineWidth(0.01);
-        const lineY = posY + py(0.01);
-        doc.line(px(0.01), lineY, px(0.83), lineY);
-      }
-      
+		doc.setLineWidth(0.01);
+		const lineY = posY + py(0.01);
+		doc.line(px(0.01), lineY, px(0.83), lineY);
+	}
 
-    private async drawTablasEtiqueta(medicamentos: any[], diluyentes: any[]) {
-        const doc = this.doc;
-        const width = doc.internal.pageSize.width;
-        const height = doc.internal.pageSize.height;
 
-        const px = (p: number) => width * p;
-        const py = (p: number) => height * p;
+	private async drawTablasEtiqueta(medicamentos: any[], diluyentes: any[]) {
+		const doc = this.doc;
+		const width = doc.internal.pageSize.width;
+		const height = doc.internal.pageSize.height;
 
-        let posY = py(0.63);
+		const px = (p: number) => width * p;
+		const py = (p: number) => height * p;
 
-        const drawSection = (titulo: string, elementos: any[]) => {
-            // Título de sección
-            doc.setFont('Montserrat-SemiBold');
-            doc.setFontSize(5);
-            doc.setTextColor(0, 0, 0);
-            doc.text(titulo, px(0.01), posY);
-            posY += py(0.04);
+		let posY = py(0.63);
 
-            doc.setFont('Montserrat-Regular');
-            doc.setFontSize(4);
+		const drawSection = (titulo: string, elementos: any[]) => {
+			// Título de sección
+			doc.setFont('Montserrat-SemiBold');
+			doc.setFontSize(5);
+			doc.setTextColor(0, 0, 0);
+			doc.text(titulo, px(0.01), posY);
+			posY += py(0.04);
 
-            elementos.forEach(el => {
-                const descripcion = el.descripcion ?? '';
-                if (descripcion.trim()) {
-                    doc.text(`${descripcion}`, px(0.015), posY);
-                    posY += py(0.015);
-                }
-            });
+			doc.setFont('Montserrat-Regular');
+			doc.setFontSize(4);
 
-            posY += py(0.03);
-        };
+			elementos.forEach(el => {
+				const descripcion = el.descripcion ?? '';
+				if (descripcion.trim()) {
+					doc.text(`${descripcion}`, px(0.015), posY);
+					posY += py(0.015);
+				}
+			});
 
-        if (medicamentos?.length) {
-            drawSection('Lista de medicamentos que componen la mezcla:', medicamentos);
-        }
+			posY += py(0.03);
+		};
 
-        if (diluyentes?.length) {
-            drawSection('Diluyente', diluyentes);
-        }
-    }
-      
+		if (medicamentos?.length) {
+			//drawSection('Lista de medicamentos que componen la mezcla:', medicamentos);
+			drawSection('Mezcla medicamentosa, lista de componentes:', medicamentos);
+		}
+
+		if (diluyentes?.length) {
+			drawSection('Diluyente', diluyentes);
+		}
+	}
+
 	// async createHeaderEtiquetaFormato(dataEtiqueta) {
 
 	// 	for (let index = 0; index < dataEtiqueta.paciente.length; index++) {
@@ -1165,7 +1171,7 @@ export class ReporteMezclasAprobada {
 	// 		// this.doc.addImage(dataEtiqueta.codigoBarra, 'PNG', this.doc.internal.pageSize.width - 20, posY + 69, 95.5, 25.5, null, null, 90)
 	// 		// this.doc.setTextColor(0, 0, 0);
 	// 		// this.doc.text(dataEtiqueta.textoCodigo, this.doc.internal.pageSize.width - 15, posY + 80, { align: 'left', angle: 90 });
-			
+
 	// 		let posX = 35;
 
 	// 		this.doc.addImage(RESOURCES.base64ILogoIMSS, 'PNG', this.doc.internal.pageSize.width - (posX + 75), posY + 12, 50.5, 25.5)
@@ -1173,7 +1179,7 @@ export class ReporteMezclasAprobada {
 	// 		this.doc.setTextColor(0, 0, 0);
 	// 		this.doc.text(dataEtiqueta.textoCodigo, this.doc.internal.pageSize.width - (posX - 5), posY + 76, { align: 'left', angle: 90 });
 
-			
+
 	// 		this.doc.setFont('Montserrat-Regular')
 	// 		this.doc.setFontSize(4);
 	// 		var splitTitle = this.doc.splitTextToSize(dataEtiqueta.direccion, 80);
@@ -1184,8 +1190,8 @@ export class ReporteMezclasAprobada {
 	// 		for (let index = 0; index < splitTitle.length; index++) {
 	// 			this.doc.text(this.doc.internal.pageSize.width - (posXDir - (index * 4)), 93 -((80 - this.doc.getTextDimensions(splitTitle[index]).w)/2), splitTitle[index] , null, 90);		
 	// 		}
-			
-			
+
+
 	// 		posY += 5;
 	// 		this.doc.setFont('Montserrat-Regular')
 	// 		posY += 5;
@@ -1508,9 +1514,9 @@ export class ReporteMezclasAprobada {
 			console.log(splitTitle);
 
 
-			let posXDir = 22 ;
+			let posXDir = 22;
 			for (let index = 0; index < splitTitle.length; index++) {
-				this.doc.text(this.doc.internal.pageSize.width - (posXDir - (index * 4)), 93 -((80 - this.doc.getTextDimensions(splitTitle[index]).w)/2), splitTitle[index] , null, 90);		
+				this.doc.text(this.doc.internal.pageSize.width - (posXDir - (index * 4)), 93 - ((80 - this.doc.getTextDimensions(splitTitle[index]).w) / 2), splitTitle[index], null, 90);
 			}
 
 			posY += 5;
