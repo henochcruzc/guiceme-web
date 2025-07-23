@@ -439,7 +439,7 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
 
 
       let paciente = {
-       nomMedico: data.datosMezcla.nombreMedico ,
+        nomMedico: data.datosMezcla.nombreMedico,
         diagnostico: data.datosMezcla.diagnostico,
         nombre: data.datosPaciente.nombrePaciente,
         fechaNac: data.datosPaciente.fecNacimiento ? data.datosPaciente.fecNacimiento : ' ',
@@ -654,7 +654,7 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
     for (let index = 0; index < numEtiquetas; index++) {
 
       let paciente = {
-        nomMedico: data.datosMezcla.nombreMedico ,
+        nomMedico: data.datosMezcla.nombreMedico,
         diagnostico: data.datosMezcla.diagnostico,
         nombre: data.datosPaciente.nombrePaciente ? data.datosPaciente.nombrePaciente : ' ',
         fechaNac: data.datosPaciente.fecNacimiento ? data.datosPaciente.fecNacimiento : ' ',
@@ -687,6 +687,7 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
     let med = {}
     let unidad = ' ';
     let dosis = ' ';
+    let lote = ' ';
 
     // for (let index = 0; index < 60; index++) { //pruebas para ver formato de tabla //hcc
     //   unidad = data.medicamentos[0].refUnidadMinMedida ? data.medicamentos[0].refUnidadMinMedida : ' ';
@@ -700,8 +701,9 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
     for (let i = 0; i < data.medicamentos.length; i++) {
       unidad = data.medicamentos[i].refUnidadMinMedida ? data.medicamentos[i].refUnidadMinMedida : ' ';
       dosis = data.medicamentos[i].numDosisMedicamento ? data.medicamentos[i].numDosisMedicamento : ' ';
+      lote = data.medicamentos[i].lote ? ' '+ data.medicamentos[i].lote : ' ';
       med = {
-        descripcion: this.bulletPoint + data.medicamentos[i].desCortaMedicamento + ' ' + '- ' + dosis + unidad//data.medicamentos[i].desCortaMedicamento + ' ' + dosis + ' ' + unidad
+        descripcion: this.bulletPoint + data.medicamentos[i].desCortaMedicamento + ' ' + '- ' + dosis + unidad + lote//data.medicamentos[i].desCortaMedicamento + ' ' + dosis + ' ' + unidad
       }
       this.tablaMedicamentos.push(med)
     }

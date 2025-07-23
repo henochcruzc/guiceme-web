@@ -11,6 +11,34 @@ import { formatDate } from '@angular/common';
 @Injectable({ providedIn: 'root' })
 export class ReporteMezclasAprobada {
 
+
+	// FONT_SIZE_TITULO = 6;
+	// FONT_SIZE_BARRAS = 4.3;
+	// FONT_SIZE_PACIENTE = 5;
+	// FONT_SIZE_MEZCLA_TITULO = 6;
+	// FONT_SIZE_MEZCLA = 5;
+	// FONT_SIZE_MEDICAMENTO_TITULO = 5;
+	// FONT_SIZE_MEDICAMENTO = 4;
+	// FONT_SIZE_FOOTER = 4;
+	// FONT_SIZE_GLOBAL = 4;
+
+
+	FONT_SIZE_TITULO = 6;
+	FONT_SIZE_BARRAS = 4.3;
+	FONT_SIZE_PACIENTE = 4.3;
+	FONT_SIZE_MEZCLA_TITULO = 5.5;
+	FONT_SIZE_MEZCLA = 4.5;
+	FONT_SIZE_MEDICAMENTO_TITULO = 5;
+	FONT_SIZE_MEDICAMENTO = 4;
+	FONT_SIZE_FOOTER = 4;
+
+	LINE_SPACING = 0.061;
+
+	PY_PACIENTE = 0.10
+	PY_MEZCLA = 0.37
+	PY_MEDICAMENTO = 0.60
+
+
 	constructor(private reporteMezclasAService: ReporteMezclasAprobadasDataService, private spinner: NgxSpinnerService) {
 		this._memoriaDataSubject = new BehaviorSubject(null);
 		this._memoriaDataSubject.subscribe(val => {
@@ -300,8 +328,8 @@ export class ReporteMezclasAprobada {
 
 		for (let i = 1; i <= pageCount; i++) {
 			doc.setPage(i);
-			doc.setFontSize(4);
-			doc.text(`RECOMENDACIONES`, boxX + px(0.40), boxY - py(0.017));
+			doc.setFontSize(this.FONT_SIZE_FOOTER);
+			doc.text(`RECOMENDACIONES`, boxX + px(0.35), boxY - py(0.017));
 
 
 			// doc.setDrawColor(65, 171, 202);
@@ -316,8 +344,6 @@ export class ReporteMezclasAprobada {
 			if (data?.requisitoConservacion?.length) {
 				let posY = boxY + py(0.025);
 				const textX = boxX + px(0.01);
-
-				doc.setFontSize(4);
 				doc.setFont('Montserrat-Regular');
 				doc.setTextColor(0, 0, 0);
 
@@ -918,7 +944,7 @@ export class ReporteMezclasAprobada {
 		const py = (percent: number) => height * percent;
 
 		doc.setFont('Montserrat-SemiBold');
-		doc.setFontSize(6);
+		doc.setFontSize(this.FONT_SIZE_TITULO);
 		doc.setTextColor(0, 0, 0);
 		doc.text('SIICEM', px(0.01), py(0.06));
 		doc.text(
@@ -954,7 +980,7 @@ export class ReporteMezclasAprobada {
 			null,
 			90
 		);
-
+		doc.setFontSize(6);
 		doc.text(
 			dataEtiqueta.textoCodigo,
 			px(0.94),
@@ -962,7 +988,7 @@ export class ReporteMezclasAprobada {
 			{ angle: 90 }
 		);
 
-		doc.setFontSize(4.3);
+		doc.setFontSize(this.FONT_SIZE_BARRAS);
 		doc.setFont('Montserrat-Regular');
 		const splitTitle = doc.splitTextToSize(dataEtiqueta.direccion, px(0.30));
 		const baseX = px(0.96);
@@ -986,11 +1012,11 @@ export class ReporteMezclasAprobada {
 		const py = (p: number) => height * p;
 
 		const col1X = px(0.01);
-		const col2X = px(0.40);
-		let posY = py(0.12);
-		const lineSpacing = py(0.04);
+		const col2X = px(0.50);
+		let posY1 = py(this.PY_PACIENTE);
+		let posY2 = py(this.PY_PACIENTE);
 
-		doc.setFontSize(5);
+		doc.setFontSize(this.FONT_SIZE_PACIENTE);
 		doc.setTextColor(0, 0, 0);
 
 		const col1Campos = [
@@ -999,12 +1025,14 @@ export class ReporteMezclasAprobada {
 			['Edad', dataPaciente.edad],
 			['Peso', dataPaciente.peso],
 			['Unidad médica', dataPaciente.unidad],
-			['Servicio', dataPaciente.servicio]
+			['Servicio', dataPaciente.servicio],
+			['Nombre del médico', dataPaciente.nomMedico],//'dsadasdasd asasdasd asd asd asd'],
+			['Diagnóstico', dataPaciente.diagnostico], //'J440 - 
 		];
 
 		const col2Campos = [
-			['Nombre del médico', dataPaciente.nomMedico],//'dsadasdasd asasdasd asd asd asd'],
-			['Diagnóstico', dataPaciente.diagnostico], //'J440 - Enfermedad pulmonar obstructiva crónica con infección aguda de las vías respiratorias inferiores'],
+			// ['Nombre del médico', dataPaciente.nomMedico],//'dsadasdasd asasdasd asd asd asd'],
+			// ['Diagnóstico', dataPaciente.diagnostico], //'J440 - Enfermedad pulmonar obstructiva crónica con infección aguda de las vías respiratorias inferiores'],
 			['Piso', dataPaciente.piso],
 			['Cama', dataPaciente.cama],
 			['NSS', dataPaciente.nss],
@@ -1020,21 +1048,21 @@ export class ReporteMezclasAprobada {
 		};
 
 		col1Campos.forEach(([label, value]) => {
-			drawCampo(col1X, posY, label, value);
-			posY += lineSpacing;
+			drawCampo(col1X, posY1, label, value);
+			posY1 += this.LINE_SPACING;
 		});
 
-		posY = py(0.12);
+
 
 		col2Campos.forEach(([label, value]) => {
-			drawCampo(col2X, posY, label, value);
-			posY += lineSpacing;
+			drawCampo(col2X, posY2, label, value);
+			posY2 += this.LINE_SPACING;
 		});
 
 		// this.doc.setDrawColor(65, 171, 202);
 		this.doc.setDrawColor(0, 0, 0);
 		this.doc.setLineWidth(0.01);
-		this.doc.line(px(0.01), posY - py(0.025), px(0.83), posY - py(0.025));
+		this.doc.line(px(0.01), posY1 - 0.02, px(0.83), posY1 - 0.02);
 
 	}
 
@@ -1048,16 +1076,16 @@ export class ReporteMezclasAprobada {
 
 		const col1X = px(0.01);
 		const col2X = px(0.55);
-		let posY = py(0.42);
-		const posYTitulo = py(0.38);
-		const lineSpacing = py(0.04);
+		const posYTitulo = py(this.PY_MEZCLA);
 
-		doc.setFontSize(6);
+		let posY1 = py(this.PY_MEZCLA + 0.04);
+		let posY2 = py(this.PY_MEZCLA + 0.10);
+		doc.setFontSize(this.FONT_SIZE_MEZCLA_TITULO);
 		doc.setFont('Montserrat-SemiBold');
 		doc.setTextColor(0, 0, 0);
 		doc.text(dataEtiqueta.tipoMezcla, col1X, posYTitulo);
 
-		doc.setFontSize(5);
+		doc.setFontSize(this.FONT_SIZE_MEZCLA);
 		doc.setTextColor(0, 0, 0);
 
 		const col1Campos = [
@@ -1076,32 +1104,34 @@ export class ReporteMezclasAprobada {
 		];
 
 		col1Campos.forEach(([label, value]) => {
-			doc.setFont('Montserrat-SemiBold');
-			doc.text(`${label}:`, col1X, posY);
-			const labelWidth = doc.getTextWidth(`${label}: `);
-			doc.setFont('Montserrat-Regular');
-			doc.text(value, col1X + labelWidth + px(0.005), posY);
-			posY += lineSpacing;
+			if (value && (typeof value === 'string' && value.trim().length > 0)) {
+				doc.setFont('Montserrat-SemiBold');
+				doc.text(`${label}:`, col1X, posY1);
+				const labelWidth = doc.getTextWidth(`${label}: `);
+				doc.setFont('Montserrat-Regular');
+				doc.text(value, col1X + labelWidth + px(0.005), posY1);
+				posY1 += this.LINE_SPACING;
+			}
 		});
 
-		posY = py(0.50);
+
 
 		col2Campos.forEach(([label, value]) => {
-			doc.setFont('Montserrat-SemiBold');
-			doc.text(`${label}:`, col2X, posY);
-			const labelWidth = doc.getTextWidth(`${label}: `);
-			doc.setFont('Montserrat-Regular');
-			doc.text(value, col2X + labelWidth + px(0.005), posY);
-			posY += lineSpacing;
+			if (value && (typeof value === 'string' && value.trim().length > 0)) {
+				doc.setFont('Montserrat-SemiBold');
+				doc.text(`${label}:`, col2X, posY2);
+				const labelWidth = doc.getTextWidth(`${label}: `);
+				doc.setFont('Montserrat-Regular');
+				doc.text(value, col2X + labelWidth + px(0.005), posY2);
+				posY2 += this.LINE_SPACING;
+			}
 		});
-
-		posY = py(0.58);
 
 		doc.setDrawColor(6, 171, 202);
 		doc.setDrawColor(0, 0, 0);
 		doc.setLineWidth(0.01);
-		const lineY = posY + py(0.01);
-		doc.line(px(0.01), lineY, px(0.83), lineY);
+		const lineY = posY1 + py(0.01);
+		doc.line(px(0.01), lineY - 0.02, px(0.83), lineY - 0.02);
 	}
 
 
@@ -1113,18 +1143,18 @@ export class ReporteMezclasAprobada {
 		const px = (p: number) => width * p;
 		const py = (p: number) => height * p;
 
-		let posY = py(0.63);
+		let posY = py(this.PY_MEDICAMENTO);
 
 		const drawSection = (titulo: string, elementos: any[]) => {
 			// Título de sección
 			doc.setFont('Montserrat-SemiBold');
-			doc.setFontSize(5);
+			doc.setFontSize(this.FONT_SIZE_MEDICAMENTO_TITULO);
 			doc.setTextColor(0, 0, 0);
 			doc.text(titulo, px(0.01), posY);
 			posY += py(0.04);
 
 			doc.setFont('Montserrat-Regular');
-			doc.setFontSize(4);
+			doc.setFontSize(this.FONT_SIZE_MEDICAMENTO);
 
 			elementos.forEach(el => {
 				const descripcion = el.descripcion ?? '';
