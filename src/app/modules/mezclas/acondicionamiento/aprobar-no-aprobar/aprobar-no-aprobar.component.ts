@@ -701,7 +701,7 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
     for (let i = 0; i < data.medicamentos.length; i++) {
       unidad = data.medicamentos[i].refUnidadMinMedida ? data.medicamentos[i].refUnidadMinMedida : ' ';
       dosis = data.medicamentos[i].numDosisMedicamento ? data.medicamentos[i].numDosisMedicamento : ' ';
-      lote = data.medicamentos[i].lote ? ' '+ data.medicamentos[i].lote : ' ';
+      lote = data.medicamentos[i].lote ? ' Lote: '+ data.medicamentos[i].lote : ' ';
       med = {
         descripcion: this.bulletPoint + data.medicamentos[i].desCortaMedicamento + ' ' + '- ' + dosis + unidad + lote//data.medicamentos[i].desCortaMedicamento + ' ' + dosis + ' ' + unidad
       }
