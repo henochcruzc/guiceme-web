@@ -25,18 +25,20 @@ export class ReporteMezclasAprobada {
 
 	FONT_SIZE_TITULO = 6;
 	FONT_SIZE_BARRAS = 4.3;
-	FONT_SIZE_PACIENTE = 4.3;
-	FONT_SIZE_MEZCLA_TITULO = 5.5;
+	FONT_SIZE_PACIENTE = 4.5;
+	FONT_SIZE_MEZCLA_TITULO = 5;
 	FONT_SIZE_MEZCLA = 4.5;
 	FONT_SIZE_MEDICAMENTO_TITULO = 5;
 	FONT_SIZE_MEDICAMENTO = 4;
 	FONT_SIZE_FOOTER = 4;
 
-	LINE_SPACING = 0.061;
+	LINE_SPACING_PACIENTE = 0.07;
+
+	LINE_SPACING = 0.069;
 
 	PY_PACIENTE = 0.10
-	PY_MEZCLA = 0.37
-	PY_MEDICAMENTO = 0.60
+	PY_MEZCLA = 0.40
+	PY_MEDICAMENTO = 0.63
 
 
 	constructor(private reporteMezclasAService: ReporteMezclasAprobadasDataService, private spinner: NgxSpinnerService) {
@@ -1003,6 +1005,10 @@ export class ReporteMezclasAprobada {
 
 	}
 
+	// texto_largo = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget'
+	// texto_largo = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,.'
+
+	// texto_largo = 'Condición de salud posterior a COVID-19 (Detenido, Infección antigüa, COVID-19 recuperado, COVID-19 sanado, Efecto residual de COVID-19, Efecto tardío de COVID-19, Post COVID-19, Secuelas COVID-19, Secuelas COVID-19 no activo, Síndrome post COVID-19)'
 	private async drawPacienteInfoPorcentual(dataPaciente: any) {
 		const doc = this.doc;
 		const width = doc.internal.pageSize.width;
@@ -1012,7 +1018,7 @@ export class ReporteMezclasAprobada {
 		const py = (p: number) => height * p;
 
 		const col1X = px(0.01);
-		const col2X = px(0.50);
+		const col2X = px(0.55);
 		let posY1 = py(this.PY_PACIENTE);
 		let posY2 = py(this.PY_PACIENTE);
 
@@ -1026,13 +1032,12 @@ export class ReporteMezclasAprobada {
 			['Peso', dataPaciente.peso],
 			['Unidad médica', dataPaciente.unidad],
 			['Servicio', dataPaciente.servicio],
-			['Nombre del médico', dataPaciente.nomMedico],//'dsadasdasd asasdasd asd asd asd'],
-			['Diagnóstico', dataPaciente.diagnostico], //'J440 - 
+			['Nombre del médico', dataPaciente.nomMedico],
+			['Diagnóstico', dataPaciente.diagnostico],
+
 		];
 
 		const col2Campos = [
-			// ['Nombre del médico', dataPaciente.nomMedico],//'dsadasdasd asasdasd asd asd asd'],
-			// ['Diagnóstico', dataPaciente.diagnostico], //'J440 - Enfermedad pulmonar obstructiva crónica con infección aguda de las vías respiratorias inferiores'],
 			['Piso', dataPaciente.piso],
 			['Cama', dataPaciente.cama],
 			['NSS', dataPaciente.nss],
@@ -1044,25 +1049,55 @@ export class ReporteMezclasAprobada {
 			doc.text(`${label}:`, x, y);
 			const labelWidth = doc.getTextWidth(`${label}: `);
 			doc.setFont('Montserrat-Regular');
-			doc.text(value, x + labelWidth + px(0.005), y);
+			let splitText = doc.splitTextToSize(value, 2.85);
+			doc.text(x + labelWidth + px(0.005), y, splitText);
+			const valueWidth = doc.getTextWidth(`${value} `);
+			return labelWidth + valueWidth + px(0.02);
 		};
 
+		let widthAnte = 0;
+
 		col1Campos.forEach(([label, value]) => {
-			drawCampo(col1X, posY1, label, value);
-			posY1 += this.LINE_SPACING;
+			if (label == 'Fecha de nacimiento') {
+				widthAnte = drawCampo(col1X, posY1, label, value);
+			} else if (label == 'Edad') {
+				widthAnte += drawCampo(widthAnte, posY1, label, value);
+			} else if (label == 'Peso') {
+				widthAnte = drawCampo(widthAnte, posY1, label, value);
+				posY1 += this.LINE_SPACING_PACIENTE;
+			} else {
+				drawCampo(col1X, posY1, label, value);
+				posY1 += this.LINE_SPACING_PACIENTE;
+			}
 		});
-
-
 
 		col2Campos.forEach(([label, value]) => {
 			drawCampo(col2X, posY2, label, value);
-			posY2 += this.LINE_SPACING;
+			posY2 += this.LINE_SPACING_PACIENTE;
 		});
+
+		let splitText = doc.splitTextToSize(dataPaciente.diagnostico, 2.85);
+
+		switch (splitText.length) {
+			case 1:
+				posY1 += -0.04;
+				break;
+
+			case 2:
+				posY1 += 0.04;
+				break;
+			case 3:
+				posY1 += 0.105;
+				break;
+
+			default:
+				break;
+		}
 
 		// this.doc.setDrawColor(65, 171, 202);
 		this.doc.setDrawColor(0, 0, 0);
 		this.doc.setLineWidth(0.01);
-		this.doc.line(px(0.01), posY1 - 0.02, px(0.83), posY1 - 0.02);
+		this.doc.line(px(0.01), posY1, px(0.83), posY1);
 
 	}
 
@@ -1131,7 +1166,7 @@ export class ReporteMezclasAprobada {
 		doc.setDrawColor(0, 0, 0);
 		doc.setLineWidth(0.01);
 		const lineY = posY1 + py(0.01);
-		doc.line(px(0.01), lineY - 0.02, px(0.83), lineY - 0.02);
+		doc.line(px(0.01), lineY - 0.06, px(0.83), lineY - 0.06);
 	}
 
 
