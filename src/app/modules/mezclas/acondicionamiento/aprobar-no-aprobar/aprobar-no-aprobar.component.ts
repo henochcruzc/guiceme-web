@@ -701,7 +701,7 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
     for (let i = 0; i < data.medicamentos.length; i++) {
       unidad = data.medicamentos[i].refUnidadMinMedida ? data.medicamentos[i].refUnidadMinMedida : ' ';
       dosis = data.medicamentos[i].numDosisMedicamento ? data.medicamentos[i].numDosisMedicamento : ' ';
-      lote = data.medicamentos[i].lote ? ' Lote: '+ data.medicamentos[i].lote : ' ';
+      lote = data.medicamentos[i].lote ? ' Lote: ' + data.medicamentos[i].lote : ' ';
       med = {
         descripcion: this.bulletPoint + data.medicamentos[i].desCortaMedicamento + ' ' + '- ' + dosis + unidad + lote//data.medicamentos[i].desCortaMedicamento + ' ' + dosis + ' ' + unidad
       }
@@ -711,7 +711,7 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
     let dil = {}
     let unidadD = ' ';
     let dosisD = ' ';
-
+    let loteD = ' ';
 
     // for (let index = 0; index < 60; index++) { //pruebas para ver el formato de tablas
     //   unidadD = data.diluyentes[0].refUnidadMinMedida ?  data.diluyentes[0].refUnidadMinMedida:' ';
@@ -725,8 +725,9 @@ export class AprobarNoAprobarComponent extends GeneralComponent {
     for (let i = 0; i < data.diluyentes.length; i++) {
       unidadD = data.diluyentes[i].refUnidadMinMedida ? data.diluyentes[i].refUnidadMinMedida : ' ';
       dosisD = data.diluyentes[i].numDosisDiluyente ? data.diluyentes[i].numDosisDiluyente : ' ';
+      loteD = data.diluyentes[i].lote ? ' Lote: ' + data.diluyentes[i].lote : ' ';
       dil = {
-        descripcion: this.bulletPoint + data.diluyentes[i].desCortaDiluyente + ' ' + '- ' + dosisD + unidadD//data.diluyentes[i].desCortaDiluyente+' '+dosisD + ' / '+unidadD
+        descripcion: this.bulletPoint + data.diluyentes[i].desCortaDiluyente + ' ' + '- ' + dosisD + unidadD + loteD//data.diluyentes[i].desCortaDiluyente+' '+dosisD + ' / '+unidadD
       }
       this.tablaDiluyentes.push(dil)
     }
