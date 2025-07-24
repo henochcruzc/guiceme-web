@@ -1,10 +1,10 @@
 <div class="card-ceme">
   <div class="card card-body">
-      <mat-panel-title class="align-header">
-        <div class="solicitud"></div>
-        <div class="text-teatle">Asignación de turno por mezcla</div>
-        <div class="line-panel-header1 w-100"></div>
-      </mat-panel-title>
+    <mat-panel-title class="align-header">
+      <div class="solicitud"></div>
+      <div class="text-teatle">Asignación de turno por mezcla</div>
+      <div class="line-panel-header1 w-100"></div>
+    </mat-panel-title>
 
 
     <div class="d-flex">
@@ -24,11 +24,11 @@
       </div>
     </div>
 
-    
+
 
     <div class="table-responsive scroll-table">
-      <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="idSolicitudMezcla" matSortDirection="asc" matSort
-        #sort="matSort" (matSortChange)="shortTable($event)">
+      <mat-table class="fullTable " [dataSource]="tableDS" matSortActive="idSolicitudMezcla" matSortDirection="asc"
+        matSort #sort="matSort" (matSortChange)="shortTable($event)">
 
         <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns ;"></mat-row>
@@ -45,6 +45,13 @@
           <mat-cell *matCellDef="let element">{{ element.cveFolioSolicitudMezcla }}</mat-cell>
         </ng-container>
 
+
+        <ng-container matColumnDef="componentes">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Lista de componentes </mat-header-cell>
+          <mat-cell style="white-space: pre-line;" *matCellDef="let element">{{ element.componentes }}</mat-cell>
+        </ng-container>
+
+
         <ng-container matColumnDef="desTipoMezcla">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de mezcla </mat-header-cell>
           <mat-cell *matCellDef="let element">{{ element.desTipoMezcla }}</mat-cell>
@@ -58,20 +65,14 @@
 
         <ng-container matColumnDef="check">
           <mat-header-cell *matHeaderCellDef class="d-flex justify-content-center">
-            <mat-checkbox 
-            (change)="$event ? toggleAllRows() : null"
-            (click)="$event.stopPropagation()"
-            [checked]="mezclasSeleccionadas.hasValue() && isAllSelected()"
-            [indeterminate]="mezclasSeleccionadas.hasValue() && !isAllSelected()"
-            >
+            <mat-checkbox (change)="$event ? toggleAllRows() : null" (click)="$event.stopPropagation()"
+              [checked]="mezclasSeleccionadas.hasValue() && isAllSelected()"
+              [indeterminate]="mezclasSeleccionadas.hasValue() && !isAllSelected()">
             </mat-checkbox>
           </mat-header-cell>
           <mat-cell *matCellDef="let element" class="d-flex justify-content-center">
-            <mat-checkbox 
-            (click)="$event.stopPropagation()"
-            (change)="$event ? toggleRow(element) : null"
-            [checked]="mezclasSeleccionadas.isSelected(element)"
-            >
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? toggleRow(element) : null"
+              [checked]="mezclasSeleccionadas.isSelected(element)">
             </mat-checkbox>
           </mat-cell>
         </ng-container>
@@ -80,8 +81,7 @@
 
     </div>
 
-    <app-no-medicamento *ngIf="tableDS?.data?.length == 0 || !tableDS"
-            [class]="'asig-turno-sin'"></app-no-medicamento>
+    <app-no-medicamento *ngIf="tableDS?.data?.length == 0 || !tableDS" [class]="'asig-turno-sin'"></app-no-medicamento>
 
 
     <div class=" paginador d-flex justify-content-end w-100 align-items-center">

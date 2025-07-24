@@ -48,7 +48,7 @@ export class AsignacionTurnoComponent extends GeneralComponent {
 
   tableDS: MatTableDataSource<any>;
   mezclasSeleccionadas = new SelectionModel<any>(true, []);
-  displayedColumns = ['cveFolioMezclaDosis', 'cveFolioSolicitudMezcla', 'desTipoMezcla', 'fechaAplicacion', 'check']
+  displayedColumns = ['cveFolioMezclaDosis', 'cveFolioSolicitudMezcla', 'componentes','desTipoMezcla', 'fechaAplicacion', 'check']
   @ViewChild('tSort', { static: true }) sort: MatSort;
 
 
