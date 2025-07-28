@@ -160,7 +160,7 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-xxl-3 col-md-6",
           key: 'lote',
           type: 'select',
           props: {
@@ -187,7 +187,7 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
           }
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-xxl-3 col-md-6",
           key: 'caducidad',
           type: 'select',
           templateOptions: {
@@ -234,7 +234,7 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
 
         },
         {
-          className: "col-lg-3 col-md-6",
+          className: "col-xxl-3 col-md-6",
           key: 'piezas',
           type: 'input',
           templateOptions: {
@@ -246,7 +246,7 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
 
         },
         {
-          className: 'col-lg-3 col-md-6',
+          className: 'col-xxl-3 col-md-6',
           type: 'button',
           props: {
             label: ' ',

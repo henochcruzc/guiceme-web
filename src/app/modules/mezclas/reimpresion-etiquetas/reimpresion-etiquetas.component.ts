@@ -64,7 +64,7 @@ export class ReimpresionEtiquetasComponent extends GeneralComponent {
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
-          className: "col-lg-3 col-md-3",
+          className: "col-md-3",
           key: 'folioMezcla',
           type: 'input',
           props: {
@@ -74,7 +74,7 @@ export class ReimpresionEtiquetasComponent extends GeneralComponent {
           },
         },
         {
-          className: "col-lg-6 col-md-4",
+          className: "col-md-5",
           key: 'motivoReimpresion',
           type: 'select',
           props: {
@@ -107,10 +107,10 @@ export class ReimpresionEtiquetasComponent extends GeneralComponent {
         }, 
         {
           fieldGroupClassName: 'row',
-          className: "col-md-4 col-lg-3",
+          className: "col-md-4 col-lg-4",
           fieldGroup:
             [{
-              className: "col-lg-5 col-md-6",
+              className: "col-lg-5 col-md-6 col-xxl-3",
               key: 'btn-limpiar',
               type: 'button',
               props: {
@@ -135,7 +135,7 @@ export class ReimpresionEtiquetasComponent extends GeneralComponent {
               },
             }, 
             {
-              className: "col-lg-4 col-md-6",
+              className: "col-lg-4 col-md-6 col-xxl-3",
               key: 'btn-buscar',
               type: 'button',
               props: {

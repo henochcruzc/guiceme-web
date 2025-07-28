@@ -1186,7 +1186,7 @@ export class ReporteMezclasAprobada {
 			doc.setFontSize(this.FONT_SIZE_MEDICAMENTO_TITULO);
 			doc.setTextColor(0, 0, 0);
 			doc.text(titulo, px(0.01), posY);
-			posY += py(0.04);
+			posY += py(0.035);
 
 			doc.setFont('Montserrat-Regular');
 			doc.setFontSize(this.FONT_SIZE_MEDICAMENTO);
@@ -1195,11 +1195,11 @@ export class ReporteMezclasAprobada {
 				const descripcion = el.descripcion ?? '';
 				if (descripcion.trim()) {
 					doc.text(`${descripcion}`, px(0.015), posY);
-					posY += py(0.015);
+					posY += py(0.03);
 				}
 			});
 
-			posY += py(0.03);
+			posY += py(0.015);
 		};
 
 		if (medicamentos?.length) {

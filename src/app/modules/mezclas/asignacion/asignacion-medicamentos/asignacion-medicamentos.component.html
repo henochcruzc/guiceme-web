@@ -44,18 +44,18 @@
 
 
         <div class="d-flex w-100 ">
-            <div class="col-lg-4 col-3" [ngClass]="{'col-3':isConsulta}">
+            <div class="col-xxl-4 col-6" [ngClass]="{'col-3':isConsulta}">
                 <div class="table-responsive scroll-table table-medicamento ">
                     <mat-table class="fullTable " [dataSource]="tableDS">
 
                         <mat-header-row *matHeaderRowDef="displayedColumns "></mat-header-row>
-                        <mat-row class="flex-column flex-lg-row gap-2 gap-lg-1"
+                        <mat-row class="flex-column flex-lg-row gap-2 gap-lg-1  "
                             *matRowDef="let row; columns: displayedColumns ;" (click)="highlight(row)"
                             [ngClass]="{'lightSelect': modelSelected.idMedicamento == row.idMedicamento,'lightSelectAsig':row.indAsignado == 1}"></mat-row>
 
                         <ng-container matColumnDef="no">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
+                            <mat-cell *matCellDef="let element"  class="border-0" >
                                 <div class="d-flex flex-row gap-2 align-items-center">
                                     {{ element.num }}<div class='ico-medic'></div>
                                 </div>
@@ -64,14 +64,14 @@
 
                         <ng-container matColumnDef="desCorta">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell *matCellDef="let element">
+                            <mat-cell *matCellDef="let element" class="p-2 border-0">
                                 <b>{{ element.desCorta }} {{ element.numUniMinMedPz }} {{ element.reUnMinMed }}</b>
                             </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="total">
                             <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-                            <mat-cell class="d-flex flex-column flex-lg-row align-items-center aligi" *matCellDef="let element">
+                            <mat-cell class="d-flex flex-column flex-lg-row align-items-center border-bottom-0 " *matCellDef="let element">
                                 <span>
                                     Cantidad total &nbsp;
                                 </span>
@@ -83,7 +83,7 @@
             </div>
 
 
-            <div class="col-lg-8 ms-3 card-detalle-med card-body " *ngIf="isConsulta"  [ngClass]="{'col-9':isConsulta}">
+            <div class="col-xxl-8 col-6 ms-3 card-detalle-med card-body " *ngIf="isConsulta"  [ngClass]="{'col-6':isConsulta}">
                 <div>
                     <div class="d-flex align-items-center gap-2">
                         <div ngClass="" class="ico-medic"></div>

@@ -20,7 +20,7 @@
                     type="button" class="btn btn-primary" (click)="dialogoReimpresion()" style="margin-right: 20px; width: 185px;">
                     Solicitar reimpresión </button>
 
-                <button *ngIf="idEstatusMezcla === 7 &&  dataResolucion.modelo.idEstatusReimpresion != undefined && dataResolucion.modelo.idEstatusReimpresion  === 4 " 
+                <button 
                     type="button" class="btn btn-primary" (click)="dialogoAprobar()" style="margin-right: 20px; width: 180px;">
                         Imprimir etiqueta </button>
             </div>
