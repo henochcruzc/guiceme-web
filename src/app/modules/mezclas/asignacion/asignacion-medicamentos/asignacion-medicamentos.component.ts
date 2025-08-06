@@ -14,6 +14,7 @@ import { AsignacionLoteComponent } from '../asignacion-lote/asignacion-lote.comp
 import { Sort } from '@angular/material/sort';
 import { NoMedicamentoComponent } from 'src/app/shared/layout/no-medicamento/no-medicamento.component';
 import { Subject } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid'; // Import v4 as uuidv4
 @Component({
   selector: 'app-asignacion-medicamentos',
   standalone: true,
@@ -54,6 +55,8 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
   campanaSelected: any;
   $obsModelSelected = new Subject<any>();
 
+  //cambio cu6
+  groupedDataLotes: any[];
 
   constructor(
     public authService: AuthService,
@@ -379,6 +382,19 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
 
   }
 
+  eliminarDuplicadosPorId(lista: any[]): any[] {
+    const uniqueIds = new Set<string>();
+    return lista.filter((objeto) => {
+      if (!uniqueIds.has(`${objeto.idLoteFabricMedic}-${objeto.numPieza}`)) {
+        uniqueIds.add(`${objeto.idLoteFabricMedic}-${objeto.numPieza}`);
+        return true;
+      }
+      return false;
+    });
+  }
+
+
+
   highlight(row) {
     this.totalEvases = 0
     this.diluyentesDataSource = new MatTableDataSource<any>([]);
@@ -397,25 +413,47 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
     console.log(this.model1.campana, row.idMedicamento)
     this.mezclaService.lotesMedicamento(row.idMedicamento, this.usuario.cemetUsuarios[0].idCentralMezcla.id, this.model1.turno, this.campanaSelected.id, this.campanaSelected.desCampana).then(data => {
       console.log(data)
-      if (data.length > 0) {
-        this.diluyentesDataSource = new MatTableDataSource(data);
 
-        for (let i = 0; i < data.length; i++) {
-          this.totalEvases = this.totalEvases + data[i].numPieza
-
-
+      this.groupedDataLotes = data.reduce((acc, currentItem) => {
+        // Create a composite key using the two fields
+        const key = `${currentItem.idLoteFabricMedic}-${currentItem.numPieza}`;
+        // If the key doesn't exist in the accumulator, initialize it with an empty array
+        if (!acc[key]) {
+          acc[key] = [];
         }
+        // Push the current item into the array corresponding to the key
+        acc[key].push(currentItem);
+        return acc;
+      }, {} as Record<string, any[]>); // Initialize accumulator as an empty object with string keys and Item[] values
+      console.log(this.groupedDataLotes);
 
+      let lstLotes = data.map((el: any) => {
+        return {
+          fechaCad: el.fechaCad,
+          idLoteFabricMedic: el.idLoteFabricMedic,
+          lote: el.lote,
+          numPieza: el.numPieza,
+          uuid: uuidv4(),
+        }
+      })
+
+      const listaSinDuplicados = this.eliminarDuplicadosPorId(lstLotes);
+      console.log(listaSinDuplicados);
+
+
+      if (listaSinDuplicados.length > 0) {
+        this.diluyentesDataSource = new MatTableDataSource(listaSinDuplicados);
+
+        for (let i = 0; i < listaSinDuplicados.length; i++) {
+          this.totalEvases = this.totalEvases + listaSinDuplicados[i].numPieza
+        }
 
       } else {
         this.form.enable()
         this.btnAsigna = false
       }
 
-
-
     })
-
 
   }
 
@@ -437,9 +475,12 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
   }
 
   onAsignar() {
+
+    this.modelSelected.indAsignado = 1
     console.log(this.lotes)
     console.log(this.fechas)
     let fecha
+
     for (let i = 0; i < this.fechas.length; i++) {
       if (this.fechas[i].idLoteFabMedic == this.model.caducidad) {
         fecha = this.fechas[i].fechaCaducidad
@@ -451,7 +492,8 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
       lote: this.model.lote,
       idLoteFabMedic: this.model.caducidad,
       numPiezas: this.model.piezas,
-      fecTemp: fecha
+      fecTemp: fecha,
+      uuid: uuidv4(),
     }
 
     this.diluyentesDataSource.data.push(model)
@@ -468,9 +510,6 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
 
     this.totalEvases = this.totalEvases + Number(model.numPiezas)
 
-
-
-
     this.diluyentesDataSource = new MatTableDataSource(this.diluyentesDataSource.data);
 
     this.form.reset()
@@ -481,42 +520,53 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
 
   guardar() {
     let usuario = this._accountService.getUser();
-    let arrayDosis = []
-
-    for (let i = 0; i < this.lstMediSAI.length; i++) {
-      if (this.lstMediSAI[i].idMedicamento == this.modelSelected.idMedicamento) {
-        this.lstId.push(this.lstMediSAI[i].idMezclaMedicDiluy)
-        arrayDosis.push(this.lstMediSAI[i].idMezclaAplicDiaDosi)
+    // let arrayDosis = []
+    //obtener los idMezclaAplicDiaDosi que tienen el medicamento seleccionado
+    let arrayMedicamentos = this.lstMediSAI.map((val: any) => {
+      if (val.idMedicamento == this.modelSelected.idMedicamento) {
+        return {
+          idMezclaMedicDiluy: val.idMezclaMedicDiluy,
+          idMezclaAplicDiaDosis: val.idMezclaAplicDiaDosi,
+          idMedicamento: val.idMedicamento,
+        }
       }
+    }).filter(function (el) {
+      return el != null;
+    });
 
-    }
-    console.log(arrayDosis)
-    console.log(this.lotes)
-    console.log(this.nvosLotes)
+    var lstMedicamentoLoteTurnoCampana = [];
+    arrayMedicamentos.forEach((medicamento: any) => {
+      this.nvosLotes.forEach((lote: any) => {
+        medicamento.idLoteFabMedic = lote.idLoteFabMedic;
+        medicamento.numPiezas = lote.numPiezas;
+        lstMedicamentoLoteTurnoCampana.push({ ...medicamento });
 
-    if (this.nvosLotes.length > 0) {
-      for (let i = 0; i < this.nvosLotes.length; i++) {
-        this.lotes.push(this.nvosLotes[i])
+      });
+    });
 
-      }
-    }
+    let lotesBorrado = this.lotes;
 
-    
+    console.log(lstMedicamentoLoteTurnoCampana)
+
     let modelSave = {
-      "lstLotes": this.lotes,
-      "lstMedAsignados": this.lstId,
-      "lstDiaDosisAsigTC": arrayDosis,
-      "cveUsuario": usuario.id,
-      "refNomCampana": this.campanaSelected.desCampana,
-      "idCentralMezcla": this.usuario.cemetUsuarios[0].idCentralMezcla.id,
-      "idTurno": this.model1.turno,
-      "idCampana": this.campanaSelected.id
+      // "lstLotes": this.lotes,
+      lstLotesBorrado: lotesBorrado, // lotes a borrar en DB
+      // "lstMedAsignados": this.lstId,
+      lstMedicamentoLoteTurnoCampana: lstMedicamentoLoteTurnoCampana,
+      cveUsuario: usuario.id, //Usuario que da de alta o baja 
+
+      //Usados para obtener el id de cent_mez_turno_campana
+      refNomCampana: this.campanaSelected.desCampana,
+      idCentralMezcla: this.usuario.cemetUsuarios[0].idCentralMezcla.id,
+      idTurno: this.model1.turno,
+      idCampana: this.campanaSelected.id
 
     }
+
 
     console.log(modelSave)
 
-    
+
     this.mezclaService.saveLotes(modelSave).then(data => {
       console.log(data)
       if (data) {
@@ -569,17 +619,17 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
     }
     console.log(model)
 
-    this.mezclaService.saveMezclas(model).then(data => {
-      if (data) {
-        console.log(data)
-        this.isConsulta = false
-        this.medicamentosUpTotal = 0
-        this._alertServices.success('El <strong>lote se asignó al medicamento</strong> con éxito.')
-        this.tableDS = new MatTableDataSource<any>([]);
+    // this.mezclaService.saveMezclas(model).then(data => {
+    //   if (data) {
+    //     console.log(data)
+    //     this.isConsulta = false
+    //     this.medicamentosUpTotal = 0
+    //     this._alertServices.success('El <strong>lote se asignó al medicamento</strong> con éxito.')
+    //     this.tableDS = new MatTableDataSource<any>([]);
 
 
-      }
-    })
+    //   }
+    // })
 
   }
 
@@ -603,47 +653,54 @@ export class AsignacionMedicamentosComponent extends GeneralComponent {
 
 
     console.log(element)
-
+    // copiar el listado original 
     let newData = [...this.diluyentesDataSource.data];
     console.log(newData)
-    if (element.idTemp) {
-      const index = newData.findIndex((e) => e.idTemp === element.idTemp);
-      const index1 = this.nvosLotes.findIndex((e) => e.idTemp === element.idTemp);
+
+    //eliminar de las dos listas por el uuid
+
+    if (element.uuid) {
+      const index = newData.findIndex((e) => e.uuid === element.uuid);
+      const index1 = this.nvosLotes.findIndex((e) => e.uuid === element.uuid);
       newData.splice(index, 1);
       this.nvosLotes.splice(index1, 1);
     }
 
-    if (element.idCentMedTurCam) {
-      const index1 = newData.findIndex((e) => e.idCentMedTurCam === element.idCentMedTurCam);
-      newData.splice(index1, 1);
-    }
+    // //si tiene un id
+    // if (element.idCentMedTurCam) {
+    //   const index1 = newData.findIndex((e) => e.idCentMedTurCam === element.idCentMedTurCam);
+    //   newData.splice(index1, 1);
+    // }
 
     // const elementDel = newData.find((e) => e.idTemp === element.idTemp);
-    console.log(newData)
-    console.log("Eliminados Lote", this.diluyentesDataSource);
-
+    // console.log(newData)
+    // console.log("Eliminados Lote", this.diluyentesDataSource);
 
     this.diluyentesDataSource.data = newData;
-
     // this.lotes = newData;
     console.log("Eliminados Lote", this.nvosLotes);
-
-
-
-
-
-    if (element.idCentMedTurCam) {
-      let modelElimi = {
-        "idCentMedTurCam": element.idCentMedTurCam,
-        "indActivo": 0
-      }
-      this.lotes.push(modelElimi)
+    // buscar los idCentMedTurCam y agregarlos a lotes
+    let key = `${element.idLoteFabricMedic}-${element.numPieza}`;
+    console.log(this.groupedDataLotes[key])
+    if (this.groupedDataLotes[key] && this.groupedDataLotes[key].length > 0) {
+      this.groupedDataLotes[key].forEach((lote: any) => {
+        let modelElimi = {
+          "idCentMedTurCam": lote.idCentMedTurCam,
+          "indActivo": 0
+        }
+        this.lotes.push(modelElimi)
+      });
     }
 
+    // if (element.idCentMedTurCam) {
+    //   let modelElimi = {
+    //     "idCentMedTurCam": element.idCentMedTurCam,
+    //     "indActivo": 0
+    //   }
+    //   this.lotes.push(modelElimi)
+    // }
+
     console.log("Eliminados Lote", this.lotes);
-
-
-
   }
 
 }
